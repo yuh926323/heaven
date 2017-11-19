@@ -1,0 +1,49 @@
+// by 劍痕
+fayon,93,123,4    script    物品回收人員    496,{
+    setarray .@item,7613,7520,984,985;    //回收的物品
+    setarray .@z,30000,85000,30000,30000;    //物品單價
+    mes "[物品回收人員]";
+    mes "^0088FF"+strcharinfo(0)+"^000000您好，很高興為您服務。";
+    mes "請問你有下列的物品嗎? 我很需要";
+    for (set .@i,0;.@i<getarraysize(.@item);set .@i,.@i+1) {
+        mes "^880000"+(.@i+1) +"^000000. [^9933FF"+ getitemname(.@item[.@i]) +"^993333 "+.@z[.@i]+" Zeny^000000]";
+    }
+    next;
+    for (set .@i,0;.@i<getarraysize(.@item);set .@i,.@i+1) {
+        set .@menu$,.@menu$+("給他 ^9933FF"+getitemname(.@item[.@i])+"^000000")+":";
+    }
+    set .@a,(select(.@menu$))-1;
+    mes "[物品回收人員]";
+    mes "那麼,你要給我多少?";
+    mes"[^0000FF"+ getitemname(.@item[.@a]) +"^000000有^FF0000"+countitem(.@item[.@a])+"^000000個]";
+    mes "^880000(輸入0取消)^000000";    
+    next;
+    input .@n;
+    
+    if(.@n == 0) {
+        close;
+    }
+    
+    if(.@n > countitem(.@item[.@a])) {
+        mes "[物品回收人員]";
+        mes "^FF0000"+.@n+"^000000個? 不對喔";
+        mes "你身上的^0000FF"+ getitemname(.@item[.@a]) +"^000000應該只有^FF0000"+countitem(.@item[.@a])+"^000000個";
+        close;
+    }
+
+    mes "[物品回收人員]";
+    mes "好的,我算一下喔";
+    mes "^0000FF"+getitemname(.@item[.@a])+"  ^FF0000"+.@n+"^000000個嗎...";
+    mes "那麼應該給你 ^993333"+(.@z[.@a]*.@n)+" Zeny";
+    next;
+    switch(select("不換","換")) {
+        case 1: close;
+        case 2:
+        mes "[物品回收人員]";
+        mes "^993333"+(.@z[.@a]*.@n)+" Zeny^000000都在這邊了";
+        mes "謝謝你哦";
+        set zeny,zeny + (.@z[.@a]*.@n);
+        delitem .@item[.@a],.@n;
+        close;    
+    }
+}
