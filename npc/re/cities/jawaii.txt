@@ -1,0 +1,30 @@
+//===== rAthenaCN 漢化聲明 ===================================
+//= 您可以隨意轉載和使用本漢化腳本。若您使用、借鑒或複製了
+//= 此腳本中的漢化成果，那麼請在您的腳本中加上並保留這七行
+//= 漢化聲明，由衷感謝。
+//= 若您對這個腳本有更好的翻譯建議，或發現此腳本的漢化錯誤，
+//= 請前往 http://rathena.cn 上報您發現的問題，謝謝。
+//============================================================
+
+//===== rAthena Script =======================================
+//= Jawaii Town Renewal
+//===== By: ==================================================
+//= Daegaladh, Masao
+//===== Current Version: =====================================
+//= 1.2
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Jawaii town NPCs.
+//===== Additional Comments: =================================
+//= 1.0 First Version. Renewal coordinates by Masao.
+//= 1.1 Moved "Honeymoon Helper" NPC.
+//= 1.2 Added Izlude duplicates. [Euphy]
+//============================================================
+
+izlude,180,224,3	duplicate(Honeymoon_Helper_Izlude)	Honeymoon Helper#Izlude	71
+izlude_a,180,224,3	duplicate(Honeymoon_Helper_Izlude)	Honeymoon Helper#Iz_a	71
+izlude_b,180,224,3	duplicate(Honeymoon_Helper_Izlude)	Honeymoon Helper#Iz_b	71
+izlude_c,180,224,3	duplicate(Honeymoon_Helper_Izlude)	Honeymoon Helper#Iz_c	71
+izlude_d,180,224,3	duplicate(Honeymoon_Helper_Izlude)	Honeymoon Helper#Iz_d	71

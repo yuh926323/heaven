@@ -1,0 +1,86 @@
+//===== rAthenaCN 漢化聲明 ===================================
+//= 您可以隨意轉載和使用本漢化腳本。若您使用、借鑒或複製了
+//= 此腳本中的漢化成果，那麼請在您的腳本中加上並保留這七行
+//= 漢化聲明，由衷感謝。
+//= 若您對這個腳本有更好的翻譯建議，或發現此腳本的漢化錯誤，
+//= 請前往 http://rathena.cn 上報您發現的問題，謝謝。
+//============================================================
+
+//===== rAthena Script ======================================= 
+//= Lighthalzen Airport Staff
+//===== By: ================================================== 
+//= L0ne_W0lf, Muad_Dib
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Lighthalzen Airport Staff
+//===== Additional Comments: ================================= 
+//= 1.0 First version.
+//============================================================ 
+
+lhz_airport,143,43,5	script	機場 職員#lhz_air1a::lhz_airport1	90,{
+	mes "[機場 職員]";
+	mes "歡迎來到裡希塔樂鎮機場.";
+	mes "我們提供不間斷的往返於艾音布羅克, 毀葛和朱諾的航班.";
+	next;
+	if (select("我想搭乘飛空艇:取消") == 1) {
+		mes "[機場 職員]";
+		mes "搭乘飛空艇需要 1,200 金幣.";
+		mes "但是如果您有飛空艇免費搭乘券的話,";
+		mes "就可以免費搭乘飛空艇.";
+		mes "您是否還想要搭乘飛空艇呢?";
+		next;
+		if (select("好的:不要") == 1) {
+			if (countitem(7311) > 0) {
+				delitem 7311,1; //Free_Flying_Ship_Ticket
+				warp "lhz_airport",148,51;
+				end;
+			}
+			if (Zeny >= 1200) {
+				set Zeny, Zeny - 1200;
+				warp "lhz_airport",148,51;
+				end;
+			}
+			mes "[機場 職員]";
+			mes "很抱歉, 您身上並沒有 1,200 金幣";
+			mes "可用於支付飛空艇的搭乘費用!";
+			close;
+		}
+	}
+	mes "[機場 職員]";
+	mes "感謝您對我們的支持, 歡迎再來.";
+	mes "祝您有個美好的一天~";
+	close;
+}
+
+lhz_airport,158,43,5	duplicate(lhz_airport1)	機場 職員#lhz_air1b	90
+lhz_airport,126,43,5	duplicate(lhz_airport1)	機場 職員#lhz_air1c	90
+
+lhz_airport,143,49,3	script	機場 職員#lhz_air2a::lhz_airport2	90,{
+	mes "[機場 職員]";
+	mes "歡迎來到裡希塔樂鎮機場.";
+	mes "如果這裡是您旅行的目的地, 那麼就由我來幫您辦理離站手續.";
+	mes "如果不是, 那麼請繼續搭乘飛空艇, 去您想去的地方.";
+	next;
+	if (select("我要離開機場內部:取消") == 1) {
+		mes "[機場 職員]";
+		mes "當您離站以後, 若還想再次登機, 就要重新付錢了.";
+		mes "只有當您想去^ff0000里希塔樂鎮^000000的時候,";
+		mes "才合適在這裡離站.";
+		mes "請問您堅持要在這裡離站嗎?";
+		next;
+		if (select("是的:不要") == 1) {
+			warp "lhz_airport",142,40;
+			end;
+		}
+	}
+	mes "[機場 職員]";
+	mes "好的, 感謝您選擇了我們的服務.";
+	mes "祝您旅途愉快~";
+	close;
+}
+
+lhz_airport,126,51,3	duplicate(lhz_airport2)	機場 職員#lhz_air2b	90
+lhz_airport,158,50,3	duplicate(lhz_airport2)	機場 職員#lhz_air2c	90

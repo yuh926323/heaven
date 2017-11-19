@@ -1,0 +1,30 @@
+//===== rAthenaCN 漢化聲明 ===================================
+//= 您可以隨意轉載和使用本漢化腳本。若您使用、借鑒或複製了
+//= 此腳本中的漢化成果，那麼請在您的腳本中加上並保留這七行
+//= 漢化聲明，由衷感謝。
+//= 若您對這個腳本有更好的翻譯建議，或發現此腳本的漢化錯誤，
+//= 請前往 http://rathena.cn 上報您發現的問題，謝謝。
+//============================================================
+
+//===== rAthena Script =======================================
+//= Test: Infinite Warp Loop
+//===== By: ==================================================
+//= rAthena Dev Team
+//===== Last Updated: ========================================
+//= 20140829
+//===== Description: ========================================= 
+//= Tests infinite warp loop prevention.
+//============================================================
+
+//test 1, looping in same map
+e_tower,74,116,0	warp	#inf_warp1_1	2,2,e_tower,81,108
+e_tower,81,108,0	warp	#inf_warp1_2	2,2,e_tower,75,84
+e_tower,75,84,0	warp	#inf_warp1_3	2,2,e_tower,74,116
+
+//test 2, looping in different map
+e_tower,76,95,0	warp	#inf_warp2_1	2,2,alb2trea,84,48
+alb2trea,84,48,0	warp	#inf_warp2_2	2,2,guild_vs5,58,50
+guild_vs5,58,50,0	warp	#inf_warp2_3	2,2,e_tower,76,95
+
+//test 3, looping due to not available cell
+ecl_tdun04,26,31,0	warp	#inf_warp3_1	20,20,prontera,100,100

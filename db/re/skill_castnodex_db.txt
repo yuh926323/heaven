@@ -1,0 +1,77 @@
+// <Skill id>,<Cast>,<Delay (optional)>
+//
+// Cast:  0 - everything affects the skill's cast time
+//        1 - skill's cast time is not affected by dex
+//        2 - skill's cast time is not affected by statuses (Suffragium, etc)
+//        4 - skill's cast time is not affected by item bonuses (equip, cards)
+//
+// Delay: 0 - everything affects the skill's delay
+//        1 - skill's delay is not affected by dex
+//        2 - skill's delay is not affected by Magic Strings / Bragi
+//        4 - skill's delay is not affected by item bonuses (equip, cards)
+//
+// Note: Values are bit fields, add them up to combine their effects.
+// Note: Delay setting '1' only makes sense when delay_dependon_dex is enabled.
+// Example: 46,1,1 = Double Strafe's cast time and delay is not affected by dex.
+
+136,0,2	//AS_SONICBLOW(音速投擲)
+263,0,2	//MO_TRIPLEATTACK(六合拳)
+272,0,2	//MO_CHAINCOMBO(連環全身掌)
+273,0,2	//MO_COMBOFINISH(猛龍誇強)
+336,1	//WE_CALLPARTNER(想念你)
+366,3	//HW_MAGICPOWER(魔力增幅)
+370,1	//CH_PALMSTRIKE(猛虎硬爬山)
+371,0,2	//CH_TIGERFIST(伏虎拳)
+372,0,2	//CH_CHAINCRUSH(氣絕崩擊)
+394,0,2	//CG_ARROWVULCAN(奧義箭亂舞)
+403,3	//PF_MEMORIZE(速讀術)
+408,1	//WE_BABY(爸媽我愛您)
+409,1	//WE_CALLPARENT(爸媽我想念您)
+410,1	//WE_CALLBABY(寶貝請來這裡)
+482,1	//PF_DOUBLECASTING(雙倍投擲)
+462,1	//SL_KAIZEL(凱易哲)
+496,1	//AM_TWILIGHT1(寬廣配藥)
+497,1	//AM_TWILIGHT2(寬廣配藥)
+498,1	//AM_TWILIGHT3(寬廣配藥)
+512,3	//GS_TRACKING(跟蹤)
+1014,1	//PR_REDEMPTIO(救贖)
+
+2012,7	//RK_CRUSHSTRIKE(粉碎衝擊)
+2013,7	//RK_REFRESH(精力重生)
+2014,7	//RK_GIANTGROWTH(力量增長)
+2015,7	//RK_STONEHARDSKIN(岩石皮膚)
+2022,0,2	//GC_CROSSIMPACT(十字斬)
+2032,7	//GC_POISONSMOKE(毒霧)
+2234,7	//RA_FEARBREEZE(屠戮射擊)
+//2267,7	//NC_SELFDESTRUCTION
+2268,7	//NC_SHAPESHIFT(裝甲變更)
+//2270,7	//NC_INFRAREDSCAN
+2271,7	//NC_ANALYZE(分析)
+2281,7	//NC_SILVERSNIPER(銀色狙擊手)
+2282,7	//NC_MAGICDECOY(FAW 魔法傀儡)
+2313,7	//LG_FORCEOFVANGUARD(先鋒之力)
+2462,7	//SO_EL_ANALYSIS(4元素分析)
+
+2534,7,7	//RETURN_TO_ELDICASTES(艾爾狄卡思泰斯的歸來)
+2536,7,7	//ALL_GUARDIAN_RECALL(守護者的召喚)
+2537,0,7	//ALL_ODINS_POWER(奧丁之力)
+3035,7,7	//ECLAGE_RECALL(返回艾可拉珠)
+
+// Mercenary Skills
+8214,7	//MA_CHARGEARROW(衝鋒箭)
+8215,7	//MA_SHARPSHOOTING(銳利射擊)
+8217,7	//ML_BRANDISHSPEAR(騎乘攻擊)
+8218,7	//ML_SPIRALPIERCE(螺旋擊刺)
+8221,7	//ML_DEVOTION(犧牲)
+8222,7	//MER_MAGNIFICAT(莫納的祝福)
+8225,7	//MER_CRASH(撞擊)
+8234,7	//MER_DECAGI(緩速術)
+8235,7	//MER_SCAPEGOAT(替罪羊)
+8238,7	//MER_KYRIE(虔誠祈禱)
+8240,7	//MER_INCAGI(敏捷增加)
+
+// Guild Skills
+10010,3	//GD_BATTLEORDER(下達戰鬥命令)
+10011,3	//GD_REGENERATION(復興公會員體力)
+10012,6	//GD_RESTORE(恢復公會員體力)
+10013,7	//GD_EMERGENCYCALL(緊急呼叫)

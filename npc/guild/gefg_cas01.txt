@@ -1,0 +1,134 @@
+//===== rAthenaCN 漢化聲明 ===================================
+//= 您可以隨意轉載和使用本漢化腳本。若您使用、借鑒或複製了
+//= 此腳本中的漢化成果，那麼請在您的腳本中加上並保留這七行
+//= 漢化聲明，由衷感謝。
+//= 若您對這個腳本有更好的翻譯建議，或發現此腳本的漢化錯誤，
+//= 請前往 http://rathena.cn 上報您發現的問題，謝謝。
+//============================================================
+
+//===== rAthena Script =======================================
+//= War of Emperium (Geffen) - Repherion
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.2
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= NPCs that relate to Geffen Guild Castle 1
+//===== Additional Comments: =================================
+//= 1.0 First Version. No longer uses functions. [L0ne_W0lf]
+//= 1.1 Removed dialog from interior flags. [L0ne_W0lf]
+//= 1.2 Partially rewrote Script. [Masao]
+//============================================================
+
+// Guild Flag (Outside Castle)
+//============================================================
+-	script	雷普立溫#1::OutsideFlagsG1	722,{
+
+	set .@GID, GetCastleData("gefg_cas01",1);
+
+	if (.@GID == 0) {
+		mes "[ 神聖盧恩米德加茲王國條例 ]";
+		mes " ";
+		mes "1. 按照神聖盧恩米德加茲王國的條例,";
+		mes "我們正式聲明此城堡沒有正式擁有者.";
+		mes " ";
+		mes "2. 經過所有試煉,";
+		mes "並且破壞了華麗金屬的勇士.";
+		mes "將會得到國王授予的城堡擁有權";
+		close;
+	}
+	if (getcharid(2) == .@GID) {
+		mes "[ 回聲 ]";
+		mes "勇士們...";
+		mes "想要回到你們的勇氣所在之地嗎?";
+		next;
+		if(select("返回公會城堡.:取消.") == 1) {
+			close2;
+			if (getcharid(2) == GetCastleData("gefg_cas01",1)) {
+				warp "gefg_cas01",197,36;
+				end;
+			}
+			end;
+		}
+		close;
+	}
+	mes "[ 神聖盧恩米德加茲王國條例 ]";
+	mes " ";
+	mes "1. 按照神聖盧恩米德加茲王國的條例,";
+	mes "我們批准該地區作為公會 ^ff0000"+GetGuildName(.@GID)+"^000000 的私有領地.";
+	mes " ";
+	mes "2. ^ff0000"+GetGuildName(.@GID)+"^000000 公會的領袖為:";
+	mes "^ff0000"+GetGuildMaster(.@GID)+"^000000";
+	mes "對此結果有意見的人，請用你手中的武器說話，證明你的勇氣，捍衛你的光榮！";
+	close;
+
+OnRecvCastleG01:
+	FlagEmblem GetCastleData("gefg_cas01",1);
+	end;
+}
+
+gef_fild13,148,51,5	duplicate(OutsideFlagsG1)	雷普立溫#1-2	722
+gef_fild13,155,54,5	duplicate(OutsideFlagsG1)	雷普立溫#2	722
+gef_fild13,212,79,6	duplicate(OutsideFlagsG1)	雷普立溫#3	722
+gef_fild13,211,71,6	duplicate(OutsideFlagsG1)	雷普立溫#4	722
+
+// Guild Flag (Inside Castle)
+//============================================================
+-	script	雷普立溫#5::InsideFlagsG1	722,{
+	end;
+
+OnRecvCastleG01:
+	FlagEmblem GetCastleData("gefg_cas01",1);
+	end;
+}
+
+gefg_cas01,28,157,4	duplicate(InsideFlagsG1)	雷普立溫#5-2	722
+gefg_cas01,22,156,5	duplicate(InsideFlagsG1)	雷普立溫#6	722
+gefg_cas01,68,185,3	duplicate(InsideFlagsG1)	雷普立溫#7	722
+gefg_cas01,17,171,5	duplicate(InsideFlagsG1)	雷普立溫#8	722
+gefg_cas01,59,16,4	duplicate(InsideFlagsG1)	雷普立溫#9	722
+gefg_cas01,64,16,4	duplicate(InsideFlagsG1)	雷普立溫#10	722
+
+// Guild Flag (Town)
+//============================================================
+geffen,109,123,2	duplicate(InsideFlagsG1)	雷普立溫#11	722
+
+// Kafra Employee
+//============================================================
+gefg_cas01,83,47,3	duplicate(guildkafra)	卡普拉 職員#gefg_cas01	117
+
+// Steward
+//============================================================
+gefg_cas01,40,48,5	duplicate(cm)	納澤#gefg_cas01	55
+
+// Treasure Room Exit
+//============================================================
+gefg_cas01,152,117,0	script	#lever_G01	111,{
+	mes " ";
+	mes "這裡有一個小小的控制桿, 去拉一下嗎?";
+	next;
+	if(select("上前拉桿.:算了.") == 1) {
+		close2;
+		warp "gefg_cas01",40,49;
+		end;
+	}
+	close;
+}
+
+// Guild Dungeon Switch
+//============================================================
+gefg_cas01,78,84,0	duplicate(gdlever)	#gefg_cas01	111
+
+// Guild Treasure Spawns
+//============================================================
+gefg_cas01,154,112,0	duplicate(Gld_Trea_Spawn)	公會寶箱#gefg_cas01	-1
+
+// AGIT Manager
+//============================================================
+gefg_cas01,198,182,0	duplicate(Gld_Agit_Manager)	Agit#gefg_cas01	-1
+
+// Guardians
+//============================================================
+gefg_cas01,40,48,5	duplicate(Gld_Guard_Template)	城堡監護人#gefg_cas01	-1

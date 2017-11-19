@@ -1,0 +1,163 @@
+//===== rAthenaCN 漢化聲明 ===================================
+//= 您可以隨意轉載和使用本漢化腳本。若您使用、借鑒或複製了
+//= 此腳本中的漢化成果，那麼請在您的腳本中加上並保留這七行
+//= 漢化聲明，由衷感謝。
+//= 若您對這個腳本有更好的翻譯建議，或發現此腳本的漢化錯誤，
+//= 請前往 http://rathena.cn 上報您發現的問題，謝謝。
+//============================================================
+
+//===== rAthena Script ======================================= 
+//= Alchemist Shop
+//===== By: ================================================== 
+//= rAthena Dev Team
+//===== Current Version: ===================================== 
+//= 1.8
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Merchants for Alchemist Materials and Manuals.
+//===== Additional Comments: ================================= 
+//= 1.1 fixed Medicine Bowl issue, thanx 2 MasterOfMuppets
+//= 1.2 Reddozen's fixes of typos. added optional Elemental
+//=     Potion Guide. [Lupus]
+//= 1.3 Deleted Elemental Potions Guide due to original quest [Lupus]
+//= 1.4 Alchemists can now purchase 2000 Medicine Bowls at once. [SinSloth]
+//= 1.5 Updated to Aegis 10.3 Standards. [L0ne_W0lf]
+//= 1.6 Corrected canceling purchase. [L0ne_W0lf]
+//= 1.7 Updated to match AEGIS script. [Masao]
+//= 1.8 Moved Craft Book Merchant to Renewal path. [Euphy]
+//============================================================ 
+
+alde_alche,24,188,3	script	公會銷售員	740,{
+	if (checkweight(1201,1) == 0) {
+		mes "- 請等等! -";
+		mes "- 你身上攜帶了太多物品了 -";
+		mes "- 先把東西多餘的東西 -";
+		mes "- 寄放在卡普拉倉庫之後 -";
+		mes "- 再回來吧! -";
+		close;
+	}
+	mes "[葛伯 紗普]";
+	mes "歡迎來到煉金術師組織，";
+	mes "需要什麼服務嗎?";
+	next;
+	switch (select("購買製藥物品:購買製作說明書:取消")) {
+	case 1:
+		mes "[葛伯 紗普]";
+		mes "請問需要什麼物品";
+		next;
+		if (select("藥缽 - 8 Zeny:停止交易") == 1) {
+			mes "[葛伯 紗普]";
+			mes "請問需要幾個?";
+			mes "如想要停止交易請寫 '0' ";
+			next;
+			while(1) {
+				input .@input,0,2001;
+				if (.@input == 0) {
+					mes "[葛伯 紗普]";
+					mes "交易已經取消，下次再說吧";
+					close;
+				}
+				else if (.@input < 1 || .@input > 2000) {
+					mes "[葛伯 紗普]";
+					mes "單次購買數量必須是1至2000個之間的數";
+					next;
+				}
+				else {
+					break;
+				}
+			}
+			set .@sell,.@input * 8;
+			set .@item_weight,.@input * 10;
+			if (Zeny < .@sell) {
+				mes "[葛伯 紗普]";
+				mes "金額不足噢";
+				mes "請確認一下所攜帶的金額";
+				close;
+			}
+			if ((MaxWeight - Weight) < .@item_weight) {
+				mes "[葛伯 紗普]";
+				mes "看樣子都不能帶走啊，";
+				mes "請確認一下所攜帶的物品量和負重";
+				close;
+			}
+			set Zeny, Zeny-.@sell;
+			getitem 7134,.@input; //Medicine_Bowl
+			mes "[葛伯 紗普]";
+			mes "感謝你的購買，";
+			mes "願你做出實用的藥";
+			close;
+		}
+		mes "[葛伯 紗普]";
+		mes "好吧~";
+		mes "如果你需要製藥相關的道具，可以隨時找我~";
+		close;
+	case 2:
+		mes "[葛伯 紗普]";
+		mes "請問需要哪些物品?";
+		mes "一般的製作說明書是100,000金幣，";
+		mes "比較特殊的幾種製作說明書除外";
+		next;
+		switch(select("一般藥水製作說明書:酒精製作說明書:火煙瓶製作說明書:鹽酸製作說明書:植物瓶製作說明書:刺錘瓶製作說明書:護貝藥製作說明書:纖細藥水製作說明書:取消交易")) {
+		case 1:
+			callsub S_SellManual,7144,100000; //Normal_Potion_Book
+			break;
+		case 2:
+			callsub S_SellManual,7127,100000; //Alcol_Create_Book
+			break;
+		case 3:
+			callsub S_SellManual,7128,100000; //FireBottle_Create_Book
+			break;
+		case 4:
+			callsub S_SellManual,7129,100000; //Acid_Create_Book
+			break;
+		case 5:
+			callsub S_SellManual,7130,100000; //Plant_Create_Book
+			break;
+		case 6:
+			callsub S_SellManual,7131,100000; //Mine_Create_Book
+			break;
+		case 7:
+			callsub S_SellManual,7132,100000; //Coating_Create_Book
+			break;
+		case 8:
+			callsub S_SellManual,7133,240000; //Slim_Potion_Create_Book
+			break;
+		case 9:
+			mes "[葛伯 紗普]";
+			mes "好吧~";
+			mes "如果你需要製藥相關說明書的話，可以隨時找我~";
+			close;
+		}
+	case 3:
+		mes "[葛伯 紗普]";
+		mes "好滴，祝你有個美好的一天~";
+		close;
+	}
+
+S_SellManual:
+	.@item_id = getarg(0);
+	.@zeny_req = getarg(1);
+
+	if (Zeny < .@zeny_req) {
+		mes "[葛伯 紗普]";
+		mes "金額不足噢";
+		mes "請確認一下所攜帶的金額";
+		close;
+	}
+	mes "[葛伯 紗普]";
+	mes ""+getitemname(.@item_id)+"?";
+	mes "購買這本說明書需要 "+.@zeny_req+" zeny.";
+	next;
+	if (select("確定購買:不買了") == 1) {
+		set Zeny, Zeny-.@zeny_req;
+		getitem .@item_id,1;
+		mes "[葛伯 紗普]";
+		mes "謝謝惠顧~";
+		mes "願你做出實用的藥";
+		close;
+	}
+	mes "[葛伯 紗普]";
+	mes "好的，那麼請下次再來吧！";
+	close;
+}

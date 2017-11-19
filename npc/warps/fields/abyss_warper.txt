@@ -1,0 +1,149 @@
+//===== rAthenaCN 漢化聲明 ===================================
+//= 您可以隨意轉載和使用本漢化腳本。若您使用、借鑒或複製了
+//= 此腳本中的漢化成果，那麼請在您的腳本中加上並保留這七行
+//= 漢化聲明，由衷感謝。
+//= 若您對這個腳本有更好的翻譯建議，或發現此腳本的漢化錯誤，
+//= 請前往 http://rathena.cn 上報您發現的問題，謝謝。
+//============================================================
+
+//===== rAthena Script =======================================
+//= Abyss Cave Warper
+//===== By: ==================================================
+//= erKURITA
+//===== Current Version: =====================================
+//= 1.4
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Warper to Abyss Cave. and warper out
+//===== Additional Comments: =================================
+//= 1.0 Added by Nexon [Nexon]
+//= 1.1 Removed Duplicates [Silent]
+//= 1.2 Fixed tab - missing pillar's appeared [Lupus]
+//= 1.3 Updated Abyss Lake entrance based on official [SinSloth]
+//= 1.3a Removed .GATs [Lupus]
+//= 1.4 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
+//===== rAthenaCN Dev: =======================================
+//= 2016.02.13 英文直譯對話部分至中文 [楊梅]
+//============================================================
+
+hu_fild05,168,304,0	script	柱子#abyss1	111,{
+	mes "^3355FF- 柱子的表面可以看到 -";
+	mes "- 三個類似龍身部分的凹槽 -";
+	mes "- 好像是龍的牙、鱗片與尾巴的部分 -";
+	mes "- 每個凹槽似乎都需要合適的道具 -^000000";
+	if((countitem(1035)) && (countitem(1036)) && (countitem(1037)))
+	{
+		next;
+		switch( select( "將龍身上的部件放進凹槽","將龍身上的部件直接吃掉" ) )
+		{
+			case 1:
+				mes "^3355FF- 將龍牙的部分放了進去 -";
+				mes "- 從柱子聽到一陣隆隆聲 -^000000";
+				specialeffect EF_WINDHIT;
+				next;
+				mes "^3355FF- 將龍鱗片的部分放進了另一個凹槽 -";
+				mes "- 柱子搖晃了一下 -^000000";
+				specialeffect EF_WINDHIT;
+				next;
+				mes "^3355FF- 你小心的將龍尾部分也放了進去 -";
+				mes "- 從柱子的表面發出了一陣光芒 -^000000";
+				specialeffect EF_WINDHIT;
+				next;
+				mes "^3355FF- 你的腳開始陷進了地面 -";
+				mes "- 並猛烈的晃動 -^000000";
+				specialeffect EF_BOWLINGBASH;
+				donpcevent "AbyssWarp::OnWarp";
+				specialeffect2 EF_PORTAL;
+				delitem 1035,1;
+				delitem 1036,1;
+				delitem 1037,1;
+				close2;
+				warp "hu_fild05",184,204;
+				end;
+
+			case 2:
+				mes "^3355FF- 你小心地將龍牙、龍鱗片 -";
+				mes "- 以及龍尾巴的部分放進口中 -";
+				mes "- 並開始咀嚼 -^000000";
+				mes "^FF0000- 什麼都沒有發生 -^000000";
+				mes "^3355FF- 只是嘗到了腐爛的味道 -^000000";
+				next;
+				emotion e_rice,1;
+				delitem 1035,1;
+				delitem 1036,1;
+				delitem 1037,1;
+				percentheal -10,0;
+				close;
+		}
+	}
+	close;
+}
+
+hu_fild05,171,211,0	script	柱子#abyss2	111,1,1,{
+
+	mes "^3355FF- 這根柱子和湖邊看到過的柱子類似 -";
+	mes "- 凹槽的地方發出藍色的光芒 -^000000";
+	next;
+	switch( select( "觸摸發光的地方","從發光的凹槽中取出物品" ) )
+	{
+		case 1:
+			mes "^3355FF*匡當匡當*^000000";
+			next;
+			mes "^3355FF- 凹槽中的光芒分散的同時 -";
+			mes "- 柱子也開始不斷的顫動 -";
+			mes "- 你聽到了從柱子內部傳來的轟鳴聲 -^000000";
+			specialeffect EF_WINDHIT;
+			next;
+			mes "*嘎吱嘎吱!*";
+			mes "*匡!*";
+			next;
+			mes "^3355FF- 凹槽發出的光芒變得非常強烈 -";
+			mes "- 腳下的地面開始慢慢的沉了下去 -^000000";
+			next;
+			specialeffect EF_BOWLINGBASH;
+			specialeffect2 EF_PORTAL;
+			close2;
+			warp "hu_fild05",169,305;
+			end;
+
+		case 2:
+			mes "^3355FF- *噗滋!* -";
+			mes "- 取出來的物品都碎掉了 -^000000";
+			specialeffect EF_WINDHIT;
+			next;
+			mes "^3355FF*匡匡匡!*^000000";
+			next;
+			mes "^3355FF- 凹槽中的光芒開始扭曲 -";
+			mes "- 柱子也開始不斷的顫動 -";
+			mes "- 震動的地面讓柱子難以站立 -";
+			mes "- 在一陣扭曲之後 你被傳送了出去 -^000000";
+			next;
+			specialeffect EF_BOWLINGBASH;
+			specialeffect2 EF_PORTAL;
+			close2;
+			warp "hu_fild05",157,284;
+			end;
+	}
+}
+
+hu_fild05,196,210,1	script	AbyssWarp	45,2,2,{
+
+OnInit:
+	disablenpc "AbyssWarp";
+	end;
+
+OnTouch_:
+	warp "abyss_01",260,268;
+	end;
+
+OnWarp:
+	initnpctimer;
+	enablenpc "AbyssWarp";
+	end;
+
+OnTimer30000:
+	stopnpctimer;
+	disablenpc "AbyssWarp";
+	end;
+}

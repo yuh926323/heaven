@@ -1,0 +1,32 @@
+//===== rAthenaCN 漢化聲明 ===================================
+//= 您可以隨意轉載和使用本漢化腳本。若您使用、借鑒或複製了
+//= 此腳本中的漢化成果，那麼請在您的腳本中加上並保留這七行
+//= 漢化聲明，由衷感謝。
+//= 若您對這個腳本有更好的翻譯建議，或發現此腳本的漢化錯誤，
+//= 請前往 http://rathena.cn 上報您發現的問題，謝謝。
+//============================================================
+
+//===== rAthena Script =======================================
+//= Lasagna Fild Monster Spawn Script
+//===== Changelogs: ==========================================
+//= 1.0 First Version. [Capuche]
+//============================================================
+
+//==================================================
+// lasa_fild01 - Ravioli Plain Watch
+//==================================================
+lasa_fild01,0,0	monster	Eggring	3495,30
+lasa_fild01,0,0	monster	Leaf Lunatic	3496,30
+lasa_fild01,0,0	monster	Grass Fabre	3497,30
+lasa_fild01,100,330,75,50	monster	Eggring	3495,50
+lasa_fild01,100,330,75,50	monster	Leaf Lunatic	3496,50
+lasa_fild01,100,330,75,50	monster	Grass Fabre	3497,50
+lasa_fild01,140,365,15,15	monster	Red Plant	1078,5
+
+//==================================================
+// lasa_fild01 - Ravioli Forest
+//==================================================
+lasa_fild02,0,0	monster	Wild Hornet	3498,40
+lasa_fild02,0,0	monster	Sweet Roda Frog	3499,40
+lasa_fild02,0,0	monster	Hunter Desert Wolf	3500,40
+lasa_fild02,0,0	monster	Combat Basilisk	3502,5

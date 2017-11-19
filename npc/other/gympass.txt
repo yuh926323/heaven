@@ -1,0 +1,139 @@
+//===== rAthenaCN 漢化聲明 ===================================
+//= 您可以隨意轉載和使用本漢化腳本。若您使用、借鑒或複製了
+//= 此腳本中的漢化成果，那麼請在您的腳本中加上並保留這七行
+//= 漢化聲明，由衷感謝。
+//= 若您對這個腳本有更好的翻譯建議，或發現此腳本的漢化錯誤，
+//= 請前往 http://rathena.cn 上報您發現的問題，謝謝。
+//============================================================
+
+//===== rAthena Script ======================================= 
+//= Gym Pass Cash Item NPC
+//===== By: ================================================== 
+//= Kisuka
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Exchange Gym Passes to learn "Enlarge Weight Limit"
+//= iRO NPC situated in Payon beside Kafra Shop.
+//===== Additional Comments: ================================= 
+//= 1.0 First version [L0ne_W0lf]
+//= 1.1 Fixed the NPC saying you "00" [L0ne_W0lf]
+//= 1.2 Replaced effect numerics with constants. [Samuray22]
+//= 1.3 Updated script, and fixed potential errors. [L0ne_W0lf]
+//============================================================ 
+
+payon,173,141,4	script	重力聖人#GymPass	899,{
+	mes "[重力聖人]";
+	mes "你好, 我是重力聖人.";
+	mes "現代人的體質已經大不如前了,";
+	mes "即使你是靠體力勞動維持生計的人,";
+	mes "某些地方的肌肉還是會變得虛弱和鬆弛.";
+	mes "知道我的意思嗎??";
+	next;
+	mes "[重力聖人]";
+	mes "跟我一起鍛煉吧!";
+	mes "我保證你可以拿更多的東西!";
+	mes "每次只要給我一張^FF0000健身房會員券^000000";
+	mes "我們就可以開始啦!";
+	next;
+	mes "[重力聖人]";
+	mes "但是別太激動喔:";
+	mes "雖然我可以陪你進行多次的鍛煉,";
+	mes "但是如果鍛煉強度太大的話,";
+	mes "你的身體會因為吃不消而累垮的喲.";
+	mes "聽明白了嗎?";
+	next;
+	mes "[重力聖人]";
+	mes "在這裡你可以受到一系列安全的訓練,";
+	mes "這些訓練可以幫你增加負重能力,";
+	mes "每人最多可以參加 ^FF000010 次^000000 負重訓練.";
+	mes "準備好了嗎?";
+	next;
+	switch(select("我準備好啦:我還沒有準備好:呃, 我的負重能力出問題了.")) {
+	case 1:
+		if (gympassmemory < 10) {
+			set .@add_carry,gympassmemory + 1;
+			set .@remain_carry,10 - .@add_carry;
+			if (countitem(7776) > 0) {
+				mes "[重力聖人]";
+				mes "喔, 我看到你帶著健身券來了.";
+				mes "那麼現在開始, 請跟著我做,";
+				mes "並試著去體會能量燃燒的感覺吧!";
+				mes "預備? 開始!";
+				next;
+				specialeffect2 EF_EARTHSPIKE;
+				next;
+				specialeffect2 EF_DEVIL;
+				next;
+				specialeffect2 EF_COIN;
+				next;
+				specialeffect2 EF_SIGHTRASHER;
+				next;
+				mes "[重力聖人]";
+				mes "好啦, 你的負重能力已經得到了提升!";
+				mes "讓我看看, 如果繼續做這套訓練的話,";
+				mes "你的負重能力還能提升 ^FF00000" + .@remain_carry + "^000000 次!";
+				delitem 7776,1; //Max_Weight_Up_Scroll
+				set gympassmemory,.@add_carry;
+				skill "ALL_INCCARRY",.@add_carry,SKILL_PERM_GRANT;
+				close;
+			}
+			else {
+				mes "[重力聖人]";
+				mes "夥計, 忘記我之前告訴你的啦?";
+				mes "如果你想增強體質提高負重能力的話,";
+				mes "記得帶^FF0000健身房會員券^000000過來!";
+				mes "跟著我鍛煉, 可以讓你更加健美哦.";
+				close;
+			}
+		}
+		else {
+			mes "[重力聖人]";
+			mes "我想你的身體已經非常健美了!";
+			mes "如果再繼續鍛煉的話,";
+			mes "對你的身體來說是相當危險的!";
+			mes "好吧, 別這樣啦~~";
+			mes "我曾告訴過你訓練是有限制的!";
+			close;
+		}
+	case 2:
+		mes "[重力聖人]";
+		mes "喔, 那真是太糟糕了.";
+		mes "如果你改變主意的話, 歡迎隨時回來.";
+		mes "請推薦你的朋友來找我:";
+		mes "如果需要鍛煉身體增加負重能力的話, 我可以讓他變得健美.";
+		close;
+	case 3:
+		if (gympassmemory > 0) {
+			mes "[重力聖人]";
+			mes "發生什麼事情了?";
+			mes "你一定是經歷了什麼事情, 導致負重肌肉群萎縮了吧?";
+			mes "不過幸運的是, 肌肉是有記憶功能的.";
+			mes "過一段時間, 就可以恢復正常...";
+			next;
+			specialeffect2 EF_EARTHSPIKE;
+			next;
+			specialeffect2 EF_DEVIL;
+			next;
+			specialeffect2 EF_COIN;
+			next;
+			specialeffect2 EF_SIGHTRASHER;
+			next;
+			mes "[重力聖人]";
+			mes "現在感覺怎麼樣?";
+			mes "你的負重肌肉群應該恢復正常了!";
+			skill "ALL_INCCARRY",gympassmemory,SKILL_PERM_GRANT;
+			close;
+		}
+		else {
+			mes "[重力聖人]";
+			mes "呃...";
+			mes "我們之前並沒有一起鍛煉過.";
+			mes "我對此非常確定.";
+			close;
+		}
+	}
+}

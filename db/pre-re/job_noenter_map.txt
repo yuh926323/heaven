@@ -1,0 +1,28 @@
+// Defines Job(s) that are restricted to enter map (by flag/zones)
+//
+// Structure of Database:
+// JobID,FlagZone,GroupLevelBypass
+//
+// JobID: See JOB_* constants or use job number
+//
+// 以下為'標記'字段的可選值 (掩碼選項):
+// 1    - 禁止進入普通地圖
+// 2    - 禁止進入 PVP地圖 (若已啟用 PK模式 的話, 請用此選項來取代1)
+// 4    - 禁止進入 GVG地圖
+// 8    - 禁止進入戰場地圖
+// 16   - 禁止進入  TE地圖
+// 區域限制 - 請參考 npc\mapflag\restricted.txt 腳本所使用的方法, 來為地圖劃分區域
+// 32   - 禁止進入 1號區域 (艾爾帕蘭追逐賽地圖)
+// 64   - 禁止進入 2號區域 (監獄地圖)
+// 128  - 禁止進入 3號區域 (依斯魯德競技場地圖)
+// 256  - 禁止進入 4號區域 (華麗金屬之戰:第二版本地圖)
+// 512  - 禁止進入 5號區域 (封閉的地下墓穴地圖)
+// 1024 - 禁止進入 6號區域 (無盡之塔地圖)
+// 2048 - 禁止進入 7號區域 (城鎮地圖)
+// 4096 - 禁止進入 8號區域 (尚未被分配)
+//
+// GroupLevelBypass: Group Level (groups.conf) to ignore the restriction
+//
+// NOTES:
+// - Restriction will be overwritten for multiple defines with the same Job ID
+// - The flag is used by 'jobcanentermap' script.

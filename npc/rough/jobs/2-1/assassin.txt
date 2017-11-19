@@ -1,0 +1,2265 @@
+//===== rAthenaCN 漢化聲明 ===================================
+//= 您可以隨意轉載和使用本漢化腳本。若您使用、借鑒或複製了
+//= 此腳本中的漢化成果，那麼請在您的腳本中加上並保留這七行
+//= 漢化聲明，由衷感謝。
+//= 若您對這個腳本有更好的翻譯建議，或發現此腳本的漢化錯誤，
+//= 請前往 http://rathena.cn 上報您發現的問題，謝謝。
+//============================================================
+
+//===== rAthena Script ======================================= 
+//= Assassin Job Quest
+//===== By: ================================================== 
+//= kobra_k88
+//===== Current Version: ===================================== 
+//= 3.6
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Job Change quest for Assassin class.
+//===== Additional Comments: ================================= 
+//= 1.0 Used some dialogue from the aegis Assassin script translated By: Pgro Team (OwNaGe)
+//=     Also converted the booby traps from the aegis script.[kobra_k88]
+//= 1.1 Made adjustments to ontouch npcs to work with the new "ontouch" functionality.
+//=     Fixed some duplicate npc names.  Added missing waitingroom triggers.
+//=     Fixed warp in "TimerSin", was supposed to be an areawarp.
+//=     For some reason sometimes the "Nameless One" would have message windows
+//=     without controls.  Changed the doevent that triggers him to an
+//=     addtimer and that seemed make the prob. go away[kobra_k88]
+//= 1.2 Fixed WRONG skillpoint check! [Lupus]
+//= 1.2b Fixed missing commands and typos [Lupus]
+//= 1.3 Baby class Support added [Lupus]
+//= 1.5 Fixed possible EXP abuse [Lupus]
+//= 1.6 Added a func which prevent advanced classes passing
+//=     2nd Job Quests again. It also guides adv classes where
+//=     to go. [Lupus]
+//= 2.0 Changed numbers to constants. [Vicious]
+//= 2.1 Removed Duplicates [Silent]
+//= 2.2 Merged back JFunc. Fixed missing dialogue [Lupus]
+//= 2.3 Fixed typo and change Nameless addtimer to 100 (with 700ms I 
+//=     was still able to bypass it) [Toms]
+//= 2.4 Fixed skipping of Nameless NPC [Lupus]
+//= 2.5 Fixed a Rogue exploit [Lupus]
+//= 2.6 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//= 2.7 Several bugfixes with the help of Samuray22 and Barron-Monster. [L0ne_W0lf]
+//= 2.8 Removed duplicate warps. [L0ne_W0lf]
+//= 2.8a Deleted unused variables. [Samuray22]
+//= 2.8b Fixed error caused in last updated, removed useless variable 'joblvl'. [L0ne_W0lf]
+//= 2.9 Fixed an indent and added a 'break;' in hopes of 'fixing' an error [L0ne_W0lf]
+//= 2.9a Corrected a Typo error ";;". [Samuray22]
+//= 2.9b Moved a wrong 'break'. [Zephyrus_cr]
+//= 3.0 Now uses enable and disable waitingroomevent. [L0ne_W0lf]
+//= 3.1 Fixed problem with waiting room. (bugreport:1099) [L0ne_W0lf]
+//= 3.1a Follow up fix. Forgot to replace a label. [L0ne_W0lf]
+//= 3.1b Fixed waiting room not enabled in some situations [Zephyrus]
+//= 3.2 Fixed a question having all correct answers. [brianluau]
+//= 3.3 Added Quest Log commands. [Kisuka]
+//= 3.4 Removed the need for use of 'goto.' [L0ne_W0lf]
+//= 3.5 Fixed the waitingroom where player can enter the Test Area without passing the written exam. Now player will not be warp inside the Test Area when did not passed the written exam instead the player will be warp back to the written exam entrance [JayPee]
+//= 3.6 Fixed broken event calls. [Euphy]
+//============================================================ 
+
+in_moc_16,19,33,1	script	工會人員#asn	1_M_JOBTESTER,{
+	if (Upper == 1) {
+		mes "[看起來很凶的人]";
+		mes "嗯? 你是....?";
+		mes "我能感覺到你和其它人不一樣...";
+		next;
+		mes "[看起來很凶的人]";
+		mes "我從沒有見過比你還要嚇人的! 這麼說吧, 我不喜歡你. 我想你該離開了!";
+		close;
+	}
+	if (SkillPoint) {
+		mes "[看起來很凶的人]";
+		mes "如果還有未設置的技能點的話, 是不能轉職的. 你最好先將技能點分配完畢.";
+		close;
+	}
+	if (ASSIN_Q == 4) {
+		mes "[看起來很凶的人]";
+		mes "噢, 別擺那張臭臉了. 你真有那麼痛苦嗎?";
+		next;
+		mes "[看起來很凶的人]";
+		mes "哇噢哇噢, 你受傷了, 我看出來了. 這樣吧, 我會為你恢復SP和HP. 爽了嗎?";
+		percentheal 100,100;
+		next;
+		mes "[看起來很凶的人]";
+		mes "活下來有那麼難嗎?";
+		mes "下次再努力點兒, 不行嗎? 不行的話, 就不要勉強自己成為一名刺客了...";
+		next;
+		if (select("無論如何我也要成為一名刺客!:算了吧, 我不玩了.") == 1) {
+			mes "[看起來很凶的人]";
+			mes "噢...";
+			mes "那就好,";
+			mes "去吧!";
+			close2;
+			set ASSIN_Q,0;
+			warp "in_moc_16",19,76;
+			end;
+		}
+		mes "[看起來很凶的人]";
+		mes "放棄了? 行吧, 走你自己的路去吧. 當你想成為一名刺客的時候, 再來找我吧.";
+		next;
+		mes "[看起來很凶的人]";
+		mes "想要回城的話只有走回去了. 噢, 不要忘了儲存你的出生點了, 記住了嗎?";
+		close2;
+		set ASSIN_Q,0;
+		set ASSIN_Q2,0;
+		set ASSIN_Q3,0;
+		savepoint "in_moc_16",18,14;
+		warp "in_moc_16",18,14;
+		end;
+	}
+	if (BaseJob == Job_Thief && countitem(1008) == 0 && ASSIN_Q > 7) {
+		mes "[刺客專家 '修伊']";
+		mes "嘿, 發生什麼事情了...? 你怎麼沒有帶來^006699泯滅之心^000000呢? 告訴過你要帶來的嘛, 在哪兒呢?";
+		next;
+		mes "[刺客專家 '修伊']";
+		mes "在會長發現之前, 快點兒把^006699泯滅之心^000000弄來! 快點兒的, 盡最大努力!";
+		next;
+		mes "[刺客專家 '修伊']";
+		mes "拿到了快點兒帶給我! ^666666*唉...*^000000";
+		close;
+	}
+	if (BaseJob == Job_Thief && countitem(1008) > 0 && ASSIN_Q > 7) {
+		mes "[刺客專家 '修伊']";
+		mes "不錯, 你拿來了啊. 祝賀! 不過因為這一塊太髒了, 我不能接受. 你永遠不可能成為一名刺客了!";
+		next;
+		mes "[刺客專家 '修伊']";
+		mes "哈哈哈! 開個玩笑了, 別生氣哈. 但是我要先和會長檢查一下.";
+		next;
+		mes "[刺客專家 '修伊']";
+		mes "...";
+		next;
+		mes "[刺客專家 '修伊']";
+		mes "...";
+		mes "......";
+		next;
+		delitem 1008,1; //Frozen_Heart
+		changequest 8007,8008;
+		mes "[刺客專家 '修伊']";
+		mes "好吧!";
+		mes "你通過認可了!";
+		next;
+		completequest 8008;
+		callfunc "Job_Change",Job_Assassin;
+		callfunc "F_ClearJobVar";		// clears all job variables for the current player
+		mes "[刺客專家 '修伊']";
+		mes "現在! 努力做一位偉大的刺客! 懷著信仰出發吧. 別忘了常來看看我們. 再一次祝賀你!";
+		close;
+	}
+	else if (countitem(1008) > 0 && BaseJob == Job_Thief && ASSIN_Q < 7) {
+		mes "[看起來很凶的人]";
+		mes "嗯?";
+		mes "你想幹什麼呢?";
+		next;
+		mes "[看起來很凶的人]";
+		mes "我看你拿來了一個^006699泯滅之心^000000... 你想成為一名刺客, 是嗎? 讓我看看...";
+		next;
+		mes "[看起來很凶的人]";
+		mes "...";
+		next;
+		mes "[看起來很凶的人]";
+		mes "...";
+		mes "......";
+		next;
+		mes "[看起來很凶的人]";
+		mes "等一下...";
+		mes "我了個去! 這是個假貨!";
+		next;
+		mes "[看起來很凶的人]";
+		mes "你怎麼敢拿假貨來糊弄我! 難道我長的像一個SB嗎!? ...";
+		close2;
+		warp "moc_fild16",206,229;
+		end;
+	}
+	else {
+		mes "[看起來很凶的人]";
+		mes "是什麼原因讓你來到這裡?";
+		mes "我不喜歡你看著我的表情... 渣渣.";
+		next;
+		if (BaseClass == Job_Novice) {
+			mes "[看起來很凶的人]";
+			mes "嘿, 菜鳥. 你最好馬上離開這裡. 我可不能保證你的生命安全.";
+			close;
+		}
+		else if (BaseClass == Job_Swordman) {
+			mes "[看起來很凶的人]";
+			mes "是什麼原因讓一位劍士來到了這裡呢? 用你的劍削蘋果去吧, 渣渣.";
+			close;
+		}
+		else if (BaseClass == Job_Mage) {
+			mes "[看起來很凶的人]";
+			mes "是什麼原因讓一位法師來到了這裡呢?";
+			next;
+			mes "[看起來很凶的人]";
+			mes "普隆德拉和朱諾的圖書館會歡迎你的, 為什麼不露個小把戲然後從我的視線裡消失呢?";
+			close;
+		}
+		else if (BaseClass == Job_Archer) {
+			mes "[看起來很凶的人]";
+			mes "哎喲, 不錯噢.";
+			mes "看到那把弓了嗎?";
+			next;
+			mes "[看起來很凶的人]";
+			mes "沒有幾個弓箭手會來到這裡啊. 那麼, 你來這兒有什麼目的嗎?!";
+			close;
+		}
+		else if (BaseClass == Job_Acolyte) {
+			mes "[看起來很凶的人]";
+			mes "我感到了一絲不一樣的氣息. 上帝的僕人來這裡幹什麼呢? 你不屬於這裡的.";
+			close;
+		}
+		else if (BaseClass == Job_Merchant) {
+			mes "[看起來很凶的人]";
+			mes "我們可不喜歡貪婪的人. 去其它地方做生意吧, 奸商.";
+			close;
+		}
+		else if (BaseJob == Job_Rogue) {
+			mes "[看起來很凶的人]";
+			mes "看起來你並不是很有心機的樣子. 好吧, 我希望你享受在這裡的休息時光.";
+			next;
+			mes "[看起來很凶的人]";
+			mes "順便問一句...";
+			mes "你看到過一名女孩嗎?";
+			mes "她的名字叫做瑪琪.";
+			next;
+			mes "[看起來很凶的人]";
+			mes "瑪琪...";
+			mes "我發誓我們會永遠在一起的. ^666666*唉...*^000000, 我想她早已經忘了吧. 還好, 我們還年青...";
+			close;
+		}
+		else if (BaseJob == Job_Assassin) {
+			mes "[刺客專家 '修伊']";
+			mes "嘿, 我還記得你~";
+			mes "你不是叫做...嗯, 我之所以記得你的名字是因為它很搞笑...";
+			next;
+			mes "[刺客專家 '修伊']";
+			mes ":+:" + strcharinfo(0) + ":+:, 對嗎? 不對, 只是"+ strcharinfo(0) +". 哈哈, 近來如何啊?";
+			next;
+			mes "[刺客專家 '修伊']";
+			mes "呵呵, 公會裡現在還沒有什麼任務呢. 專心於修練吧. 那麼, 再見了.";
+			close;
+		}
+		else if (BaseJob == Job_Thief && JobLevel > 39) {
+			if (SkillPoint) {
+				mes "[看起來很凶的人]";
+				mes "如果你的技能點數沒有設置完的話, 是不能參加轉職的. 去把點數分配完成再說吧.";
+				close;
+			}
+			else {
+				mes "[看起來很凶的人]";
+				mes "嗯...";
+				mes "一名盜賊...?";
+				next;
+				mes "[看起來很凶的人]";
+				mes "經驗還很豐富的盜賊, 我的錢包在你路過我時就不見了嘿. 我喜歡你.";
+				next;
+				mes "[看起來很凶的人]";
+				mes "那麼, 準備成為一名刺客了嗎?";
+				next;
+				switch(select("是的, 來吧.:需要什麼條件嗎?:沒準備好.")) {
+				case 1:
+					mes "[看起來很凶的人]";
+					mes "那麼準備好了嗎?";
+					mes "我會把你傳送到辦公室去的.";
+					close2;
+					set ASSIN_Q,0;
+					if(checkquest(8000) != -1) {
+						changequest 8000,8001;
+					}else{
+						setquest 8001;
+					}
+					warp "in_moc_16",19,76;
+					end;
+				case 2:
+					mes "[看起來很凶的人]";
+					mes "條件? 首先你的職業要是盜賊, 其次, 你的職業技能最少要達到40級.";
+					next;
+					mes "[看起來很凶的人]";
+					mes "最後, 你要接受一次考試.";
+					mes "記住了嗎? 如果你對自己很有信心的話, 這些都不是問題.";
+					close;
+				case 3:
+					mes "[看起來很凶的人]";
+					mes "嗯...";
+					mes "好吧.";
+					mes "如果你準備好了,";
+					mes "再來找我吧.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[看起來很凶的人]";
+			mes "嗯, 你還沒準備好成為一名刺客啊. 你要先滿足一些條件的.";
+			next;
+			mes "[看起來很凶的人]";
+			mes "繼續修練吧, 職業技能最少要達到40級, 記住了嗎? 當然了, 如果超過40級的話, 也是沒問題的.";
+			close;
+		}
+	}
+}
+
+in_moc_16,25,90,1	script	暗殺者 凱伊#ASN2	4_M_JOB_ASSASSIN,2,2,{
+	mes "[凱伊]";
+	mes "嗯?!";
+	emotion e_gasp;
+	next;
+	mes "[凱伊]";
+	mes "站近點兒. 我喜歡和人很近的交談. 提高嗓門才能讓人聽見說話, 那就太煩燥了.";
+	mes "不要站在我後面, 我的菊花會比較緊張...";
+	close;
+
+OnTouch:
+	if (ASSIN_Q2 == 4) {
+		mes "[凱伊]";
+		mes "嗯?";
+		mes "一分鐘前,";
+		mes "你不是剛從我面前走過嗎?";
+		next;
+		mes "[凱伊]";
+		mes "嗯...?!";
+		mes "跪了?";
+		mes "還只是在筆試階段嗎?";
+		mes "這麼弱?";
+		mes "咦嘿嘿啊哈哈!";
+		next;
+		mes "[凱伊]";
+		mes "好吧...";
+		mes "好久沒有遇到你這麼失敗的人了...";
+		mes "讓我再笑一會兒吧.";
+		next;
+		mes "[凱伊]";
+		mes "哈哈!";
+		mes "嘿嘿哈哈啊啊~!";
+		mes "笑尿了啊....";
+		next;
+		mes "[凱伊]";
+		mes "實在對不起, 不過我還是想笑啊, 哈哈... 這麼說, 要我給你一點兒提示嗎?";
+		next;
+		switch(select("- 求求你給我一些提示吧.:- 夠了啊, 說你的提示吧!:- ...玩兒蛋去!")) {
+		case 1:
+			mes "[凱伊]";
+			mes "哈哈哈哈!!!";
+			mes "哇哇哇, 你還沒有成為一名刺客, 笑死我了, 笑死我了!";
+			next;
+			mes "[無名者]";
+			mes "哇噢噢...";
+			next;
+			mes "[凱伊]";
+			mes "你聽到無名者的聲音了嗎?! '求求你, 給我提示吧.' 哈哈哈哈!";
+			next;
+			mes "[無名者]";
+			mes "是的.";
+			mes "這個渣渣又可笑,";
+			mes "又可憐.";
+			next;
+			mes "[凱伊]";
+			mes "哈哈哈哈!";
+			mes "這麼說,";
+			mes "你求我給你一些提示, 是嗎?";
+			next;
+			mes "[凱伊]";
+			mes "...";
+			next;
+			mes "[凱伊]";
+			mes "...";
+			mes "......";
+			next;
+			mes "[凱伊]";
+			mes "...";
+			mes "......";
+			mes ".........";
+			next;
+			mes "[凱伊]";
+			mes "...";
+			mes "......";
+			mes ".........";
+			mes "............";
+			next;
+			mes "[凱伊]";
+			mes "...";
+			mes "......";
+			mes ".........";
+			mes "............";
+			mes "...............";
+			next;
+			mes "[凱伊]";
+			mes "算了.";
+			mes "我改變主意了!";
+			mes "不準備給你任何提示了, 哈哈哈哈~";
+			close;
+		case 2:
+			mes "[凱伊]";
+			if (Sex) {
+				mes "呼, 看來你非常有信心成為一名刺客啊.";
+				next;
+				mes "[凱伊]";
+				mes "我懂的我懂的, 人們總有陷入困境的時候. 抱歉嘲笑了你.";
+			}
+			else
+				mes "我喜歡你的態度. 你應該保持做盜賊的尊嚴. 抱歉, 我剛才笑你了. 我相信你下次會做的更好的.";
+			next;
+			mes "[凱伊]";
+			mes "按規定, 是不能給你提示的, 但是關於刺客我會再說一些...";
+			next;
+			mes "[凱伊]";
+			mes "不論如何, 我們珍視我們的尊嚴. 因為我們是刺客...";
+			next;
+			mes "[凱伊]";
+			mes "如果人們以某種方式靠近你, 他們不會明白我說的是什麼. 由於職業本性, 我們天生就是孤獨者.";
+			next;
+			mes "[凱伊]";
+			mes "當愛人或朋友看到你手中血跡的時候, 不會給你解釋的機會, 他們就會離開你了.";
+			next;
+			mes "[凱伊]";
+			mes "有時會很寂寞, 但是這並不是壞事. 至少我可以按我的方式來做事, 你懂的, 任何方式.";
+			next;
+			mes "[凱伊]";
+			mes "那麼, 這些就是我能告訴你的了.";
+			mes "是否成為一名刺客, 取決於你的選擇.";
+			close;
+		case 3:
+			mes "[凱伊]";
+			mes "...嗯.";
+			next;
+			mes "[凱伊]";
+			mes "對嘛, 就是這種精神. 不要讓人看扁了!";
+			mes "記住, 我們是刺客...";
+			next;
+			mes "[凱伊]";
+			mes "對於之前的嘲笑, 我說一聲對不起. 我想讓你記住, 要保持我們的尊嚴.";
+			next;
+			mes "[凱伊]";
+			mes "保持你的尊嚴,";
+			mes "對於拳刃和短劍上血染的痕跡, 你也要保持一種敬仰的態度.";
+			next;
+			if (select("- ...明白了.:- ...我很迷惑.") == 1) {
+				mes "[凱伊]";
+				mes "好的, 我相信你. 讓我給你一些衷告吧.";
+				next;
+				switch(rand(1,3)) {
+				case 1:
+					mes "[凱伊]";
+					mes "首先, '無影之牙'...專門為拳刃而設計的技能. 所以, 它不需要任何和短劍相關的技能支持.";
+					next;
+					mes "[凱伊]";
+					mes "'二刀連擊' ...試過了嗎? 它能讓你一下對敵人造成兩次傷害.";
+					next;
+					mes "[凱伊]";
+					mes "火靈礦石是一種元素石頭, 而藍色魔力礦石和我們的職業沒有任何關聯!";
+					next;
+					mes "[凱伊]";
+					mes "你看到過魔法師用冰箭術打擊長老樹精了嗎? 水屬性克制火屬性. 而風屬性克制水屬性.";
+					next;
+					mes "[凱伊]";
+					mes "當你靠近牆壁或類似的地方的話, '偽裝'會讓你完美的消失! 除非有些小賤人用反隱的技能, 你懂的.";
+					next;
+					break;
+				case 2:
+					mes "[凱伊]";
+					mes "'骸靈拳刃是不死屬性的.";
+					next;
+					mes "[凱伊]";
+					mes "你目前都用過了什麼武器? 大馬士革? 長柄短劍? 雙刃短劍? 或者笨拙短劍? 你手上現在用的是什麼?";
+					next;
+					mes "[凱伊]";
+					mes "可以從沙漠之狼身上得到有洞的卡塔勒拳刃. 要記住了. 你會有用到它的時候的.";
+					next;
+					mes "[凱伊]";
+					mes "你可以從土撥鼠那兒得到有洞的拳刃. 嗯, 我不知道它們為什麼會有那種武器... 或許它們用來打洞?";
+					next;
+					mes "[凱伊]";
+					mes "還有...";
+					mes "我一隻想要一隻羅達蛙做寵物. 但那是不可能的!";
+					next;
+					mes "[凱伊]";
+					mes "據我所知, 鎯頭哥布靈是地屬性的. 而火屬性是克地屬性的.";
+					next;
+					mes "[凱伊]";
+					mes "你聽說過屬性武器嗎? 只有鐵匠可以打造屬性武器...";
+					next;
+					break;
+				case 3:
+					mes "[凱伊]";
+					mes "打到長老樹精卡片了就賣給魔法師. 他們會瘋狂的搶購的. 它不是增加 INT 的嗎? 嗯...";
+					next;
+					mes "[凱伊]";
+					mes "對於我們來說, 閃避和攻擊比防禦更重要. 不要想著去穿一件頭盔. 太重了, 會很不舒適並會擋住你的視線.";
+					next;
+					mes "[凱伊]";
+					mes "殘影每升一級會增加3%的閃避.";
+					next;
+					mes "[凱伊]";
+					mes "正如我所告訴你的, 拳刃系列的武器都是雙手持有的!";
+					next;
+					mes "[凱伊]";
+					mes "沙漠都市... 我想念我的家鄉, 夢羅克. 我很久沒有回去了. 恍如隔世的感覺啊. 時光飛逝...";
+					next;
+					mes "[凱伊]";
+					mes "咳咳. 我想起來了我的盜賊轉職任務. 我太緊張了, 哈哈, 闖進農場去拿食用蘑菇...";
+					next;
+					mes "[凱伊]";
+					mes "學會了隱匿和偽裝, 再沒人能找得到你.";
+					next;
+					mes "[凱伊]";
+					mes "我聽說小巴風特卡片增加3點AGI, 並且增加1點必殺攻擊率...";
+					next;
+					mes "[凱伊]";
+					mes "是的, 我們特別需要強化AGI. 通過一定的素質點數可以增加我們的AGI, 問題是素質點不會永遠增加, 是嗎?";
+					next;
+				}
+				mes "[凱伊]";
+				mes "^666666*唷*^000000 這就是我所能告訴你的了, 儘管提示並不是很多. 但我幾乎告訴了你所有了...";
+				next;
+				mes "[凱伊]";
+				mes "再試去接受'無名者'的考試吧.";
+				close2;
+				warp "in_moc_16",19,144;
+				end;
+			}
+			mes "[凱伊]";
+			mes "^666666*唉...*^000000";
+			mes "你怎麼不明白尊嚴的概念? 你剛才就對我表現出來了啊!";
+			next;
+			mes "[凱伊]";
+			mes "噢, 我知道了, 你剛才表現出來的並不是尊嚴, 而是粗魯!";
+			next;
+			mes "[凱伊]";
+			mes "啊...";
+			mes "WARP PORTAL!";
+			close2;
+			warp "c_tower4",64,76;
+			end;
+		}
+	}
+	else {
+		mes "[凱伊]";
+		mes "你一定是見習刺客.";
+		mes "你來這裡是為了成為一名真正的刺客的, 不是嗎?";
+		next;
+		if (select("- 是的, 我要成為真正的刺客. :- ...不, 我就是來玩的.") == 1) {
+			mes "[凱伊]";
+			mes "好的, 先來填寫一下申請表格. 請寫下你的名字和職業技能等級.";
+			next;
+			mes "[凱伊]";
+			mes "我看看...";
+			mes "你的名字是";
+			mes "" + strcharinfo(0) + "...";
+			mes "職業等級" + JobLevel + "...";
+			next;
+			if (JobLevel > 48) {
+				mes "[凱伊]";
+				mes "等等, 職業技能等級是" + JobLevel + "?! 你訓練的很刻苦啊! 我的上司會喜歡你的~";
+				next;
+				mes "[凱伊]";
+				mes "填完表格了嗎? 好了, 來給我看看. 等一下, 我會把你送到考試場地.";
+				next;
+				mes "[凱伊]";
+				mes "那麼,";
+				mes "祝你好運了!";
+				close2;
+				set ASSIN_Q3,1;
+				set ASSIN_Q,1;
+				changequest 8001,8002;
+				warp "in_moc_16",19,144;
+				end;
+			}
+			else if (JobLevel < 49) {
+				mes "[凱伊]";
+				mes "好吧,";
+				mes "你具備了基本條件.";
+				mes "還算不錯.";
+				next;
+				mes "[凱伊]";
+				mes "當你填寫完表格的時候,";
+				mes "走過來,";
+				mes "把它交給我.";
+				mes "嗯, 謝謝.";
+				next;
+				mes "[凱伊]";
+				mes "我會把你送到考試場地,";
+				mes "那麼,";
+				mes "祝你好運了~";
+				close2;
+				set ASSIN_Q3,2;
+				set ASSIN_Q,1;
+				changequest 8001,8002;
+				warp "in_moc_16",19,144;
+				end;
+			}
+			else {
+				mes "[凱伊]";
+				mes "你這個渣渣, 到底是誰? ";
+				mes "信不信我叫人來?";
+				mes "...城管!";
+				close2;
+				warp "moc_fild16",206,229;
+				end;
+			}
+		}
+		else {
+			mes "[凱伊]";
+			mes "呼...?";
+			mes "你是想耍我還是怎麼的? 不想成為一名刺客了嗎?";
+			next;
+			if (select("耍你怎麼了.:我想成為一名刺客.") == 1) {
+				mes "[凱伊]";
+				mes "趕緊滾出這個地方.";
+				mes "趁我還沒有發脾氣...";
+				close2;
+				set ASSIN_Q,0;
+				set ASSIN_Q3,0;
+				set ASSIN_Q2,0;
+				erasequest 8001;
+				warp "moc_fild16",206,229;
+				end;
+			}
+			mes "[凱伊]";
+			mes "...";
+			mes "鬧哪樣啊?";
+			mes "好吧.";
+			next;
+			mes "[凱伊]";
+			mes "將你的名字和職業技能等級填寫到這個表格中.";
+			next;
+			mes "[凱伊]";
+			mes "" + strcharinfo(0) + "?";
+			mes "這就是你的名字?";
+			mes "聽起來很有趣啊.";
+			mes "讓我看看... 職業技能等級是" + JobLevel + "...";
+			next;
+			if (JobLevel > 48) {
+				mes "[凱伊]";
+				mes "噢? 職業技能等級是" + JobLevel + "?! 你一定訓練的很刻苦吧. 我想我的上司會喜歡你的...";
+				next;
+				mes "[凱伊]";
+				mes "表格填寫完了嗎? 好了, 交給我吧. 我會把你送到考試場地的, 祝你好運~";
+				next;
+				set ASSIN_Q3,1;
+				set ASSIN_Q,1;
+				changequest 8001,8002;
+				warp "in_moc_16",19,144;
+				end;
+			}
+			else if (JobLevel < 49) {
+				mes "[凱伊]";
+				mes "還不錯, 你達到了基本要求, 表格填寫完了嗎?";
+				next;
+				mes "[凱伊]";
+				mes "把它交給我吧, 我會送你到考試場地, 好嗎?";
+				mes "祝你好運...";
+				next;
+				set ASSIN_Q3,2;
+				set ASSIN_Q,1;
+				changequest 8001,8002;
+				warp "in_moc_16",19,144;
+				end;
+			}
+			else {
+				mes "[凱伊]";
+				mes "你這個渣渣是怎麼進來的?";
+				mes "聽到沒?";
+				mes "滾出去!";
+				close2;
+				warp "moc_fild16",206,229;
+				end;
+			}
+		}
+	}
+}
+
+in_moc_16,19,154,0	script	無名者	-1,8,2,{
+OnTouch:
+	if (ASSIN_Q2 < 5) {
+		if (ASSIN_Q2 < 3) {
+			mes "[無名者]";
+			mes "歡迎你, 騷年.";
+			mes "咦哈哈哈哈.";
+			mes "你根本找不到我的...";
+			next;
+			mes "[無名者]";
+			mes "我隱藏的很完美!";
+			mes "要想像我這樣, 只有成為一名偉大的刺客!";
+			next;
+			mes "[無名者]";
+			mes "怕了嗎? 只要我想, 殺死你是一件很簡單的事情...";
+			next;
+			if (select("嚇尿了...:我要和你單挑!") == 1) {
+				mes "[無名者]";
+				mes "現在我看出來了,";
+				mes "你只不過是";
+				mes "一個懦夫.";
+				next;
+				mes "[無名者]";
+				mes "哈哈哈哈!";
+				mes "只能在畏懼中捲縮!";
+				mes "太可笑了!";
+				close;
+			}
+			mes "[無名者]";
+			mes "那麼...";
+			mes "你的意思是...";
+			mes "要和我...?";
+			mes "打一架?!";
+			next;
+			mes "[無名者]";
+			mes "算了吧. 我所過之處, 血流成河. 刀下亡魂無數.";
+			next;
+			mes "[無名者]";
+			mes "我來這兒是為了測試你的理論知識. 對於成為一名刺客來說, 知識一樣很重要.";
+			next;
+			mes "[無名者]";
+			mes "如果想勝出,";
+			mes "就要正確回答我的問題, 而這些問題, 只有一名偉大的刺客才能答對.";
+			next;
+			mes "[無名者]";
+			mes "儘管我很狠心,";
+			mes "但我並不無情. 開始回答之前, 有什麼要問的嗎?";
+			next;
+			set ASSIN_Q2,0;
+			while(ASSIN_Q2 < 3) {
+				switch(select("...技能?:...素質?:我都知道了.")) {
+				case 1:
+					mes "[無名者]";
+					mes "技能...?";
+					mes "儘管技能有很多應用時注意的細節, 但我會把基本的概念告訴你的.";
+					next;
+					mes "[無名者]";
+					mes "首先, ^3355FF拳刃修煉^000000. 這個技能增加拳刃系列武器的攻擊力. 等級愈高, 增加的攻擊力也愈大.";
+					next;
+					mes "[無名者]";
+					mes "^3355FF左手修煉^000000 and ^3355FF右手修煉^000000. 使用短劍系列武器時, 刺客兩手可以分別持有不同的武器.";
+					next;
+					mes "[無名者]";
+					mes "但是同時使用兩種武器肯定比只使用一種武器要困難得多. 左右手修煉可以恢復兩手本來的攻擊力.";
+					next;
+					mes "[無名者]";
+					mes "然而, 如果你不打算使用兩把短劍的話, 就不需要學習這個技能了. 右手修煉2級以後, 就可以學習左手修煉了.";
+					next;
+					mes "[無名者]";
+					mes "^3355FF音速投擲^000000可以讓你一次對近身敵人進行8次攻擊. 只有裝配拳刃系列武器時才能使用.";
+					next;
+					mes "[無名者]";
+					mes "當然了, 傷害受武器攻擊力和STR的影響. 拳刃修煉4級以後, 就可以學習音速投擲了.";
+					next;
+					mes "[無名者]";
+					mes "^3355FF無影之牙^000000可以讓你在隱匿的狀態下攻擊敵人.";
+					next;
+					mes "[無名者]";
+					mes "因為是遠程攻擊手段, 所以當你被怪物圍攻時會很有用的.";
+					next;
+					mes "[無名者]";
+					mes "因為只有在隱匿狀態下才能發動此技能, 所以必須學會2級的偽裝才能學習此技能.";
+					next;
+					mes "[無名者]";
+					mes "為了學習^3355FF偽裝^000000, 你必須先學會2級的隱匿. 那時當你接近牆壁時就可以移動了.";
+					next;
+					mes "[無名者]";
+					mes "^3355FF塗毒^000000可以讓你把毒藥塗抹在你正使用的武器上. 它可以臨時賦予武器毒屬性.";
+					next;
+					mes "[無名者]";
+					mes "這個技能有一定機率讓敵人中毒. 同時, 你也可以用此技能給你的隊友進行塗毒...";
+					next;
+					mes "[無名者]";
+					mes "^3355FF毒性反彈^000000這個持能的作用是, 當某特定玩家受到毒屬性的攻擊時, 可以將毒性反作用到施毒者身上. 你必須提前學會3級的塗毒.";
+					next;
+					mes "[無名者]";
+					mes "^3355FF病毒散播^000000以紅色魔力礦石作為催化劑, 在指定的範圍內散播病毒. 此技能等級愈高, 毒性持續時間愈長.";
+					next;
+					mes "[無名者]";
+					mes "在學會了5級塗毒以後, 你就可以學習這個技能了.";
+					next;
+					mes "[無名者]";
+					mes "^3355FF毒性感染^000000可以讓被施用者在HP低於一定數值時, 3秒後發生爆炸.";
+					next;
+					mes "[無名者]";
+					mes "爆炸時對周圍的敵人也給予傷害力, 讓毒擴散出去. 需要5級的毒性反彈和5級的毒性散播作為前置技能.";
+					next;
+					mes "[無名者]";
+					mes "好了...";
+					mes "關於刺客的技能,";
+					mes "我能告訴你的就是這麼多了.";
+					set ASSIN_Q2,1;
+					next;
+					break;
+				case 2:
+					mes "[無名者]";
+					mes "嗯, 關於素質點...";
+					mes "對於刺客來說, AGI是最重要的了.";
+					next;
+					mes "[無名者]";
+					mes "為了進行刺殺任務, STR也是很重要的. 當然了, 這只是我的建議.";
+					next;
+					mes "[無名者]";
+					mes "我不能給你一個固定的素質分配方案, 走哪條路, 要看你自己的決定.";
+					set ASSIN_Q2,2;
+					next;
+					break;
+				case 3:
+					if (ASSIN_Q2 == 0) {
+						mes "[無名者]";
+						mes "都懂了嗎?!";
+						mes "我會進行裁定的!";
+						next;
+					}
+					set ASSIN_Q2,3;
+					break;
+				}
+			}
+			mes "[無名者]";
+			mes "是時候對你進行理論測試了, 你最多只能答錯1道題目.";
+			next;
+			mes "[無名者]";
+			mes "換句話說, 10道題目中你必須要答對9道. 我不會告訴你哪道題答錯了...";
+			next;
+			mes "[無名者]";
+			mes "準備好了嗎?";
+			mes "好的, 開始了!";
+		}
+		else if (ASSIN_Q2 < 5) {
+			mes "[無名者]";
+			mes "通過這麼簡單的一項測試,";
+			mes "有問題嗎?";
+			mes "你還需要";
+			mes "掌握更多的知識啊.";
+			next;
+			if (select("幫幫我如何通過?:我要再試一次!") == 1) {
+				mes "[無名者]";
+				mes "問的非常好. 但是你被刺客工公放逐, 所以和我沒關係啊...";
+				close2;
+				warp "moc_fild16",206,151;
+				end;
+			}
+			mes "[無名者]";
+			mes "我懂了...";
+			mes "去吧, 不要害怕. 我會一直在你身邊的...";
+			next;
+			mes "[無名者]";
+			mes "現在, 我會對你再次進行測試! 記住了, 10道題目中你必須要答對9道. 記住我一直在幫你...";
+			next;
+			mes "[無名者]";
+			mes "如果你答錯了2道題, 就不要想成為刺客了.";
+			next;
+			mes "[無名者]";
+			mes "好的,";
+			mes "準備好了嗎?";
+			mes "祝你好運.";
+		}
+		next;
+		switch(rand(1,3)) {
+		case 1:
+			mes "[無名者]";
+			mes "1. 下面哪個選項不是無影之牙的前置?";
+			next;
+			if (select("偽裝2級:音速投擲5級:拳刃修煉4級:右手修煉2級") == 4)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "2. 塗毒會賦矛武器什麼屬性?";
+			next;
+			if (select("毒:地:火:風") == 1)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "3. 右手修煉4級有什麼作用效果?";
+			next;
+			if (select("恢復80%攻擊力:恢復90%攻擊力:增加90%攻擊力:增加108%攻擊力") == 2)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "4. 病毒散播需要什麼物品作為催化劑?";
+			next;
+			if (select("火靈礦石:藍色魔力礦石:黃色魔力礦石:紅色魔力礦石") == 4)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "5. 塗毒5級以後, 你就可以學習哪項技能了?";
+			next;
+			if (select("施毒:音速投擲:毒性感染:病毒散播") == 4)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "6. 下面這些技能中, 哪一個可以讓你在隱身狀態下還能移動?";
+			next;
+			if (select("隱匿:後退迴避:偽裝:噴砂") == 3)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "7. 下面哪一個選項是和毒性感染有關的?";
+			next;
+			if (select("移動速度.:紅色魔力礦石.:施毒者的武器.") == 2)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "8. 下面哪種魔物被插了螃蟹卡片的武器所克制?";
+			next;
+			if (select("綠蒼蠅:羅達蛙:長老樹精:巴風特") == 3)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "9. 當使用二刀連擊時,";
+			mes "需要消耗多少的SP?";
+			next;
+			if (select("消耗SP為15:被動技能, 消耗SP為0.:主動技能, 消耗SP為10.:消耗SP為54") == 2)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "10. 什麼屬性的武器在依斯魯德海底時使用效果最好?";
+			next;
+			if (select("風屬性:水屬性:地屬性:火屬性") == 1)
+				set .@assassin_t,.@assassin_t+10;
+			break;
+		case 2:
+			mes "[無名者]";
+			mes "1. 殺死哪種魔物時,";
+			mes "掉落有2洞的卡塔勒拳刃?";
+			next;
+			if (select("盜蟲:魔菇:沙漠之狼:刺錘哥布靈") == 3)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "2. 殺死哪種魔物時,";
+			mes "掉落3洞的拳刃?";
+			next;
+			if (select("土撥鼠:沙漠之狼:螳螂:摩爾") == 1)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "3. 什麼職業可以造屬性武器?";
+			next;
+			if (select("商人:鐵匠:盜賊:服事") == 2)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "4. 下面哪一個不是拳刃系列的武器?";
+			next;
+			if (select("秘刃暗嘯:巨魔指甲:血之淚:長柄短劍") == 4)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "5. 依斯魯德海底的怪物大部分是哪種屬性的?";
+			next;
+			if (select("水:火:風:地") == 1)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "6. 下面哪一種魔物,";
+			mes "不能作為寵物來領養?";
+			next;
+			if (select("魔菇:羅達蛙:鬼女:蒼蠅") == 2)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "7. 下面哪一種魔物, 用火屬性的武器最好對付?";
+			next;
+			if (select("刺刀哥布靈:鏈錘哥布靈:大斧哥布靈:鎯頭哥布靈") == 4)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "8. 下面哪種拳刃是無屬性的?";
+			next;
+			if (select("火靈拳刃:刺籐拳刃:骸靈拳刃:聖靈拳刃") == 4)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "9. 下面哪種波利是念屬性的?";
+			next;
+			if (select("波利:波利之王:幽靈波利:聖誕波利") == 3)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "10. 下面哪一種魔物,";
+			mes "不是不死屬性的?";
+			next;
+			if (select("腐屍:畢萊特:幽靈劍士:安畢斯") == 3)
+				set .@assassin_t,.@assassin_t+10;
+			break;
+		case 3:
+			mes "[無名者]";
+			mes "1. 10級的殘影能提升多少的閃避?";
+			next;
+			if (select("30:40:160:20") == 1)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "2. 即使處於隱匿或偽裝狀態, 也可以被下列哪種魔物發現?";
+			next;
+			if (select("綠棉蟲:黑暗之王:木乃伊:瘋兔") == 2)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "3. 下面哪種搭配不能被刺客同時使用?";
+			next;
+			if (select("雙刃短劍+大馬士革短劍:笨拙短劍+大馬士革短劍:血之淚+笨拙短劍:破甲短錐+手術刀") == 3)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "4. 下面哪一座城市是盜賊轉職之地?";
+			next;
+			if (select("普隆德拉:朱諾:艾爾怕蘭:夢羅克") == 4)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "5. 下面哪個卡片和AGI無關?";
+			next;
+			if (select("小巴風特卡片:長老樹精卡片:盜蟲卡片:浮勒盜蟲卡片") == 2)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "6. 哪一項是刺客這個職業的特長?";
+			next;
+			if (select("出色的歌唱能力:無敵的閱讀能力:厲害的魔法能力:看似NB的閃避能力") == 4)
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "7. 當職業技能等級達到50級時, 可以額外獲得的AGI點數是多少?";
+			next;
+			if (select("7:8:9:10") == 4) 
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "8. 哪一種裝備是刺客不能佩戴的?";
+			next;
+			if (select("雙刃短劍:狂怒颶風:圓盾:聖靈拳刃") == 2) 
+				set .@assassin_t,.@assassin_t+10;
+			mes "[無名者]";
+			mes "9. 下面哪一種物品是盜賊轉職所需?";
+			next;
+			switch(select("惡臭香菇:香菇芽孢:毒香菇:毒魔菇芽孢")) {
+			case 1:
+			case 3:
+				set .@assassin_t,.@assassin_t+10;
+				break;
+			default:
+				break;
+			}
+			mes "[無名者]";
+			mes "10. 下面哪一種武器對刺客幫助最少?";
+			next;
+			if (select("瘋兔卡片:長老樹精卡片:狼卡片:小雞卡片") == 2)
+				set .@assassin_t,.@assassin_t+10;
+			break;
+		}
+		if (ASSIN_Q2 == 3) {
+			next;
+			mes "[無名者]";
+			mes "嗯.";
+			mes "不管怎麼說";
+			mes "你都已經盡力了.";
+			mes "先休息一下吧.";
+			next;
+			mes "[無名者]";
+			mes "讓我看看...";
+			mes "你的分數.";
+			mes "" + .@assassin_t + " percent...";
+			if (.@assassin_t > 80) {
+				set ASSIN_Q2,5;
+				changequest 8002,8003;
+				mes "不錯.";
+				mes "你通過了!";
+				next;
+				mes "[無名者]";
+				mes "然而, 接下來還有一項測試等著你呢. 到達下一個考場時, 你會接到命令的...";
+				close;
+			}
+			else {
+				set ASSIN_Q2,4;
+				mes "那麼, 你失敗了!";
+				next;
+				mes "[無名者]";
+				mes "這個分數就想成為一名刺客? 繼續修煉去吧.";
+				next;
+				mes "[無名者]";
+				mes "你可以去問問卡伊, 看看他有什麼建議.";
+				next;
+				mes "[無名者]";
+				mes "另外, 藍翔技校歡迎你...";
+				close2;
+				warp "in_moc_16",19,76;
+				end;
+			}
+		}
+		else if (ASSIN_Q2 == 4) {
+			next;
+			mes "[無名者]";
+			mes "你盡力了,";
+			mes "我看得出來...";
+			next;
+			mes "[無名者]";
+			mes "讓我看看...";
+			mes "你的得分.";
+			mes "" + .@assassin_t + " points...";
+			if (.@assassin_t > 80) {
+				set ASSIN_Q2,5;
+				changequest 8002,8003;
+				next;
+				mes "[無名者]";
+				mes "這次總算通過了! 但是並沒有結束. 前面還有一個測試等著你呢. 祝你好運了!";
+				close;
+			}
+			else {
+				set ASSIN_Q2,4;
+				mes "你失敗了!";
+				next;
+				mes "[無名者]";
+				mes "這麼弱的渣渣, 你怎麼可能成為一名刺客?!";
+				next;
+				mes "[無名者]";
+				mes "我認為你也就只能是一個盜賊了. 快走吧, 繼續修煉直到你完全掌握了刺客的知識.";
+				next;
+				mes "[無名者]";
+				mes "如果你毫無頭緒的話, 我可以給你一個建議.";
+				next;
+				mes "[無名者]";
+				mes "去找卡伊吧, 就是那個放你進來的人, 他或許可以幫你提升一下你的理論知識.";
+				next;
+				mes "[無名者]";
+				mes "另外, 藍翔技校歡迎你...";
+				close2;
+				warp "in_moc_16",19,76;
+				end;
+			}
+		}
+	}
+	else {
+		mes "[無名者]";
+		mes "...我會一直關注你的.";
+		close;
+	}
+}
+
+in_moc_16,21,165,2	script	待命房間#ASNTEST	4_F_JOB_ASSASSIN,{
+	end;
+
+OnInit:
+	disablenpc "待命房間#ASNTEST";
+	waitingroom "待命房間",10,"待命房間#ASNTEST::OnStartArena",1;
+	enablewaitingroomevent;
+	end;
+
+OnStartArena:
+	warpwaitingpc "in_moc_16", 66, 151;
+	attachrid($@warpwaitingpc[0]);
+	if (ASSIN_Q2 < 5) {
+		warpchar "in_moc_16",20,145,getcharid(0);
+		end;
+	}
+	donpcevent "旁觀者#ASNTEST::OnEnable";
+	donpcevent "門衛#ASN::OnDisable";
+	set getvariableofnpc(.DisableTraps,"旁觀者#ASNTEST"),0;
+	disablewaitingroomevent;
+	end;
+
+OnStart:
+	enablewaitingroomevent;
+	end;
+}
+
+in_moc_16,21,165,2	script	測試嚮導#ASN	4_F_JOB_ASSASSIN,4,4,{
+	end;
+
+OnTouch:
+	if (ASSIN_Q2 < 5) {
+		mes "[帕勒卡迪]";
+		mes "沒有通過理論知識考試的話是不能繼續進行任務的, 再去找無名者談談吧...";
+		close2;
+		warp "in_moc_16",19,76;
+		end;
+	}
+	if (ASSIN_Q == 1 && ASSIN_Q2 == 5) {
+		mes "[帕勒卡迪]";
+		mes "" + strcharinfo(0) + "...";
+		mes "你通過考試了..?";
+		next;
+		mes "[帕勒卡迪]";
+		mes "說實話, 我寧願讓你不需任何條件就轉職成為刺客, 但近來有太多無知的人什麼也不懂就來轉職...";
+		next;
+		mes "[帕勒卡迪]";
+		mes "我們必須要保持我們刺客的尊嚴, 但是很遺憾, 有太多無節操的人也想成為刺客了...";
+		next;
+		mes "[帕勒卡迪]";
+		mes "所有的刺客都必須對他們殺死的敵人保持敬意, 武器上染著的血痕, 一樣包含了他們的尊嚴!";
+		next;
+		mes "[帕勒卡迪]";
+		mes "好了. 下一項測試是考驗你快速準確找到目標的能力.";
+		next;
+		mes "[帕勒卡迪]";
+		mes "如果你要成為一名刺客, 就要清楚的分辨出哪些是敵人而哪些是朋友.";
+		next;
+		mes "[帕勒卡迪]";
+		mes "這個測試的任務就是殺死盡可能多的, 名為^008800轉職試驗用樣本^000000的魔物.";
+		next;
+		mes "[帕勒卡迪]";
+		mes "你至少要殺死6只名為^008800轉職試驗用樣本^000000的魔物,";
+		mes "它們夾雜在相近名字的魔物中間, 所以你要格外小心...";
+		next;
+		mes "[帕勒卡迪]";
+		mes "如果失敗了, 就要重新開始測試. 到我上面的房間去,";
+		mes "就可以傳送到考試場地.";
+		next;
+		mes "[帕勒卡迪]";
+		mes "房間裡一次只允許進一個人, 所以只要有人在進行測試, 你就只有在外面等著直到他考試完畢.";
+		close;
+	}
+	else {
+		mes "[帕勒卡迪]";
+		mes "嘿, 不要太緊張了,";
+		mes "放輕鬆!";
+		next;
+		mes "[帕勒卡迪]";
+		mes "嗯, 如果你很累了, 我可以送你回去, 但是你就要重新接受考試了. 所以你的決定是...?";
+		next;
+		if (select("繼續考試!:退出考試.") == 1) {
+			mes "[帕勒卡迪]";
+			mes "好的!";
+			mes "記住了,";
+			mes "你必須殺死至少6只";
+			mes "名為^008800轉職試驗用樣本^000000的魔物!";
+			mes "祝你好運!";
+			close;
+		}
+		mes "[帕勒卡迪]";
+		mes "好吧...";
+		mes "我想,";
+		mes "你是應該休息一下了...";
+		close2;
+		set ASSIN_Q,0;
+		set ASSIN_Q3,0;
+		set ASSIN_Q2,0;
+		changequest 8003,8000;
+		warp "in_moc_16",19,13;
+		end;
+	}
+}
+
+in_moc_16,1,1,0	script	旁觀者#ASNTEST	-1,{
+	end;
+
+OnEnable:
+	set .MyMobs,6;
+	// Target mobs
+	monster "in_moc_16",62,161,"轉職試驗用樣本",1002,1,"旁觀者#ASNTEST::OnMyMobDead";
+	monster "in_moc_16",85,169,"轉職試驗用樣本",1063,1,"旁觀者#ASNTEST::OnMyMobDead";
+	monster "in_moc_16",88,152,"轉職試驗用樣本",1002,1,"旁觀者#ASNTEST::OnMyMobDead";
+	monster "in_moc_16",90,143,"轉職試驗用樣本",1113,1,"旁觀者#ASNTEST::OnMyMobDead";
+	monster "in_moc_16",74,167,"轉職試驗用樣本",1031,1,"旁觀者#ASNTEST::OnMyMobDead";
+	monster "in_moc_16",77,173,"轉職試驗用樣本",1002,1,"旁觀者#ASNTEST::OnMyMobDead";
+	// Decoy mobs
+	monster "in_moc_16",62,161,"轉職試驗有樣本",1063,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",85,169,"轉職試驗有樣本",1031,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",79,174,"轉職試驗有樣本",1113,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",85,156,"轉職試驗有樣本",1063,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",74,171,"轉職試驗用樣式",1002,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",68,173,"轉職試用樣式子",1113,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",65,158,"轉職試用戰鬥本",1002,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",60,158,"轉職試用驗樣本",1113,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",64,169,"轉職試驗用樣本們",1002,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",71,173,"轉職試驗有樣子",1063,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",77,172,"別操我",1002,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",76,172,"轉職樣本",1063,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",75,172,"雅蠛蝶",1113,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",67,167,"快來快來嘛",1063,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",86,170,"轉職試驗用啊用",1031,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",86,171,"試驗用轉職樣本",1002,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",85,170,"試驗有轉職樣本",1113,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",89,171,"弄我",1063,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",85,170,"黑暗之王",1031,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",89,156,"金正日",1002,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",89,156,"霸天虎",1113,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",89,156,"轉職用試樣本",1063,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",89,156,"車專試用樣本",1113,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",89,156,"哭尿了",1031,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",83,169,"土波利",1002,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",63,158,"周傑倫",1063,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",63,157,"車專耳只試用",1002,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",64,159,"轉用試驗樣子",1002,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",63,159,"轉職用試樣樣",1063,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",63,159,"祝你好運啊",1002,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",63,159,"李亞鵬",1002,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",83,148,"今晚打老虎",1002,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",82,148,"巨魔戰將",1002,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	monster "in_moc_16",84,148,"四大天王",1002,1,"旁觀者#ASNTEST::OnMyMobDead2";
+	initnpctimer;
+	end;
+
+OnReset:
+	killmonster "in_moc_16","旁觀者#ASNTEST::OnMyMobDead";
+	killmonster "in_moc_16","旁觀者#ASNTEST::OnMyMobDead2";
+	stopnpctimer;
+	donpcevent "待命房間#ASNTEST::OnStart";
+	end;
+
+OnResetMob:
+	killmonster "in_moc_16","旁觀者#ASNTEST::OnMyMobDead";
+	killmonster "in_moc_16","旁觀者#ASNTEST::OnMyMobDead2";
+	stopnpctimer;
+	end;
+
+OnMyMobDead:
+	set .MyMobs,.MyMobs-1;
+	if (.MyMobs < 1) {
+		mapannounce "in_moc_16","看起來你做的不錯啊, 保持住!",bc_map;
+		set ASSIN_Q,3;
+		changequest 8003,8004;
+		donpcevent "計時器#1::OnEnable";
+		donpcevent "門衛#ASN::OnEnable";
+		donpcevent "旁觀者#ASNTEST::OnResetMob";
+		set .DisableTraps,1;
+		stopnpctimer;
+	}
+	else {
+		mapannounce "in_moc_16","好的, 做的不錯! 就快成功了, 快了!",bc_map;
+	}
+	end;
+
+OnMyMobDead2:
+	mapannounce "in_moc_16",strcharinfo(0) + "! 你犯了一個錯誤! 我要把你帶出考場!",bc_map;
+	set ASSIN_Q,2;
+	warp "in_moc_16",19,161;
+	donpcevent "旁觀者#ASNTEST::OnReset";
+	end;
+
+OnTimer1000:
+	mapannounce "in_moc_16"," 好了, 開始測試!",bc_map;
+	end;
+
+OnTimer2000:
+	mapannounce "in_moc_16","就像之前告訴你的那樣, 只能殺死名為 '轉職試驗用樣本' 的魔物",bc_map;
+	end;
+
+OnTimer3000:
+	mapannounce "in_moc_16","考試的目的是為了檢驗你從人群中辨別出敵人的能力!",bc_map;
+	end;
+
+OnTimer4000:
+	mapannounce "in_moc_16","你只有3分鐘的時間! 每過一分鐘我都會提醒你一次.",bc_map;
+	end;
+
+OnTimer5000:
+	mapannounce "in_moc_16","好了, 3分鐘計時開始, 出發出發!",bc_map;
+	end;
+
+OnTimer65000:
+	mapannounce "in_moc_16","只有2分鐘了. 只能殺死名為 '轉職試驗用樣本' 的魔物!",bc_map;
+	end;
+
+OnTimer125000:
+	mapannounce "in_moc_16","還有一分鐘.",bc_map;
+	end;
+
+OnTimer180000:
+	mapannounce "in_moc_16","還有5秒鐘...",bc_map;
+	end;
+
+OnTimer181000:
+	mapannounce "in_moc_16","還有4秒鐘...",bc_map;
+	end;
+
+OnTimer182000:
+	mapannounce "in_moc_16","還有3秒鐘...",bc_map;
+	end;
+
+OnTimer183000:
+	mapannounce "in_moc_16","還有2秒鐘...",bc_map;
+	end;
+
+OnTimer184000:
+	mapannounce "in_moc_16","還有1秒鐘.",bc_map;
+	end;
+
+OnTimer185000:
+	mapannounce "in_moc_16","時間到!",bc_map;
+	mapannounce "in_moc_16","想浪費時間的話你就這樣繼續吧. 你不得不再進行一次測試了!",bc_map;
+	//set ASSIN_Q,2;
+	end;
+
+OnTimer186000:
+	areawarp "in_moc_16",60,136,93,177,"in_moc_16",19,161;
+	end;
+
+OnTimer187000:
+	donpcevent "旁觀者#ASNTEST::OnReset";
+	end;
+}
+
+in_moc_16,68,158,0	script	01_1::SinTrap	-1,0,0,{
+OnTouch:
+	if (getvariableofnpc(.DisableTraps,"旁觀者#ASNTEST")  < 1) {
+		mapannounce "in_moc_16",strcharinfo(0) + ", 你掉入了陷阱, 將會被遣返.",bc_map;
+		set ASSIN_Q,2;
+		warp "in_moc_16",19,161;
+		donpcevent "旁觀者#ASNTEST::OnResetMob";
+		donpcevent "待命房間#ASNTEST::OnStart";
+	}
+	end;
+}
+
+in_moc_16,69,158,0	duplicate(SinTrap)	01_2	-1,0,0
+in_moc_16,68,159,0	duplicate(SinTrap)	01_3	-1,0,0
+in_moc_16,69,159,0	duplicate(SinTrap)	01_4	-1,0,0
+in_moc_16,64,162,0	duplicate(SinTrap)	02_1	-1,0,0
+in_moc_16,65,162,0	duplicate(SinTrap)	02_2	-1,0,0
+in_moc_16,64,163,0	duplicate(SinTrap)	02_3	-1,0,0
+in_moc_16,65,163,0	duplicate(SinTrap)	02_4	-1,0,0
+in_moc_16,62,168,0	duplicate(SinTrap)	03_1	-1,0,0
+in_moc_16,63,168,0	duplicate(SinTrap)	03_2	-1,0,0
+in_moc_16,62,169,0	duplicate(SinTrap)	03_3	-1,0,0
+in_moc_16,63,169,0	duplicate(SinTrap)	03_4	-1,0,0
+in_moc_16,66,170,0	duplicate(SinTrap)	04_1	-1,0,0
+in_moc_16,67,170,0	duplicate(SinTrap)	04_2	-1,0,0
+in_moc_16,66,171,0	duplicate(SinTrap)	04_3	-1,0,0
+in_moc_16,67,171,0	duplicate(SinTrap)	04_4	-1,0,0
+in_moc_16,64,174,0	duplicate(SinTrap)	05_1	-1,0,0
+in_moc_16,64,175,0	duplicate(SinTrap)	05_2	-1,0,0
+in_moc_16,65,174,0	duplicate(SinTrap)	05_3	-1,0,0
+in_moc_16,65,175,0	duplicate(SinTrap)	05_4	-1,0,0
+in_moc_16,72,174,0	duplicate(SinTrap)	06_1	-1,0,0
+in_moc_16,72,175,0	duplicate(SinTrap)	06_2	-1,0,0
+in_moc_16,73,174,0	duplicate(SinTrap)	06_3	-1,0,0
+in_moc_16,73,175,0	duplicate(SinTrap)	06_4	-1,0,0
+in_moc_16,72,166,0	duplicate(SinTrap)	07_1	-1,0,0
+in_moc_16,72,167,0	duplicate(SinTrap)	07_2	-1,0,0
+in_moc_16,73,166,0	duplicate(SinTrap)	07_3	-1,0,0
+in_moc_16,73,167,0	duplicate(SinTrap)	07_4	-1,0,0
+in_moc_16,72,168,0	duplicate(SinTrap)	08_1	-1,0,0
+in_moc_16,72,169,0	duplicate(SinTrap)	08_2	-1,0,0
+in_moc_16,73,168,0	duplicate(SinTrap)	08_3	-1,0,0
+in_moc_16,73,169,0	duplicate(SinTrap)	08_4	-1,0,0
+in_moc_16,78,168,0	duplicate(SinTrap)	09_1	-1,0,0
+in_moc_16,78,169,0	duplicate(SinTrap)	09_2	-1,0,0
+in_moc_16,79,168,0	duplicate(SinTrap)	09_3	-1,0,0
+in_moc_16,79,169,0	duplicate(SinTrap)	09_4	-1,0,0
+in_moc_16,80,172,0	duplicate(SinTrap)	10_1	-1,0,0
+in_moc_16,81,172,0	duplicate(SinTrap)	10_2	-1,0,0
+in_moc_16,82,172,0	duplicate(SinTrap)	10_3	-1,0,0
+in_moc_16,83,172,0	duplicate(SinTrap)	10_4	-1,0,0
+in_moc_16,80,173,0	duplicate(SinTrap)	10_5	-1,0,0
+in_moc_16,81,173,0	duplicate(SinTrap)	10_6	-1,0,0
+in_moc_16,82,173,0	duplicate(SinTrap)	10_7	-1,0,0
+in_moc_16,83,173,0	duplicate(SinTrap)	10_8	-1,0,0
+in_moc_16,88,174,0	duplicate(SinTrap)	11_1	-1,0,0
+in_moc_16,88,175,0	duplicate(SinTrap)	11_2	-1,0,0
+in_moc_16,89,174,0	duplicate(SinTrap)	11_3	-1,0,0
+in_moc_16,89,175,0	duplicate(SinTrap)	11_4	-1,0,0
+in_moc_16,86,166,0	duplicate(SinTrap)	12_1	-1,0,0
+in_moc_16,86,167,0	duplicate(SinTrap)	12_2	-1,0,0
+in_moc_16,87,166,0	duplicate(SinTrap)	12_3	-1,0,0
+in_moc_16,87,167,0	duplicate(SinTrap)	12_4	-1,0,0
+in_moc_16,90,164,0	duplicate(SinTrap)	13_1	-1,0,0
+in_moc_16,90,165,0	duplicate(SinTrap)	13_2	-1,0,0
+in_moc_16,91,164,0	duplicate(SinTrap)	13_3	-1,0,0
+in_moc_16,91,165,0	duplicate(SinTrap)	13_4	-1,0,0
+in_moc_16,84,160,0	duplicate(SinTrap)	14_1	-1,0,0
+in_moc_16,85,160,0	duplicate(SinTrap)	14_2	-1,0,0
+in_moc_16,86,160,0	duplicate(SinTrap)	14_3	-1,0,0
+in_moc_16,87,160,0	duplicate(SinTrap)	14_4	-1,0,0
+in_moc_16,88,160,0	duplicate(SinTrap)	14_5	-1,0,0
+in_moc_16,89,160,0	duplicate(SinTrap)	14_6	-1,0,0
+in_moc_16,84,161,0	duplicate(SinTrap)	14_7	-1,0,0
+in_moc_16,85,161,0	duplicate(SinTrap)	14_8	-1,0,0
+in_moc_16,86,161,0	duplicate(SinTrap)	14_9	-1,0,0
+in_moc_16,87,161,0	duplicate(SinTrap)	14_10	-1,0,0
+in_moc_16,88,161,0	duplicate(SinTrap)	14_11	-1,0,0
+in_moc_16,89,161,0	duplicate(SinTrap)	14_12	-1,0,0
+in_moc_16,86,154,0	duplicate(SinTrap)	15_1	-1,0,0
+in_moc_16,86,155,0	duplicate(SinTrap)	15_2	-1,0,0
+in_moc_16,87,154,0	duplicate(SinTrap)	15_3	-1,0,0
+in_moc_16,87,155,0	duplicate(SinTrap)	15_4	-1,0,0
+in_moc_16,84,150,0	duplicate(SinTrap)	16_1	-1,0,0
+in_moc_16,84,151,0	duplicate(SinTrap)	16_2	-1,0,0
+in_moc_16,85,150,0	duplicate(SinTrap)	16_3	-1,0,0
+in_moc_16,85,151,0	duplicate(SinTrap)	16_4	-1,0,0
+in_moc_16,90,150,0	duplicate(SinTrap)	17_1	-1,0,0
+in_moc_16,90,151,0	duplicate(SinTrap)	17_2	-1,0,0
+in_moc_16,91,150,0	duplicate(SinTrap)	17_3	-1,0,0
+in_moc_16,91,151,0	duplicate(SinTrap)	17_4	-1,0,0
+in_moc_16,86,146,0	duplicate(SinTrap)	18_1	-1,0,0
+in_moc_16,86,147,0	duplicate(SinTrap)	18_2	-1,0,0
+in_moc_16,87,146,0	duplicate(SinTrap)	18_3	-1,0,0
+in_moc_16,87,147,0	duplicate(SinTrap)	18_4	-1,0,0
+
+in_moc_16,87,137,0	script	門衛#ASN	WARPNPC,2,1,{
+OnInit:
+	disablenpc "門衛#ASN";
+	end;
+
+OnTouch:
+	donpcevent "托馬斯#ASNTEST::OnDisable";
+	if (ASSIN_Q == 3)
+		set ASSIN_Q,3;
+	else
+		set ASSIN_Q,4;
+	warp "in_moc_16",87,102;
+	savepoint "in_moc_16",16,13;
+	end;
+
+OnEnable:
+	mapannounce "in_moc_16","坐標(87 137)處, 通向另一個房間的門, 已經打開.",bc_map;
+	enablenpc "門衛#ASN";
+	end;
+
+OnDisable:
+	disablenpc "門衛#ASN";
+	end;
+}
+
+in_moc_16,3,3,0	script	計時器#1	-1,{
+OnEnable:
+	initnpctimer;
+	end;
+
+OnTimer187000:
+	donpcevent "托馬斯#ASNTEST::OnDisable";
+	stopnpctimer;
+	end;
+
+OnDisable:
+	stopnpctimer;
+	end;
+	
+OnMyMobDead:
+	mapannounce "in_moc_16","嘿, 我怎麼跟你說的, 不要亂殺生啊!",bc_map;
+	mapannounce "in_moc_16","我要把你帶回去... *唉...*",bc_map;
+	set ASSIN_Q,3;
+	warp "in_moc_16",87,102;
+	killmonsterall "in_moc_16";
+	end;
+}
+
+in_moc_16,89,98,1	script	托馬斯#ASNTEST	2_M_THIEFMASTER,5,1,{
+	end;
+
+OnTouch:
+	if (ASSIN_Q == 4) {
+		mes "[托馬斯]";
+		mes "嘖嘖...! 看起來你受了不少傷啊. ^666666*唉*^000000 等一下, 讓我恢復你的HP和SP先...";
+		percentheal 100,100;
+		next;
+		mes "[托馬斯]";
+		mes "看起來你過得並不好啊. 你是不是覺得太刻苦了點...";
+		mes "夠了, 孩子.";
+		next;
+		switch(select("我想再試一次!:我... 我退出!")) {
+		case 1:
+			mes "[托馬斯]";
+			mes "好的.";
+			mes "祝你好運了.";
+			close;
+		case 2:
+			mes "[托馬斯]";
+			mes "呼...";
+			mes "退出考試? 我想你也是不想浪費我們大家的時間了.";
+			next;
+			mes "[托馬斯]";
+			mes "另外, 不要忘了儲存你在城市裡的出生點.";
+			close2;
+			mapannounce "in_moc_16",strcharinfo(0) + " 退出了考試...下一個是誰?!",bc_map;
+			set ASSIN_Q,0;
+			set ASSIN_Q2,0;
+			set ASSIN_Q3,0;
+			changequest 8004,8000;
+			savepoint "in_moc_16",18,14;
+			warp "in_moc_16",18,14;
+			donpcevent "待命房間#ASNTEST::OnStart";
+			end;
+		}
+	}
+
+	mes "[托馬斯]";
+	mes "嘿, 我的名字是托馬斯. 我負責測試你的隱身能力, 準備好了嗎?";
+	next;
+	mes "[托馬斯]";
+	mes "聽著, 這次測試你不能殺死任何一隻魔物. 你的目標是走到站在這個屋子反方向的 '帕勒卡迪' 那裡.";
+	next;
+	mes "[托馬斯]";
+	mes "簡單的說, 就是不殺死一隻魔物的情況下, 走到 '帕勒卡迪' 那裡, 明白了嗎?";
+	next;
+	mes "[托馬斯]";
+	mes "好吧, 說的夠多了, 讓我們看看你的表現吧.";
+	close2;
+	set ASSIN_Q,4;
+
+	monster "in_moc_16",81,77,"木乃伊",1041,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",82,77,"木乃伊",1041,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",83,77,"木乃伊",1041,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",84,77,"木乃伊",1041,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",85,77,"木乃伊",1041,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",86,77,"木乃伊",1041,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",88,77,"木乃伊",1041,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",89,77,"木乃伊",1041,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",90,77,"木乃伊",1041,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",77,77,"木乃伊",1041,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",78,56,"木乃伊",1041,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",79,56,"木乃伊",1041,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",80,56,"木乃伊",1041,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",81,56,"木乃伊",1041,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",91,55,"木乃伊",1041,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",92,56,"木乃伊",1041,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",93,56,"木乃伊",1041,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",94,56,"木乃伊",1041,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",95,56,"木乃伊",1041,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",96,56,"木乃伊",1041,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",97,56,"木乃伊",1041,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",76,62,"海葵",1068,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",79,62,"海葵",1068,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",79,65,"海葵",1068,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",76,65,"海葵",1068,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",96,62,"海葵",1068,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",96,65,"海葵",1068,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",99,62,"海葵",1068,1,"計時器#1::OnMyMobDead";
+	monster "in_moc_16",99,65,"海葵",1068,1,"計時器#1::OnMyMobDead";
+	end;
+
+OnDisable:
+	donpcevent "待命房間#ASNTEST::OnStart";
+	killmonsterall "in_moc_16";
+	end;
+}
+
+in_moc_16,87,48,2	script	帕勒卡迪#ASN	4_F_JOB_ASSASSIN,2,2,{
+OnTouch:
+	donpcevent "計時器#1::OnDisable";
+	donpcevent "托馬斯#ASNTEST::OnDisable";
+	mes "[帕勒卡迪]";
+	mes "噢! 恭喜你了!";
+	mes "你可以到我們工會會長的房間去了, 加油吧!";
+	close2;
+	set ASSIN_Q,5;
+	changequest 8004,8005;
+	warp "in_moc_16",181,183;
+	end;
+}
+
+in_moc_16,182,169,0	script	迷宮輔助人員	WARPNPC,1,1,{
+OnTouch:
+	if (ASSIN_Q == 5 || ASSIN_Q == 6) {
+		warp "in_moc_16",181,183;
+		set ASSIN_Q,ASSIN_Q+1;
+		changequest 8005,8006;
+	}
+	else {
+		mapannounce "in_moc_16",strcharinfo(0)+" 進入了工會會長的房間.'",bc_map;
+		savepoint "in_moc_16",181,183;
+		donpcevent "工會會長#ASN1::OnCast";
+		warp "in_moc_16",167,113;
+		end;
+	}
+}
+
+in_moc_16,167,110,0	script	工會會長#ASN1	-1,3,1,{
+OnTouch:
+	savepoint "in_moc_16",167,110;
+	mes "[工會會長]";
+	mes "歡迎啊. ";
+	mes "這裡就是工會會長房間了, 刺客工會的最深處.";
+	next;
+	mes "[工會會長]";
+	mes "我會給你一個小測試. 你需要通過這個迷宮走到我這裡來. 這個迷宮是工會用來避免外界打擾用的.";
+	next;
+	mes "[工會會長]";
+	mes "我很期待";
+	mes "在迷宮的出口處";
+	mes "和你會面.";
+	close;
+
+OnCast:
+	mapannounce "in_moc_16","...下一位志願者, 請進來吧.",bc_map;
+	end;
+}
+
+in_moc_16,149,80,4	script	工會會長#ASN2	1_M_MOC_LORD,1,1,{
+OnTouch:
+	savepoint "morocc",100,100;
+	if (ASSIN_Q == 7 && BaseJob == Job_Thief) {
+		set ASSIN_Q,8;
+		mes "[工會會長]";
+		mes "歡迎!";
+		mes "讓你花費這麼長時間";
+		mes "通過迷宮,";
+		mes "真是不好意思啊.";
+		next;
+		mes "[工會會長]";
+		mes "我剛才看了你的簡歷. 作為一名盜賊, 你很有勇氣. 很少能遇到像你一樣有潛力的人了.";
+		next;
+		mes "[工會會長]";
+		mes "如果不介意的話, 我能問你一些問題嗎? 不用太緊張的, 不過如果你說謊了, 你的菊花就是我的了.";
+		next;
+		mes "[工會會長]";
+		mes "首先, 對於刺客來說, 你認為什麼是最重要的?";
+		next;
+		switch(select("更強大的力量.:刺客的尊嚴.:無盡的修煉.")) {
+		case 1:
+			mes "[工會會長]";
+			mes "更強大的力量...";
+			mes "是的, 我想你的意思是說";
+			mes "作為一名刺客,";
+			mes "肯定要比盜賊更加強大.";
+			next;
+			mes "[工會會長]";
+			mes "然而, 是什麼讓你想要擁有更強大的力量呢? 去做秀? 去逞能? 你想如何利用你強大的力量呢?";
+			next;
+			mes "[工會會長]";
+			mes "你想要變得更加強大的原因是什麼?";
+			mes "嗯...";
+			mes "能和我說說嗎?";
+			next;
+			switch(select("復仇...!:錢財~:我想去旅行.")) {
+			case 1:
+				set ASSIN_Q,8;
+				mes "[工會會長]";
+				mes "復仇...?";
+				mes "是的, 我懂的, 我們每個人都有一些怨恨的人或事.";
+				next;
+				mes "[工會會長]";
+				mes "但是, 記住了, 我們不能被情感所左右. 這才是我們要走的路.";
+				next;
+				mes "[工會會長]";
+				mes "成為了刺客,";
+				mes "就意味著以後必定要走一條孤獨的路.";
+				next;
+				break;
+			case 2:
+				set ASSIN_Q,9;
+				mes "[工會會長]";
+				mes "為了金錢...? 不否認我們都需要錢才能活下去. 但是我們刺客有更高尚的目的.";
+				next;
+				mes "[工會會長]";
+				mes "成為一名刺客就意味著";
+				mes "放棄了奢侈的生活,";
+				mes "甘於樸素...";
+				next;
+				break;
+			case 3:
+				set ASSIN_Q,10;
+				mes "[工會會長]";
+				mes "好想法. 周遊世界會增長你的見識.";
+				next;
+				mes "[工會會長]";
+				mes "儘管我們中的大多數人都不願混在人群中, 但是我想你已經注意到了這一點, 是嗎?";
+				next;
+				mes "[工會會長]";
+				mes "從某種意義上說, 我們就是天煞孤星...";
+				next;
+				break;
+			}
+			break;
+		case 2:
+			mes "[工會會長]";
+			mes "刺客的尊嚴...";
+			mes "其他的刺客有告訴過你嗎...?";
+			next;
+			mes "[工會會長]";
+			mes "尊嚴是很重要, 但是如果沒有能力的話, 尊嚴就毫無價值.";
+			next;
+			mes "[工會會長]";
+			mes "你之前遇到過的很多的刺客都是我們的同胞, 是出生入死過的戰友.";
+			next;
+			mes "[工會會長]";
+			mes "我能理解為什麼尊嚴對他們來說是那麼的重要. 那麼, 是什麼原因讓你立志成為一名刺客的呢?";
+			next;
+			switch(select("我喜歡孤獨的感覺.:賺錢.:感覺挺屌.")) {
+			case 1:
+				set ASSIN_Q,11;
+				mes "[工會會長]";
+				mes "說的對...";
+				mes "我們都是苦行僧, 都是獨行俠...";
+				next;
+				mes "[工會會長]";
+				mes "換句話說,";
+				mes "成為了刺客,";
+				mes "就要失去很多.";
+				next;
+				mes "[工會會長]";
+				mes "但我之前說過, 我們有很多兄弟, 無處不在, 特別是當你執行工會任務的時候.";
+				next;
+				break;
+			case 2:
+				set ASSIN_Q,12;
+				mes "[工會會長]";
+				mes "不否認我們都需要錢才能活下去. 但是我們刺客有更高尚的目的, 不只是為了錢, 是嗎?";
+				next;
+				break;
+			case 3:
+				set ASSIN_Q,13;
+				mes "[工會會長]";
+				mes "外貌只是表象...";
+				next;
+				mes "[工會會長]";
+				mes "用我們的方式來看, 有些可恥的刺客背叛了作為一名刺客的初衷...";
+				next;
+				mes "[工會會長]";
+				mes "不要忘了...";
+				mes "刺客不會左顧右盼. 我們不會生活在世俗的看法中, 永遠不會.";
+				next;
+				break;
+			}
+			break;
+		case 3:
+			mes "[工會會長]";
+			mes "無盡的修煉...";
+			mes "你想成為刺客的原因是這個嗎?";
+			next;
+			mes "[工會會長]";
+			mes "跟盜賊相比, 刺客這個職業不允許絲毫的放縱.";
+			mes "告訴我你訓練的目的.";
+			next;
+			switch(select("加強我的技能.:就是我的目標.:為了精神上的充實.")) {
+			case 1:
+				set ASSIN_Q,14;
+				mes "[工會會長]";
+				mes "這是必然的. 但是不要認為技能對刺客來說是最重要的.";
+				next;
+				mes "[工會會長]";
+				mes "如果你只是想這樣的話, 刺客這個職業不會讓你滿意的...";
+				next;
+				break;
+			case 2:
+				set ASSIN_Q,15;
+				mes "[工會會長]";
+				mes "是你其中的一個理想? 我想你一定有很多理想了...";
+				next;
+				mes "[工會會長]";
+				mes "我也認識這麼一個人... 很久以前, 在一次任務中我也遇到過一個有理想的騎士, 他在躲避著追殺.";
+				next;
+				mes "[工會會長]";
+				mes "可是在他達到52級之前我必須要殺了他... ^666666*唉*^000000.";
+				next;
+				mes "我對你有一些擔擾啊, 我想說的是, 一旦你成為了刺客就再也沒有回頭路了...";
+				next;
+				break;
+			case 3:
+				set ASSIN_Q,16;
+				mes "[工會會長]";
+				mes "好想法...";
+				mes "這是提升的一個好想法. 很多人只注重身體上的修煉而忽視了精神的修養.";
+				next;
+				mes "[工會會長]";
+				mes "我想你會成為一名正直的刺客.";
+				next;
+				break;
+			}
+			break;
+		}
+		mes "[工會會長]";
+		mes "很遺憾, 不少智力有硬傷的人也想成為刺客...";
+		next;
+		mes "[工會會長]";
+		mes "他們到處惹事讓我們也連受恥辱.";
+		next;
+		mes "[工會會長]";
+		mes "千萬不要成為他們中的一員. 工會的責任你也要擔負一份...";
+		next;
+		mes "[工會會長]";
+		mes "那麼, 如果你成為了一名刺客, 第一件事想幹什麼?";
+		next;
+		switch(select("我會馬上去捕獵.:有人在等我呢.:看看刺客都有些什麼能力.")) {
+		case 1:
+			mes "[工會會長]";
+			mes "捕獵...";
+			mes "沒了...?";
+			next;
+			switch(select("我會先去升級.:我去試試我的技能.:我會去那些原來我不能去的地方.")) {
+			case 1:
+				set .@assassin_sangdam,.@assassin_sangdam+10;
+				mes "[工會會長]";
+				mes "不要魯莽啊...";
+				mes "成為刺客並不意味著你變成了另外一個人, 不要著急.";
+				next;
+				break;
+			case 2:
+				set .@assassin_sangdam,.@assassin_sangdam+5;
+				mes "[工會會長]";
+				mes "自省是很重要的. 我能理解當你成為刺客時對自己的新能力而感到興奮.";
+				next;
+				mes "[工會會長]";
+				mes "那麼, 我希望你不要忽略了你的智力成長.";
+				next;
+				break;
+			case 3:
+				mes "[工會會長]";
+				mes "非常好...";
+				mes "去尋找那些未知之地吧. 但是要記住成為刺客並不意味著你完全成為另一個人.";
+				next;
+				mes "[工會會長]";
+				mes "不要強迫自己做太多的事情.";
+				mes "放鬆一些, 自然就好.";
+				next;
+				break;
+			}
+			break;
+		case 2:
+			mes "[工會會長]";
+			mes "我可以問問,";
+			mes "是誰在等你嗎?";
+			next;
+			switch(select("好基友.:好戰友.:好炮友.")) {
+			case 1:
+				set .@assassin_sangdam,.@assassin_sangdam+5;
+				mes "[工會會長]";
+				mes "我懂的...";
+				mes "好基友, 一起走.";
+				next;
+				break;
+			case 2:
+				set .@assassin_sangdam,.@assassin_sangdam+5;
+				mes "[工會會長]";
+				mes "非常好...";
+				mes "好戰友是那些為了你可以犧牲自己生命的朋友...";
+				next;
+				mes "[工會會長]";
+				mes "為了他們, 你也應當同樣如此.";
+				next;
+				break;
+			case 3:
+				mes "[工會會長]";
+				mes "我懂的...快去吧...注意身體...";
+				next;
+				mes "[工會會長]";
+				if (Sex)
+					mes "但是永遠不要向她透露你是一名刺客的信息.";
+				else
+					mes "但是永遠不要向她透露你是一名刺客的信息.";
+				next;
+				mes "[工會會長]";
+				mes "愛你所愛, 對於你的真心人, 上天是不會給你第二次機會和她相遇的.";
+				next;
+				break;
+			}
+			break;
+		case 3:
+			mes "[工會會長]";
+			mes "真令人敬佩. 有什麼想問的嗎?";
+			next;
+			switch(select("刺客在哪裡升級...:刺客的主要目標.:賺錢方面的...")) {
+			case 1:
+				set .@assassin_sangdam,.@assassin_sangdam+5;
+				mes "[工會會長]";
+				mes "全看你的能力和選擇了, 其實任何地方都可以做為你成長的環境.";
+				next;
+				mes "[工會會長]";
+				mes "不過你必須要學會一項技能,";
+				mes "就是在任何環境下的逃生本領.";
+				next;
+				break;
+			case 2:
+				mes "[工會會長]";
+				mes "外面的世界有很多的刺客的, 去問問他們的意見吧.";
+				next;
+				mes "[工會會長]";
+				mes "我希望你成為一名優秀的刺客. 在你足夠強大時, 我也希望你能像你的老師現在關照你一樣, 來關照他們.";
+				next;
+				break;
+			case 3:
+				set .@assassin_sangdam,.@assassin_sangdam+10;
+				mes "[工會會長]";
+				mes "嘖嘖嘖...";
+				mes "你成為刺客就是想去賺錢嗎?";
+				next;
+				mes "[工會會長]";
+				mes "那樣的人們是不受歡迎的, 如果你的目標是這個, 那麼你就要重新考慮你的職業選擇了...";
+				next;
+				break;
+			}
+			break;
+		}
+		mes "[工會會長]";
+		mes "很高興遇到你, 你讓我想起了我逝去的青春.";
+		next;
+		mes "[工會會長]";
+		mes "給我一點兒時間,";
+		mes "讓我考慮一下...";
+		next;
+		mapannounce "in_moc_16","所有參加了" + strcharinfo(0) + "測試的人員, 請都站到我前面來.",bc_map;
+		mes "[工會會長]";
+		mes "所有參加了" + strcharinfo(0) + "測試的人員, 請都站到我前面來.";
+		next;
+		mes "[工會會長]";
+		mes "他們馬上就到";
+		mes "......";
+		next;
+		enablenpc "[修伊]";
+		enablenpc "[凱伊]";
+		enablenpc "[無名者]";
+		enablenpc "[帕勒卡迪]";
+		enablenpc "[監考官]";
+		enablenpc "[托馬斯]";
+		enablenpc "[馬洛畢斯]";
+		mes "[無名者]";
+		mes "到齊了.";
+		next;
+		mes "[工會會長]";
+		mes "我想聽聽你們關於" + strcharinfo(0) + "的考試意見.";
+		next;
+		mes "[無名者]";
+		mes "嗯...";
+		mes "我認為";
+		mes ""+ strcharinfo(0) +"";
+		mes "還是不錯的.";
+		next;
+		mes "[工會會長]";
+		mes "嗯...";
+		mes "無名者的看法,";
+		mes "還是支持你的.";
+		mes "你的意見呢, 修伊?";
+		next;
+		if (ASSIN_Q3 == 1) {
+			mes "[修伊]";
+			mes "這麼說吧...";
+			mes "他的表現不是非常好,";
+			mes "不過....";
+			next;
+			mes "[修伊]";
+			mes "我的意見呢,";
+			mes "和無名者一樣.";
+		}
+		else {
+			mes "[修伊]";
+			mes "儘管"+ strcharinfo(0) +"表現的有點兒柔弱, 但總的來說, "+ strcharinfo(0) +"達到了我的標準.";
+			next;
+			mes "[修伊]";
+			mes "如果沒什麼事兒, 我回去工作了.";
+			next;
+			mes "[工會會長]";
+			mes "好的..";
+			mes "咳咳...修伊從來就是這麼酷...";
+		}
+		next;
+		mes "[工會會長]";
+		mes "那麼...";
+		mes "監考官, 你的意見呢?";
+		mes "說說看吧.";
+		next;
+		disablenpc "[修伊]";
+		mes "[監考官]";
+		mes "他的確通過了考試, 我只能這麼說.";
+		next;
+		mes "[工會會長]";
+		mes "嗯...";
+		mes "我們的意見挺統一的, 關於"+ strcharinfo(0) +"我沒有什麼問題了...";
+		next;
+		switch(ASSIN_Q) {
+		case 8:
+			mes "[工會會長]";
+			mes "儘管現在你被仇恨所驅使, 但我希望你能在日後的修煉中慢慢平復...";
+			next;
+			break;
+		case 9:
+			mes "[工會會長]";
+			mes "儘管你現在更關心的是金錢, 但我想你會有更偉大的理想的...";
+			next;
+			break;
+		case 10:
+			mes "[工會會長]";
+			mes "渴望周遊世界, 我希望你會在旅途中找到真實的自己...";
+			next;
+			break;
+		case 11:
+			mes "[工會會長]";
+			mes "你好像很瞭解刺客. 我認為孤獨對你來說不算什麼...";
+			next;
+			break;
+		case 12:
+			mes "[工會會長]";
+			mes "你對金錢很癡迷, 不過我想你會改變的.";
+			next;
+			mes "[工會會長]";
+			mes "儘管我不太信任你, 但我會給你機會的...";
+			next;
+			break;
+		case 13:
+			mes "[工會會長]";
+			mes "儘管你對刺客的造型有很大的興趣, 但我想今後你會瞭解刺客的本質的.";
+			next;
+			break;
+		case 14:
+			mes "[工會會長]";
+			mes "渴望更強大的技能的人啊, 我想你終會瞭解精神力的作用的.";
+			next;
+			break;
+		case 15:
+			mes "[工會會長]";
+			mes "或早或晚, 你會發現你願意為之努力的事情的...";
+			next;
+			break;
+		case 16:
+			mes "[工會會長]";
+			mes "我知道有些人只注重物理方面的修煉,";
+			mes "但我相信, 你和他們不同...";
+			next;
+		}
+		if (ASSIN_Q3 == 1 && BaseJob == Job_Thief && ASSIN_Q > 6 && ASSIN_Q < 17) {
+			mes "[工會會長]";
+			mes "好了, 我說的夠多了, 選一項做為禮物吧.";
+			next;
+			mes "[工會會長]";
+			mes "看看有什麼你喜歡的.";
+			next;
+			switch(select("拳刃:卡塔勒拳刃:笨拙短劍:短劍")) {
+			case 1:
+				mes "[工會會長]";
+				mes "想去附魔啊...";
+				mes "附魔毀一生......不過還是祝你好運吧.";
+				getitem 1251,1; //Jur_
+				break;
+			case 2:
+				mes "[工會會長]";
+				mes "這樣啊...";
+				mes "莫拉村有彩虹橋的傳說.";
+				mes "村子裡面有各種小草精,";
+				mes "我很早就聽說過了,";
+				mes "拿著吧.";
+				getitem 1253,1; //Katar_
+				break;
+			case 3:
+				mes "[工會會長]";
+				mes "運氣不好的時候就用得上它們咯.";
+				getitem 1208,1; //Main_Gauche_
+				break;
+			case 4:
+				mes "[工會會長]";
+				mes "原來你更喜歡逛商城啊...";
+				mes "給你, 拿好啦. 祝你成功!";
+				getitem 1220,1; //Gladius_
+			}
+			set ASSIN_Q,17;
+			set ASSIN_Q3,2;
+			next;
+		}
+		else {
+			mes "[工會會長]";
+			mes "好了, 我說的夠多了.";
+			mes "這個先拿著吧.";
+			next;
+			switch(rand(1,5)) {
+			case 1:
+				getitem 1207,1; //Main_Gauche
+				break;
+			case 2:
+				getitem 1250,1; //Jur
+				break;
+			case 3:
+				getitem 1216,1; //Stiletto
+				break;
+			case 4:
+				getitem 1201,1; //Knife
+				break;
+			case 5:
+				getitem 1252,1; //Katar
+			}
+			set ASSIN_Q,17;
+		}
+		mes "[工會會長]";
+		mes "好吧, 我會給你一個標記. 去找入口處那位看起來很凶的人.";
+		next;
+		mes "[工會會長]";
+		mes "拿著這個, 修伊會為你進行轉職儀式的.";
+		next;
+		mes "[工會會長]";
+		mes "你, " + strcharinfo(0) + ", 立志成為一名刺客. 願你使用我們刺客的方式, 成為別人的榜樣.";
+		savepoint "morocc",100,100;
+		getitem 1008,1; //Frozen_Heart
+		changequest 8006,8007;
+		next;
+		mes "[工會會長]";
+		mes "好了, 都回到自己的崗位上去吧. 我也會把你送到入口處的, 走著...";
+		disablenpc "[修伊]";
+		disablenpc "[凱伊]";
+		disablenpc "[無名者]";
+		disablenpc "[帕勒卡迪]";
+		disablenpc "[監考官]";
+		disablenpc "[托馬斯]";
+		disablenpc "[馬洛畢斯]";
+		close2;
+		warp "in_moc_16",17,19;
+		end;
+	}
+	else if (ASSIN_Q == 17) {
+		mes "[工會會長]";
+		mes "嗯...?";
+		mes "你怎麼會在這裡...?";
+		next;
+		mes "[工會會長]";
+		mes "你就快完成考試了. 為什麼不去拿到^006699泯滅之心^000000呢, 這樣你就可以轉職了啊.";
+		close2;
+		warp "in_moc_16",17,19;
+		end;
+	}
+	else if (ASSIN_Q > 7 && ASSIN_Q < 17) {
+		set ASSIN_Q,7;
+		mes "[工會會長]";
+		mes "搞什麼? 你選擇了取消? 你不想完成轉職了嗎?";
+		next;
+		mes "[工會會長]";
+		mes "^666666*唉...*^000000";
+		mes "好吧, 讓我們再試一次, 如果你還是不聽我說什麼的話, 你的菊花就是我的了, 明白嗎?";
+		close;
+	}
+	else {
+		mes "[工會會長]";
+		mes "嗯? 你怎麼進來了?";
+		next;
+		mes "[工會會長]";
+		mes "你已經完成了考試, 把^006699泯滅之心^000000交給那個看起來很凶的人, 就可以完成轉職了!";
+		close2;
+		warp "in_moc_16",17,19;
+		end;
+	}
+}
+
+in_moc_16,186,81,1	script	輔助人員	1_M_JOBTESTER,1,1,{
+	mes "[輔助人員]";
+	mes "對不起, 我不負責轉職. 去找工會會長吧, 就像他告訴你的那樣.";
+	close;
+}
+
+in_moc_16,170,90,0	script	info 1	-1,{
+OnTouch:
+	mes "[工會會長]";
+	mes "嗯.";
+	mes "那邊是行不通的, 再找其它的路.";
+	close;
+}
+
+in_moc_16,153,85,0	script	info 2	-1,1,1,{
+OnTouch:
+	mes "[工會會長]";
+	mes "你做的不錯. 只需要再拐一點兒彎.";
+	close;
+}
+
+in_moc_16,160,85,0	script	info 3	-1,1,1,{
+OnTouch:
+	mes "[工會會長]";
+	mes "嗯.";
+	mes "現在,";
+	mes "那邊是行不通的.";
+	close;
+}
+
+in_moc_16,175,89,0	script	info 4	-1,1,1,{
+OnTouch:
+	mes "[工會會長]";
+	mes "嗯...";
+	mes "你在向著我的助手走過去啊. 你還需要和他再說兩句嗎?";
+	close;
+}
+
+in_moc_16,164,88,0	script	info 5	-1,{
+OnTouch:
+	mes "[工會會長]";
+	mes "不錯...";
+	mes "我能感覺到你離我愈來愈近了.";
+	close;
+}
+
+in_moc_16,149,95,0	script	info 6	-1,1,1,{
+OnTouch:
+	mes "[工會會長]";
+	mes "嗯, 不錯啊, 快到了.";
+	close;
+}
+
+in_moc_16,180,101,0	script	info 7	-1,1,1,{
+OnTouch:
+	mes "[工會會長]";
+	mes "我想你走的路不對啊.";
+	close;
+}
+
+in_moc_16,186,107,0	script	info 8	-1,1,1,{
+OnTouch:
+	mes "[工會會長]";
+	mes "毫無方向感了, 嗯?";
+	close;
+}
+
+-	script	#moc_assin_dup	-1,{
+	end;
+
+OnInit:
+	disablenpc strnpcinfo(0);
+	end;
+}
+in_moc_16,156,87,1	duplicate(#moc_assin_dup)	[修伊]	1_M_JOBTESTER
+in_moc_16,156,85,1	duplicate(#moc_assin_dup)	[凱伊]	4_M_JOB_ASSASSIN
+in_moc_16,156,83,1	duplicate(#moc_assin_dup)	[無名者]	1_M_MOC_LORD
+in_moc_16,156,81,2	duplicate(#moc_assin_dup)	[帕勒卡迪]	4_F_JOB_ASSASSIN
+in_moc_16,156,79,1	duplicate(#moc_assin_dup)	[監考官]	2_M_THIEFMASTER
+in_moc_16,156,77,1	duplicate(#moc_assin_dup)	[托馬斯]	2_M_THIEFMASTER
+in_moc_16,156,75,1	duplicate(#moc_assin_dup)	[馬洛畢斯]	1_M_JOBTESTER

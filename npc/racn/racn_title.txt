@@ -1,0 +1,89 @@
+//===== rAthenaCN 漢化聲明 ===================================
+//= 您可以隨意轉載和使用本漢化腳本。若您使用、借鑒或複製了
+//= 此腳本中的漢化成果，那麼請在您的腳本中加上並保留這七行
+//= 漢化聲明，由衷感謝。
+//= 若您對這個腳本有更好的翻譯建議，或發現此腳本的漢化錯誤，
+//= 請前往 http://rathena.cn 上報您發現的問題，謝謝。
+//============================================================
+
+//===== rAthenaCN Script =======================================
+//= 2015客戶端稱號機制演示腳本
+//===== By: ==================================================
+//= Sola、小克
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthenaCN 開發團隊
+//===== Description: =========================================
+//= 演示如何通過 rAthenaCN 拓展的 getchartitle 和 setchartitle
+//= 這兩個腳本函數來設置和獲取玩家的稱號。
+//============================================================
+//= 此腳本演示的指令為:
+//=   [腳本] getchartitle {<char_id>};
+//=   [腳本] setchartitle <稱號ID>{,<char_id>};
+//= [GM指令] @title <稱號ID>
+//============================================================
+
+prontera,136,125,4	script	稱號演示	123,{
+	if (PACKETVER < 20150513){
+		mes "[rAthenaCN 演示]";
+		mes "官方自帶的稱號機制僅在版本號 ^0000ff>=^000000 ^ff000020150513^000000 的客戶端上有效.";
+		mes "請使用符合要求的新版客戶端程序之後, 再來找我演示吧.";
+		close;
+	}
+	mes "[rAthenaCN 演示]";
+	mes "我負責演示2015客戶端的稱號機制..";
+	mes "與稱號機制配套的腳本指令如下:";
+	mes "^ff0000getchartitle {<char_id>};^000000";
+	mes "^ff0000setchartitle <稱號ID>{,<char_id>};^000000";
+	mes "與稱號機制配套的GM指令如下:";
+	mes "^ff0000@title <稱號ID>^000000";
+	next;
+	mes "[rAthenaCN 演示]";
+	mes "稱號在服務端是以一個ID存在的, 服務端並不知道這個稱號ID對應的文本,";
+	mes "稱號ID與文本的對應表保存在客戶端的 ^ff0000data\\luafiles514\\lua files\\datainfo\\titletable.lub^000000 文件中, 大家可以去看看.";
+	next;
+	mes "[rAthenaCN 演示]";
+	mes "請選擇你要測試或瞭解的功能.";
+	next;
+	switch(select("setchartitle - 設置我的稱號ID:getchartitle - 獲取我的稱號ID:OnPCChangeTitleFilter - 稱號更換事件")){
+		case 1:
+			mes "[rAthenaCN 演示]";
+			mes "有效的稱號ID範圍在:^ff00001000~1034^000000之間,";
+			mes "^0000ff若填寫的ID無效, 則稱號會被取消.^000000";
+			mes "請填寫你想設置的稱號ID?";
+			next;
+			input .@title_id;
+			mes "[rAthenaCN 演示]";
+			mes "你填寫的稱號ID為: ^ff0000" + .@title_id + "^000000";
+			if (.@title_id < 1000 || .@title_id > 1034){
+				mes "^0000ffID不在合法範圍內, 稱號將被取消^000000";
+			}
+			switch(setchartitle(.@title_id)){
+				case -1:
+					mes "函數返回值: -1 - 執行失敗";
+					break;
+				case 1:
+					mes "函數返回值: 1 - 執行成功";
+					break;
+			}
+			mes "這部分功能演示結束.";
+			break;
+		case 2:
+			mes "[rAthenaCN 演示]";
+			mes "你現在的稱號ID為: ^ff0000" + getchartitle() + "^000000";
+			mes "若稱號ID為 ^ff0000-1^000000 則表示函數執行失敗.";
+			mes "這部分功能演示結束.";
+			break;
+		case 3:
+			mes "[rAthenaCN 演示]";
+			mes "使用 ^ff0000OnPCChangeTitleFilter^000000 事件";
+			mes "可以在玩家更換稱號時獲得通知.";
+			mes "具體使用方法請查看事件演示腳本: ^ff0000npc/racn/racn_events.txt^000000.";
+			break;
+	}
+	close;
+OnInit:
+	waitingroom "稱號演示",1;
+	end;
+}

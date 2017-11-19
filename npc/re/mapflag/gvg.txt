@@ -1,0 +1,48 @@
+//===== rAthenaCN 漢化聲明 ===================================
+//= 您可以隨意轉載和使用本漢化腳本。若您使用、借鑒或複製了
+//= 此腳本中的漢化成果，那麼請在您的腳本中加上並保留這七行
+//= 漢化聲明，由衷感謝。
+//= 若您對這個腳本有更好的翻譯建議，或發現此腳本的漢化錯誤，
+//= 請前往 http://rathena.cn 上報您發現的問題，謝謝。
+//============================================================
+
+//===== rAthena Script =======================================
+//= Mapflag: Guild versus Guild mode.
+//===== By: ==================================================
+//= rAthena Dev Team
+//===== Current Version: =====================================
+//= 1.1
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: ========================================= 
+//= Players can attack other guilds, and will have their guild
+//= icons shown. WoE damage reductions will also take place.
+//= gvg: Turns on GvG mode.
+//= gvg_castle: Describes castle maps for WoE.
+//= gvg_dungeon: Describes dungeon maps for WoE.
+//= gvg_te: Turns on GvG mode for WoE:TE.
+//= gvg_te_castle: Describes castle maps for WoE:TE.
+//===== Additional Comments: ================================= 
+//= 1.0 Renewal split. [Euphy]
+//= 1.1 Added GVG TE Castles. [Cydh]
+//============================================================
+
+// Guild Dungeons =========
+gld2_ald	mapflag	gvg_dungeon
+gld2_gef	mapflag	gvg_dungeon
+gld2_pay	mapflag	gvg_dungeon
+gld2_prt	mapflag	gvg_dungeon
+teg_dun01	mapflag	gvg_dungeon
+teg_dun02	mapflag	gvg_dungeon
+
+// WOE:Training Edition Castles =====
+te_prtcas01	mapflag	gvg_te_castle
+te_prtcas02	mapflag	gvg_te_castle
+te_prtcas03	mapflag	gvg_te_castle
+te_prtcas04	mapflag	gvg_te_castle
+te_prtcas05	mapflag	gvg_te_castle
+te_aldecas1	mapflag	gvg_te_castle
+te_aldecas2	mapflag	gvg_te_castle
+te_aldecas3	mapflag	gvg_te_castle
+te_aldecas4	mapflag	gvg_te_castle
+te_aldecas5	mapflag	gvg_te_castle

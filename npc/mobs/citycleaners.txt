@@ -1,0 +1,48 @@
+//===== rAthenaCN 漢化聲明 ===================================
+//= 您可以隨意轉載和使用本漢化腳本。若您使用、借鑒或複製了
+//= 此腳本中的漢化成果，那麼請在您的腳本中加上並保留這七行
+//= 漢化聲明，由衷感謝。
+//= 若您對這個腳本有更好的翻譯建議，或發現此腳本的漢化錯誤，
+//= 請前往 http://rathena.cn 上報您發現的問題，謝謝。
+//============================================================
+
+//===== rAthena Script =======================================
+//= City Cleaners Monster Spawn Script
+//===== By: ==================================================
+//= massdriller
+//===== Current Version: =====================================
+//= 1.2
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Spawns monsters to clean up cities.
+//===== Additional Comments: =================================
+//= 0.1a Added a few more towns to spawn Wild rose [MasterOfMuppets]
+//= 0.1b And even more from Poki#3 [Komurka]
+//= 1.0 Removed unofficial city cleaners [Playtester]
+//= 1.1 Added other city spawns [Playtester]
+//= 1.2 Split spawns into Pre-RE/RE and Town files. [Euphy]
+//============================================================
+
+//==================================================
+// Wild Rose City Spawns
+//==================================================
+prontera,0,0	monster	狂暴野貓	1261,1,7200000,3600000
+morocc,0,0	monster	狂暴野貓	1261,1,7200000,3600000
+alberta,0,0	monster	狂暴野貓	1261,1,7200000,3600000
+aldebaran,0,0	monster	狂暴野貓	1261,1,7200000,3600000
+geffen,0,0	monster	狂暴野貓	1261,1,7200000,3600000
+payon,0,0	monster	狂暴野貓	1261,1,7200000,3600000
+comodo,0,0	monster	狂暴野貓	1261,1,7200000,3600000
+izlude,0,0	monster	狂暴野貓	1261,1,7200000,3600000
+yuno,0,0	monster	狂暴野貓	1261,1,7200000,3600000
+einbroch,0,0	monster	狂暴野貓	1261,1,7200000,3600000
+lighthalzen,0,0	monster	狂暴野貓	1261,1,7200000,3600000
+hugel,0,0	monster	狂暴野貓	1261,1,7200000,3600000
+umbala,0,0	monster	狂暴野貓	1261,1,7200000,3600000
+amatsu,0,0	monster	狂暴野貓	1261,1,7200000,3600000
+gonryun,0,0	monster	狂暴野貓	1261,1,7200000,3600000
+louyang,0,0	monster	狂暴野貓	1261,1,7200000,3600000
+ayothaya,0,0	monster	狂暴野貓	1261,1,7200000,3600000
+moscovia,0,0	monster	狂暴野貓	1261,1,7200000,3600000
+einbech,0,0	monster	狂暴野貓	1261,1,3600000,3000000

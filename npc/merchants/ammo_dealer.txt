@@ -1,0 +1,107 @@
+//===== rAthenaCN 漢化聲明 ===================================
+//= 您可以隨意轉載和使用本漢化腳本。若您使用、借鑒或複製了
+//= 此腳本中的漢化成果，那麼請在您的腳本中加上並保留這七行
+//= 漢化聲明，由衷感謝。
+//= 若您對這個腳本有更好的翻譯建議，或發現此腳本的漢化錯誤，
+//= 請前往 http://rathena.cn 上報您發現的問題，謝謝。
+//============================================================
+
+//===== rAthena Script =======================================
+//= Bullet Dealers
+//===== By ===================================================
+//= Playtester, Paradox924X
+//===== Version ==============================================
+//= 2.1
+//===== Compatible With ======================================
+//= rAthena Project
+//===== Description ==========================================
+//= Bullet trader.
+//===== Comments =============================================
+//= 1.0 First version [Playtester]
+//= 1.1 Converted from Aegis [Paradox924X]
+//= 1.2 More optimized conversion [Legionaire]
+//= 1.2a Removed .GATs [Lupus]
+//= 1.3 Fixed [Playtester] Optimized. Got rid of @vars [Lupus]
+//= 1.4 Updated to match AEGIS script. [Kisuka]
+//= 1.5 Updated to match AEGIS script again. [Masao]
+//= 1.6 Moved Izlude duplicate to pre-re/re paths. [Euphy]
+//= 2.0 Clean-up. [Capuche]
+//= 2.1 Fixes Issue #1482, where Rebellion jobs cannot use this npc. [Limestone]
+//============================================================
+
+alberta,118,160,3	script	子彈商人 湯尼#alb::bdt	4_M_04,{
+	mes "[湯尼]";
+	if (BaseClass == Job_Gunslinger) {
+		mes "我是湯尼, 一名彈藥經銷商. ";
+		mes "當你缺乏彈藥的時候, 可以來找我. ";
+		mes "只要帶給我材料, 我就能幫你製作出你所需的彈藥. ";
+		next;
+		switch(select("毒物子彈:火焰子彈:雷擊子彈:暗盲子彈:冰凍子彈:取消")) {
+		case 1: callsub S_BulletTrade,937,10,13205;// <item required>, <amount req>, <bullet id>
+		case 2: callsub S_BulletTrade,7097,2,13203;
+		case 3: callsub S_BulletTrade,7053,3,13204;
+		case 4: callsub S_BulletTrade,1024,5,13206;
+		case 5: callsub S_BulletTrade,7054,2,13207;
+		case 6:
+			mes "[湯尼]";
+			mes "改變主意啦？";
+			mes "好吧, 我會一直呆在這裡. ";
+			mes "如果你需要彈藥的話, 可以隨時來找我. ";
+			close;
+		}
+	}
+	mes "嗨, 我叫湯尼. ";
+	mes "我是專門為槍手們提供彈藥貨品的商人. ";
+	next;
+	mes "[湯尼]";
+	mes "如果你想購買彈藥的話, 我很遺憾. ";
+	mes "我只能將彈藥賣給熟練的槍手. ";
+	close;
+
+S_BulletTrade:
+	.@required_id = getarg(0);
+	.@required_amount = getarg(1);
+	.@bullet_id = getarg(2);
+
+	mes "[湯尼]";
+	mes "想製作 30 枚 "+getitemname(.@bullet_id)+" 的話, 你得帶來以下材料：";
+	mes "強化武器金屬-級數一 x 1";
+	mes "塊強化武器金屬-級數二 x 1";
+	mes getitemname(.@required_id) + " x " + .@required_amount +".";
+	next;
+	mes "[湯尼]";
+	mes "記住一次最多交易500個30枚裝的子彈. ";
+	mes "如果不想兌換, 就輸入 0 好了. ";
+	next;
+	input .@amount;
+	mes "[湯尼]";
+	if (.@amount < 1) {
+		mes "看來你是不想兌換啊, 那麼交易取消. ";
+	}
+	else if (.@amount > 500) {
+		mes "嗨, 你想要的子彈太多了. ";
+		mes "之前不是和你說過一次最多只能交易500個30枚裝的子彈嗎？";
+		mes "除非...你想把你的裝備也做成子彈...";
+	}
+	else if (countitem(1010) >= .@amount && countitem(1011) >= .@amount && countitem(.@required_id) >= (.@amount*.@required_amount)) {
+		if (checkweight(.@bullet_id,.@amount * 30) == 0) {
+			mes "嗯？你的背包沒有空間可以放這些子彈. ";
+			mes "等你將背包騰出足夠的空間後, 再來找我吧. ";
+			mes "試試看將一些東西放到卡普拉倉庫. ";
+		} else {
+			mes "很好, 一切準備就緒. ";
+			mes "材料我就帶走了, 這是你要的子彈. ";
+			mes "很高興能和你做交易~";
+			delitem 1010,.@amount; //Phracon
+			delitem 1011,.@amount; //Emveretarcon
+			delitem .@required_id,.@amount * .@required_amount;
+			getitem .@bullet_id,.@amount * 30;
+		}
+	} else {
+		mes "嘖嘖嘖嘖~";
+		mes "你沒有準備足夠的材料. ";
+		mes "不過沒關係, 我不會用子彈射殺你的, ";
+		mes "等你收集齊足夠的材料後再來找我吧. ";
+	}
+	close;
+}

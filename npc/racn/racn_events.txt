@@ -1,0 +1,761 @@
+//===== rAthenaCN 漢化聲明 ===================================
+//= 您可以隨意轉載和使用本漢化腳本。若您使用、借鑒或複製了
+//= 此腳本中的漢化成果，那麼請在您的腳本中加上並保留這七行
+//= 漢化聲明，由衷感謝。
+//= 若您對這個腳本有更好的翻譯建議，或發現此腳本的漢化錯誤，
+//= 請前往 http://rathena.cn 上報您發現的問題，謝謝。
+//============================================================
+
+//===== rAthenaCN Script =======================================
+//= 拓展事件測試腳本
+//===== By: ==================================================
+//= Sola、小克
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthenaCN 開發團隊
+//===== Description: =========================================
+//= 用來對 rAthenaCN 拓展事件進行測試的腳本，從這裡也可以學習
+//= 到這些拓展事件的使用方法。
+//============================================================
+
+-	script	EVENT_TEST_INIT	-1,{
+end;
+OnPCLoginEvent:
+	dispbottom "[事件演示] 已加載演示腳本，若想關閉演示腳本，請查看 npc/scripts_racn.conf 配置文件";
+end;
+}
+
+-	script	EVENT_OFFICIAL_CABIN	-1,{
+end;
+OnPCStatCalcEvent:
+	// OnPCStatCalcEvent 是與玩家關聯的
+	// 這個時間是 rAthena 官方支持的事件，而並非 rAthenaCN 拓展添加的事件
+	// 當玩家身上的狀態有變化，而導致需要重算玩家的相關信息時，該事件將被觸發
+	// 
+	// 觸發時機包括但不限：
+	// - 穿戴/脫下裝備而導致玩家能力變化時
+	// - 獲得/解除一個狀態導致玩家能力變化時(比如吃料理，用加速術等)
+	// - 剛進入遊戲時/過地圖時
+	// -------------------------------------------------------
+	dispbottom "[事件演示] OnPCStatCalcEvent | " + strcharinfo(0) + " 的角色能力值被系統重新計算了！";
+end;
+}
+
+-	script	EVENT_IDENTIFIED	-1,{
+end;
+OnPCIdentifyFilter:
+	// OnPCIdentifyFilter 是與玩家關聯的
+	// 在鑒定列表中選中裝備點確定按鈕時觸發, 此時系統的鑒定過程還未發生
+	// 
+	// 參數說明
+	// -------------------------------------------------------
+	// @identify_idx 為物品的背包序號
+	// 
+	// 問: 什麼是背包序號？
+	// 答: 玩家的背包最多可以攜帶100種物品, 每種物品在背包都有
+	//     一個內在的序號用來標記此物品的位置。
+	//
+	// 注意: 這個序號每次玩家登錄、或者是拾取、存倉後，都可能都
+	//       會變化。不推薦拿「背包序號」來作為識別物品的唯一序號。
+	// -------------------------------------------------------
+	dispbottom "[事件演示] OnPCIdentifyFilter | " + strcharinfo(0) + " 準備鑒定背包序號為 " + @identify_idx + " 的物品";
+	dispbottom "           - 編號: " + getinventoryinfo(@identify_idx, 0) + " | 數量: " + getinventoryinfo(@identify_idx, 1) + " | 裝備到哪個位置: " + getinventoryinfo(@identify_idx, 2) + " | 精煉值: " + getinventoryinfo(@identify_idx, 3) + " | 是否鑒定: " + getinventoryinfo(@identify_idx, 4);
+	dispbottom "           - 是否損壞: " + getinventoryinfo(@identify_idx, 5) + " | 卡片1: " + getinventoryinfo(@identify_idx, 6) + " | 卡片2: " + getinventoryinfo(@identify_idx, 7) + " | 卡片3: " + getinventoryinfo(@identify_idx, 8) + " | 卡片4: " + getinventoryinfo(@identify_idx, 9) + " | 租賃到期時間: " + getinventoryinfo(@identify_idx, 10);
+	
+	processhalt;	// 中斷系統的默認鑒定操作
+	
+	.@itemid = getinventoryinfo(@identify_idx, 0);
+	.@amount = getinventoryinfo(@identify_idx, 1);
+	.@refine = rand(1,9);	// 被鑒定的裝備精煉值隨機+1到+9
+	
+	delinventory @identify_idx,.@amount;
+	getitem2 .@itemid,.@amount,1,.@refine,0,0,0,0,0;
+end;
+OnPCIdentifyEvent:
+	// OnPCIdentifyEvent 是與玩家關聯的
+	// 當玩家成功鑒定了一件裝備時，此事件會被觸發
+	// 
+	// 參數說明
+	// -------------------------------------------------------
+	// @identify_idx 為物品的背包序號
+	// 
+	// 問: 什麼是背包序號？
+	// 答: 玩家的背包最多可以攜帶100種物品, 每種物品在背包都有
+	//     一個內在的序號用來標記此物品的位置。
+	//
+	// 注意: 這個序號每次玩家登錄、或者是拾取、存倉後，都可能都
+	//       會變化。不推薦拿「背包序號」來作為識別物品的唯一序號。
+	// -------------------------------------------------------
+	dispbottom "[事件演示] OnPCIdentifyEvent | " + strcharinfo(0) + " 已鑒定了背包序號為 " + @identify_idx + " 的物品";
+	dispbottom "           - 編號: " + getinventoryinfo(@identify_idx, 0) + " | 數量: " + getinventoryinfo(@identify_idx, 1) + " | 裝備到哪個位置: " + getinventoryinfo(@identify_idx, 2) + " | 精煉值: " + getinventoryinfo(@identify_idx, 3) + " | 是否鑒定: " + getinventoryinfo(@identify_idx, 4);
+	dispbottom "           - 是否損壞: " + getinventoryinfo(@identify_idx, 5) + " | 卡片1: " + getinventoryinfo(@identify_idx, 6) + " | 卡片2: " + getinventoryinfo(@identify_idx, 7) + " | 卡片3: " + getinventoryinfo(@identify_idx, 8) + " | 卡片4: " + getinventoryinfo(@identify_idx, 9) + " | 租賃到期時間: " + getinventoryinfo(@identify_idx, 10);
+end;
+}
+
+-	script	RELOAD_WARNING	-1,{
+end;
+OnBfReloadScriptEvent:
+	// OnBfReloadScriptEvent 是與玩家關聯的
+	// 刷新NPC之前若有100個玩家在線，那麼該事件會以100個玩家的身份被觸發100次
+	// 因此，下面的 announce 公告必須是只有玩家自己可見的 bc_self 類型
+	// 如果是 bc_all 類型的話，刷新時若有100個玩家在線，則每個玩家會看到100條全服公告
+	// -------------------------------------------------------
+	
+	announce "[全服公告] 正在刷新服務器，可能會卡住幾秒鐘，請別強制退出遊戲！", bc_self|bc_yellow;
+end;
+OnAfReloadScriptEvent:
+	// OnAfReloadScriptEvent 是與玩家關聯的
+	// 刷新NPC之後若有100個玩家在線，那麼該事件會以100個玩家的身份被觸發100次
+	// 因此，下面的 announce 公告必須是只有玩家自己可見的 bc_self 類型
+	// 如果是 bc_all 類型的話，刷新時若有100個玩家在線，則每個玩家會看到100條全服公告
+	// -------------------------------------------------------
+	
+	announce "[全服公告] 已經刷新完畢，感謝大家的配合！", bc_self|bc_yellow;
+end;
+}
+
+-	script	MOB_KILL_EVENT	-1,{
+end;
+OnPCKillMvpEvent:
+	// OnPCKillMvpEvent 是與玩家關聯的(關聯到給MVP帶來最後一擊的玩家)
+	// 死了一個MVP魔物的話，此事件只會被觸發1次
+	// 
+	// 參數說明
+	// -------------------------------------------------------
+	// killerrid 	此參數已於 v1.4.5 版本被廢棄
+	// killedrid 	為被殺死的MVP魔物的魔物編號(MobID)
+	// @mob_dead_x	魔物死亡時的X坐標
+	// @mob_dead_y	魔物死亡時的Y坐標
+	// @mob_lasthit_rid		給予MVP魔物最後一擊的玩家RID(賬號編號)
+	// @mob_lasthit_cid		給予MVP魔物最後一擊的玩家角色編號
+	// @mob_mvp_rid			給予MVP魔物最大傷害的玩家RID(賬號編號)
+	// @mob_mvp_cid			給予MVP魔物最大傷害的玩家角色編號
+	// -------------------------------------------------------
+	
+	announce "[全服公告] 玩家 「" + strcharinfo(0, @mob_lasthit_cid) + "」 給予了位於 " + strcharinfo(3)+","+@mob_dead_x+","+@mob_dead_y + " 的MVP魔物 「" + strmobinfo(2, killedrid) + "」 最後一擊, 對魔物造成最多傷害的MVP玩家為 「" + strcharinfo(0, @mob_mvp_cid) + "」", bc_all|bc_yellow;
+end;
+OnNPCKillEvent:
+	dispbottom "[事件演示] OnNPCKillEvent | 殺死了位於 " + strcharinfo(3)+","+@mob_dead_x+","+@mob_dead_y + " 的普通魔物，魔物編號為 " + killedrid + " ！";
+end;
+}
+
+-	script	HOMUNCULUS_EVENT	-1,{
+end;
+OnPCHomLvUpEvent:
+	// OnPCHomLvUpEvent 是與玩家關聯的(關聯到生命體的主人)
+	// 當玩家的人工生命體升級之後，此事件會被觸發
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCHomLvUpEvent | " + strcharinfo(0) + " 的人工生命體升級了！";
+	dispbottom "           - 生命體類型為: " + gethominfo(1) + " | 名字: " + gethominfo(2) + " | 等級: " + gethominfo(6) + " | 更多信息請用 gethominfo 指令獲取";
+end;
+OnPCHomCallEvent:
+	// OnPCHomCallEvent 是與玩家關聯的(關聯到生命體的主人)
+	// 當玩家召喚出人工生命體之後，此事件會被觸發
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCHomCallEvent | " + strcharinfo(0) + " 召喚了人工生命體！";
+	dispbottom "           - 生命體類型為: " + gethominfo(1) + " | 名字: " + gethominfo(2) + " | 等級: " + gethominfo(6) + " | 更多信息請用 gethominfo 指令獲取";
+end;
+OnPCHomRestEvent:
+	// OnPCHomRestEvent 是與玩家關聯的(關聯到生命體的主人)
+	// 當玩家將人工生命體安息之後，此事件會被觸發
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCHomRestEvent | " + strcharinfo(0) + " 的人工生命體安息了！";
+	dispbottom "           - 生命體類型為: " + gethominfo(1) + " | 名字: " + gethominfo(2) + " | 等級: " + gethominfo(6) + " | 更多信息請用 gethominfo 指令獲取";
+end;
+OnPCHomDeadEvent:
+	// OnPCHomDeadEvent 是與玩家關聯的(關聯到生命體的主人)
+	// 當玩家的人工生命體死亡之後，此事件會被觸發
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCHomDeadEvent | " + strcharinfo(0) + " 的人工生命體死亡了！";
+	dispbottom "           - 生命體類型為: " + gethominfo(1) + " | 名字: " + gethominfo(2) + " | 等級: " + gethominfo(6) + " | 更多信息請用 gethominfo 指令獲取";
+end;
+OnPCHomAliveEvent:
+	// OnPCHomAliveEvent 是與玩家關聯的(關聯到生命體的主人)
+	// 當玩家復活人工生命體之後，此事件會被觸發
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCHomAliveEvent | " + strcharinfo(0) + " 的人工生命體復活了！";
+	dispbottom "           - 生命體類型為: " + gethominfo(1) + " | 名字: " + gethominfo(2) + " | 等級: " + gethominfo(6) + " | 更多信息請用 gethominfo 指令獲取";
+end;
+}
+
+-	script	PC_EQUIP_EVENT	-1,{
+end;
+OnPCEquipFilter:
+	// OnPCEquipFilter 是與玩家關聯的
+	// 當玩家準備穿戴上一件物品的時候，此事件會被觸發
+	//
+	// 時機注意事項
+	// -------------------------------------------------------
+	// 「準備穿戴」說明還沒完成穿戴, 所以此時使用 
+	// getinventoryinfo(@equip_idx, 2) 去獲取該裝備的穿戴位置時,
+	// 返回的內容只會是 0
+	//
+	// 參數說明
+	// -------------------------------------------------------
+	// @equip_idx 為物品的背包序號
+	// 
+	// 問: 什麼是背包序號？
+	// 答: 玩家的背包最多可以攜帶100種物品, 每種物品在背包都有
+	//     一個內在的序號用來標記此物品的位置。
+	//
+	// 注意: 這個序號每次玩家登錄、或者是拾取、存倉後，都可能都
+	//       會變化。不推薦拿「背包序號」來作為識別物品的唯一序號。
+	// 
+	// 為了兼容SEA和CSEA服務端
+	// @equip_pos 也被賦予了和 @equip_idx 一樣的值
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCEquipFilter | " + strcharinfo(0) + " 即將穿戴一件裝備，它的背包序號為: " + @equip_idx;
+end;
+OnPCEquipEvent:
+	// OnPCEquipEvent 是與玩家關聯的
+	// 當玩家成功穿戴上一件物品的時候，此事件會被觸發
+	// 
+	// 參數說明
+	// -------------------------------------------------------
+	// @equip_idx 為物品的背包序號
+	// 
+	// 問: 什麼是背包序號？
+	// 答: 玩家的背包最多可以攜帶100種物品, 每種物品在背包都有
+	//     一個內在的序號用來標記此物品的位置。
+	//
+	// 注意: 這個序號每次玩家登錄、或者是拾取、存倉後，都可能都
+	//       會變化。不推薦拿「背包序號」來作為識別物品的唯一序號。
+	// 
+	// 為了兼容SEA和CSEA服務端
+	// @equip_pos 也被賦予了和 @equip_idx 一樣的值
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCEquipEvent | " + strcharinfo(0) + " 已經穿戴了一件裝備，它的背包序號為: " + @equip_idx;
+	dispbottom "           - 編號: " + getinventoryinfo(@equip_idx, 0) + " | 數量: " + getinventoryinfo(@equip_idx, 1) + " | 裝備到哪個位置: " + getinventoryinfo(@equip_idx, 2) + " | 精煉值: " + getinventoryinfo(@equip_idx, 3) + " | 是否鑒定: " + getinventoryinfo(@equip_idx, 4);
+	dispbottom "           - 是否損壞: " + getinventoryinfo(@equip_idx, 5) + " | 卡片1: " + getinventoryinfo(@equip_idx, 6) + " | 卡片2: " + getinventoryinfo(@equip_idx, 7) + " | 卡片3: " + getinventoryinfo(@equip_idx, 8) + " | 卡片4: " + getinventoryinfo(@equip_idx, 9) + " | 租賃到期時間: " + getinventoryinfo(@equip_idx, 10);
+end;
+OnPCUnequipFilter:
+	// OnPCUnequipFilter 是與玩家關聯的
+	// 當玩家準備脫掉一件物品的時候，此事件會被觸發
+	// 
+	// 時機注意事項
+	// -------------------------------------------------------
+	// 「準備脫掉」說明還沒完全脫掉, 所以此時使用 
+	// getinventoryinfo(@equip_idx, 2) 去獲取該裝備的穿戴位置時,
+	// 返回的內容絕對不會是 0
+	//
+	// 中斷注意事項
+	// -------------------------------------------------------
+	// 當你使用 processhalt 腳本指令中斷本事件的後續動作時,
+	// 可能會導致切換裝備失敗. 因為切換裝備實際上是由兩個動作組成的,
+	// 分別是 「先脫下舊的, 再穿上新的」. 若脫下舊的裝備操作被中斷,
+	// 那麼新的裝備也會穿不上.
+	// 
+	// 參數說明
+	// -------------------------------------------------------
+	// @unequip_idx 為物品的背包序號
+	// 
+	// 問: 什麼是背包序號？
+	// 答: 玩家的背包最多可以攜帶100種物品, 每種物品在背包都有
+	//     一個內在的序號用來標記此物品的位置。
+	//
+	// 注意: 這個序號每次玩家登錄、或者是拾取、存倉後，都可能都
+	//       會變化。不推薦拿「背包序號」來作為識別物品的唯一序號。
+	// 
+	// 為了兼容SEA和CSEA服務端
+	// @unequip_pos 也被賦予了和 @unequip_idx 一樣的值
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCUnequipFilter | " + strcharinfo(0) + " 準備脫下一件裝備，它的背包序號為: " + @unequip_idx;
+end;
+OnPCUnequipEvent:
+	// OnPCUnequipEvent 是與玩家關聯的
+	// 當玩家成功脫掉一件物品的時候，此事件會被觸發
+	// 
+	// 參數說明
+	// -------------------------------------------------------
+	// @unequip_idx 為物品的背包序號
+	// 
+	// 問: 什麼是背包序號？
+	// 答: 玩家的背包最多可以攜帶100種物品, 每種物品在背包都有
+	//     一個內在的序號用來標記此物品的位置。
+	//
+	// 注意: 這個序號每次玩家登錄、或者是拾取、存倉後，都可能都
+	//       會變化。不推薦拿「背包序號」來作為識別物品的唯一序號。
+	// 
+	// 為了兼容SEA和CSEA服務端
+	// @unequip_pos 也被賦予了和 @unequip_idx 一樣的值
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCUnequipEvent | " + strcharinfo(0) + " 已經脫下了一件裝備，它的背包序號為: " + @unequip_idx;
+	dispbottom "           - 編號: " + getinventoryinfo(@unequip_idx, 0) + " | 數量: " + getinventoryinfo(@unequip_idx, 1) + " | 精煉值: " + getinventoryinfo(@unequip_idx, 3) + " | 是否鑒定: " + getinventoryinfo(@unequip_idx, 4);
+	dispbottom "           - 是否損壞: " + getinventoryinfo(@unequip_idx, 5) + " | 卡片1: " + getinventoryinfo(@unequip_idx, 6) + " | 卡片2: " + getinventoryinfo(@unequip_idx, 7) + " | 卡片3: " + getinventoryinfo(@unequip_idx, 8) + " | 卡片4: " + getinventoryinfo(@unequip_idx, 9) + " | 租賃到期時間: " + getinventoryinfo(@unequip_idx, 10);
+end;
+}
+
+-	script	PC_STATUS_CHANGE_EVENT	-1,{
+end;
+OnPCBuffStartEvent:
+	// OnPCBuffStartEvent 是與玩家關聯的
+	// 當玩家獲得了一個狀態(俗稱Buff)後，此事件會被觸發
+	// 
+	// 參數說明
+	// -------------------------------------------------------
+	// @started_sc_id		為這個新增狀態的編號
+	// @started_sc_rate		為這個新增狀態的觸發概率(10000 = 100%)
+	// @started_sc_tick		為這個新增狀態的持續時長(單位為毫秒)
+	// 						時長根據內部實現方式的不同，有可能是指多長時間後剩餘秒數減一
+	// @started_sc_val1		為這個新增狀態的第1個參數的值
+	// @started_sc_val2		為這個新增狀態的第2個參數的值
+	// @started_sc_val3		為這個新增狀態的第3個參數的值
+	// @started_sc_val4		為這個新增狀態的第4個參數的值
+	// 
+	// 為了兼容SEA和CSEA服務端
+	// @startedsc 也被賦予了和 @started_sc_id 一樣的值
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCBuffStartEvent | " + strcharinfo(0) + " 獲得了編號為 " + @started_sc_id + " 的狀態！";
+	dispbottom "           - 概率: " + @started_sc_rate + " | 時長: " + @started_sc_tick + " | 參數1: " + @started_sc_val1 + " | 參數2: " + @started_sc_val2 + " | 參數3: " + @started_sc_val3 + " | 參數4: " + @started_sc_val4;
+end;
+OnPCBuffEndEvent:
+	// OnPCBuffEndEvent 是與玩家關聯的
+	// 當玩家解除了一個狀態(俗稱Buff)後，此事件會被觸發
+	// 
+	// 參數說明
+	// -------------------------------------------------------
+	// @ended_sc_id			為這個被解除狀態的編號
+	// 
+	// 為了兼容SEA和CSEA服務端
+	// @endedsc 也被賦予了和 @ended_sc_id 一樣的值
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCBuffEndEvent | " + strcharinfo(0) + " 解除了編號為 " + @ended_sc_id + " 的狀態！";
+end;
+}
+
+-	script	PARTY_EVENT	-1,{
+end;
+OnPCPartyCreateFilter:
+	// OnPCPartyCreateFilter 是與玩家關聯的(關聯到隊長)
+	// 當玩家創建了一個隊伍後，此事件會被觸發
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCPartyCreateFilter | 您創建了一個隊伍！";
+end;
+OnPCPartyJoinFilter:
+	// OnPCPartyJoinFilter 是與玩家關聯的(關聯到加入隊伍的玩家)
+	// 當玩家加入了一個隊伍後，此事件會被觸發
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCPartyCreateFilter | 您加入了一個隊伍！";
+end;
+OnPCPartyLeaveFilter:
+	// OnPCPartyLeaveFilter 是與玩家關聯的(關聯到離開隊伍的玩家)
+	// 當玩家離開了一個隊伍後(無論是自願還是被踢)，此事件會被觸發
+	//
+	// 參數說明
+	// -------------------------------------------------------
+	// @left_party_id		為已經離開的隊伍編號
+	// @left_party_name$	為已經離開的隊伍名稱
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCPartyCreateFilter | 您離開了編號為 " + @left_party_id + " 的隊伍，隊名為: " + @left_party_name$;
+end;
+}
+
+-	script	GUILD_EVENT	-1,{
+end;
+OnPCGuildCreateFilter:
+	// OnPCGuildCreateFilter 是與玩家關聯的(關聯到會長)
+	// 當玩家創建了一個公會後，此事件會被觸發
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCGuildCreateFilter | 您創建了一個公會！";
+end;
+OnPCGuildJoinFilter:
+	// OnPCGuildJoinFilter 是與玩家關聯的(關聯到加入公會的玩家)
+	// 當玩家加入了一個公會後，此事件會被觸發
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCGuildJoinFilter | 您加入了一個公會！";
+end;
+OnPCGuildLeaveFilter:
+	// OnPCGuildLeaveFilter 是與玩家關聯的(關聯到離開公會的玩家)
+	// 當玩家離開了一個公會後，此事件會被觸發
+	//
+	// 參數說明
+	// -------------------------------------------------------
+	// @left_guild_id		為已經離開的公會編號
+	// @left_guild_name$	為已經離開的公會名稱
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCGuildLeaveFilter | 您離開了編號為 " + @left_guild_id + " 的公會，會名為: " + @left_guild_name$;
+end;
+}
+
+-	script	PET_EVENT	-1,{
+end;
+OnPCPetLootEvent:
+	// OnPCPetLootEvent 是與玩家關聯的(關聯到寵物的主人)
+	// 當玩家的寵物拾取到物品之後，此事件會被觸發
+	//
+	// 參數說明
+	// -------------------------------------------------------
+	// @petloot_item_id			為拾取到的物品編號
+	// @petloot_item_amount		為拾取到的物品數量
+	// @petloot_game_id			為此物品的遊戲單位編號
+	//
+	// 為了兼容SEA和CSEA服務端
+	// @petloot_id 也被賦予了和 @petloot_item_id 一樣的值
+	// @petloot_gid 也被賦予了和 @petloot_game_id 一樣的值
+	// @petloot_amount 也被賦予了和 @petloot_item_amount 一樣的值
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCPetLootEvent | 您的寵物撿取了 " + @petloot_item_amount + " 個 " + getitemname(@petloot_item_id) + " ！";
+end;
+OnPCPetFeedEvent:
+	// OnPCPetFeedEvent 是與玩家關聯的(關聯到寵物的主人)
+	// 當玩家給自己的寵物餵食後，此事件會被觸發
+	//
+	// 為了兼容SEA和CSEA服務端
+	// OnPCFoodPet 事件也會被同時執行，等效於 OnPCPetFeedEvent 事件
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCPetFeedEvent | 您餵養了寵物！";
+end;
+}
+
+-	script	VIEW_EQUIP_EVENT	-1,{
+end;
+OnPCViewEquipFilter:
+	// OnPCViewEquipFilter 是與玩家關聯的(關聯到主動發起查看請求的玩家)
+	// 當玩家點擊查看某個玩家的裝備之後，此事件會被觸發
+	//
+	// 參數說明
+	// -------------------------------------------------------
+	// @view_equip_target_name$	被查看者的角色名
+	// @view_equip_target_cid	被查看者的角色編號
+	// @view_equip_target_aid	被查看者的賬號編號
+	//
+	// 為了兼容CSEA服務端
+	// @vieweq_name$ 也被賦予了和 @view_equip_target_name$ 一樣的值
+	// @vieweq_cid 也被賦予了和 @view_equip_target_cid 一樣的值
+	// @vieweq_aid 也被賦予了和 @view_equip_target_aid 一樣的值
+	// 
+	// 為了兼容SEA服務端
+	// @eqview_cid 也被賦予了和 @view_equip_target_cid 一樣的值
+	// -------------------------------------------------------
+
+	dispbottom "[事件演示] OnPCViewEquipFilter | 您查看了「" + @view_equip_target_name$ + "」的裝備，他的AID為 " + @view_equip_target_aid + " | CID為 " + @view_equip_target_cid + "！";
+end;
+}
+
+-	script	USE_SKILL_EVENT	-1,{
+end;
+OnPCUseSkillExFilter:
+	// OnPCUseSkillExFilter 是與技能施放者關聯的
+	// 當玩家施放技能時，詠唱之前此事件會被觸發
+	// 無論技能的所需道具是否足夠，最終技能會不會使用失敗，只要玩家使用了技能，就必定觸發此事件
+	//
+	// 參數說明
+	// -------------------------------------------------------
+	// @useskill_id		施放的技能ID
+	// @useskill_lv		被施放的技能等級
+	// @useskill_target	被施法目標的GameID或者AccountID，若為 0 則表示這是個對地面施放的技能
+	// @useskill_x		被施法的地面X坐標
+	// @useskill_y		被施法的地面Y坐標
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCUseSkillExFilter | 開始使用技能";
+	dispbottom "           - 技能編號: " + @useskill_id + " | 技能等級: " + @useskill_lv + " | 目標GID/AID: " + @useskill_target + " | 地面坐標: " + @useskill_x + "," + @useskill_y;
+end;
+OnPCUseSkillExEvent:
+	// OnPCUseSkillExEvent 是與技能施放者關聯的
+	// 當玩家技能成功施放完畢時，此事件會被觸發
+	// 只有技能成功被施放出來了，才會觸發此事件
+	//
+	// 參數說明
+	// -------------------------------------------------------
+	// @useskill_id		施放的技能ID
+	// @useskill_lv		被施放的技能等級
+	// @useskill_target	被施法目標的GameID或者AccountID，若為 0 則表示這是個對地面施放的技能
+	// @useskill_x		被施法的地面X坐標
+	// @useskill_y		被施法的地面Y坐標
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCUseSkillExEvent | 技能使用完畢";
+	dispbottom "           - 技能編號: " + @useskill_id + " | 技能等級: " + @useskill_lv + " | 目標GID/AID: " + @useskill_target + " | 地面坐標: " + @useskill_x + "," + @useskill_y;
+end;
+}
+
+-	script	USE_ITEM_EVENT	-1,{
+end;
+OnPCUseItemExFilter:
+	// OnPCUseItemExFilter 是與物品使用者關聯的
+	// 當玩家雙擊使用「非裝備」類型道具時，此事件會被觸發
+	// 無論物品最終是否會使用失敗，只要玩家雙擊了物品，就必定觸發此事件
+	//
+	// 參數說明
+	// -------------------------------------------------------
+	// @useitem_nameid	玩家所使用的物品編號
+	// @useitem_idx		玩家所使用物品的背包序號
+	//
+	// 問: 什麼是背包序號？
+	// 答: 玩家的背包最多可以攜帶100種物品, 每種物品在背包都有
+	//     一個內在的序號用來標記此物品的位置。
+	//
+	// 注意: 這個序號每次玩家登錄、或者是拾取、存倉後，都可能都
+	//       會變化。不推薦拿「背包序號」來作為識別物品的唯一序號。
+	// 
+	// 為了兼容SEA和CSEA服務端
+	// @useitem_pos 也被賦予了和 @useitem_idx 一樣的值
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCUseItemExFilter | 開始使用物品";
+	dispbottom "           - 物品編號: " + @useitem_nameid + " | 物品名稱: " + getitemname(@useitem_nameid) + " | 背包序號: " + @useitem_idx;
+	dispbottom "           - 編號: " + getinventoryinfo(@useitem_idx, 0) + " | 數量: " + getinventoryinfo(@useitem_idx, 1) + " | 裝備到哪個位置: " + getinventoryinfo(@useitem_idx, 2) + " | 精煉值: " + getinventoryinfo(@useitem_idx, 3) + " | 是否鑒定: " + getinventoryinfo(@useitem_idx, 4);
+	dispbottom "           - 是否損壞: " + getinventoryinfo(@useitem_idx, 5) + " | 卡片1: " + getinventoryinfo(@useitem_idx, 6) + " | 卡片2: " + getinventoryinfo(@useitem_idx, 7) + " | 卡片3: " + getinventoryinfo(@useitem_idx, 8) + " | 卡片4: " + getinventoryinfo(@useitem_idx, 9) + " | 租賃到期時間: " + getinventoryinfo(@useitem_idx, 10);
+end;
+OnPCUseItemExEvent:
+	// OnPCUseItemExEvent 是與物品使用者關聯的
+	// 當玩家成功使用「非裝備」類型道具時，此事件會被觸發
+	// 只有當物品被成功使用時，才會觸發此事件
+	//
+	// 參數說明
+	// -------------------------------------------------------
+	// @useitem_nameid	玩家所使用的物品編號
+	// @useitem_idx		玩家所使用物品的背包序號
+	//
+	// 問: 什麼是背包序號？
+	// 答: 玩家的背包最多可以攜帶100種物品, 每種物品在背包都有
+	//     一個內在的序號用來標記此物品的位置。
+	//
+	// 注意: 這個序號每次玩家登錄、或者是拾取、存倉後，都可能都
+	//       會變化。不推薦拿「背包序號」來作為識別物品的唯一序號。
+	// 
+	// 為了兼容SEA和CSEA服務端
+	// @useitem_pos 也被賦予了和 @useitem_idx 一樣的值
+	// -------------------------------------------------------
+	
+	dispbottom "[事件演示] OnPCUseItemExEvent | 物品使用完畢";
+	dispbottom "           - 物品編號: " + @useitem_nameid + " | 物品名稱: " + getitemname(@useitem_nameid) + " | 背包序號: " + @useitem_idx;
+	dispbottom "           - 編號: " + getinventoryinfo(@useitem_idx, 0) + " | 數量: " + getinventoryinfo(@useitem_idx, 1) + " | 裝備到哪個位置: " + getinventoryinfo(@useitem_idx, 2) + " | 精煉值: " + getinventoryinfo(@useitem_idx, 3) + " | 是否鑒定: " + getinventoryinfo(@useitem_idx, 4);
+	dispbottom "           - 是否損壞: " + getinventoryinfo(@useitem_idx, 5) + " | 卡片1: " + getinventoryinfo(@useitem_idx, 6) + " | 卡片2: " + getinventoryinfo(@useitem_idx, 7) + " | 卡片3: " + getinventoryinfo(@useitem_idx, 8) + " | 卡片4: " + getinventoryinfo(@useitem_idx, 9) + " | 租賃到期時間: " + getinventoryinfo(@useitem_idx, 10);
+end;
+}
+
+-	script	PC_MOVE	-1,{
+end;
+OnWhisperGlobal:
+	// 私聊一個名為 npc:PC_MOVE 的人，隨便發一句話過去，
+	// 即可觸發這裡的代碼
+	
+	if (getbattleflag("pc_move_event_trigger_type") == 0){
+		dispbottom "[事件演示] 您在 conf/battle/extend.conf 的 pc_move_event_trigger_type 值為 0, 無法觸發 OnPCMoveFilter 事件";
+		end;
+	}
+	else {
+		when_pcmove_doevent;
+		dispbottom "[事件演示] 已經觸發 when_pcmove_doevent; 玩家的下次移動會觸發 OnPCMoveFilter 事件";
+	}
+end;
+OnPCMoveFilter:
+	// OnPCMoveFilter 是與想要移動的玩家關聯的
+	// 當玩家點擊地面的某個格子想要移動時，此事件會在玩家開始走路之前觸發
+	// 
+	// 若 conf/battle/extend.conf 的 pc_move_event_trigger_type 值為 0
+	// 那麼永遠不會觸發此事件
+	// 
+	// 若 conf/battle/extend.conf 的 pc_move_event_trigger_type 值為 1
+	// 那麼必須先調用 when_pcmove_doevent; 腳本指令後，玩家的下一次移動才會觸發本事件
+	//
+	// 若 conf/battle/extend.conf 的 pc_move_event_trigger_type 值為 2
+	// 那麼玩家的所有移動都會觸發本事件(人多的話可能會影響性能)
+	// 
+	// 參數說明
+	// -------------------------------------------------------
+	// @moveto_x	玩家想要移動到的目標位置的x坐標
+	// @moveto_y	玩家想要移動到的目標位置的y坐標
+	// -------------------------------------------------------
+	dispbottom "[事件演示] OnPCMoveFilter | 玩家開始移動, 目的地坐標是: " + @moveto_x + "," + @moveto_y;
+end;
+}
+
+-	script	BEFORE_LOADMAP	-1,{
+end;
+OnPCWillLoadMapEvent:
+	// OnPCWillLoadMapEvent 將關聯到想要過圖的玩家
+	// 當玩家登錄後準備進入地圖、或者準備切換地圖時，都會觸發此事件
+	//
+	// 參數說明
+	// -------------------------------------------------------
+	// @loadmap_oldmap_id		玩家準備過圖時，老地圖的地圖編號，若為0則表示玩家剛登錄，沒有老地圖
+	// @loadmap_oldmap_name$	玩家準備過圖時，老地圖的地圖名稱
+	// @loadmap_oldmap_x		玩家準備過圖時，在老地圖中所處的x坐標
+	// @loadmap_oldmap_y		玩家準備過圖時，在老地圖中所處的y坐標
+	// 
+	// @loadmap_newmap_id		玩家準備過圖時，目的地地圖的地圖編號
+	// @loadmap_newmap_name$	玩家準備過圖時，目的地地圖的地圖名稱
+	// @loadmap_newmap_x		玩家準備過圖時，會在目的地地圖的哪個x坐標出現
+	// @loadmap_newmap_y		玩家準備過圖時，會在目的地地圖的哪個y坐標出現
+	// -------------------------------------------------------
+	if (@loadmap_oldmap_id == 0){
+		dispbottom "[事件演示] OnPCWillLoadMapEvent | 準備進入 " + @loadmap_newmap_name$ + "," + @loadmap_newmap_x + "," + @loadmap_newmap_y;
+	}
+	else {
+		dispbottom "[事件演示] OnPCWillLoadMapEvent | 準備從 " + @loadmap_oldmap_name$ + "," + @loadmap_newmap_x + "," + @loadmap_newmap_y +" 進入 " + @loadmap_newmap_name$ + "," + @loadmap_newmap_x + "," + @loadmap_newmap_y;
+	}
+end;
+}
+
+prontera,142,125,3	script	進入聊天室事件	123,{
+	mes "[rAthenaCN 演示]";
+	mes "事件名: ^ff0000OnPCInChatroomFilter^000000";
+	mes "直接點擊我可以正常對話. ^0000ff雙擊進入我頭上的牌子能夠在不打開聊天室的情況下, 直接打開倉庫.^000000";
+	next;
+	mes "[rAthenaCN 演示]";
+	mes "此演示NPC的腳本位於服務端的: ^ff0000npc\\racn\\racn_events.txt^000000";
+	mes "您可以在下面的配置文件中移除它: ^0000ffnpc\\scripts_racn.conf^000000";
+	close;
+OnInit:
+	// 這裡的人數限制必須大於等於 2
+	// 如果設置為 1 的話，那麼NPC就已經把聊天室佔滿了
+	// 此時雙擊聊天室牌子的話，客戶端會直接告訴玩家「聊天室已滿員」
+	//
+	// 所以，為了讓下面的 OnPCInChatroomFilter 事件可以觸發，
+	// 這裡的人數限制必須大於或者等於 2 才可以喲
+	waitingroom "雙擊打開倉庫",2;
+	end;
+OnPCInChatroomFilter:
+	// OnPCInChatroomFilter 將關聯到進入本NPC聊天室的玩家
+	// 當玩家雙擊進入本NPC開啟的聊天室時，將觸發此事件
+	//
+	// 中斷說明
+	// -------------------------------------------------------
+	// 您可以使用 processhalt 指令來中斷後續動作
+	// 
+	// 若使用中斷
+	// - 那麼客戶端將不會打開聊天室窗口
+	//
+	// 若不用中斷
+	// - 那麼客戶端將成功打開聊天室窗口，玩家可以參與聊天
+	// -------------------------------------------------------
+	// 
+	// 事件順序
+	// -------------------------------------------------------
+	// 我們知道 waitingroom 本身自帶一個事件，當聊天室中的成員
+	// 數量足夠時，就會被觸發。
+	// 
+	// 在這裡你需要知道的是，若您使用 processhalt 中斷了本事件，那麼
+	// 這個 rAthena 自帶的 waitingroom 事件將不會被觸發。
+	// -------------------------------------------------------
+	openstorage;
+	processhalt;
+	end;
+}
+
+-	script	PC_CHANGE_TITLE	-1,{
+end;
+OnPCChangeTitleFilter:
+	// OnPCChangeTitleFilter 是與觸發改變稱號請求的玩家關聯的
+	// 
+	// 當符合以下時機時, 就會觸發此事件:
+	// - 當玩家在裝備窗口的「稱號」界面中雙擊了某個稱號時
+	// - 使用setchartitle腳本指令去設置稱號時
+	// - 使用GM指令@title去設置稱號時
+	//
+	// 若下面的 @now_title_id 為 0 則表示玩家雙擊了 「Title Release」
+	// 
+	// 參數說明
+	// -------------------------------------------------------
+	// @trigger_mode	為0表示通過裝備面板觸發、為1表示通過setchartitle腳本指令觸發、為2表示通過GM指令@title觸發
+	// @now_title_id	即將變更成的目標稱號ID(該值可在事件中被修改)
+	// @pre_title_id	之前的稱號ID是多少
+	// -------------------------------------------------------
+	
+	switch(@trigger_mode){
+		case 0:
+			.@mode_str$ = "裝備面板中的稱號頁面";
+			break;
+		case 1:
+			.@mode_str$ = "setchartitle腳本指令";
+			break;
+		case 2:
+			.@mode_str$ = "GM指令@title";
+			break;
+		default:
+			.@mode_str$ = "奇怪的未知方法";
+			break;
+	}
+	
+	// 鑒於 @now_title_id 是可被修改的
+	// 所以你可以用很粗暴的方法，直接修改 @now_title_id 的方式來篡改最終的稱號ID
+	// 但是要注意, 採用這種方法的話, 後面別跟 processhalt;
+	// -------------------------------------------------------
+	// 例如:
+	// @now_title_id = 1020;
+	// end;
+	// -------------------------------------------------------
+	
+	if (@trigger_mode == 0 && @now_title_id == 0){
+		// 若玩家雙擊了裝備面板中的稱號, 那麼彈出菜單讓玩家選擇稱號.
+		// @now_title_id 為 0 表示玩家雙擊的是「Title Release」
+		
+		// 必須要在使用 mes 和 menu 之前調用 processhalt; 否則 processhalt; 會失效噠
+		processhalt;
+		
+		mes "[稱號事件演示]";
+		mes "您可以在下面選擇一個稱號.";
+		mes "在 ^ff0000data\\msgstringtable.txt^000000 中可以將 ^0000ffTitle Release^000000 改成 ^0000ff雙擊選擇稱號^000000,";
+		mes "這樣看起來更合理一些.";
+		switch(select("Junction of life - ID = 1000:Expert - ID = 1001:Dabster - ID = 1002:隱藏我的稱號 - ID = 0")){
+			case 1:
+				setchartitle(1000);
+				end;	// 這裡就直接end終止，不然繼續執行會有 dispbottom 提示
+			case 2:
+				setchartitle(1001);
+				end;	// 這裡就直接end終止，不然繼續執行會有 dispbottom 提示
+			case 3:
+				setchartitle(1002);
+				end;	// 這裡就直接end終止，不然繼續執行會有 dispbottom 提示
+			case 4:
+			default:
+				setchartitle(0);
+				end;
+		}
+	}
+	
+	dispbottom "[事件演示] OnPCChangeTitleFilter | 通過「" + .@mode_str$ + "」更換稱號, ID從 " + @pre_title_id + " 變為 " + @now_title_id;
+end;
+}
+
+-	script	PC_OPEN_ROULETTE	-1,{
+end;
+OnPCOpenRouletteFilter:
+	// 當玩家點擊打開樂透大轉盤的時候會觸發此事件
+	// 關於此事件的說明請參閱: doc\rAthenaCN_events.txt 文檔
+	if (@roulette_demo == 0) {
+		@roulette_demo = 1;
+		
+		processhalt;
+		mes "[rAthenaCN 演示]";
+		mes "^ff0000您點擊了樂透大轉盤按鈕.^000000";
+		mes "此操作被 npc/racn/racn_events.txt 腳本中的 PC_OPEN_ROULETTE 攔截.";
+		mes "若不需要此演示, 請註銷對應的腳本.";
+		mes "^0000ff下一次點擊轉盤將不再攔截您的操作, 直到你退出此角色.^000000";
+		close;
+	}
+end;
+OnPCCloseRouletteEvent:
+	// 當玩家關閉樂透大轉盤的時候會觸發此事件
+	// 關於此事件的說明請參閱: doc\rAthenaCN_events.txt 文檔
+	mes "[rAthenaCN 演示]";
+	mes "^ff0000您剛剛關閉了樂透大轉盤.^000000";
+	close;
+end;
+}
+
+
+

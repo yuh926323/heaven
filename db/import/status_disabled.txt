@@ -1,0 +1,27 @@
+// Status Change Restriction Database
+//
+// Defines restrictions of status changes (SC).
+// Disabled SC will always be removed or fail to be inflicted on this map.
+//
+// Structure of Database:
+// SCType,Flag
+//
+// 以下為'標記'字段的可選值 (掩碼選項):
+// 1    - 禁止在普通地圖 中使用
+// 2    - 禁止在 PVP地圖 中使用 (若已啟用 PK模式 的話, 請用此選項來取代1)
+// 4    - 禁止在 GVG地圖 中使用
+// 8    - 禁止在戰場地圖 中使用
+// 16   - 禁止在  TE地圖 中使用
+// 區域限制 - 請參考 npc\mapflag\restricted.txt 腳本所使用的方法, 來為地圖劃分區域
+// 32   - 禁止在 1號區域 中使用 (艾爾帕蘭追逐賽地圖)
+// 64   - 禁止在 2號區域 中使用 (監獄地圖)
+// 128  - 禁止在 3號區域 中使用 (依斯魯德競技場地圖)
+// 256  - 禁止在 4號區域 中使用 (華麗金屬之戰:第二版本地圖)
+// 512  - 禁止在 5號區域 中使用 (封閉的地下墓穴地圖)
+// 1024 - 禁止在 6號區域 中使用 (無盡之塔地圖)
+// 2048 - 禁止在 7號區域 中使用 (城鎮地圖)
+// 4096 - 禁止在 8號區域 中使用 (尚未被分配)
+//
+// Example:
+// SC_ENDURE,4   // Endure status will be removed when the player enters GvG and WoE Castle maps; Also cannot be inflicted again.
+
