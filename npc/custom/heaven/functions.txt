@@ -1,0 +1,5 @@
+/*
+作者: Dragon
+作業環境: rA
+說明: 放一些共用 functions
+*/
