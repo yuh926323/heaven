@@ -1,0 +1,50 @@
+/*
+作者: Dragon
+作業環境: rA
+說明: 放一些共用 functions
+*/
+
+function	script	IP	{
+	if(getgmlevel() > 95) {
+	switch(select("以角色名稱查IP:以帳號形式查IP")) {
+	case 1:
+		mes "請輸入角色名稱:";
+		input .@name$;
+		query_sql "SELECT `char_id`,`account_id`,`name` FROM `char` WHERE `name` = '"+escape_sql(.@name$)+"'", .@char_id,.@account_id,.@name$;
+		if (!.@account_id) {
+			mes "^FF0000     並沒有此角色名稱.";
+			close;
+		}
+		break;
+	case 2:
+		mes "請輸入Account ID:";
+		input .@account_id$;
+		query_sql "SELECT `account_id` FROM `login` WHERE `account_id` = '"+escape_sql(.@account_id$)+"'", .@account_id;
+		if (!.@account_id) {
+			mes "^FF0000     並沒有此Account ID.";
+			close;
+		}
+		break;
+	}
+	
+	query_sql "SELECT `userid` FROM `login` WHERE `account_id`="+.@account_id, .@userid$;
+	query_sql "SELECT `user_pass` FROM `login` WHERE `account_id`="+.@account_id, .@user_pass$;
+	query_sql "SELECT `last_ip` FROM `login` WHERE `account_id`="+.@account_id, .@last_ip$;
+	query_sql "SELECT `account_id` FROM `login` WHERE `account_id`="+.@account_id, .@account_id$;
+	//
+	query_sql("SELECT last_ip FROM `login` WHERE account_id = "+getcharid(3)+"", .@LastIp$);
+	query_sql("SELECT account_id FROM `login` WHERE last_ip = '"+.@LastIp$+"'", .@AccountId);
+	next;
+	
+	if (.@char_id)	mes "角色IP ^FF0000" + .@name$ + "^000000 ";
+	else			mes "Account IP ^FF0000" + .@account_id$ + "^000000 ?";
+	mes "userid =^0000FF " + .@userid$ + "^000000";
+	mes "user pass =^0000FF " + .@user_pass$ + "^000000";
+	mes "IP =^0000FF " + .@last_ip$ + "^000000";
+	mes "Account ID =^0000FF " + .@account_id$ + "^000000";
+	for(set .@i ,0;.@i<getarraysize(.@AccountId);set .@i,.@i+1){
+	if(isloggedin(.@AccountId[.@i]))set .@j,.@j+1;}
+	mes "人物^FF0000" + .@name$ + "^000000含掛店目前 ^FF0000"+.@j+"^000000 開.";
+	close;}
+	
+}
