@@ -10,238 +10,175 @@
 //==各位大哥大姐轉載請保留以上，萬分感激。　　　　　==//
 //====================================================//
 //====================================================//
-que_temsky.gat,94,95,6	script	阿呆工匠	63,{
+que_temsky.gat, 94, 95, 6	script	阿呆工匠	63,{
 
-	switch(select("精煉裝備","^0000FF濃縮神鋁精練裝備^000000","修理裝備","拆除卡片","小神鋁換大神鋁","選購材料")) {
-case 1:
-	callfunc "RefineMain";	end;
-case 2:
-	callfunc "RefineMain2";	end;
-case 3:
-	callfunc "Repair";	end;
-case 4:
-	callfunc "CardMain";	end;
-case 5:
-	callfunc "Change";	end;
-case 6:
-	callfunc "ShopMain";	end;	}	}
+set .@menu, select(
+    "精煉裝備",
+    "^0000FF濃縮神鋁精練裝備^000000",
+    "修理裝備",
+    "拆除卡片",
+    "小神鋁換大神鋁",
+    "選購材料"
+);
 
-//====================================================//
-
-function	script	RefineMain2	{
-
-	mes"[阿呆工匠]";
-	mes"^0000FF濃縮神鋁精練模式^000000";
-	mes"請選擇您要精煉的物品選項。";
-	next;
-	set .@RItem,select(
-	"^FF0088[頭上]-^000000" + getequipname(EQI_HEAD_TOP),
-	"^FF0088[頭中]-^000000" + getequipname(EQI_HEAD_MID),
-	"^FF0088[頭下]-^000000" + getequipname(EQI_HEAD_LOW),
-	"^FF0088[衣服]-^000000" + getequipname(EQI_GARMENT),
-	"^FF0088[左手武器]-^000000" + getequipname(EQI_HAND_L),
-	"^FF0088[右手盾牌]-^000000" + getequipname(EQI_HAND_R),
-	"^FF0088[鞋子]-^000000" + getequipname(EQI_SHOES),
-	"^FF0088[飾品1]-^000000" + getequipname(EQI_ACC_L),
-	"^FF0088[飾品2]-^000000" + getequipname(EQI_ACC_R)
-	);
-
-	if ( getequipisequiped(.@RItem) == 0 ) {	mes"[阿呆工匠]";
-							mes"您還沒有裝備要精煉物品唷!";
-							close;	}
-	if ( getequipisenableref(.@RItem) == 0 ) {	mes"[阿呆工匠]";
-							mes"這個物品是無法精煉的唷!";
-							close;	}
-	//if ( getequipisidentify(.@RItem) == 0 ) {	mes"[阿呆工匠]";
-							//mes"未鑒定的物品是無法精煉的唷!";
-							//close;	}
-	if ( getequiprefinerycnt(.@RItem) >= 20 ) {	mes"[阿呆工匠]";
-							mes"這個物品已經精煉到最高等級了唷!";
-							close;	}
-	switch(getequipweaponlv(.@RItem)) {
-	case 0:	set .@Item,7619;		set .@Zeny,20000;	break;
-	case 1:	set .@Item,7620;	set .@Zeny,500;		break;
-	case 2:	set .@Item,7620;	set .@Zeny,2000;	break;
-	case 3:	set .@Item,7620;		set .@Zeny,25000;	break;
-	case 4:	set .@Item,7620;		set .@Zeny,50000;	break;	}
-	mes"[阿呆工匠][^0000FF計算機^000000][^FF0000"+(getequippercentrefinery(.@RItem)+5)+"%^000000]";
-	mes"[^0000FF防爆水晶^000000數量為^FF0000"+countitem(20001)+"^000000個]";
-	mes "精煉 ^0000FF"+getequipname(.@RItem)+"^000000 這項物品";
-	mes "需要 ^FF0000"+getitemname(.@Item)+" 1^000000 個";
-	mes "　和 ^FF0000金錢 "+.@Zeny+"^000000 z";
-	next;
-	if (select("是的!","不了!")==2) {
-					close;
-					}
-	if ( (getequippercentrefinery(.@RItem)+5) < 100 ) {
-	mes"[阿呆工匠]";
-	mes"物品已經達到它的^FF0000安定值^000000，";
-	mes"繼續精煉可能會使裝備損壞，";
-	mes"即使這樣您還要繼續精煉嗎？";
-	next;
-	if (select("是的!","不了!")==2) {
-					close;
-					}	}
-	mes"[阿呆工匠][^0000FF計算機^000000][^FF0000"+(getequippercentrefinery(.@RItem)+5)+"%^000000]";
-	mes"鏘！鏘！鏘！";
-	next;
-
-Refine_Ing:
-	if ( countitem(.@Item) < 1 || Zeny < .@Zeny ) {	mes "[阿呆工匠]";
-							mes "抱歉您身上的物品不足!";
-							close;	}
-	delitem .@Item,1;
-	set Zeny,Zeny - .@Zeny;
-	if ( (getequippercentrefinery(.@RItem)+5) >= rand(100) ) {
-	Successrefitem .@RItem;
-	if ( getequiprefinerycnt(.@RItem) < 20 ) {
-	set .@RStr$,"請問";
-	mes"[阿呆工匠][^0000FF計算機^000000][^FF0000"+(getequippercentrefinery(.@RItem)+5)+"%^000000]";
-	mes"[^0000FF防爆水晶^000000數量為^FF0000"+countitem(20001)+"^000000個]";
-	if ( (getequippercentrefinery(.@RItem)+5) != 100 ) {	mes"物品已經達到它的^FF0000安定值^000000，";
-								mes"繼續精煉可能會使裝備損壞，";
-								set .@RStr$,"即使這樣";	}
-	mes ""+.@RStr$+"您還要繼續精煉嗎？";
-	next;
-	if (select("是的!","不了!")==1) {
-					goto Refine_Ing; 
-					}	}
-	mes"[阿呆工匠]";
-	mes"恭喜您物品已精煉成功了!";
-	close;
-	} else {
-	if ( countitem(20001) != 0 ) 
-	{
-	delitem 20001,1;
-	specialeffect2 155;
-	mes"[阿呆工匠]";
-	mes"原來是防爆水晶阿!";
-	mes"那這次失敗也沒關係了.";
-	close;	}
-	specialeffect2 155;
-	failedrefitem .@RItem;
-	mes"[阿呆工匠]";
-	mes"抱歉您的物品精煉失敗了!";
-	close;}
-	
+switch(.@menu) {
+    case 1:
+        callfunc("RefineMain", 1);
+        break;
+    case 2:
+        callfunc("RefineMain", 2);
+         break;
+    case 3:
+        callfunc "Repair";
+        break;
+    case 4:
+        callfunc "CardMain";
+        break;
+    case 5:
+        callfunc "Change";
+        break;
+    case 6:
+        callfunc "ShopMain";
+        break;
 }
 
+end;
 
-
-
+OnInit:
+    set .npcname$, "[阿呆工匠]";
+    setarray $@TRANS_SELECT_TEXT$,
+        "頭上", "頭中", "頭下", "衣服", "左手武器",
+        "右手盾牌", "披肩", "鞋子", "飾品1", "飾品2";
+    setarray $@TRANS_SELECT_VALUE,
+        EQI_HEAD_TOP, EQI_HEAD_MID, EQI_HEAD_LOW, EQI_ARMOR, EQI_HAND_L,
+        EQI_HAND_R, EQI_GARMENT, EQI_SHOES, EQI_ACC_L, EQI_ACC_R;
+    end;
+}
 
 //====================================================//
 
 function	script	RefineMain	{
+	mes .npcname$;
+	mes "請選擇您要精煉的物品選項。";
+	next;
+    set .@RItem, $@TRANS_SELECT_VALUE[select(callfunc("GetRefineSelectMenu")) - 1];
 
-	mes"[阿呆工匠]";
-	mes"請選擇您要精煉的物品選項。";
-	next;
-	set .@RItem,select(
-	"^FF0088[頭上]-^000000" + (getequipname(EQI_HEAD_TOP) == -1 ? "沒有裝備" : getequipname(EQI_HEAD_TOP)),
-	"^FF0088[頭中]-^000000" + getequipname(EQI_HEAD_MID),
-	"^FF0088[頭下]-^000000" + getequipname(EQI_HEAD_LOW),
-	"^FF0088[衣服]-^000000" + getequipname(EQI_GARMENT),
-	"^FF0088[左手武器]-^000000" + getequipname(EQI_HAND_L),
-	"^FF0088[右手盾牌]-^000000" + getequipname(EQI_HAND_R),
-	"^FF0088[鞋子]-^000000" + getequipname(EQI_SHOES),
-	"^FF0088[飾品1]-^000000" + getequipname(EQI_ACC_L),
-	"^FF0088[飾品2]-^000000" + getequipname(EQI_ACC_R)
-	);
+	if ( getequipisequiped(.@RItem) == 0 ) {
+        mes .npcname$;
+        mes "您還沒有裝備要精煉物品唷!";
+        close;
+    }
+	if ( getequipisenableref(.@RItem) == 0 ) {
+        mes .npcname$;
+        mes "這個物品是無法精煉的唷!";
+        close;
+    }
+	if ( getequiprefinerycnt(.@RItem) >= 20 ) {
+        mes .npcname$;
+        mes "這個物品已經精煉到最高等級了唷!";
+        close;
+    }
 
-	if ( getequipisequiped(.@RItem) == 0 ) {	mes"[阿呆工匠]";
-							mes"您還沒有裝備要精煉物品唷!";
-							close;	}
-	if ( getequipisenableref(.@RItem) == 0 ) {	mes"[阿呆工匠]";
-							mes"這個物品是無法精煉的唷!";
-							close;	}
-	//if ( getequipisidentify(.@RItem) == 0 ) {	mes"[阿呆工匠]";
-							//mes"未鑒定的物品是無法精煉的唷!";
-							//close;	}
-	if ( getequiprefinerycnt(.@RItem) >= 20 ) {	mes"[阿呆工匠]";
-							mes"這個物品已經精煉到最高等級了唷!";
-							close;	}
-	switch(getequipweaponlv(.@RItem)) {
-	case 0:	set .@Item,985;		set .@Zeny,20000;	break;
-	case 1:	set .@Item,1010;	set .@Zeny,500;		break;
-	case 2:	set .@Item,1011;	set .@Zeny,2000;	break;
-	case 3:	set .@Item,984;		set .@Zeny,25000;	break;
-	case 4:	set .@Item,984;		set .@Zeny,50000;	break;	}
-	mes"[阿呆工匠][^0000FF計算機^000000][^FF0000"+getequippercentrefinery(.@RItem)+"%^000000]";
-	mes"[^0000FF防爆水晶^000000數量為^FF0000"+countitem(20001)+"^000000個]";
-	mes "精煉 ^0000FF"+getequipname(.@RItem)+"^000000 這項物品";
-	mes "需要 ^FF0000"+getitemname(.@Item)+" 1^000000 個";
-	mes "　和 ^FF0000金錢 "+.@Zeny+"^000000 z";
+    // 鋁、一級強化、二級強化、神之金屬、神之金屬
+    setarray .@normal, 985, 1010, 1011, 984, 984;
+    // 濃縮鋁、濃縮神之金屬
+    setarray .@advance, 7619, 7620, 7620, 7620, 7620;
+    setarray .@cost, 20000, 500, 2000, 25000, 50000;
+    setarray .@extra_rates, 0, 5;
+    set .@mode, getarg(0); // .@mode = 1: 一般; .@mode = 2: 濃縮
+    set .@extra_rate, .@extra_rates[.@mode - 1];
+    set .@weapon_level, getequipweaponlv(.@RItem);
+	switch(.@mode) {
+        case 1:
+            set .@Item, .@normal[.@weapon_level];
+            set .@Zeny, .@cost[.@weapon_level];
+            break;
+        case 2:
+            set .@Item, .@advance[.@weapon_level];
+            set .@Zeny, .@cost[.@weapon_level];
+            break;
+    }
+
+	mes .npcname$ + "[^0000FF計算機^000000][^FF0000" + (getequippercentrefinery(.@RItem) + .@extra_rate) + "%^000000]";
+	mes "[^0000FF防爆水晶^000000數量為^FF0000" + countitem(20001) + "^000000個]";
+	mes "精煉 ^0000FF" + getequipname(.@RItem) + "^000000 這項物品";
+	mes "需要 ^FF0000" + getitemname(.@Item) + " 1^000000 個";
+	mes "　和 ^FF0000金錢 " + .@Zeny + "^000000 z";
 	next;
-	if (select("是的!","不了!")==2) {
-					close;
-					}
-	if ( getequippercentrefinery(.@RItem) < 100 ) {
-	mes"[阿呆工匠]";
-	mes"物品已經達到它的^FF0000安定值^000000，";
-	mes"繼續精煉可能會使裝備損壞，";
-	mes"即使這樣您還要繼續精煉嗎？";
-	next;
-	if (select("是的!","不了!")==2) {
-					close;
-					}	}
-	mes"[阿呆工匠][^0000FF計算機^000000][^FF0000"+getequippercentrefinery(.@RItem)+"%^000000]";
-	mes"鏘！鏘！鏘！";
-	next;
+
+	if (select("是的!", "不了!") == 2) {
+        close;
+    }
+
+    if ( (getequippercentrefinery(.@RItem) + .@extra_rate) < 100 ) {
+        mes .npcname$;
+        mes "物品已經達到它的^FF0000安定值^000000，";
+        mes "繼續精煉可能會使裝備損壞，";
+        mes "即使這樣您還要繼續精煉嗎？";
+        next;
+        if (select("是的!", "不了!") == 2) {
+            close;
+        }
+    }
+    mes "[阿呆工匠][^0000FF計算機^000000][^FF0000" + (getequippercentrefinery(.@RItem) + .@extra_rate) + "%^000000]";
+    mes "鏘！鏘！鏘！";
+    next;
 
 Refine_Ing:
-	if ( countitem(.@Item) < 1 || Zeny < .@Zeny ) {	mes "[阿呆工匠]";
-							mes "抱歉您身上的物品不足!";
-							close;	}
+    if ( countitem(.@Item) < 1 || Zeny < .@Zeny ) {
+        mes .npcname$;
+        mes "抱歉您身上的物品不足!";
+        close;
+    }
+
 	delitem .@Item,1;
 	set Zeny,Zeny - .@Zeny;
-	if ( getequippercentrefinery(.@RItem) >= rand(100) ) {
-	Successrefitem .@RItem;
-	if ( getequiprefinerycnt(.@RItem) < 20 ) {
-	set .@RStr$,"請問";
-	mes"[阿呆工匠][^0000FF計算機^000000][^FF0000"+getequippercentrefinery(.@RItem)+"%^000000]";
-	mes"[^0000FF防爆水晶^000000數量為^FF0000"+countitem(20001)+"^000000個]";
-	if ( getequippercentrefinery(.@RItem) != 100 ) {	mes"物品已經達到它的^FF0000安定值^000000，";
-								mes"繼續精煉可能會使裝備損壞，";
-								set .@RStr$,"即使這樣";	}
-	mes ""+.@RStr$+"您還要繼續精煉嗎？";
-	mes "yes="+.@yes+"";
-	next;
-	if (select("是的!","不了!")==1) {
-					goto Refine_Ing;
-					}	}
-	mes"[阿呆工匠]";
-	mes"恭喜您物品已精煉成功了!";
-	close;
-	} else {
-	if ( countitem(20001) != 0 ) 
-	{
-	delitem 20001,1;
-	specialeffect2 155;
-	mes"[阿呆工匠]";
-	mes"原來是防爆水晶阿!";
-	mes"那這次失敗也沒關係了.";
-	close;
-	}
-	specialeffect2 155;
-	failedrefitem .@RItem;
-	mes"[阿呆工匠]";
-	mes"抱歉您的物品精煉失敗了!";
-	close;}
-	
+
+    if ( (getequippercentrefinery(.@RItem) + .@extra_rate) >= rand(100) ) {
+        successrefitem(.@RItem);
+        if ( getequiprefinerycnt(.@RItem) < 20 ) {
+            set .@RStr$, "請問";
+            mes .npcname$ + "[^0000FF計算機^000000][^FF0000" + (getequippercentrefinery(.@RItem) + .@extra_rate) + "%^000000]";
+            mes "[^0000FF防爆水晶^000000數量為^FF0000" + countitem(20001) + "^000000個]";
+            if ( (getequippercentrefinery(.@RItem) + .@extra_rate) != 100 ) {
+                mes "物品已經達到它的^FF0000安定值^000000，";
+                mes "繼續精煉可能會使裝備損壞，";
+                set .@RStr$, "即使這樣";
+            }
+            mes .@RStr$ + "您還要繼續精煉嗎？";
+            next;
+            if (select("是的!", "不了!") == 1) {
+                goto Refine_Ing;
+            }
+        }
+        mes .npcname$;
+        mes "恭喜您物品已精煉成功了!";
+        close;
+    } else {
+        if ( countitem(20001) != 0 ) {
+            delitem 20001,1;
+            specialeffect2 155;
+            mes .npcname$;
+            mes "原來是防爆水晶阿!";
+            mes "那這次失敗也沒關係了.";
+            close;
+        }
+        specialeffect2 155;
+        failedrefitem .@RItem;
+        mes .npcname$;
+        mes "抱歉您的物品精煉失敗了!";
+        close;
+    }
 }
-
-
-
 
 //====================================================//
 
 function	script	Repair	{
 
-	mes "[阿呆工匠]";
+	mes .npcname$;
 	mes"請選擇您要修理的物品選項。";
 	next;
-	if ( getbrokenid(1) == NULL ) {	mes "[阿呆工匠]";
+	if ( getbrokenid(1) == NULL ) {	mes .npcname$;
 					mes "您沒有任何受損的物品唷!";
 					close;	}
 
@@ -252,7 +189,7 @@ function	script	Repair	{
 				getitemname(getbrokenid(9)),getitemname(getbrokenid(10)));
 
 	if ( getbrokenid(.@RepItem) == NULL ) {	close;	}
-	mes "[阿呆工匠]";
+	mes .npcname$;
 	mes "修理 ^0000FF"+getitemname(getbrokenid(.@RepItem))+"^000000 這項物品";
 	mes "需要 ^FF0000鋼鐵     1^000000 個";
 	mes "　和 ^FF0000金錢 10000^000000 z";
@@ -260,16 +197,16 @@ function	script	Repair	{
 	if (select("是的!","不了!")==2) {
 					close;
 					}
-	if ( countitem(999) < 1 || Zeny < 10000 ) {	mes "[阿呆工匠]";
+	if ( countitem(999) < 1 || Zeny < 10000 ) {	mes .npcname$;
 							mes "抱歉您身上的物品不足!";
 							close;	}
 	delitem 999,1;
 	set Zeny,Zeny - 10000;
 	repair(.@RepItem);
-	mes"[阿呆工匠]";
+	mes .npcname$;
 	mes"鏘！鏘！鏘！";
 	next;
-	mes"[阿呆工匠]";
+	mes .npcname$;
 	mes"恭喜您物品已修理完成了!";
 	close;
 }
@@ -278,18 +215,18 @@ function	script	Repair	{
 
 function	script	CardMain	{
 
-	mes "[阿呆工匠]";
+	mes .npcname$;
 	mes"請選擇您要拆除的物品選項。";
 	next;
 	set .@CardPart,select(getequipname(1),getequipname(2),getequipname(3),getequipname(4),
 				getequipname(5),getequipname(6),getequipname(7),getequipname(8),
 				getequipname(9),getequipname(10));
 
-	if ( getequipcardcnt(.@CardPart) == 0 )	{	mes "[阿呆工匠]";
+	if ( getequipcardcnt(.@CardPart) == 0 )	{	mes .npcname$;
 							mes "這個物品並沒有插上卡片唷!";
 							close;	}
 	set .@CardCount,getequipcardcnt(.@CardPart);
-	mes "[阿呆工匠]";
+	mes .npcname$;
 	mes "拆除 ^0000FF"+getequipname(.@CardPart)+"^000000 上的卡片，";
 	mes "需要 ^FF0000金錢 "+(1000000+(.@CardCount*250000))+"^000000 z";
 	mes "　和 ^FF0000鋼鐵　　5^000000 個";
@@ -298,16 +235,16 @@ function	script	CardMain	{
 					close;
 					}
 	if ( zeny < (1000000+(.@CardCount*250000)) || 
-				countitem(999) < 5  ) {	mes "[阿呆工匠]";
+				countitem(999) < 5  ) {	mes .npcname$;
 								mes "抱歉您身上的物品不足!";
 								close;	}
 	delitem 999,5;
 	set zeny,zeny - (1000000+(.@CardCount*250000));
 	successremovecards .@CardPart;
-	mes"[阿呆工匠]";
+	mes .npcname$;
 	mes"鏘！鏘！鏘！";
 	next;
-	mes"[阿呆工匠]";
+	mes .npcname$;
 	mes"恭喜您拆除卡片已完成了!";
 	close;
 }
@@ -316,7 +253,7 @@ function	script	CardMain	{
 
 function	script	ShopMain	{
 
-	mes "[阿呆工匠]";
+	mes .npcname$;
 	mes"請選擇您要購買的物品選項。";
 	next;
 	switch(select("鍛治鐵砧","鍛治物品","強化金屬")) {
@@ -337,14 +274,14 @@ case 3:
 	case 2:	set .@SItem,1011;	set .@SZeny,1000;	goto Shop_Item;	}	}
 
 Shop_Item:
-	mes "[阿呆工匠]";
+	mes .npcname$;
 	mes "購買 ^0000FF"+getitemname(.@SItem)+"^000000 這項物品，";
 	mes "需要 ^FF0000金錢 "+.@SZeny+"^000000 z";
 	mes "　";
 	mes "數量：Min 1 個，Max 100 個！";
 	next;
 	input .@ItemNum;
-	if ( .@ItemNum < 1  || .@ItemNum > 100 ) {	mes "[阿呆工匠]";
+	if ( .@ItemNum < 1  || .@ItemNum > 100 ) {	mes .npcname$;
 							mes "您輸入的數量不正確唷!";
 							close;	}
 	mes "[阿呆工匠][^0000FF計算機^000000]";
@@ -358,18 +295,18 @@ Shop_Item:
 	case 2:	close;
 	case 3:	goto Shop_Item;
 	case 4:	callfunc "ShopMain";	end;	}
-	if ( zeny < (.@SZeny*.@ItemNum) ) {		mes "[阿呆工匠]";
+	if ( zeny < (.@SZeny*.@ItemNum) ) {		mes .npcname$;
 							mes "抱歉您身上的金錢不足!";
 							close;	}
-	if( checkweight(.@SItem,.@ItemNum)==0 ) {	mes "[阿呆工匠]";
+	if( checkweight(.@SItem,.@ItemNum)==0 ) {	mes .npcname$;
 							mes "抱歉您身上的空間不足!";
 							close;	}
 	set Zeny,Zeny - (.@SZeny*.@ItemNum);
 	getitem .@SItem,.@ItemNum;
-	mes"[阿呆工匠]";
+	mes .npcname$;
 	mes"鏘！鏘！鏘！";
 	next;
-	mes"[阿呆工匠]";
+	mes .npcname$;
 	mes"恭喜您選購材料已完成了!";
 	close;
 }
@@ -377,7 +314,7 @@ Shop_Item:
 //==================================================//
 
 function	script	Change	{
-	mes "[阿呆工匠]";
+	mes .npcname$;
         mes "^0088FF"+strcharinfo(0)+"^000000您好。";
 	mes "請選擇要兌換的選項";
 	next;
@@ -386,12 +323,12 @@ function	script	Change	{
 	case 1 : setarray .@data,984,756; break;
 	case 2 : setarray .@data,985,757; break;
 		}
-	mes "[阿呆工匠]";
+	mes .npcname$;
 	mes "哦,你要換^9933FF"+getitemname(.@data[0])+"^000000阿";
 	mes "^993333**材料如下**^000000";
 	mes "[^0000FF"+ getitemname(.@data[1])+"^000000] ^FF00005個^000000";
 	next;
-	mes "[阿呆工匠]";
+	mes .npcname$;
 	mes "^9933335個"+ getitemname(.@data[1]) +"可換1個"+ getitemname(.@data[0]) +"^000000";
 	mes "那麼,你要換多少個^993333"+ getitemname(.@data[0])+"^000000?";
 	mes"[^0000FF"+ getitemname(.@data[1]) +"^000000有^FF0000"+countitem(.@data[1])+"^000000個]";
@@ -401,7 +338,7 @@ function	script	Change	{
 	if(.@n == 0) close;
 	if((.@n*5) > countitem(.@data[1]))
 		{
-		mes "[阿呆工匠]";
+		mes .npcname$;
 		mes "^FF0000"+.@n+"^000000個?數量不對喔";
 		close;
 		}
@@ -415,3 +352,10 @@ function	script	Change	{
 	close;
 }
 
+function	script	GetRefineSelectMenu	{
+    for (set .@i, 0; .@i < getarraysize($@TRANS_SELECT_TEXT$); set .@i, .@i + 1) {
+        set .@menu$, .@menu$ + "^FF0088[" + $@TRANS_SELECT_TEXT$[.@i] + "] - ^000000" + (getequipname($@TRANS_SELECT_VALUE[.@i]) == "" ? "沒有裝備" : getequipname($@TRANS_SELECT_VALUE[.@i])) + ":";
+    }
+
+    return .@menu$;
+}
