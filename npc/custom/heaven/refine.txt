@@ -44,9 +44,9 @@ function	script	RefineMain2	{
 	if ( getequipisenableref(.@RItem) == 0 ) {	mes"[阿呆工匠]";
 							mes"這個物品是無法精煉的唷!";
 							close;	}
-	if ( getequipisidentify(.@RItem) == 0 ) {	mes"[阿呆工匠]";
-							mes"未鑒定的物品是無法精煉的唷!";
-							close;	}
+	//if ( getequipisidentify(.@RItem) == 0 ) {	mes"[阿呆工匠]";
+							//mes"未鑒定的物品是無法精煉的唷!";
+							//close;	}
 	if ( getequiprefinerycnt(.@RItem) >= 20 ) {	mes"[阿呆工匠]";
 							mes"這個物品已經精煉到最高等級了唷!";
 							close;	}
@@ -139,9 +139,9 @@ function	script	RefineMain	{
 	if ( getequipisenableref(.@RItem) == 0 ) {	mes"[阿呆工匠]";
 							mes"這個物品是無法精煉的唷!";
 							close;	}
-	if ( getequipisidentify(.@RItem) == 0 ) {	mes"[阿呆工匠]";
-							mes"未鑒定的物品是無法精煉的唷!";
-							close;	}
+	//if ( getequipisidentify(.@RItem) == 0 ) {	mes"[阿呆工匠]";
+							//mes"未鑒定的物品是無法精煉的唷!";
+							//close;	}
 	if ( getequiprefinerycnt(.@RItem) >= 20 ) {	mes"[阿呆工匠]";
 							mes"這個物品已經精煉到最高等級了唷!";
 							close;	}
