@@ -59,7 +59,7 @@ function	script	CheckAmount	{
     else return rand(1,5);
 }
 
-fayon, 84, 123,5	script	魔物獵人	753,{
+fayon, 82, 128,5	script	魔物獵人	844,{
     mes .npcname$;
     mes "我將會以你現在的等級";
     mes "來分配工作給你，完成後會有報酬";
@@ -142,4 +142,8 @@ fayon, 84, 123,5	script	魔物獵人	753,{
         // 避免搜尋到的魔物 (例: 華麗金屬)
         setarray $@exception$, "真晶", "炸彈", "聖誕", "肉粽", "寶箱", "箱子", "寶物箱子", "旗幟", "守護石", "防禦線", "水晶", "華麗金屬", "開關";
         end;
+    OnInit:
+	waitingroom "打怪任務",0;
+	return;
+	close;
 }
