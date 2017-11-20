@@ -5,7 +5,7 @@ fayon, 93, 123, 4	script	物品回收人員	496,{
     
     mes "[物品回收人員]";
     mes "^0088FF" + strcharinfo(0) + "^000000您好，很高興為您服務。";
-    mes "請問你有下列的物品嗎? 我很需要這個";
+    mes "請問你有下列的物品嗎? 我很需要";
     for (set .@i, 0;.@i < getarraysize(.@item); set .@i, .@i + 1) {
         mes "^880000" + (.@i + 1) + "^000000. [^9933FF" + getitemname(.@item[.@i]) + "^993333 " + .@z[.@i] + " Zeny^000000]";
     }
