@@ -43,7 +43,7 @@ function	script	RefineMain2	{
 	"¥k¤â¬ÞµP" + getequipname(EQI_HAND_R),
 	"¾c¤l" + getequipname(EQI_SHOES),
 	"¹¢«~1" + getequipname(EQI_ACC_L),
-	"¹¢«~2" + getequipname(EQI_ACC_R),
+	"¹¢«~2" + getequipname(EQI_ACC_R)
 	);
 
 	if ( getequipisequiped(.@RItem) == 0 ) {	mes"[ªü§b¤u¦K]";
@@ -146,7 +146,7 @@ function	script	RefineMain	{
 	"¥k¤â¬ÞµP" + getequipname(EQI_HAND_R),
 	"¾c¤l" + getequipname(EQI_SHOES),
 	"¥ª¹¢«~1" + getequipname(EQI_ACC_L),
-	"¥k¹¢«~2" + getequipname(EQI_ACC_R),
+	"¥k¹¢«~2" + getequipname(EQI_ACC_R)
 	);
 
 	if ( getequipisequiped(.@RItem) == 0 ) {	mes"[ªü§b¤u¦K]";
