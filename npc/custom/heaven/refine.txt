@@ -35,15 +35,15 @@ function	script	RefineMain2	{
 	mes"請選擇您要精煉的物品選項。";
 	next;
 	set .@RItem,select(
-	"頭上" + getequipname(EQI_HEAD_TOP),
-	"頭中" + getequipname(EQI_HEAD_MID),
-	"頭下" + getequipname(EQI_HEAD_LOW),
-	"衣服" + getequipname(EQI_GARMENT),
-	"左手武器" + getequipname(EQI_HAND_L),
-	"右手盾牌" + getequipname(EQI_HAND_R),
-	"鞋子" + getequipname(EQI_SHOES),
-	"飾品1" + getequipname(EQI_ACC_L),
-	"飾品2" + getequipname(EQI_ACC_R)
+	"^FF0088[頭上]-^000000" + getequipname(EQI_HEAD_TOP),
+	"^FF0088[頭中]-^000000" + getequipname(EQI_HEAD_MID),
+	"^FF0088[頭下]-^000000" + getequipname(EQI_HEAD_LOW),
+	"^FF0088[衣服]-^000000" + getequipname(EQI_GARMENT),
+	"^FF0088[左手武器]-^000000" + getequipname(EQI_HAND_L),
+	"^FF0088[右手盾牌]-^000000" + getequipname(EQI_HAND_R),
+	"^FF0088[鞋子]-^000000" + getequipname(EQI_SHOES),
+	"^FF0088[飾品1]-^000000" + getequipname(EQI_ACC_L),
+	"^FF0088[飾品2]-^000000" + getequipname(EQI_ACC_R)
 	);
 
 	if ( getequipisequiped(.@RItem) == 0 ) {	mes"[阿呆工匠]";
@@ -138,15 +138,15 @@ function	script	RefineMain	{
 	mes"請選擇您要精煉的物品選項。";
 	next;
 	set .@RItem,select(
-	"頭上" + getequipname(EQI_HEAD_TOP),
-	"頭中" + getequipname(EQI_HEAD_MID),
-	"頭下" + getequipname(EQI_HEAD_LOW),
-	"衣服" + getequipname(EQI_GARMENT),
-	"左手武器" + getequipname(EQI_HAND_L),
-	"右手盾牌" + getequipname(EQI_HAND_R),
-	"鞋子" + getequipname(EQI_SHOES),
-	"左飾品1" + getequipname(EQI_ACC_L),
-	"右飾品2" + getequipname(EQI_ACC_R)
+	"^FF0088[頭上]-^000000" + getequipname(EQI_HEAD_TOP),
+	"^FF0088[頭中]-^000000" + getequipname(EQI_HEAD_MID),
+	"^FF0088[頭下]-^000000" + getequipname(EQI_HEAD_LOW),
+	"^FF0088[衣服]-^000000" + getequipname(EQI_GARMENT),
+	"^FF0088[左手武器]-^000000" + getequipname(EQI_HAND_L),
+	"^FF0088[右手盾牌]-^000000" + getequipname(EQI_HAND_R),
+	"^FF0088[鞋子]-^000000" + getequipname(EQI_SHOES),
+	"^FF0088[飾品1]-^000000" + getequipname(EQI_ACC_L),
+	"^FF0088[飾品2]-^000000" + getequipname(EQI_ACC_R)
 	);
 
 	if ( getequipisequiped(.@RItem) == 0 ) {	mes"[阿呆工匠]";
