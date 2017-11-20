@@ -34,9 +34,17 @@ function	script	RefineMain2	{
 	mes"^0000FF濃縮神鋁精練模式^000000";
 	mes"請選擇您要精煉的物品選項。";
 	next;
-	set .@RItem,select(getequipname(1),getequipname(2),getequipname(3),getequipname(4),
-				getequipname(5),getequipname(6),getequipname(7),getequipname(8),
-				getequipname(9),getequipname(10));
+	set .@RItem,select(
+	"頭上" + getequipname(EQI_HEAD_TOP),
+	"頭中" + getequipname(EQI_HEAD_MID),
+	"頭下" + getequipname(EQI_HEAD_LOW),
+	"衣服" + getequipname(EQI_GARMENT),
+	"左手武器" + getequipname(EQI_HAND_L),
+	"右手盾牌" + getequipname(EQI_HAND_R),
+	"鞋子" + getequipname(EQI_SHOES),
+	"飾品1" + getequipname(EQI_ACC_L),
+	"飾品2" + getequipname(EQI_ACC_R),
+	);
 
 	if ( getequipisequiped(.@RItem) == 0 ) {	mes"[阿呆工匠]";
 							mes"您還沒有裝備要精煉物品唷!";
@@ -129,9 +137,17 @@ function	script	RefineMain	{
 	mes"[阿呆工匠]";
 	mes"請選擇您要精煉的物品選項。";
 	next;
-	set .@RItem,select(getequipname(1),getequipname(2),getequipname(3),getequipname(4),
-				getequipname(5),getequipname(6),getequipname(7),getequipname(8),
-				getequipname(9),getequipname(10));
+	set .@RItem,select(
+	"頭上" + getequipname(EQI_HEAD_TOP),
+	"頭中" + getequipname(EQI_HEAD_MID),
+	"頭下" + getequipname(EQI_HEAD_LOW),
+	"衣服" + getequipname(EQI_GARMENT),
+	"左手武器" + getequipname(EQI_HAND_L),
+	"右手盾牌" + getequipname(EQI_HAND_R),
+	"鞋子" + getequipname(EQI_SHOES),
+	"左飾品1" + getequipname(EQI_ACC_L),
+	"右飾品2" + getequipname(EQI_ACC_R),
+	);
 
 	if ( getequipisequiped(.@RItem) == 0 ) {	mes"[阿呆工匠]";
 							mes"您還沒有裝備要精煉物品唷!";
