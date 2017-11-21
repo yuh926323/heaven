@@ -1,27 +1,27 @@
 /*
-§@ªÌ: Dragon
-§@·~Àô¹Ò: rA
-»¡©ú: ©ñ¤@¨Ç¦@¥Î functions
+ä½œè€…: Dragon
+ä½œæ¥­ç’°å¢ƒ: rA
+èªªæ˜: æ”¾ä¸€äº›å…±ç”¨ functions
 */
 
 function	script	IP	{
 	if(getgmlevel() > 95) {
-	switch(select("¥H¨¤¦â¦WºÙ¬dIP:¥H±b¸¹§Î¦¡¬dIP")) {
+	switch(select("ä»¥è§’è‰²åç¨±æŸ¥IP:ä»¥å¸³è™Ÿå½¢å¼æŸ¥IP")) {
 	case 1:
-		mes "½Ğ¿é¤J¨¤¦â¦WºÙ:";
+		mes "è«‹è¼¸å…¥è§’è‰²åç¨±:";
 		input .@name$;
 		query_sql "SELECT `char_id`,`account_id`,`name` FROM `char` WHERE `name` = '"+escape_sql(.@name$)+"'", .@char_id,.@account_id,.@name$;
 		if (!.@account_id) {
-			mes "^FF0000     ¨Ã¨S¦³¦¹¨¤¦â¦WºÙ.";
+			mes "^FF0000     ä¸¦æ²’æœ‰æ­¤è§’è‰²åç¨±.";
 			close;
 		}
 		break;
 	case 2:
-		mes "½Ğ¿é¤JAccount ID:";
+		mes "è«‹è¼¸å…¥Account ID:";
 		input .@account_id$;
 		query_sql "SELECT `account_id` FROM `login` WHERE `account_id` = '"+escape_sql(.@account_id$)+"'", .@account_id;
 		if (!.@account_id) {
-			mes "^FF0000     ¨Ã¨S¦³¦¹Account ID.";
+			mes "^FF0000     ä¸¦æ²’æœ‰æ­¤Account ID.";
 			close;
 		}
 		break;
@@ -36,7 +36,7 @@ function	script	IP	{
 	query_sql("SELECT account_id FROM `login` WHERE last_ip = '"+.@LastIp$+"'", .@AccountId);
 	next;
 	
-	if (.@char_id)	mes "¨¤¦âIP ^FF0000" + .@name$ + "^000000 ";
+	if (.@char_id)	mes "è§’è‰²IP ^FF0000" + .@name$ + "^000000 ";
 	else			mes "Account IP ^FF0000" + .@account_id$ + "^000000 ?";
 	mes "userid =^0000FF " + .@userid$ + "^000000";
 	mes "user pass =^0000FF " + .@user_pass$ + "^000000";
@@ -44,7 +44,7 @@ function	script	IP	{
 	mes "Account ID =^0000FF " + .@account_id$ + "^000000";
 	for(set .@i ,0;.@i<getarraysize(.@AccountId);set .@i,.@i+1){
 	if(isloggedin(.@AccountId[.@i]))set .@j,.@j+1;}
-	mes "¤Hª«^FF0000" + .@name$ + "^000000§t±¾©±¥Ø«e ^FF0000"+.@j+"^000000 ¶}.";
+	mes "äººç‰©^FF0000" + .@name$ + "^000000å«æ›åº—ç›®å‰ ^FF0000"+.@j+"^000000 é–‹.";
 	close;}
 	
 }

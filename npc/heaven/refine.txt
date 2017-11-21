@@ -1,24 +1,24 @@
 //====================================================//
 //====================================================//
-//==»s§@¤H : ³¯¤p­× (SkyTwo) ¡@¡@¡@¡@¡@¡@Eathena¡@¡@==//
-//==§ó·s¤é´Á : ¦è¤¸ 2008/06/20¡@¡@¡@¡@¡@¡@¡@Script¡@==//
-//==¸}¥»ª©¸¹ : ÁcÅé¤¤¤å v1.5 ¥¿¦¡ª©¡@¡@¡@¡@¡@¡@¡@¡@ ==//
-//==¸}¥»¦WºÙ : ªü§b¤u¦K¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@ ==//
-//==¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@==//
-//==¸}¥»¥X³B : http://srogm.no-ip.info/forum¡@¡@¡@¡@==//
-//==¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@¡@==//
-//==¦U¦ì¤j­ô¤j©jÂà¸ü½Ğ«O¯d¥H¤W¡A¸U¤À·P¿E¡C¡@¡@¡@¡@¡@==//
+//==è£½ä½œäºº : é™³å°ä¿® (SkyTwo) ã€€ã€€ã€€ã€€ã€€ã€€Eathenaã€€ã€€==//
+//==æ›´æ–°æ—¥æœŸ : è¥¿å…ƒ 2008/06/20ã€€ã€€ã€€ã€€ã€€ã€€ã€€Scriptã€€==//
+//==è…³æœ¬ç‰ˆè™Ÿ : ç¹é«”ä¸­æ–‡ v1.5 æ­£å¼ç‰ˆã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ==//
+//==è…³æœ¬åç¨± : é˜¿å‘†å·¥åŒ ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ==//
+//==ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€==//
+//==è…³æœ¬å‡ºè™• : http://srogm.no-ip.info/forumã€€ã€€ã€€ã€€==//
+//==ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€==//
+//==å„ä½å¤§å“¥å¤§å§è½‰è¼‰è«‹ä¿ç•™ä»¥ä¸Šï¼Œè¬åˆ†æ„Ÿæ¿€ã€‚ã€€ã€€ã€€ã€€ã€€==//
 //====================================================//
 //====================================================//
-que_temsky.gat, 94, 95, 6	script	ªü§b¤u¦K	63,{
+que_temsky.gat, 94, 95, 6	script	é˜¿å‘†å·¥åŒ 	63,{
 
 set .@menu, select(
-    "^FF0000ºë·Ò¸Ë³Æ^000000",
-    "^0000FF¿@ÁY¯«¾Tºë½m¸Ë³Æ^000000",
-    "­×²z¸Ë³Æ",
-    "©î°£¥d¤ù",
-    "¤p¯«¾T´«¤j¯«¾T",
-    "¿ïÁÊ§÷®Æ"
+    "^FF0000ç²¾ç…‰è£å‚™^000000",
+    "^0000FFæ¿ƒç¸®ç¥é‹ç²¾ç·´è£å‚™^000000",
+    "ä¿®ç†è£å‚™",
+    "æ‹†é™¤å¡ç‰‡",
+    "å°ç¥é‹æ›å¤§ç¥é‹",
+    "é¸è³¼ææ–™"
 );
 
 switch(.@menu) {
@@ -45,10 +45,10 @@ switch(.@menu) {
 end;
 
 OnInit:
-    set .npcname$, "[ªü§b¤u¦K]";
+    set .npcname$, "[é˜¿å‘†å·¥åŒ ]";
     setarray $@TRANS_SELECT_TEXT$,
-        "ÀY¤W", "ÀY¤¤", "ÀY¤U", "¦çªA", "¥ª¤âªZ¾¹",
-        "¥k¤â¬ŞµP", "©ÜªÓ", "¾c¤l", "¹¢«~1", "¹¢«~2";
+        "é ­ä¸Š", "é ­ä¸­", "é ­ä¸‹", "è¡£æœ", "å·¦æ‰‹æ­¦å™¨",
+        "å³æ‰‹ç›¾ç‰Œ", "æŠ«è‚©", "é‹å­", "é£¾å“1", "é£¾å“2";
     setarray $@TRANS_SELECT_VALUE,
         EQI_HEAD_TOP, EQI_HEAD_MID, EQI_HEAD_LOW, EQI_ARMOR, EQI_HAND_L,
         EQI_HAND_R, EQI_GARMENT, EQI_SHOES, EQI_ACC_L, EQI_ACC_R;
@@ -59,33 +59,33 @@ OnInit:
 
 function	script	RefineMain	{
 	mes .npcname$;
-	mes "½Ğ¿ï¾Ü±z­nºë·Òªºª««~¿ï¶µ¡C";
+	mes "è«‹é¸æ“‡æ‚¨è¦ç²¾ç…‰çš„ç‰©å“é¸é …ã€‚";
 	next;
     set .@RItem, $@TRANS_SELECT_VALUE[select(callfunc("GetRefineSelectMenu")) - 1];
 
 	if ( getequipisequiped(.@RItem) == 0 ) {
         mes .npcname$;
-        mes "±zÁÙ¨S¦³¸Ë³Æ­nºë·Òª««~­ò!";
+        mes "æ‚¨é‚„æ²’æœ‰è£å‚™è¦ç²¾ç…‰ç‰©å“å”·!";
         close;
     }
 	if ( getequipisenableref(.@RItem) == 0 ) {
         mes .npcname$;
-        mes "³o­Óª««~¬OµLªkºë·Òªº­ò!";
+        mes "é€™å€‹ç‰©å“æ˜¯ç„¡æ³•ç²¾ç…‰çš„å”·!";
         close;
     }
 	if ( getequiprefinerycnt(.@RItem) >= 20 ) {
         mes .npcname$;
-        mes "³o­Óª««~¤w¸gºë·Ò¨ì³Ì°ªµ¥¯Å¤F­ò!";
+        mes "é€™å€‹ç‰©å“å·²ç¶“ç²¾ç…‰åˆ°æœ€é«˜ç­‰ç´šäº†å”·!";
         close;
     }
 
-    // ¾T¡B¤@¯Å±j¤Æ¡B¤G¯Å±j¤Æ¡B¯«¤§ª÷Äİ¡B¯«¤§ª÷Äİ
+    // é‹ã€ä¸€ç´šå¼·åŒ–ã€äºŒç´šå¼·åŒ–ã€ç¥ä¹‹é‡‘å±¬ã€ç¥ä¹‹é‡‘å±¬
     setarray .@normal, 985, 1010, 1011, 984, 984;
-    // ¿@ÁY¾T¡B¿@ÁY¯«¤§ª÷Äİ
+    // æ¿ƒç¸®é‹ã€æ¿ƒç¸®ç¥ä¹‹é‡‘å±¬
     setarray .@advance, 7619, 7620, 7620, 7620, 7620;
     setarray .@cost, 20000, 500, 2000, 25000, 50000;
     setarray .@extra_rates, 0, 5;
-    set .@mode, getarg(0); // .@mode = 1: ¤@¯ë; .@mode = 2: ¿@ÁY
+    set .@mode, getarg(0); // .@mode = 1: ä¸€èˆ¬; .@mode = 2: æ¿ƒç¸®
     set .@extra_rate, .@extra_rates[.@mode - 1];
     set .@weapon_level, getequipweaponlv(.@RItem);
 	switch(.@mode) {
@@ -99,35 +99,35 @@ function	script	RefineMain	{
             break;
     }
 
-	mes .npcname$ + "[^0000FF­pºâ¾÷^000000][^FF0000" + (getequippercentrefinery(.@RItem) + .@extra_rate) + "%^000000]";
-	mes "[^0000FF¨¾Ãz¤ô´¹^000000¼Æ¶q¬°^FF0000" + countitem(20001) + "^000000­Ó]";
-	mes "ºë·Ò ^0000FF" + getequipname(.@RItem) + "^000000 ³o¶µª««~";
-	mes "»İ­n ^FF0000" + getitemname(.@Item) + " 1^000000 ­Ó";
-	mes "¡@©M ^FF0000ª÷¿ú " + .@Zeny + "^000000 z";
+	mes .npcname$ + "[^0000FFè¨ˆç®—æ©Ÿ^000000][^FF0000" + (getequippercentrefinery(.@RItem) + .@extra_rate) + "%^000000]";
+	mes "[^0000FFé˜²çˆ†æ°´æ™¶^000000æ•¸é‡ç‚º^FF0000" + countitem(20001) + "^000000å€‹]";
+	mes "ç²¾ç…‰ ^0000FF" + getequipname(.@RItem) + "^000000 é€™é …ç‰©å“";
+	mes "éœ€è¦ ^FF0000" + getitemname(.@Item) + " 1^000000 å€‹";
+	mes "ã€€å’Œ ^FF0000é‡‘éŒ¢ " + .@Zeny + "^000000 z";
 	next;
 
-	if (select("¬Oªº!", "¤£¤F!") == 2) {
+	if (select("æ˜¯çš„!", "ä¸äº†!") == 2) {
         close;
     }
 
     if ( (getequippercentrefinery(.@RItem) + .@extra_rate) < 100 ) {
         mes .npcname$;
-        mes "ª««~¤w¸g¹F¨ì¥¦ªº^FF0000¦w©w­È^000000¡A";
-        mes "Ä~Äòºë·Ò¥i¯à·|¨Ï¸Ë³Æ·lÃa¡A";
-        mes "§Y¨Ï³o¼Ë±zÁÙ­nÄ~Äòºë·Ò¶Ü¡H";
+        mes "ç‰©å“å·²ç¶“é”åˆ°å®ƒçš„^FF0000å®‰å®šå€¼^000000ï¼Œ";
+        mes "ç¹¼çºŒç²¾ç…‰å¯èƒ½æœƒä½¿è£å‚™æå£ï¼Œ";
+        mes "å³ä½¿é€™æ¨£æ‚¨é‚„è¦ç¹¼çºŒç²¾ç…‰å—ï¼Ÿ";
         next;
-        if (select("¬Oªº!", "¤£¤F!") == 2) {
+        if (select("æ˜¯çš„!", "ä¸äº†!") == 2) {
             close;
         }
     }
-    mes "[ªü§b¤u¦K][^0000FF­pºâ¾÷^000000][^FF0000" + (getequippercentrefinery(.@RItem) + .@extra_rate) + "%^000000]";
-    mes "Ãò¡IÃò¡IÃò¡I";
+    mes "[é˜¿å‘†å·¥åŒ ][^0000FFè¨ˆç®—æ©Ÿ^000000][^FF0000" + (getequippercentrefinery(.@RItem) + .@extra_rate) + "%^000000]";
+    mes "é˜ï¼é˜ï¼é˜ï¼";
     next;
 
 Refine_Ing:
     if ( countitem(.@Item) < 1 || Zeny < .@Zeny ) {
         mes .npcname$;
-        mes "©êºp±z¨­¤Wªºª««~¤£¨¬!";
+        mes "æŠ±æ­‰æ‚¨èº«ä¸Šçš„ç‰©å“ä¸è¶³!";
         close;
     }
 
@@ -137,36 +137,36 @@ Refine_Ing:
     if ( (getequippercentrefinery(.@RItem) + .@extra_rate) >= rand(100) ) {
         successrefitem(.@RItem);
         if ( getequiprefinerycnt(.@RItem) < 20 ) {
-            set .@RStr$, "½Ğ°İ";
-            mes .npcname$ + "[^0000FF­pºâ¾÷^000000][^FF0000" + (getequippercentrefinery(.@RItem) + .@extra_rate) + "%^000000]";
-            mes "[^0000FF¨¾Ãz¤ô´¹^000000¼Æ¶q¬°^FF0000" + countitem(20001) + "^000000­Ó]";
+            set .@RStr$, "è«‹å•";
+            mes .npcname$ + "[^0000FFè¨ˆç®—æ©Ÿ^000000][^FF0000" + (getequippercentrefinery(.@RItem) + .@extra_rate) + "%^000000]";
+            mes "[^0000FFé˜²çˆ†æ°´æ™¶^000000æ•¸é‡ç‚º^FF0000" + countitem(20001) + "^000000å€‹]";
             if ( (getequippercentrefinery(.@RItem) + .@extra_rate) != 100 ) {
-                mes "ª««~¤w¸g¹F¨ì¥¦ªº^FF0000¦w©w­È^000000¡A";
-                mes "Ä~Äòºë·Ò¥i¯à·|¨Ï¸Ë³Æ·lÃa¡A";
-                set .@RStr$, "§Y¨Ï³o¼Ë";
+                mes "ç‰©å“å·²ç¶“é”åˆ°å®ƒçš„^FF0000å®‰å®šå€¼^000000ï¼Œ";
+                mes "ç¹¼çºŒç²¾ç…‰å¯èƒ½æœƒä½¿è£å‚™æå£ï¼Œ";
+                set .@RStr$, "å³ä½¿é€™æ¨£";
             }
-            mes .@RStr$ + "±zÁÙ­nÄ~Äòºë·Ò¶Ü¡H";
+            mes .@RStr$ + "æ‚¨é‚„è¦ç¹¼çºŒç²¾ç…‰å—ï¼Ÿ";
             next;
-            if (select("¬Oªº!", "¤£¤F!") == 1) {
+            if (select("æ˜¯çš„!", "ä¸äº†!") == 1) {
                 goto Refine_Ing;
             }
         }
         mes .npcname$;
-        mes "®¥³ß±zª««~¤wºë·Ò¦¨¥\¤F!";
+        mes "æ­å–œæ‚¨ç‰©å“å·²ç²¾ç…‰æˆåŠŸäº†!";
         close;
     } else {
         if ( countitem(20001) != 0 ) {
             delitem 20001,1;
             specialeffect2 155;
             mes .npcname$;
-            mes "­ì¨Ó¬O¨¾Ãz¤ô´¹ªü!";
-            mes "¨º³o¦¸¥¢±Ñ¤]¨SÃö«Y¤F.";
+            mes "åŸä¾†æ˜¯é˜²çˆ†æ°´æ™¶é˜¿!";
+            mes "é‚£é€™æ¬¡å¤±æ•—ä¹Ÿæ²’é—œä¿‚äº†.";
             close;
         }
         specialeffect2 155;
         failedrefitem .@RItem;
         mes .npcname$;
-        mes "©êºp±zªºª««~ºë·Ò¥¢±Ñ¤F!";
+        mes "æŠ±æ­‰æ‚¨çš„ç‰©å“ç²¾ç…‰å¤±æ•—äº†!";
         close;
     }
 }
@@ -176,10 +176,10 @@ Refine_Ing:
 function	script	Repair	{
 
 	mes .npcname$;
-	mes"½Ğ¿ï¾Ü±z­n­×²zªºª««~¿ï¶µ¡C";
+	mes"è«‹é¸æ“‡æ‚¨è¦ä¿®ç†çš„ç‰©å“é¸é …ã€‚";
 	next;
 	if ( getbrokenid(1) == NULL ) {	mes .npcname$;
-					mes "±z¨S¦³¥ô¦ó¨ü·lªºª««~­ò!";
+					mes "æ‚¨æ²’æœ‰ä»»ä½•å—æçš„ç‰©å“å”·!";
 					close;	}
 
 	set .@RepItem,select(getitemname(getbrokenid(1)),getitemname(getbrokenid(2)),
@@ -190,24 +190,24 @@ function	script	Repair	{
 
 	if ( getbrokenid(.@RepItem) == NULL ) {	close;	}
 	mes .npcname$;
-	mes "­×²z ^0000FF"+getitemname(getbrokenid(.@RepItem))+"^000000 ³o¶µª««~";
-	mes "»İ­n ^FF0000¿ûÅK     1^000000 ­Ó";
-	mes "¡@©M ^FF0000ª÷¿ú 10000^000000 z";
+	mes "ä¿®ç† ^0000FF"+getitemname(getbrokenid(.@RepItem))+"^000000 é€™é …ç‰©å“";
+	mes "éœ€è¦ ^FF0000é‹¼éµ     1^000000 å€‹";
+	mes "ã€€å’Œ ^FF0000é‡‘éŒ¢ 10000^000000 z";
 	next;
-	if (select("¬Oªº!","¤£¤F!")==2) {
+	if (select("æ˜¯çš„!","ä¸äº†!")==2) {
 					close;
 					}
 	if ( countitem(999) < 1 || Zeny < 10000 ) {	mes .npcname$;
-							mes "©êºp±z¨­¤Wªºª««~¤£¨¬!";
+							mes "æŠ±æ­‰æ‚¨èº«ä¸Šçš„ç‰©å“ä¸è¶³!";
 							close;	}
 	delitem 999,1;
 	set Zeny,Zeny - 10000;
 	repair(.@RepItem);
 	mes .npcname$;
-	mes"Ãò¡IÃò¡IÃò¡I";
+	mes"é˜ï¼é˜ï¼é˜ï¼";
 	next;
 	mes .npcname$;
-	mes"®¥³ß±zª««~¤w­×²z§¹¦¨¤F!";
+	mes"æ­å–œæ‚¨ç‰©å“å·²ä¿®ç†å®Œæˆäº†!";
 	close;
 }
 
@@ -216,36 +216,36 @@ function	script	Repair	{
 function	script	CardMain	{
 
 	mes .npcname$;
-	mes"½Ğ¿ï¾Ü±z­n©î°£ªºª««~¿ï¶µ¡C";
+	mes"è«‹é¸æ“‡æ‚¨è¦æ‹†é™¤çš„ç‰©å“é¸é …ã€‚";
 	next;
 	set .@CardPart,select(getequipname(1),getequipname(2),getequipname(3),getequipname(4),
 				getequipname(5),getequipname(6),getequipname(7),getequipname(8),
 				getequipname(9),getequipname(10));
 
 	if ( getequipcardcnt(.@CardPart) == 0 )	{	mes .npcname$;
-							mes "³o­Óª««~¨Ã¨S¦³´¡¤W¥d¤ù­ò!";
+							mes "é€™å€‹ç‰©å“ä¸¦æ²’æœ‰æ’ä¸Šå¡ç‰‡å”·!";
 							close;	}
 	set .@CardCount,getequipcardcnt(.@CardPart);
 	mes .npcname$;
-	mes "©î°£ ^0000FF"+getequipname(.@CardPart)+"^000000 ¤Wªº¥d¤ù¡A";
-	mes "»İ­n ^FF0000ª÷¿ú "+(1000000+(.@CardCount*250000))+"^000000 z";
-	mes "¡@©M ^FF0000¿ûÅK¡@¡@5^000000 ­Ó";
+	mes "æ‹†é™¤ ^0000FF"+getequipname(.@CardPart)+"^000000 ä¸Šçš„å¡ç‰‡ï¼Œ";
+	mes "éœ€è¦ ^FF0000é‡‘éŒ¢ "+(1000000+(.@CardCount*250000))+"^000000 z";
+	mes "ã€€å’Œ ^FF0000é‹¼éµã€€ã€€5^000000 å€‹";
 	next;
-	if (select("¬Oªº!","¤£¤F!")==2) {
+	if (select("æ˜¯çš„!","ä¸äº†!")==2) {
 					close;
 					}
 	if ( zeny < (1000000+(.@CardCount*250000)) || 
 				countitem(999) < 5  ) {	mes .npcname$;
-								mes "©êºp±z¨­¤Wªºª««~¤£¨¬!";
+								mes "æŠ±æ­‰æ‚¨èº«ä¸Šçš„ç‰©å“ä¸è¶³!";
 								close;	}
 	delitem 999,5;
 	set zeny,zeny - (1000000+(.@CardCount*250000));
 	successremovecards .@CardPart;
 	mes .npcname$;
-	mes"Ãò¡IÃò¡IÃò¡I";
+	mes"é˜ï¼é˜ï¼é˜ï¼";
 	next;
 	mes .npcname$;
-	mes"®¥³ß±z©î°£¥d¤ù¤w§¹¦¨¤F!";
+	mes"æ­å–œæ‚¨æ‹†é™¤å¡ç‰‡å·²å®Œæˆäº†!";
 	close;
 }
 
@@ -254,60 +254,60 @@ function	script	CardMain	{
 function	script	ShopMain	{
 
 	mes .npcname$;
-	mes"½Ğ¿ï¾Ü±z­nÁÊ¶Rªºª««~¿ï¶µ¡C";
+	mes"è«‹é¸æ“‡æ‚¨è¦è³¼è²·çš„ç‰©å“é¸é …ã€‚";
 	next;
-	switch(select("ÁëªvÅK¯z","Áëªvª««~","±j¤Æª÷Äİ")) {
+	switch(select("é›æ²»éµç §","é›æ²»ç‰©å“","å¼·åŒ–é‡‘å±¬")) {
 case 1:
-	switch(select("ÅK¯z","¯«¤§ª÷ÄİÅK¯z","¶Àª÷ÅK¯z")) {
+	switch(select("éµç §","ç¥ä¹‹é‡‘å±¬éµç §","é»ƒé‡‘éµç §")) {
 	case 1:	set .@SItem,986;	set .@SZeny,3000;	goto Shop_Item;
 	case 2:	set .@SItem,987;	set .@SZeny,120000;	goto Shop_Item;
 	case 3:	set .@SItem,988;	set .@SZeny,300000;	goto Shop_Item;	}
 case 2:
-	switch(select("Äâ±a¥Îº²ÄqÄl","¿ûÅKÁè¤l","¶Àª÷Áè¤l","¯«¤§ª÷ÄİÁè¤l")) {
+	switch(select("æ”œå¸¶ç”¨ç†”ç¤¦çˆ","é‹¼éµéŒ˜å­","é»ƒé‡‘éŒ˜å­","ç¥ä¹‹é‡‘å±¬éŒ˜å­")) {
 	case 1:	set .@SItem,612;	set .@SZeny,150;	goto Shop_Item;
 	case 2:	set .@SItem,613;	set .@SZeny,1000;	goto Shop_Item;
 	case 3:	set .@SItem,614;	set .@SZeny,3000;	goto Shop_Item;
 	case 4:	set .@SItem,615;	set .@SZeny,5000;	goto Shop_Item;	}
 case 3:
-	switch(select("±j¤ÆªZ¾¹ª÷Äİ-¯Å¼Æ¤@","±j¤ÆªZ¾¹ª÷Äİ-¯Å¼Æ¤G")) {
+	switch(select("å¼·åŒ–æ­¦å™¨é‡‘å±¬-ç´šæ•¸ä¸€","å¼·åŒ–æ­¦å™¨é‡‘å±¬-ç´šæ•¸äºŒ")) {
 	case 1:	set .@SItem,1010;	set .@SZeny,200;	goto Shop_Item;
 	case 2:	set .@SItem,1011;	set .@SZeny,1000;	goto Shop_Item;	}	}
 
 Shop_Item:
 	mes .npcname$;
-	mes "ÁÊ¶R ^0000FF"+getitemname(.@SItem)+"^000000 ³o¶µª««~¡A";
-	mes "»İ­n ^FF0000ª÷¿ú "+.@SZeny+"^000000 z";
-	mes "¡@";
-	mes "¼Æ¶q¡GMin 1 ­Ó¡AMax 100 ­Ó¡I";
+	mes "è³¼è²· ^0000FF"+getitemname(.@SItem)+"^000000 é€™é …ç‰©å“ï¼Œ";
+	mes "éœ€è¦ ^FF0000é‡‘éŒ¢ "+.@SZeny+"^000000 z";
+	mes "ã€€";
+	mes "æ•¸é‡ï¼šMin 1 å€‹ï¼ŒMax 100 å€‹ï¼";
 	next;
 	input .@ItemNum;
 	if ( .@ItemNum < 1  || .@ItemNum > 100 ) {	mes .npcname$;
-							mes "±z¿é¤Jªº¼Æ¶q¤£¥¿½T­ò!";
+							mes "æ‚¨è¼¸å…¥çš„æ•¸é‡ä¸æ­£ç¢ºå”·!";
 							close;	}
-	mes "[ªü§b¤u¦K][^0000FF­pºâ¾÷^000000]";
-	mes "ÁÊ¶R ^0000FF"+getitemname(.@SItem)+"^000000 ^0000FF"+.@ItemNum+"^000000 ­Ó¡A";
-	mes "»İ­n ^FF0000ª÷¿ú "+(.@SZeny*.@ItemNum)+"^000000 z";
-	mes "¡@";
-	mes"­pºâ§¹²¦¡I½Ğ°İ±zÁÙ­nÄ~Äò¶Ü¡H";
+	mes "[é˜¿å‘†å·¥åŒ ][^0000FFè¨ˆç®—æ©Ÿ^000000]";
+	mes "è³¼è²· ^0000FF"+getitemname(.@SItem)+"^000000 ^0000FF"+.@ItemNum+"^000000 å€‹ï¼Œ";
+	mes "éœ€è¦ ^FF0000é‡‘éŒ¢ "+(.@SZeny*.@ItemNum)+"^000000 z";
+	mes "ã€€";
+	mes"è¨ˆç®—å®Œç•¢ï¼è«‹å•æ‚¨é‚„è¦ç¹¼çºŒå—ï¼Ÿ";
 	next;
-	switch(select("¬Oªº!","¤£¤F!","­«³]¼Æ¶q","ªğ¦^¿ï³æ")) {
+	switch(select("æ˜¯çš„!","ä¸äº†!","é‡è¨­æ•¸é‡","è¿”å›é¸å–®")) {
 	case 1:	break;
 	case 2:	close;
 	case 3:	goto Shop_Item;
 	case 4:	callfunc "ShopMain";	end;	}
 	if ( zeny < (.@SZeny*.@ItemNum) ) {		mes .npcname$;
-							mes "©êºp±z¨­¤Wªºª÷¿ú¤£¨¬!";
+							mes "æŠ±æ­‰æ‚¨èº«ä¸Šçš„é‡‘éŒ¢ä¸è¶³!";
 							close;	}
 	if( checkweight(.@SItem,.@ItemNum)==0 ) {	mes .npcname$;
-							mes "©êºp±z¨­¤WªºªÅ¶¡¤£¨¬!";
+							mes "æŠ±æ­‰æ‚¨èº«ä¸Šçš„ç©ºé–“ä¸è¶³!";
 							close;	}
 	set Zeny,Zeny - (.@SZeny*.@ItemNum);
 	getitem .@SItem,.@ItemNum;
 	mes .npcname$;
-	mes"Ãò¡IÃò¡IÃò¡I";
+	mes"é˜ï¼é˜ï¼é˜ï¼";
 	next;
 	mes .npcname$;
-	mes"®¥³ß±z¿ïÁÊ§÷®Æ¤w§¹¦¨¤F!";
+	mes"æ­å–œæ‚¨é¸è³¼ææ–™å·²å®Œæˆäº†!";
 	close;
 }
 
@@ -315,34 +315,34 @@ Shop_Item:
 
 function	script	Change	{
 	mes .npcname$;
-        mes "^0088FF"+strcharinfo(0)+"^000000±z¦n¡C";
-	mes "½Ğ¿ï¾Ü­n§I´«ªº¿ï¶µ";
+        mes "^0088FF"+strcharinfo(0)+"^000000æ‚¨å¥½ã€‚";
+	mes "è«‹é¸æ“‡è¦å…Œæ›çš„é¸é …";
 	next;
-	switch(select("§I´« ^9933FF¯«¤§ª÷Äİ^000000","§I´« ^9933FF¾T^000000"))
+	switch(select("å…Œæ› ^9933FFç¥ä¹‹é‡‘å±¬^000000","å…Œæ› ^9933FFé‹^000000"))
 	{
 	case 1 : setarray .@data,984,756; break;
 	case 2 : setarray .@data,985,757; break;
 		}
 	mes .npcname$;
-	mes "®@,§A­n´«^9933FF"+getitemname(.@data[0])+"^000000ªü";
-	mes "^993333**§÷®Æ¦p¤U**^000000";
-	mes "[^0000FF"+ getitemname(.@data[1])+"^000000] ^FF00005­Ó^000000";
+	mes "å“¦,ä½ è¦æ›^9933FF"+getitemname(.@data[0])+"^000000é˜¿";
+	mes "^993333**ææ–™å¦‚ä¸‹**^000000";
+	mes "[^0000FF"+ getitemname(.@data[1])+"^000000] ^FF00005å€‹^000000";
 	next;
 	mes .npcname$;
-	mes "^9933335­Ó"+ getitemname(.@data[1]) +"¥i´«1­Ó"+ getitemname(.@data[0]) +"^000000";
-	mes "¨º»ò,§A­n´«¦h¤Ö­Ó^993333"+ getitemname(.@data[0])+"^000000?";
-	mes"[^0000FF"+ getitemname(.@data[1]) +"^000000¦³^FF0000"+countitem(.@data[1])+"^000000­Ó]";
-	mes "^880000(¿é¤J0¨ú®ø)^000000";	
+	mes "^9933335å€‹"+ getitemname(.@data[1]) +"å¯æ›1å€‹"+ getitemname(.@data[0]) +"^000000";
+	mes "é‚£éº¼,ä½ è¦æ›å¤šå°‘å€‹^993333"+ getitemname(.@data[0])+"^000000?";
+	mes"[^0000FF"+ getitemname(.@data[1]) +"^000000æœ‰^FF0000"+countitem(.@data[1])+"^000000å€‹]";
+	mes "^880000(è¼¸å…¥0å–æ¶ˆ)^000000";	
 	next;
 	input .@n;
 	if(.@n == 0) close;
 	if((.@n*5) > countitem(.@data[1]))
 		{
 		mes .npcname$;
-		mes "^FF0000"+.@n+"^000000­Ó?¼Æ¶q¤£¹ï³á";
+		mes "^FF0000"+.@n+"^000000å€‹?æ•¸é‡ä¸å°å–”";
 		close;
 		}
-	switch(select("¤£´«","´«"))
+	switch(select("ä¸æ›","æ›"))
 	{
 	case 1: close; break;
 	case 2: 
@@ -354,7 +354,7 @@ function	script	Change	{
 
 function	script	GetRefineSelectMenu	{
     for (set .@i, 0; .@i < getarraysize($@TRANS_SELECT_TEXT$); set .@i, .@i + 1) {
-        set .@menu$, .@menu$ + "^FF0088[" + $@TRANS_SELECT_TEXT$[.@i] + "] - ^000000" + (getequipname($@TRANS_SELECT_VALUE[.@i]) == "" ? "¨S¦³¸Ë³Æ" : getequipname($@TRANS_SELECT_VALUE[.@i])) + ":";
+        set .@menu$, .@menu$ + "^FF0088[" + $@TRANS_SELECT_TEXT$[.@i] + "] - ^000000" + (getequipname($@TRANS_SELECT_VALUE[.@i]) == "" ? "æ²’æœ‰è£å‚™" : getequipname($@TRANS_SELECT_VALUE[.@i])) + ":";
     }
 
     return .@menu$;

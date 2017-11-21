@@ -1,9 +1,9 @@
 /*
-§@ªÌ: ªü¯«£¾
-­×§ï: Dragon
-§@·~Àô¹Ò: eA¡BSeAr¡BrA
-»¡©ú:        ·|¦Û°Ê·j´MÀ»±şÅ]ª«
-Å]ª«ªºµ¥¯Å½d³ò·|»P¸}¦âµ¥¯Å¬Û®t5(¹w³]:5)
+ä½œè€…: é˜¿ç¥Ë‡
+ä¿®æ”¹: Dragon
+ä½œæ¥­ç’°å¢ƒ: eAã€SeArã€rA
+èªªæ˜:        æœƒè‡ªå‹•æœå°‹æ“Šæ®ºé­”ç‰©
+é­”ç‰©çš„ç­‰ç´šç¯„åœæœƒèˆ‡è…³è‰²ç­‰ç´šç›¸å·®5(é è¨­:5)
 */
 
 function	script	Reward	{
@@ -27,7 +27,7 @@ function	script	Searching	{
             sleep2 1;
         }
 
-        // ¼g¦ºÀH¾÷ ÃÈ¤l ¨ì ³À¨¤¥ÒÂÎ
+        // å¯«æ­»éš¨æ©Ÿ è å­ åˆ° é¹¿è§’ç”²èŸ²
         set .@i, rand(1001, 2085);
 
         if (0 < getmonsterinfo(.@i, MOB_MVPEXP)) {
@@ -59,20 +59,20 @@ function	script	CheckAmount	{
     else return rand(1,5);
 }
 
-fayon, 82, 129,5	script	Å]ª«Ây¤H	844,{
+fayon, 82, 129,5	script	é­”ç‰©çµäºº	844,{
     mes .npcname$;
-    mes "§Ú±N·|¥H§A²{¦bªºµ¥¯Å";
-    mes "¨Ó¤À°t¤u§@µ¹§A¡A§¹¦¨«á·|¦³³ø¹S";
-    mes "^ff0000¡°Lv.90UP ¤£¾A¦X¦¹¥ô°È^000000";
+    mes "æˆ‘å°‡æœƒä»¥ä½ ç¾åœ¨çš„ç­‰ç´š";
+    mes "ä¾†åˆ†é…å·¥ä½œçµ¦ä½ ï¼Œå®Œæˆå¾Œæœƒæœ‰å ±é…¬";
+    mes "^ff0000â€»Lv.90UP ä¸é©åˆæ­¤ä»»å‹™^000000";
     next;
     if(0 == getgmlevel() && (gettimetick(2) - #DAILY_QUESTS_HUNTER_TIMER) < 86400) {
         mes .npcname$;
-        mes "- ©µ¿ğ®É¶¡³Ñ¾l: ^ff0000" + (86400 - (gettimetick(2) - #DAILY_QUESTS_HUNTER_TIMER)) + "^000000 ¬í -";
+        mes "- å»¶é²æ™‚é–“å‰©é¤˜: ^ff0000" + (86400 - (gettimetick(2) - #DAILY_QUESTS_HUNTER_TIMER)) + "^000000 ç§’ -";
         close;
     }
     
     if (MustKill) {
-        if(select(KillPoint >= KillAmount ? "´£¥æ¥ô°È(^888888¥ô°È¤w§¹¦¨^000000)" : "¬d¬İ¥ô°È¤º®e", "©ñ±ó^FF1493'" + getmonsterinfo(MustKill, MOB_NAME) + "'^000000¥ô°È") == 2) {
+        if(select(KillPoint >= KillAmount ? "æäº¤ä»»å‹™(^888888ä»»å‹™å·²å®Œæˆ^000000)" : "æŸ¥çœ‹ä»»å‹™å…§å®¹", "æ”¾æ£„^FF1493'" + getmonsterinfo(MustKill, MOB_NAME) + "'^000000ä»»å‹™") == 2) {
             set MustKill, 0;
             set KillAmount, 0;
             set KillPoint, 0;
@@ -80,14 +80,14 @@ fayon, 82, 129,5	script	Å]ª«Ây¤H	844,{
                 set #DAILY_QUESTS_HUNTER_TIMER, gettimetick(2);
             }
             mes .npcname$;
-            mes "^FF1493¥»¦¸¥ô°È³Q¨ú®ø^000000";
+            mes "^FF1493æœ¬æ¬¡ä»»å‹™è¢«å–æ¶ˆ^000000";
         } else if(KillPoint>=KillAmount){
             mes .npcname$;
-            mes "®¥³ß§A§¹¦¨¥»¦¸ªºÅ]ª«Ây±ş¥ô°È";
-            mes "¥»¦¸Àò±oªº³ø¹S";
-            mes "Base¸gÅç­È ^FF1493"+callfunc("Reward",1)+"^000000";
-            mes "Job¸gÅç­È ^FF1493"+callfunc("Reward",2)+"^000000";
-            mes "CashÂI¼Æ ^FF1493"+callfunc("Reward",3)+"^000000";
+            mes "æ­å–œä½ å®Œæˆæœ¬æ¬¡çš„é­”ç‰©çµæ®ºä»»å‹™";
+            mes "æœ¬æ¬¡ç²å¾—çš„å ±é…¬";
+            mes "Baseç¶“é©—å€¼ ^FF1493"+callfunc("Reward",1)+"^000000";
+            mes "Jobç¶“é©—å€¼ ^FF1493"+callfunc("Reward",2)+"^000000";
+            mes "Cashé»æ•¸ ^FF1493"+callfunc("Reward",3)+"^000000";
             set BaseExp, BaseExp+callfunc("Reward",1);
             set JobExp, JobExp+callfunc("Reward",2);
             set #CASHPOINTS,#CASHPOINTS+callfunc("Reward",3);
@@ -97,30 +97,30 @@ fayon, 82, 129,5	script	Å]ª«Ây¤H	844,{
             set #DAILY_QUESTS_HUNTER_TIMER, gettimetick(2);
         } else {
             mes .npcname$;
-            mes "¥»¦¸ªºÅ]ª«Ây±ş¥ô°È¤º®e";
-            mes "^0088FFÅ]ª«¦WºÙ^000000: ^FF1493"+getmonsterinfo(MustKill, MOB_NAME)+"^000000";
-            mes "^0088FFÅ]ª«µ¥¯Å^000000: ^FF1493"+getmonsterinfo(MustKill, MOB_LV)+"";
-            mes "^0088FF¼Æ¶q^000000:[ ^009900"+KillPoint+"^000000/^FF6600"+KillAmount+"^000000 ]";
+            mes "æœ¬æ¬¡çš„é­”ç‰©çµæ®ºä»»å‹™å…§å®¹";
+            mes "^0088FFé­”ç‰©åç¨±^000000: ^FF1493"+getmonsterinfo(MustKill, MOB_NAME)+"^000000";
+            mes "^0088FFé­”ç‰©ç­‰ç´š^000000: ^FF1493"+getmonsterinfo(MustKill, MOB_LV)+"";
+            mes "^0088FFæ•¸é‡^000000:[ ^009900"+KillPoint+"^000000/^FF6600"+KillAmount+"^000000 ]";
             next;
-            mes "¥»¦¸ªºÅ]ª«Ây±ş¥ô°È¹S³Ò";
-            mes "^0088FFBase¸gÅç­È^000000: ^FF1493"+callfunc("Reward",1)+"^000000";
-            mes "^0088FFJob¸gÅç­È^000000: ^FF1493"+callfunc("Reward",2)+"^000000";
-            mes "^0088FFCashÂI¼Æ^000000: ^FF1493"+callfunc("Reward",3)+"^000000";
+            mes "æœ¬æ¬¡çš„é­”ç‰©çµæ®ºä»»å‹™é…¬å‹";
+            mes "^0088FFBaseç¶“é©—å€¼^000000: ^FF1493"+callfunc("Reward",1)+"^000000";
+            mes "^0088FFJobç¶“é©—å€¼^000000: ^FF1493"+callfunc("Reward",2)+"^000000";
+            mes "^0088FFCashé»æ•¸^000000: ^FF1493"+callfunc("Reward",3)+"^000000";
         }
         close;
     } else {
         set MustKill, callfunc("Searching");
         set KillAmount,callfunc("CheckAmount",getmonsterinfo(MustKill, MOB_LV));
         mes .npcname$;
-        mes "¥»¦¸ªºÅ]ª«Ây±ş¥ô°È¤º®e";
-        mes "^0088FFÅ]ª«¦WºÙ^000000: ^FF1493"+getmonsterinfo(MustKill, MOB_NAME)+"^000000";
-        mes "^0088FFÅ]ª«µ¥¯Å^000000: ^FF1493"+getmonsterinfo(MustKill, MOB_LV)+"";
-        mes "^0088FF¼Æ¶q^000000:[ ^009900"+KillPoint+"^000000/^FF6600"+KillAmount+"^000000 ]";
+        mes "æœ¬æ¬¡çš„é­”ç‰©çµæ®ºä»»å‹™å…§å®¹";
+        mes "^0088FFé­”ç‰©åç¨±^000000: ^FF1493"+getmonsterinfo(MustKill, MOB_NAME)+"^000000";
+        mes "^0088FFé­”ç‰©ç­‰ç´š^000000: ^FF1493"+getmonsterinfo(MustKill, MOB_LV)+"";
+        mes "^0088FFæ•¸é‡^000000:[ ^009900"+KillPoint+"^000000/^FF6600"+KillAmount+"^000000 ]";
         next;
-        mes "¥»¦¸ªºÅ]ª«Ây±ş¥ô°È¹S³Ò";
-        mes "^0088FFBase¸gÅç­È^000000: ^FF1493"+callfunc("Reward",1)+"^000000";
-        mes "^0088FFJob¸gÅç­È^000000: ^FF1493"+callfunc("Reward",2)+"^000000";
-        mes "^0088FFCashÂI¼Æ^000000: ^FF1493"+callfunc("Reward",3)+"^000000";
+        mes "æœ¬æ¬¡çš„é­”ç‰©çµæ®ºä»»å‹™é…¬å‹";
+        mes "^0088FFBaseç¶“é©—å€¼^000000: ^FF1493"+callfunc("Reward",1)+"^000000";
+        mes "^0088FFJobç¶“é©—å€¼^000000: ^FF1493"+callfunc("Reward",2)+"^000000";
+        mes "^0088FFCashé»æ•¸^000000: ^FF1493"+callfunc("Reward",3)+"^000000";
         close;
     }
 
@@ -131,16 +131,16 @@ fayon, 82, 129,5	script	Å]ª«Ây¤H	844,{
         }
         end;
     OnInit:
-	waitingroom "¥´©Ç¥ô°È",0;
+	waitingroom "æ‰“æ€ªä»»å‹™",0;
         set .npcname$, "[" + strnpcinfo(0) + "]";
-        set $@MAX_LEVEL, 110; // ­pºâ©Çª«³Ì°ªµ¥¯Å°ò·Ç
-        set $@MAX_LEVEL_RANGE, 5; // ©Çª«³Ì°ªµ¥¯Å½d³ò
-        set $@MIN_LEVEL_RANGE, 10; // ©Çª«³Ì¤pµ¥¯Å½d³ò
+        set $@MAX_LEVEL, 110; // è¨ˆç®—æ€ªç‰©æœ€é«˜ç­‰ç´šåŸºæº–
+        set $@MAX_LEVEL_RANGE, 5; // æ€ªç‰©æœ€é«˜ç­‰ç´šç¯„åœ
+        set $@MIN_LEVEL_RANGE, 10; // æ€ªç‰©æœ€å°ç­‰ç´šç¯„åœ
 
-        set $@BASE_RATE, 5; // Base ¸gÅç­¿²v
-        set $@JOB_RATE, 5; // Job ¸gÅç­¿²v
+        set $@BASE_RATE, 5; // Base ç¶“é©—å€ç‡
+        set $@JOB_RATE, 5; // Job ç¶“é©—å€ç‡
         logmes $@MAX_LEVEL_RANGE + "1234";
-        // Á×§K·j´M¨ìªºÅ]ª« (¨Ò: µØÄRª÷Äİ)
-        setarray $@exception$, "¯u´¹", "¬µ¼u", "¸t½Ï", "¦×ºê", "Ä_½c", "½c¤l", "Ä_ª«½c¤l", "ºX¼m", "¦uÅ@¥Û", "¨¾¿m½u", "¤ô´¹", "µØÄRª÷Äİ", "¶}Ãö";
+        // é¿å…æœå°‹åˆ°çš„é­”ç‰© (ä¾‹: è¯éº—é‡‘å±¬)
+        setarray $@exception$, "çœŸæ™¶", "ç‚¸å½ˆ", "è–èª•", "è‚‰ç²½", "å¯¶ç®±", "ç®±å­", "å¯¶ç‰©ç®±å­", "æ——å¹Ÿ", "å®ˆè­·çŸ³", "é˜²ç¦¦ç·š", "æ°´æ™¶", "è¯éº—é‡‘å±¬", "é–‹é—œ";
         end;
 }
