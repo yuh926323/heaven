@@ -28,7 +28,7 @@ fayon, 93, 123, 4	script	物品回收人員	496,{
 
     if(.@n > countitem(.@item[.@a])) {
         mes "[物品回收人員]";
-        mes "^FF0000" + .@n + "^000000個？不對喔∼";
+        mes "^FF0000" + .@n + "^000000個？不對喔～";
         mes "你身上的^0000FF" + getitemname(.@item[.@a]) + "^000000應該只有^FF0000" + countitem(.@item[.@a]) + "^000000個";
         close;
     }
