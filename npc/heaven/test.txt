@@ -1,5 +1,0 @@
-fayon, 82, 120,5	script	測試utf8	844,{
-    mes "這是 unix, utf-8 檔案";
-    mes "想確認中文沒問題";
-    close;
-}
