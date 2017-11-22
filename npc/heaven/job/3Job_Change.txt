@@ -1,4 +1,4 @@
-//--------------------------------------------------//
+﻿//--------------------------------------------------//
 //--------------------------------------------------//
 //	名稱:	職業服務員
 //	版本:	v2.0
@@ -177,5 +177,66 @@ function	script	Job3_Change	{
 	Job3_Done:
 		mes "[職業服務員]";
 		mes "轉職已經順利完成!";
+		getitem 2795,1; // 青蘋果戒指
+		switch(BaseJob)
+		{
+		case Job_Knight:
+			getitem 5746,1; // 符文 頭環
+			break;
+	
+		case Job_Hunter:
+			getitem 5748,1; // 狙擊手 護目鏡
+			getitem 6124,1; // 狼笛
+			break;
+
+		case Job_Priest:
+			getitem 5747,1; // 聖冠
+			break;
+
+		case Job_Wizard:
+			getitem 5753,1; // 魔力之 石 帽子
+			break;
+
+		case Job_Blacksmith:
+			if(Sex)
+    			getitem 5749,1; // 駕駛員 頭帶
+    			else
+    			getitem 5760,1; // 駕駛員 頭帶
+			break;
+
+		case Job_Assassin:
+			getitem 5755,1; // 沉默 執行者
+			break;
+
+		case Job_Crusader:
+			getitem 5757,1; // 覆面 施密特 頭盔
+			break;
+
+		case Job_Bard:
+			getitem 5751,1; // 宮廷樂師 宋的 帽子
+			break;
+
+		case Job_Dancer:
+			getitem 5758,1; // 瀕死的天鵝
+			break;
+
+		case Job_Monk:
+			getitem 5754,1; // 燃燒的 靈魂
+			break;
+
+		case Job_Sage:
+			getitem 5756,1; // 風之 低語
+			break;
+
+		case Job_Alchemist:
+			getitem 5752,1; // 麥得斯的 低語
+			break;
+
+		case Job_Rogue:
+			getitem 6121,1; // 化妝刷
+			getitem 6122,1; // 毛刷
+			getitem 5750,1; // 影子 工藝
+			break;
+	}
 		close;	
 }
