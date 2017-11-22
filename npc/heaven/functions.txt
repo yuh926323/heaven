@@ -48,3 +48,8 @@ function	script	IP	{
 	close;}
 	
 }
+
+fayon,90,120,1	script	test1234	512,{
+    mes SC_INCREASEAGI;
+    close;
+}
