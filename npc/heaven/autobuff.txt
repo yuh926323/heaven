@@ -1,0 +1,10 @@
+fayon,83,123,0	script	buff	-1,4,4,{
+	end;
+OnTouch:
+	percentheal 100,100;
+	skilleffect 29,0; sc_start SC_INCREASEAGI,1800000,10;
+	skilleffect 34,0; sc_start SC_BLESSING,1800000,10;
+	skilleffect 361,0; sc_start SC_ASSUMPTIO,180000,5; 
+	close;
+
+}
