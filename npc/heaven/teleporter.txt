@@ -20,7 +20,7 @@ OnInit:
     end;
 }
 
-function	script warpFeatue	{
+function	script	warpFeatue	{
     next;
     switch( select("商店街") ) {
         case 1:
@@ -30,7 +30,7 @@ function	script warpFeatue	{
     end;
 }
 
-function	script warpCity	{
+function	script	warpCity	{
     next;
     switch( select(
             "普隆德拉","依斯魯德","吉芬","夢羅克","斐揚",
@@ -78,7 +78,7 @@ function	script warpCity	{
     end;
 }
 
-function	script warpDungeon	{
+function	script	warpDungeon	{
     next;
     switch( select("迷藏森林","普隆德拉地下水道","海底洞窟","史芬克斯密穴","金字塔迷宮","螞蟻地獄密穴","吉芬塔地下密穴",
         "妙勒尼廢棄礦場","克雷斯特漢姆古城","獸人地下洞窟","裴揚迷宮","沉沒之船","艾爾帕蘭鍾塔","龜島","玩具工廠",
