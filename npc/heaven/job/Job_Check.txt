@@ -1,32 +1,32 @@
 //--------------------------------------------------//
 //--------------------------------------------------//
-//	�W��:	¾�~�A�ȭ�
-//	����:	v2.0
-//	�ۮe:	rAthena Project, SeAr
-//	���:	2015/08/27
-//	�s�@:	iisnowred(���ީ]��)
-//	��U:	
-//	�n��:	�ЫO�d�H�W�X�B�A����
+//	名稱:	職業服務員
+//	版本:	v2.0
+//	相容:	rAthena Project, SeAr
+//	日期:	2015/08/27
+//	製作:	iisnowred(風萌夜雪)
+//	協助:	
+//	聲明:	請保留以上出處，謝謝
 //--------------------------------------------------//
 //--------------------------------------------------//
 
-//�˴��O�_�ŦX��¾����
-//�Цۦ�����p�ק��������¾�����˴�����
-//�w�]����P�x��]�w�ۦP
+//檢測是否符合轉職條件
+//請自行視情況修改或關閉轉職條件檢測項目
+//預設條件與官方設定相同
 
 function	script	Job_Check	{
 
-	//��ߪ�
+	//初心者
 	if ( Class == 0 || Class == 4001 ) {
 		if ( JobLevel < 10 ) {
-			mes "[¾�~�A�ȭ�]";
-			mes "�ݭn�F��¾�~����^FF000010��^000000�~��i����¾!";
+			mes "[職業服務員]";
+			mes "需要達到職業等級^FF000010級^000000才能進行轉職!";
 			close;
 		}
 		if ( $@SkPt_Check == 1 ){
 			if ( SkillPoint > 0 ) {
-				mes "[¾�~�A�ȭ�]";
-				mes "���Ѿl���ޯ��I�ƮɵL�k�i����¾!";
+				mes "[職業服務員]";
+				mes "有剩餘的技能點數時無法進行轉職!";
 				close;
 			}
 		}
@@ -34,17 +34,17 @@ function	script	Job_Check	{
 		end;	
 	}
 
-	//�@��¾�B�i���@��¾�ζ`���a
+	//一轉職、進階一轉職及跆拳家
 	if (( Class >= 1 && Class <= 6 ) || ( Class >= 4002 && Class <= 4007 ) || ( Class == 4046 )) {
 		if ( JobLevel < 40 ) {
-			mes "[¾�~�A�ȭ�]";
-			mes "�ݭn�F��¾�~����^FF000040��^000000�ΥH�W�~��i����¾!";
+			mes "[職業服務員]";
+			mes "需要達到職業等級^FF000040級^000000或以上才能進行轉職!";
 			close;
 		}
 		if ( $@SkPt_Check == 1 ){
 			if ( SkillPoint > 0 ) {
-				mes "[¾�~�A�ȭ�]";
-				mes "���Ѿl���ޯ��I�ƮɵL�k�i����¾!";
+				mes "[職業服務員]";
+				mes "有剩餘的技能點數時無法進行轉職!";
 				close;
 			}
 		}
@@ -52,22 +52,22 @@ function	script	Job_Check	{
 		end;	
 	}
 	
-	//�G��¾
+	//二轉職
 	if (( Class >= 7 && Class <= 12 ) || ( Class >= 14 && Class <= 20 )) {
 		if ( BaseLevel < 99 ) {
-			mes "[¾�~�A�ȭ�]";
-			mes "�ݭn�F��򥻵���^FF000099��^000000�~��i����¾!";
+			mes "[職業服務員]";
+			mes "需要達到基本等級^FF000099級^000000才能進行轉職!";
 			close;
 		}
 		if ( JobLevel < 50 ) {
-			mes "[¾�~�A�ȭ�]";
-			mes "�ݭn�F��¾�~����^FF000050��^000000�~��i����¾!";
+			mes "[職業服務員]";
+			mes "需要達到職業等級^FF000050級^000000才能進行轉職!";
 			close;
 		}
 		if ( $@SkPt_Check == 1 ){
 			if ( SkillPoint > 0 ) {
-				mes "[¾�~�A�ȭ�]";
-				mes "���Ѿl���ޯ��I�ƮɵL�k�i����¾!";
+				mes "[職業服務員]";
+				mes "有剩餘的技能點數時無法進行轉職!";
 				close;
 			}
 		}
@@ -75,22 +75,22 @@ function	script	Job_Check	{
 		end;
 	}
 	
-	//�i���G��¾
+	//進階二轉職
 	if (( Class >= 4008 && Class <= 4013 ) || ( Class >= 4015 && Class <= 4021 )) {
 		if ( BaseLevel < 99 ) {
-			mes "[¾�~�A�ȭ�]";
-			mes "�ݭn�F��򥻵���^FF000099��^000000�~��i����¾!";
+			mes "[職業服務員]";
+			mes "需要達到基本等級^FF000099級^000000才能進行轉職!";
 			close;
 		}
 		if ( JobLevel < 50 ) {
-			mes "[¾�~�A�ȭ�]";
-			mes "�ݭn�F��¾�~����^FF000050��^000000�ΥH�W�~��i����¾!";
+			mes "[職業服務員]";
+			mes "需要達到職業等級^FF000050級^000000或以上才能進行轉職!";
 			close;
 		}
 		if ( $@SkPt_Check == 1 ){
 			if ( SkillPoint > 0 ) {
-				mes "[¾�~�A�ȭ�]";
-				mes "���Ѿl���ޯ��I�ƮɵL�k�i����¾!";
+				mes "[職業服務員]";
+				mes "有剩餘的技能點數時無法進行轉職!";
 				close;
 			}
 		}
@@ -98,22 +98,22 @@ function	script	Job_Check	{
 		end;
 	}
 	
-	//�W�Ū�ߪ�
+	//超級初心者
 	if ( Class == 23 ) {
 		if ( BaseLevel < 99 ) {
-			mes "[¾�~�A�ȭ�]";
-			mes "�ݭn�F��򥻵���^FF000099��^000000�~��i�浥���X�R!";
+			mes "[職業服務員]";
+			mes "需要達到基本等級^FF000099級^000000才能進行等級擴充!";
 			close;
 		}
 		if ( JobLevel < 99 ) {
-			mes "[¾�~�A�ȭ�]";
-			mes "�ݭn�F��¾�~����^FF000099��^000000�~��i�浥���X�R!";
+			mes "[職業服務員]";
+			mes "需要達到職業等級^FF000099級^000000才能進行等級擴充!";
 			close;
 		}
 		if ( $@SkPt_Check == 1 ){
 			if ( SkillPoint > 0 ) {
-				mes "[¾�~�A�ȭ�]";
-				mes "���Ѿl���ޯ��I�ƮɵL�k�i�浥���X�R!";
+				mes "[職業服務員]";
+				mes "有剩餘的技能點數時無法進行等級擴充!";
 				close;
 			}
 		}
@@ -121,22 +121,22 @@ function	script	Job_Check	{
 		end;	
 	}
 
-	//�j��ΧԪ�
+	//槍手及忍者
 	if ( Class == 24 || Class == 25 ) {
 		if ( BaseLevel < 99 ) {
-			mes "[¾�~�A�ȭ�]";
-			mes "�ݭn�F��򥻵���^FF000099��^000000�~��i����¾!";
+			mes "[職業服務員]";
+			mes "需要達到基本等級^FF000099級^000000才能進行轉職!";
 			close;
 		}
 		if ( JobLevel < 70 ) {
-			mes "[¾�~�A�ȭ�]";
-			mes "�ݭn�F��¾�~����^FF000070��^000000�~��i����¾!";
+			mes "[職業服務員]";
+			mes "需要達到職業等級^FF000070級^000000才能進行轉職!";
 			close;
 		}
 		if ( $@SkPt_Check == 1 ){
 			if ( SkillPoint > 0 ) {
-				mes "[¾�~�A�ȭ�]";
-				mes "���Ѿl���ޯ��I�ƮɵL�k�i����¾!";
+				mes "[職業服務員]";
+				mes "有剩餘的技能點數時無法進行轉職!";
 				close;
 			}
 		}
@@ -144,17 +144,17 @@ function	script	Job_Check	{
 		end;	
 	}
 	
-	//�_�_¾�~�ˬd
+	//寶寶職業檢查
 	if ( Class >= 4024 && Class <= 4029 ) {
 		if ( JobLevel < 40 ) {
-			mes "[¾�~�A�ȭ�]";
-			mes "�ݭn�F��¾�~����^FF000040��^000000�ΥH�W�~��i����¾!";
+			mes "[職業服務員]";
+			mes "需要達到職業等級^FF000040級^000000或以上才能進行轉職!";
 			close;
 		}
 		if ( $@SkPt_Check == 1 ){
 			if ( SkillPoint > 0 ) {
-				mes "[¾�~�A�ȭ�]";
-				mes "���Ѿl���ޯ��I�ƮɵL�k�i����¾!";
+				mes "[職業服務員]";
+				mes "有剩餘的技能點數時無法進行轉職!";
 				close;
 			}
 		}
@@ -163,26 +163,26 @@ function	script	Job_Check	{
 	
 	if (( Class >= 4030 && Class <= 4035 ) || ( Class >= 4037 && Class <= 4043 )) {
 		if ( BaseLevel < 99 ) {
-			mes "[¾�~�A�ȭ�]";
-			mes "�ݭn�F��򥻵���^FF000099��^000000�~��i����¾!";
+			mes "[職業服務員]";
+			mes "需要達到基本等級^FF000099級^000000才能進行轉職!";
 			close;
 		}
 		if ( JobLevel < 50 ) {
-			mes "[¾�~�A�ȭ�]";
-			mes "�ݭn�F��¾�~����^FF000050��^000000�~��i����¾!";
+			mes "[職業服務員]";
+			mes "需要達到職業等級^FF000050級^000000才能進行轉職!";
 			close;
 		}
 		if ( $@SkPt_Check == 1 ){
 			if ( SkillPoint > 0 ) {
-				mes "[¾�~�A�ȭ�]";
-				mes "���Ѿl���ޯ��I�ƮɵL�k�i����¾!";
+				mes "[職業服務員]";
+				mes "有剩餘的技能點數時無法進行轉職!";
 				close;
 			}
 		}
 		callfunc "BbJob_Change";
 	}
 	
-	mes "[¾�~�A�ȭ�]";
-	mes "�z��¾�~�w�g����A�i����¾!";
+	mes "[職業服務員]";
+	mes "您的職業已經不能再進行轉職!";
 	close;
 }

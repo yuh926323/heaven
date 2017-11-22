@@ -1,27 +1,27 @@
 //--------------------------------------------------//
 //--------------------------------------------------//
-//	�W��:	¾�~�A�ȭ�
-//	����:	v2.0
-//	�ۮe:	rAthena Project, SeAr
-//	���:	2015/08/27
-//	�s�@:	iisnowred(���ީ]��)
-//	��U:	
-//	�n��:	�ЫO�d�H�W�X�B�A����
+//	名稱:	職業服務員
+//	版本:	v2.0
+//	相容:	rAthena Project, SeAr
+//	日期:	2015/08/27
+//	製作:	iisnowred(風萌夜雪)
+//	協助:	
+//	聲明:	請保留以上出處，謝謝
 //--------------------------------------------------//
 //--------------------------------------------------//
 
-//�@��¾��ۦ���
-//�i���@��¾�|�ھ���ͫe¾�~�۰���¾
+//一轉職能自行選擇
+//進階一轉職會根據轉生前職業自動轉職
 
 function	script	Job1_Change	{
 
-	//�@��¾
+	//一轉職
 	if ( Class == 0 ) {
-		mes "[¾�~�A�ȭ�]";
-		mes "�п�ܷQ�n��¾��¾�~:";
-		mes "����:^FF0000��ͫ�N������¾����L¾�~^000000";
+		mes "[職業服務員]";
+		mes "請選擇想要轉職的職業:";
+		mes "提示:^FF0000轉生後將不能轉職成其他職業^000000";
 		next;
-		switch(select("�C�h","�]�k�v","�}�b��","�A��","�ӤH","�s��","�W�Ū�ߪ�","�j��","�Ԫ�","�`���a")) {
+		switch(select("劍士","魔法師","弓箭手","服事","商人","盜賊","超級初心者","槍手","忍者","跆拳家")) {
 			case 1:
 				jobchange 1;
 				set Job1_History,1;
@@ -46,11 +46,11 @@ function	script	Job1_Change	{
 				jobchange 6;
 				set Job1_History,6;
 				goto Job1_Done;
-			case 7:		//�W�Ū�ߪ̩󥿪A�ݭn�F��45�Ť~����¾
+			case 7:		//超級初心者於正服需要達到45級才能轉職
 				if ( BaseLevel < 45 ) {
-					mes "[¾�~�A�ȭ�]";
-					mes "�Q�n��¾�����W�Ū�ߪ̡A";
-					mes "�ݭn�F��򥻵���^FF000045��^000000�~��i����¾!";
+					mes "[職業服務員]";
+					mes "想要轉職成為超級初心者，";
+					mes "需要達到基本等級^FF000045級^000000才能進行轉職!";
 					close;
 				} else {
 					jobchange 23;
@@ -72,7 +72,7 @@ function	script	Job1_Change	{
 		}
 	}
 
-	//�i���@��¾
+	//進階一轉職
 	if ( Class == 4001 ) {
 		if ( Job1_History == 1 ) {
 			jobchange 4002;
@@ -101,7 +101,7 @@ function	script	Job1_Change	{
 	}
 
 	Job1_Done:
-		mes "[¾�~�A�ȭ�]";
-		mes "��¾�w�g���Q����!";
+		mes "[職業服務員]";
+		mes "轉職已經順利完成!";
 		close;
 }

@@ -1,29 +1,29 @@
 //--------------------------------------------------//
 //--------------------------------------------------//
-//	�W��:	¾�~�A�ȭ�
-//	����:	v2.0
-//	�ۮe:	rAthena Project, SeAr
-//	���:	2015/08/27
-//	�s�@:	iisnowred(���ީ]��)
-//	��U:	
-//	�n��:	�ЫO�d�H�W�X�B�A����
+//	名稱:	職業服務員
+//	版本:	v2.0
+//	相容:	rAthena Project, SeAr
+//	日期:	2015/08/27
+//	製作:	iisnowred(風萌夜雪)
+//	協助:	
+//	聲明:	請保留以上出處，謝謝
 //--------------------------------------------------//
 //--------------------------------------------------//
 
-//�X�R¾�~�ŦX��¾����Y�|�۰���¾
-//�Ԫ̷|�ۦ��ѧO�ʧO�i����¾
+//擴充職業符合轉職條件即會自動轉職
+//忍者會自行識別性別進行轉職
 
 function	script	ExJob_Change	{
 
-	if ( Class == 23 ) {	//�W�Ū�ߪ��X�R����
+	if ( Class == 23 ) {	//超級初心者擴充等級
 		jobchange 4190;
 		goto ExJob_Done;
 	}
-	if ( Class == 24 ) {	//�ϫq��
+	if ( Class == 24 ) {	//反叛者
 		jobchange 4215;
 		goto ExJob_Done;
 	}
-	if ( Class == 25 ) {	//�v�T,�g
+	if ( Class == 25 ) {	//影狼,朧
 		if ( sex  == 1 ) {
 			jobchange 4211;
 			goto ExJob_Done;
@@ -34,7 +34,7 @@ function	script	ExJob_Change	{
 	}
 	
 	ExJob_Done:
-		mes "[¾�~�A�ȭ�]";
-		mes "��¾�w�g���Q����!";
+		mes "[職業服務員]";
+		mes "轉職已經順利完成!";
 		close;	
 }

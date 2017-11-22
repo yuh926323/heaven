@@ -1,26 +1,26 @@
 //--------------------------------------------------//
 //--------------------------------------------------//
-//	¦WºÙ:	Â¾·~ªA°È­û
-//	ª©¥»:	v2.0
-//	¬Û®e:	rAthena Project, SeAr
-//	¤é´Á:	2015/08/27
-//	»s§@:	iisnowred(­·µÞ©]³·)
-//	¨ó§U:	
-//	Án©ú:	½Ð«O¯d¥H¤W¥X³B¡AÁÂÁÂ
+//	åç¨±:	è·æ¥­æœå‹™å“¡
+//	ç‰ˆæœ¬:	v2.0
+//	ç›¸å®¹:	rAthena Project, SeAr
+//	æ—¥æœŸ:	2015/08/27
+//	è£½ä½œ:	iisnowred(é¢¨èŒå¤œé›ª)
+//	å”åŠ©:	
+//	è²æ˜Ž:	è«‹ä¿ç•™ä»¥ä¸Šå‡ºè™•ï¼Œè¬è¬
 //--------------------------------------------------//
 //--------------------------------------------------//
 
-//Ä_Ä_¤GÂàÂ¾¯à¦Û¦æ¿ï¾Ü
-//Ä_Ä_¤TÂàÂ¾·|®Ú¾Ú¥Ø«eÂ¾·~¦Û°ÊÂàÂ¾
+//å¯¶å¯¶äºŒè½‰è·èƒ½è‡ªè¡Œé¸æ“‡
+//å¯¶å¯¶ä¸‰è½‰è·æœƒæ ¹æ“šç›®å‰è·æ¥­è‡ªå‹•è½‰è·
 
 function	script	BbJob_Change	{
 
 	if ( Class >= 4024 && Class <= 4029 ) {
-		mes "[Â¾·~ªA°È­û]";
-		mes "½Ð¿ï¾Ü·Q­nÂàÂ¾ªºÂ¾·~:";
+		mes "[è·æ¥­æœå‹™å“¡]";
+		mes "è«‹é¸æ“‡æƒ³è¦è½‰è·çš„è·æ¥­:";
 		
 		if ( Job1_History == 1 ) {
-			switch(select("Ä_Ä_ÃM¤h","Ä_Ä_¤Q¦r­x")) {
+			switch(select("å¯¶å¯¶é¨Žå£«","å¯¶å¯¶åå­—è»")) {
 				case 1:
 					jobchange 4030;
 					set Job2_History,1;
@@ -32,7 +32,7 @@ function	script	BbJob_Change	{
 			}
 		}
 		if ( Job1_History == 2 ) {
-			switch(select("Ä_Ä_§Å®v","Ä_Ä_½åªÌ")) {
+			switch(select("å¯¶å¯¶å·«å¸«","å¯¶å¯¶è³¢è€…")) {
 				case 1:
 					jobchange 4032;
 					set Job2_History,1;
@@ -45,7 +45,7 @@ function	script	BbJob_Change	{
 		}
 		if ( Job1_History == 3 ) {
 			if ( Sex == 1 ) {
-				switch(select("Ä_Ä_Ây¤H","Ä_Ä_§u¹C¸Ö¤H ")) {
+				switch(select("å¯¶å¯¶çµäºº","å¯¶å¯¶åŸéŠè©©äºº ")) {
 					case 1:
 						jobchange 4034;
 						set Job2_History,1;
@@ -56,7 +56,7 @@ function	script	BbJob_Change	{
 						goto BbJob_Done;	
 				}
 			} else {
-				switch(select("Ä_Ä_Ây¤H","Ä_Ä_»RÄ]")) {
+				switch(select("å¯¶å¯¶çµäºº","å¯¶å¯¶èˆžå­ƒ")) {
 					case 1:
 						jobchange 4034;
 						set Job2_History,1;
@@ -69,7 +69,7 @@ function	script	BbJob_Change	{
 			}
 		}
 		if ( Job1_History == 4 ) {
-			switch(select("Ä_Ä_²½¥q","Ä_Ä_ªZ¹D®a")) {
+			switch(select("å¯¶å¯¶ç¥­å¸","å¯¶å¯¶æ­¦é“å®¶")) {
 				case 1:
 					jobchange 4031;
 					set Job2_History,1;
@@ -81,7 +81,7 @@ function	script	BbJob_Change	{
 			}
 		}
 		if ( Job1_History == 5 ) {
-			switch(select("Ä_Ä_ÅK¦K","Ä_Ä_Áåª÷³N¤h")) {
+			switch(select("å¯¶å¯¶éµåŒ ","å¯¶å¯¶éŠé‡‘è¡“å£«")) {
 				case 1:
 					jobchange 4033;
 					set Job2_History,1;
@@ -93,7 +93,7 @@ function	script	BbJob_Change	{
 			}
 		}
 		if ( Job1_History == 6 ) {
-			switch(select("Ä_Ä_¨ë«È","Ä_Ä_¬yª]")) {
+			switch(select("å¯¶å¯¶åˆºå®¢","å¯¶å¯¶æµæ°“")) {
 				case 1:
 					jobchange 4035;
 					set Job2_History,1;
@@ -161,7 +161,7 @@ function	script	BbJob_Change	{
 		}
 
 	BbJob_Done:
-		mes "[Â¾·~ªA°È­û]";
-		mes "ÂàÂ¾¤w¸g¶¶§Q§¹¦¨!";
+		mes "[è·æ¥­æœå‹™å“¡]";
+		mes "è½‰è·å·²ç¶“é †åˆ©å®Œæˆ!";
 		close;	
 }

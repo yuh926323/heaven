@@ -1,28 +1,28 @@
 //--------------------------------------------------//
 //--------------------------------------------------//
-//	¦WºÙ:	Â¾·~ªA°È­û
-//	ª©¥»:	v2.0
-//	¬Û®e:	rAthena Project, SeAr
-//	¤é´Á:	2015/08/27
-//	»s§@:	iisnowred(­·µÞ©]³·)
-//	¨ó§U:	
-//	Án©ú:	½Ð«O¯d¥H¤W¥X³B¡AÁÂÁÂ
+//	åç¨±:	è·æ¥­æœå‹™å“¡
+//	ç‰ˆæœ¬:	v2.0
+//	ç›¸å®¹:	rAthena Project, SeAr
+//	æ—¥æœŸ:	2015/08/27
+//	è£½ä½œ:	iisnowred(é¢¨èŒå¤œé›ª)
+//	å”åŠ©:	
+//	è²æ˜Ž:	è«‹ä¿ç•™ä»¥ä¸Šå‡ºè™•ï¼Œè¬è¬
 //--------------------------------------------------//
 //--------------------------------------------------//
 
-//¤GÂàÂ¾¯à¦Û¦æ¿ï¾Ü
-//¶i¶¥¤GÂàÂ¾·|®Ú¾ÚÂà¥Í«eÂ¾·~¦Û°ÊÂàÂ¾
+//äºŒè½‰è·èƒ½è‡ªè¡Œé¸æ“‡
+//é€²éšŽäºŒè½‰è·æœƒæ ¹æ“šè½‰ç”Ÿå‰è·æ¥­è‡ªå‹•è½‰è·
 
 function	script	Job2_Change	{
 
-	//¤GÂàÂ¾
+	//äºŒè½‰è·
 	if (( Class >= 1 && Class <= 6 ) || Class == 4046 ) {
-		mes "[Â¾·~ªA°È­û]";
-		mes "½Ð¿ï¾Ü·Q­nÂàÂ¾ªºÂ¾·~:";
-		mes "´£¥Ü:^FF0000Âà¥Í«á±N¤£¯àÂàÂ¾¦¨¨ä¥LÂ¾·~^000000";
+		mes "[è·æ¥­æœå‹™å“¡]";
+		mes "è«‹é¸æ“‡æƒ³è¦è½‰è·çš„è·æ¥­:";
+		mes "æç¤º:^FF0000è½‰ç”Ÿå¾Œå°‡ä¸èƒ½è½‰è·æˆå…¶ä»–è·æ¥­^000000";
 		
 		if ( Job1_History == 1 ) {
-			switch(select("ÃM¤h","¤Q¦r­x")) {
+			switch(select("é¨Žå£«","åå­—è»")) {
 				case 1:
 					jobchange 7;
 					set Job2_History,1;
@@ -34,7 +34,7 @@ function	script	Job2_Change	{
 			}
 		}
 		if ( Job1_History == 2 ) {
-			switch(select("§Å®v","½åªÌ")) {
+			switch(select("å·«å¸«","è³¢è€…")) {
 				case 1:
 					jobchange 9;
 					set Job2_History,1;
@@ -47,7 +47,7 @@ function	script	Job2_Change	{
 		}
 		if ( Job1_History == 3 ) {
 			if ( Sex == 1 ) {
-				switch(select("Ây¤H","§u¹C¸Ö¤H ")) {
+				switch(select("çµäºº","åŸéŠè©©äºº ")) {
 					case 1:
 						jobchange 11;
 						set Job2_History,1;
@@ -58,7 +58,7 @@ function	script	Job2_Change	{
 						goto Job2_Done;	
 				}
 			} else {
-				switch(select("Ây¤H","»RÄ]")) {
+				switch(select("çµäºº","èˆžå­ƒ")) {
 					case 1:
 						jobchange 11;
 						set Job2_History,1;
@@ -71,7 +71,7 @@ function	script	Job2_Change	{
 			}
 		}
 		if ( Job1_History == 4 ) {
-			switch(select("²½¥q","ªZ¹D®a")) {
+			switch(select("ç¥­å¸","æ­¦é“å®¶")) {
 				case 1:
 					jobchange 8;
 					set Job2_History,1;
@@ -83,7 +83,7 @@ function	script	Job2_Change	{
 			}
 		}
 		if ( Job1_History == 5 ) {
-			switch(select("ÅK¦K","Áåª÷³N¤h")) {
+			switch(select("éµåŒ ","éŠé‡‘è¡“å£«")) {
 				case 1:
 					jobchange 10;
 					set Job2_History,1;
@@ -95,7 +95,7 @@ function	script	Job2_Change	{
 			}
 		}
 		if ( Job1_History == 6 ) {
-			switch(select("¨ë«È","¬yª]")) {
+			switch(select("åˆºå®¢","æµæ°“")) {
 				case 1:
 					jobchange 12;
 					set Job2_History,1;
@@ -107,7 +107,7 @@ function	script	Job2_Change	{
 			}
 		}
 		if ( Job1_History == 10 ) {
-			switch(select("®±¸t","®©ÆF¤h")) {
+			switch(select("æ‹³è–","æ‚Ÿéˆå£«")) {
 				case 1:
 					jobchange 4047;
 					set Job2_History,1;
@@ -120,29 +120,29 @@ function	script	Job2_Change	{
 		}
 	}
 
-	//¶i¶¥¤GÂàÂ¾
+	//é€²éšŽäºŒè½‰è·
 	if ( Class >= 4002 && Class <= 4007 ) {
-		if (( Job1_History == 1 ) && ( Job2_History == 1 )) {	//ÃM¤h»â¥D
+		if (( Job1_History == 1 ) && ( Job2_History == 1 )) {	//é¨Žå£«é ˜ä¸»
 			jobchange 4008;
 			goto Job2_Done;
 		}
-		if (( Job1_History == 1 ) && ( Job2_History == 2 )) {	//¸t·µ¤Q¦r­x
+		if (( Job1_History == 1 ) && ( Job2_History == 2 )) {	//è–æ®¿åå­—è»
 			jobchange 4015;
 			goto Job2_Done;
 		}
-		if (( Job1_History == 2 ) && ( Job2_History == 1 )) {	//¶WÅ]¾É¤h
+		if (( Job1_History == 2 ) && ( Job2_History == 1 )) {	//è¶…é­”å°Žå£«
 			jobchange 4010;
 			goto Job2_Done;
 		}
-		if (( Job1_History == 2 ) && ( Job2_History == 2 )) {	//´¼ªÌ
+		if (( Job1_History == 2 ) && ( Job2_History == 2 )) {	//æ™ºè€…
 			jobchange 4017;
 			goto Job2_Done;
 		}
-		if (( Job1_History == 3 ) && ( Job2_History == 1 )) {	//¯«®g¤â
+		if (( Job1_History == 3 ) && ( Job2_History == 1 )) {	//ç¥žå°„æ‰‹
 			jobchange 4012;
 			goto Job2_Done;
 		}
-		if (( Job1_History == 3 ) && ( Job2_History == 2 )) {	//·d¯ºÃÀ¤H,§NÆv»R®V
+		if (( Job1_History == 3 ) && ( Job2_History == 2 )) {	//æžç¬‘è—äºº,å†·è±”èˆžå§¬
 			if ( Sex == 1 ) {
 				jobchange 4020;
 				goto Job2_Done;
@@ -151,34 +151,34 @@ function	script	Job2_Change	{
 				goto Job2_Done;
 			}
 		}
-		if (( Job1_History == 4 ) && ( Job2_History == 1 )) {	//¯«©x
+		if (( Job1_History == 4 ) && ( Job2_History == 1 )) {	//ç¥žå®˜
 			jobchange 4009;
 			goto Job2_Done;
 		}
-		if (( Job1_History == 4 ) && ( Job2_History == 2 )) {	//ªZ³N©v®v
+		if (( Job1_History == 4 ) && ( Job2_History == 2 )) {	//æ­¦è¡“å®—å¸«
 			jobchange 4016;
 			goto Job2_Done;
 		}
-		if (( Job1_History == 5 ) && ( Job2_History == 1 )) {	//¯«¤u¦K
+		if (( Job1_History == 5 ) && ( Job2_History == 1 )) {	//ç¥žå·¥åŒ 
 			jobchange 4011;
 			goto Job2_Done;
 		}
-		if (( Job1_History == 5 ) && ( Job2_History == 2 )) {	//³Ð³yªÌ
+		if (( Job1_History == 5 ) && ( Job2_History == 2 )) {	//å‰µé€ è€…
 			jobchange 4019;
 			goto Job2_Done;
 		}
-		if (( Job1_History == 6 ) && ( Job2_History == 1 )) {	//¤Q¦r¨ë«È
+		if (( Job1_History == 6 ) && ( Job2_History == 1 )) {	//åå­—åˆºå®¢
 			jobchange 4013;
 			goto Job2_Done;
 		}
-		if (( Job1_History == 6 ) && ( Job2_History == 2 )) {	//¯«¦æ¤Ó«O
+		if (( Job1_History == 6 ) && ( Job2_History == 2 )) {	//ç¥žè¡Œå¤ªä¿
 			jobchange 4018;
 			goto Job2_Done;
 		}
 	}
 	
 	Job2_Done:
-		mes "[Â¾·~ªA°È­û]";
-		mes "ÂàÂ¾¤w¸g¶¶§Q§¹¦¨!";
+		mes "[è·æ¥­æœå‹™å“¡]";
+		mes "è½‰è·å·²ç¶“é †åˆ©å®Œæˆ!";
 		close;	
 }
