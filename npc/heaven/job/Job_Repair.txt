@@ -1,0 +1,130 @@
+//--------------------------------------------------//
+//--------------------------------------------------//
+//	名稱:	職業服務員
+//	版本:	v2.0
+//	相容:	rAthena Project, SeAr
+//	日期:	2015/08/27
+//	製作:	iisnowred(風萌夜雪)
+//	協助:	
+//	聲明:	請保留以上出處，謝謝
+//--------------------------------------------------//
+//--------------------------------------------------//
+
+prontera,158,191,4	script	轉職修復員	62,{
+
+	callfunc "Job_Repair";
+	end;
+
+	OnInit:
+	waitingroom "轉職修復服務",0;
+}
+
+function	script	Job_Repair	{
+
+	if (( Job1_History >= 1 && Job1_History <= 6 && Job2_History >= 1 && Job2_History <=2 ) || ( Job1_History >= 7 && Job1_History <= 10 )) {
+		mes "[轉職修復員]";
+		mes "您並不需要進行轉職修復!";
+		close;
+	}
+
+	mes "[轉職修復員]";
+	mes "請選擇您的一轉職業:";
+	mes "提示:^FF0000修復機會只有一次，請如實謹慎選擇，否則將會造成永久錯誤!^000000";
+	next;
+	switch(select("劍士","魔法師","弓箭手","服事","商人","盜賊","超級初心者","槍手","忍者","跆拳家")){
+		case 1:
+			set Job1_History,1;
+			mes "請選擇您的二轉職業";
+			next;
+			switch(select("騎士","十字軍")){
+				case 1:
+					set Job2_History,1;
+					goto Repair_Done;
+				case 2:
+					set Job2_History,2;
+					goto Repair_Done;
+			}
+		case 2:
+			set Job1_History,2;
+			mes "請選擇您的二轉職業";
+			mes "提示:^FF0000修復機會只有一次，請如實謹慎選擇，否則將會造成永久錯誤!^000000";
+			next;
+			switch(select("巫師","賢者")){
+				case 1:
+					set Job2_History,1;
+					goto Repair_Done;
+				case 2:
+					set Job2_History,2;
+					goto Repair_Done;
+			}
+		case 3:
+			set Job1_History,3;
+			mes "請選擇您的二轉職業";
+			mes "提示:^FF0000修復機會只有一次，請如實謹慎選擇，否則將會造成永久錯誤!^000000";
+			next;
+			switch(select("獵人","吟遊詩人 / 舞孃")){
+				case 1:
+					set Job2_History,1;
+					goto Repair_Done;
+				case 2:
+					set Job2_History,2;
+					goto Repair_Done;
+			}
+		case 4:
+			set Job1_History,4;
+			mes "請選擇您的二轉職業";
+			mes "提示:^FF0000修復機會只有一次，請如實謹慎選擇，否則將會造成永久錯誤!^000000";
+			next;
+			switch(select("祭司","武道家")){
+				case 1:
+					set Job2_History,1;
+					goto Repair_Done;
+				case 2:
+					set Job2_History,2;
+					goto Repair_Done;
+			}
+		case 5:
+			set Job1_History,5;
+			mes "請選擇您的二轉職業";
+			mes "提示:^FF0000修復機會只有一次，請如實謹慎選擇，否則將會造成永久錯誤!^000000";
+			next;
+			switch(select("鐵匠","鍊金術士")){
+				case 1:
+					set Job2_History,1;
+					goto Repair_Done;
+				case 2:
+					set Job2_History,2;
+					goto Repair_Done;
+			}
+		case 6:
+			set Job1_History,6;
+			mes "請選擇您的二轉職業";
+			mes "提示:^FF0000修復機會只有一次，請如實謹慎選擇，否則將會造成永久錯誤!^000000";
+			next;
+			switch(select("刺客","流氓")){
+				case 1:
+					set Job2_History,1;
+					goto Repair_Done;
+				case 2:
+					set Job2_History,2;
+					goto Repair_Done;
+			}
+		case 7:
+			set Job1_History,7;
+			goto Repair_Done;
+		case 8:
+			set Job1_History,8;
+			goto Repair_Done;
+		case 9:
+			set Job1_History,9;
+			goto Repair_Done;
+		case 10:
+			set Job1_History,10;
+			goto Repair_Done;
+	}
+			
+	Repair_Done:
+		mes "[轉職修復員]";
+		mes "轉職修復已經順利完成!";
+		close;
+}

@@ -1,0 +1,167 @@
+//--------------------------------------------------//
+//--------------------------------------------------//
+//	名稱:	職業服務員
+//	版本:	v2.0
+//	相容:	rAthena Project, SeAr
+//	日期:	2015/08/27
+//	製作:	iisnowred(風萌夜雪)
+//	協助:	
+//	聲明:	請保留以上出處，謝謝
+//--------------------------------------------------//
+//--------------------------------------------------//
+
+//寶寶二轉職能自行選擇
+//寶寶三轉職會根據目前職業自動轉職
+
+function	script	BbJob_Change	{
+
+	if ( Class >= 4024 && Class <= 4029 ) {
+		mes "[職業服務員]";
+		mes "請選擇想要轉職的職業:";
+		
+		if ( Job1_History == 1 ) {
+			switch(select("寶寶騎士","寶寶十字軍")) {
+				case 1:
+					jobchange 4030;
+					set Job2_History,1;
+					goto BbJob_Done;
+				case 2:
+					jobchange 4037;
+					set Job2_History,2;
+					goto BbJob_Done;	
+			}
+		}
+		if ( Job1_History == 2 ) {
+			switch(select("寶寶巫師","寶寶賢者")) {
+				case 1:
+					jobchange 4032;
+					set Job2_History,1;
+					goto BbJob_Done;
+				case 2:
+					jobchange 4039;
+					set Job2_History,2;
+					goto BbJob_Done;	
+			}
+		}
+		if ( Job1_History == 3 ) {
+			if ( Sex == 1 ) {
+				switch(select("寶寶獵人","寶寶吟遊詩人 ")) {
+					case 1:
+						jobchange 4034;
+						set Job2_History,1;
+						goto BbJob_Done;
+					case 2:
+						jobchange 4042;
+						set Job2_History,2;
+						goto BbJob_Done;	
+				}
+			} else {
+				switch(select("寶寶獵人","寶寶舞孃")) {
+					case 1:
+						jobchange 4034;
+						set Job2_History,1;
+						goto BbJob_Done;
+					case 2:
+						jobchange 4043;
+						set Job2_History,2;
+						goto BbJob_Done;	
+				}
+			}
+		}
+		if ( Job1_History == 4 ) {
+			switch(select("寶寶祭司","寶寶武道家")) {
+				case 1:
+					jobchange 4031;
+					set Job2_History,1;
+					goto BbJob_Done;
+				case 2:
+					jobchange 4038;
+					set Job2_History,2;
+					goto BbJob_Done;	
+			}
+		}
+		if ( Job1_History == 5 ) {
+			switch(select("寶寶鐵匠","寶寶鍊金術士")) {
+				case 1:
+					jobchange 4033;
+					set Job2_History,1;
+					goto BbJob_Done;
+				case 2:
+					jobchange 4041;
+					set Job2_History,2;
+					goto BbJob_Done;	
+			}
+		}
+		if ( Job1_History == 6 ) {
+			switch(select("寶寶刺客","寶寶流氓")) {
+				case 1:
+					jobchange 4035;
+					set Job2_History,1;
+					goto BbJob_Done;
+				case 2:
+					jobchange 4040;
+					set Job2_History,2;
+					goto BbJob_Done;	
+			}
+		}
+	}
+		
+	BbJob_Confirm:
+		if ( Class == 4030 ) {
+			jobchange 4096;
+			goto BbJob_Done;
+		}
+		if ( Class == 4031 ) {
+			jobchange 4099;
+			goto BbJob_Done;
+		}
+		if ( Class == 4032 ) {
+			jobchange 4097;
+			goto BbJob_Done;
+		}
+		if ( Class == 4033 ) {
+			jobchange 4100;
+			goto BbJob_Done;
+		}
+		if ( Class == 4034 ) {
+			jobchange 4098;
+			goto BbJob_Done;
+		}
+		if ( Class == 4035 ) {
+			jobchange 4101;
+			goto BbJob_Done;
+		}
+		if ( Class == 4037 ) {
+			jobchange 4102;
+			goto BbJob_Done;
+		}
+		if ( Class == 4038 ) {
+			jobchange 4106;
+			goto BbJob_Done;
+		}
+		if ( Class == 4039 ) {
+			jobchange 4103;
+			goto BbJob_Done;
+		}
+		if ( Class == 4040 ) {
+			jobchange 4108;
+			goto BbJob_Done;
+		}
+		if ( Class == 4041 ) {
+			jobchange 4107;
+			goto BbJob_Done;
+		}
+		if ( Class == 4042 ) {
+			jobchange 4104;
+			goto BbJob_Done;
+		}
+		if ( Class == 4033 ) {
+			jobchange 4105;
+			goto BbJob_Done;
+		}
+
+	BbJob_Done:
+		mes "[職業服務員]";
+		mes "轉職已經順利完成!";
+		close;	
+}

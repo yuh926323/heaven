@@ -1,0 +1,184 @@
+//--------------------------------------------------//
+//--------------------------------------------------//
+//	名稱:	職業服務員
+//	版本:	v2.0
+//	相容:	rAthena Project, SeAr
+//	日期:	2015/08/27
+//	製作:	iisnowred(風萌夜雪)
+//	協助:	
+//	聲明:	請保留以上出處，謝謝
+//--------------------------------------------------//
+//--------------------------------------------------//
+
+//二轉職能自行選擇
+//進階二轉職會根據轉生前職業自動轉職
+
+function	script	Job2_Change	{
+
+	//二轉職
+	if (( Class >= 1 && Class <= 6 ) || Class == 4046 ) {
+		mes "[職業服務員]";
+		mes "請選擇想要轉職的職業:";
+		mes "提示:^FF0000轉生後將不能轉職成其他職業^000000";
+		
+		if ( Job1_History == 1 ) {
+			switch(select("騎士","十字軍")) {
+				case 1:
+					jobchange 7;
+					set Job2_History,1;
+					goto Job2_Done;
+				case 2:
+					jobchange 14;
+					set Job2_History,2;
+					goto Job2_Done;	
+			}
+		}
+		if ( Job1_History == 2 ) {
+			switch(select("巫師","賢者")) {
+				case 1:
+					jobchange 9;
+					set Job2_History,1;
+					goto Job2_Done;
+				case 2:
+					jobchange 16;
+					set Job2_History,2;
+					goto Job2_Done;	
+			}
+		}
+		if ( Job1_History == 3 ) {
+			if ( Sex == 1 ) {
+				switch(select("獵人","吟遊詩人 ")) {
+					case 1:
+						jobchange 11;
+						set Job2_History,1;
+						goto Job2_Done;
+					case 2:
+						jobchange 19;
+						set Job2_History,2;
+						goto Job2_Done;	
+				}
+			} else {
+				switch(select("獵人","舞孃")) {
+					case 1:
+						jobchange 11;
+						set Job2_History,1;
+						goto Job2_Done;
+					case 2:
+						jobchange 20;
+						set Job2_History,2;
+						goto Job2_Done;	
+				}
+			}
+		}
+		if ( Job1_History == 4 ) {
+			switch(select("祭司","武道家")) {
+				case 1:
+					jobchange 8;
+					set Job2_History,1;
+					goto Job2_Done;
+				case 2:
+					jobchange 15;
+					set Job2_History,2;
+					goto Job2_Done;	
+			}
+		}
+		if ( Job1_History == 5 ) {
+			switch(select("鐵匠","鍊金術士")) {
+				case 1:
+					jobchange 10;
+					set Job2_History,1;
+					goto Job2_Done;
+				case 2:
+					jobchange 18;
+					set Job2_History,2;
+					goto Job2_Done;	
+			}
+		}
+		if ( Job1_History == 6 ) {
+			switch(select("刺客","流氓")) {
+				case 1:
+					jobchange 12;
+					set Job2_History,1;
+					goto Job2_Done;
+				case 2:
+					jobchange 17;
+					set Job2_History,2;
+					goto Job2_Done;	
+			}
+		}
+		if ( Job1_History == 10 ) {
+			switch(select("拳聖","悟靈士")) {
+				case 1:
+					jobchange 4047;
+					set Job2_History,1;
+					goto Job2_Done;
+				case 2:
+					jobchange 4049;
+					set Job2_History,2;
+					goto Job2_Done;	
+			}
+		}
+	}
+
+	//進階二轉職
+	if ( Class >= 4002 && Class <= 4007 ) {
+		if (( Job1_History == 1 ) && ( Job2_History == 1 )) {	//騎士領主
+			jobchange 4008;
+			goto Job2_Done;
+		}
+		if (( Job1_History == 1 ) && ( Job2_History == 2 )) {	//聖殿十字軍
+			jobchange 4015;
+			goto Job2_Done;
+		}
+		if (( Job1_History == 2 ) && ( Job2_History == 1 )) {	//超魔導士
+			jobchange 4010;
+			goto Job2_Done;
+		}
+		if (( Job1_History == 2 ) && ( Job2_History == 2 )) {	//智者
+			jobchange 4017;
+			goto Job2_Done;
+		}
+		if (( Job1_History == 3 ) && ( Job2_History == 1 )) {	//神射手
+			jobchange 4012;
+			goto Job2_Done;
+		}
+		if (( Job1_History == 3 ) && ( Job2_History == 2 )) {	//搞笑藝人,冷豔舞姬
+			if ( Sex == 1 ) {
+				jobchange 4020;
+				goto Job2_Done;
+			} else {
+				jobchange 4021;
+				goto Job2_Done;
+			}
+		}
+		if (( Job1_History == 4 ) && ( Job2_History == 1 )) {	//神官
+			jobchange 4009;
+			goto Job2_Done;
+		}
+		if (( Job1_History == 4 ) && ( Job2_History == 2 )) {	//武術宗師
+			jobchange 4016;
+			goto Job2_Done;
+		}
+		if (( Job1_History == 5 ) && ( Job2_History == 1 )) {	//神工匠
+			jobchange 4011;
+			goto Job2_Done;
+		}
+		if (( Job1_History == 5 ) && ( Job2_History == 2 )) {	//創造者
+			jobchange 4019;
+			goto Job2_Done;
+		}
+		if (( Job1_History == 6 ) && ( Job2_History == 1 )) {	//十字刺客
+			jobchange 4013;
+			goto Job2_Done;
+		}
+		if (( Job1_History == 6 ) && ( Job2_History == 2 )) {	//神行太保
+			jobchange 4018;
+			goto Job2_Done;
+		}
+	}
+	
+	Job2_Done:
+		mes "[職業服務員]";
+		mes "轉職已經順利完成!";
+		close;	
+}

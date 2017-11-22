@@ -1,0 +1,115 @@
+//--------------------------------------------------//
+//--------------------------------------------------//
+//	名稱:	職業服務員
+//	版本:	v2.0
+//	相容:	rAthena Project
+//	日期:	2015/08/27
+//	製作:	iisnowred(風萌夜雪)
+//	協助:	
+//	聲明:	請保留以上出處，謝謝
+//--------------------------------------------------//
+//--------------------------------------------------//
+
+//重要事項:
+//如果是使用 SeAr 平台，請勿使用此段腳本，需要轉用 Job_Rent_SEAR.txt 文件!
+
+//租借項目，已包括寶寶職業
+
+function	script	Job_Rent	{
+	
+	mes "[職業服務員]";
+	mes	"請選擇您想要租借的項目:";
+	next;
+	switch(select("坐騎、魔導機甲","獵鷹","手推車")){
+		case 1:
+			if ( checkriding() || checkdragon() || checkmadogear() ) {
+				goto Rent_Fail;
+			} else if ( ismounting() ) {
+				mes "[職業服務員]";
+				mes "請先移除您的騎寵!";
+				close;
+			} else {
+				if ( Class == 7 || Class == 4008 || Class == 4030 || Class == 14 || Class == 4015 || Class == 4066 ||
+					Class == 4073 || Class == 4037 || Class == 4102 ) {
+					if ( !getskilllv(63) ) {
+						mes "[職業服務員]";
+						mes "很抱歉，需要習得^FF0000騎乘術^000000才能租借坐騎!";
+						close;
+					} else {
+						setriding;
+						goto Rent_Done;
+					}
+				}
+				if ( Class == 4054 || Class == 4060 || Class == 4096 ) {
+					if ( !getskilllv(2007) ) {
+						mes "[職業服務員]";
+						mes "很抱歉，需要習得^FF0000龍駕馭^000000才能租借坐騎!";
+						close;
+					} else {
+						setdragon;
+						goto Rent_Done;
+					}
+				}
+				if ( Class == 4058 || Class == 4064 || Class == 4100 ) {
+					if ( !getskilllv(2255) ) {
+						mes "[職業服務員]";
+						mes "很抱歉，需要習得^FF0000魔導機甲執照^000000才能租借坐騎!";
+						close;
+					} else {
+						setmadogear;
+						goto Rent_Done;
+					}
+				}
+				goto Rent_Fail2;
+			}
+		case 2:
+			if ( checkfalcon() ) {
+				goto Rent_Fail;
+			} else {
+				if ( Class == 11 || Class == 4012 || Class == 4056 || Class == 4062 || Class == 4034 || Class == 4098 ) {
+					if ( !getskilllv(127) ) {
+						mes "[職業服務員]";
+						mes "很抱歉，需要習得^FF0000馴鷹術^000000才能租借獵鷹!";
+						close;
+					} else {
+						setfalcon;
+						goto Rent_Done;
+					}
+				}
+				goto Rent_Fail2;
+			}
+		case 3:
+			if ( checkcart() ) {
+				goto Rent_Fail;
+			} else {
+				if ( Class == 5 || Class == 4006 || Class == 4028 || Class == 10 || Class == 4011 || Class == 4058 ||
+					Class == 4064 || Class == 4033 || Class == 4100 || Class == 18 || Class == 4019 || Class == 4071 ||
+					Class == 4078 || Class == 4041 || Class == 4107 ) {
+					if ( !getskilllv(39) ) {
+						mes "[職業服務員]";
+						mes "很抱歉，需要習得^FF0000手推車使用^000000才能租借手推車!";
+						close;
+					} else {
+						setcart;
+						goto Rent_Done;
+					}
+				}
+				goto Rent_Fail2;
+			}
+	}
+	
+	Rent_Fail:
+		mes "[職業服務員]";
+		mes "很抱歉，您已經租借過了!";
+		close;
+
+	Rent_Fail2:
+		mes "[職業服務員]";
+		mes "很抱歉，您的職業無法租借此項目!";
+		close;
+
+	Rent_Done:
+		mes "[職業服務員]";
+		mes "租借已經順利完成!";
+		close;
+}

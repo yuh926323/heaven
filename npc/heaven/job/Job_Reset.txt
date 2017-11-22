@@ -1,0 +1,60 @@
+//--------------------------------------------------//
+//--------------------------------------------------//
+//	名稱:	職業服務員
+//	版本:	v2.0
+//	相容:	rAthena Project, SeAr
+//	日期:	2015/08/27
+//	製作:	iisnowred(風萌夜雪)
+//	協助:	
+//	聲明:	請保留以上出處，謝謝
+//--------------------------------------------------//
+//--------------------------------------------------//
+
+//重置素質、技能
+
+function	script	Job_Reset	{
+	
+	mes "[職業服務員]";
+	mes "重置服務的收費如下:";
+	mes "1. 重置素質 - " + $@RStZeny + " Zeny";
+	mes "2. 重置技能 - " + $@RSkZeny + " Zeny";
+	mes "3. 重置全部 - " + $@RAllZeny + " Zeny";
+	next;
+	switch(select("重置素質","重置技能","重置全部")){
+		case 1:
+			if ( Zeny >= $@RStZeny ) {
+				set Zeny,Zeny - $@RStZeny;
+				ResetStatus;
+				goto Reset_Done;
+			} else {
+				goto Reset_Fail;
+			}
+		case 2:
+			if ( Zeny >= $@RSkZeny ) {
+				set Zeny,Zeny - $@RSkZeny;
+				ResetSkill;
+				goto Reset_Done;
+			} else {
+				goto Reset_Fail;
+			}
+		case 3:
+			if ( Zeny >= $@RAllZeny ) {
+				set Zeny,Zeny - $@RAllZeny;
+				ResetStatus;
+				ResetSkill;
+				goto Reset_Done;
+			} else {
+				goto Reset_Fail;
+			}
+	}
+	
+	Reset_Done:
+		mes "[職業服務員]";
+		mes "重置已經順利完成!";
+		close;
+		
+	Reset_Fail:
+		mes "[職業服務員]";
+		mes "很抱歉，您身上並持未有足夠Zeny!";
+		close;
+}

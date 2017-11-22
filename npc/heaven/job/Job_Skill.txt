@@ -1,0 +1,174 @@
+//--------------------------------------------------//
+//--------------------------------------------------//
+//	名稱:	職業服務員
+//	版本:	v2.0
+//	相容:	rAthena Project, SeAr
+//	日期:	2015/08/27
+//	製作:	iisnowred(風萌夜雪)
+//	協助:	
+//	聲明:	請保留以上出處，謝謝
+//--------------------------------------------------//
+//--------------------------------------------------//
+
+//學習職業專屬的任務技能，其餘職業亦會習得緊急治療技能
+
+function	script	Job_Skill	{
+
+	//初心者
+	if ( Class == 0 || Class == 4001 ) {
+		skill 143,1,0;
+		goto Skill_Done;	
+	}
+	//劍士
+	if ( Class == 1 || Class == 4002 || Class == 4024 ) {
+		skill 144,1,0;
+		skill 145,1,0;
+		skill 146,1,0;
+		goto Skill_Done;
+	}
+	//騎士
+	if ( Class == 7 || Class == 4008 || Class == 4054 || Class == 4060 || Class == 4030 || Class == 4096 ) {
+		skill 144,1,0;
+		skill 145,1,0;
+		skill 146,1,0;
+		skill 1001,1,0;
+		goto Skill_Done;
+	}
+	//十字軍
+	if ( Class == 14 || Class == 4015 || Class == 4066 || Class == 4073 || Class == 4037 || Class == 4102 ) {
+		skill 144,1,0;
+		skill 145,1,0;
+		skill 146,1,0;
+		skill 1002,1,0;
+		goto Skill_Done;
+	}
+	//魔法師
+	if ( Class == 2 || Class == 4003 || Class == 4025 ) {
+		skill 157,1,0;
+		goto Skill_Done;
+	}
+	//巫師
+	if ( Class == 9 || Class == 4010 || Class == 4055 || Class == 4061 || Class == 4032 || Class == 4097 ) {
+		skill 157,1,0;
+		skill 1006,1,0;
+		goto Skill_Done;
+	}
+	//賢者
+	if ( Class == 16 || Class == 4017 || Class == 4067 || Class == 4074 || Class == 4039 || Class == 4103) {
+		skill 157,1,0;
+		skill 1007,1,0;
+		skill 1008,1,0;
+		skill 1017,1,0;
+		skill 1018,1,0;
+		skill 1019,1,0;
+	}
+	//弓箭手
+	if ( Class == 3 || Class == 4004 || Class == 4026) {
+		skill 147,1,0;
+		skill 148,1,0;
+		goto Skill_Done;
+	}
+	//獵人
+	if ( Class == 11 || Class == 4012 || Class == 4056 || Class == 4062 || Class == 4034 || Class == 4098 ) {
+		skill 147,1,0;
+		skill 148,1,0;
+		skill 1009,1,0;
+		goto Skill_Done;
+	}
+	//吟遊詩人
+	if ( Class == 19 || Class == 4020 || Class == 4068 || Class == 4075 || Class == 4042 || Class == 4104 ) {
+		skill 147,1,0;
+		skill 148,1,0;
+		skill 1010,1,0;
+		goto Skill_Done;
+	}
+	//舞孃
+	if ( Class == 20 || Class == 4021 || Class == 4069 || Class == 4076 || Class == 4043 || Class == 4105) {
+		skill 147,1,0;
+		skill 148,1,0;
+		skill 1011,1,0;
+		goto Skill_Done;
+	}
+	//服事
+	if ( Class == 4 || Class == 4005 || Class == 4027 ) {
+		skill 156,1,0;
+		goto Skill_Done;
+	}
+	//祭司
+	if ( Class == 8 || Class == 4009 || Class == 4057 || Class == 4063 || Class == 4031 || Class == 4099 ) {
+		skill 156,1,0;
+		skill 1014,1,0;
+		goto Skill_Done;
+	}
+	//武道家
+	if ( Class == 15 || Class == 4016 || Class == 4070 || Class == 4077 || Class == 4038 || Class == 4106 ) {
+		skill 156,1,0;
+		skill 1015,1,0;
+		skill 1016,1,0;
+		goto Skill_Done;
+	}
+	//商人
+	if ( Class == 5 || Class == 4006 || Class == 4028 ) {
+		skill 153,1,0;
+		skill 154,1,0;
+		skill 155,1,0;
+		skill 2535,1,SKILL_PERM_GRANT;
+		goto Skill_Done;
+	}
+	//鐵匠
+	if ( Class == 10 || Class == 4011 || Class == 4058 || Class == 4064 || Class == 4033 || Class == 4100 ) {
+		skill 153,1,0;
+		skill 154,1,0;
+		skill 155,1,0;
+		skill 2535,1,SKILL_PERM_GRANT;
+		skill 1012,1,0;
+		skill 1013,1,0;
+		goto Skill_Done;
+	}
+	//鍊金術師
+	if ( Class == 18 || Class == 4019 || Class == 4071 || Class == 4078 || Class == 4041 || Class == 4107 ) {
+		skill 153,1,0;
+		skill 154,1,0;
+		skill 155,1,0;
+		skill 2535,1,SKILL_PERM_GRANT;
+		skill 238,1,0;
+		goto Skill_Done;
+	}
+	//盜賊
+	if ( Class == 6 || Class == 4007 || Class == 4029 ) {
+		skill 149,1,0;
+		skill 150,1,0;
+		skill 151,1,0;
+		skill 152,1,0;
+		goto Skill_Done;
+	}
+	//刺客
+	if ( Class == 12 || Class == 4013 || Class == 4059 || Class == 4065 || Class == 4035 || Class == 4101 ) {
+		skill 149,1,0;
+		skill 150,1,0;
+		skill 151,1,0;
+		skill 152,1,0;
+		skill 1003,1,0;
+		skill 1004,1,0;
+		goto Skill_Done;
+	}
+	//流氓
+	if ( Class == 17 || Class == 4018 || Class == 4072 || Class == 4079 || Class == 4040 || Class == 4108) {
+		skill 149,1,0;
+		skill 150,1,0;
+		skill 151,1,0;
+		skill 152,1,0;
+		skill 1005,1,0;
+		goto Skill_Done;
+	}
+	
+	Skill_Done:
+		skill 142,1,0;					//緊急治療
+		if ( $@inccarry == 1 ) {
+			skill 681,10,SKILL_PERM_GRANT;	//負重量上升R
+		}
+		mes "[職業服務員]";
+		mes "已成功習得職業的專屬技能!";
+		close;
+
+}

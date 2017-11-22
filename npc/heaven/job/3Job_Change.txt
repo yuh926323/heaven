@@ -1,0 +1,181 @@
+//--------------------------------------------------//
+//--------------------------------------------------//
+//	名稱:	職業服務員
+//	版本:	v2.0
+//	相容:	rAthena Project, SeAr
+//	日期:	2015/08/27
+//	製作:	iisnowred(風萌夜雪)
+//	協助:	
+//	聲明:	請保留以上出處，謝謝
+//--------------------------------------------------//
+//--------------------------------------------------//
+
+//三轉職會根據目前職業自動轉職
+//非轉生的二轉職會轉職成非轉生的三轉職
+
+function	script	Job3_Change	{
+	
+	//非進階二轉確認
+	if (( Class >= 7 && Class <= 12 ) || ( Class >= 14 && Class <= 20 )) {
+		mes "[職業服務員]";
+		mes "您是^FF0000非轉生^000000的角色，";
+		mes "確定要進行三轉轉職嗎?";
+		mes "提示:^FF0000轉職後將無法學習進階二轉職業技能^000000";
+		next;
+		switch(select("確定","取消")){
+			case 1:
+				if ( $@J3Item_Check == 1) {
+					goto Job3_Item;
+				} else {
+					goto Job3_Confirm;
+				}
+			case 2:
+				mes "[職業服務員]";
+				mes "有需要歡迎隨時來找我幫忙!";
+				close;
+		}
+	}
+
+	//道具確認
+	if ( $@J3Item_Check == 1) {
+		Job3_Item:
+		mes	"[職業服務員]";
+		mes	"進行三轉轉職需要";
+		mes	"^FF0000" + $@J3Zeny +"^000000金幣及";
+		mes	"[^FF0000" + getitemname($@J3Item) + "^000000]一個，";
+		mes	"請問您要進行轉職嗎?";
+		next;
+		switch(select("確定","取消")) {
+			case 1:
+				if ( Zeny < $@J3Zeny ) {
+					mes	"[職業服務員]";
+					mes	"很抱歉，您身上並持未有足夠金幣，";
+					mes	"無法進行轉職!";
+					close;
+				} else if ( countitem($@J3Item) < 1 ) {
+					mes	"[職業服務員]";
+					mes	"很抱歉，您身上並未持有";
+					mes	"[^FF0000" + getitemname($@J3Item) + "^000000]，";
+					mes	"無法進行轉職!";
+					close;
+				} else {
+					delitem $@J3Item,1;
+					goto Job3_Confirm;
+				}
+			case 2:
+				goto Job_Bye;
+		}
+	}
+
+	//三轉轉職
+	Job3_Confirm:
+		if ( Class == 7 ) {
+			jobchange 4054;
+			goto Job3_Done;
+		}
+		if ( Class == 8 ) {
+			jobchange 4057;
+			goto Job3_Done;
+		}
+		if ( Class == 9 ) {
+			jobchange 4055;
+			goto Job3_Done;
+		}
+		if ( Class == 10 ) {
+			jobchange 4058;
+			goto Job3_Done;
+		}
+		if ( Class == 11 ) {
+			jobchange 4056;
+			goto Job3_Done;
+		}
+		if ( Class == 12 ) {
+			jobchange 4059;
+			goto Job3_Done;
+		}
+		if ( Class == 14 ) {
+			jobchange 4066;
+			goto Job3_Done;
+		}
+		if ( Class == 15 ) {
+			jobchange 4070;
+			goto Job3_Done;
+		}
+		if ( Class == 16 ) {
+			jobchange 4067;
+			goto Job3_Done;
+		}
+		if ( Class == 17 ) {
+			jobchange 4072;
+			goto Job3_Done;
+		}
+		if ( Class == 18 ) {
+			jobchange 4071;
+			goto Job3_Done;
+		}
+		if ( Class == 19 ) {
+			jobchange 4068;
+			goto Job3_Done;
+		}
+		if ( Class == 20 ) {
+			jobchange 4069;
+			goto Job3_Done;
+		}
+		if ( Class == 4008 ) {
+			jobchange 4060;
+			goto Job3_Done;
+		}
+		if ( Class == 4009 ) {
+			jobchange 4063;
+			goto Job3_Done;
+		}
+		if ( Class == 4010 ) {
+			jobchange 4061;
+			goto Job3_Done;
+		}
+		if ( Class == 4011 ) {
+			jobchange 4064;
+			goto Job3_Done;
+		}
+		if ( Class == 4012 ) {
+			jobchange 4062;
+			goto Job3_Done;
+		}
+		if ( Class == 4013 ) {
+			jobchange 4065;
+			goto Job3_Done;
+		}
+		if ( Class == 4015 ) {
+			jobchange 4073;
+			goto Job3_Done;
+		}
+		if ( Class == 4016 ) {
+			jobchange 4077;
+			goto Job3_Done;
+		}
+		if ( Class == 4017 ) {
+			jobchange 4074;
+			goto Job3_Done;
+		}
+		if ( Class == 4018 ) {
+			jobchange 4079;
+			goto Job3_Done;
+		}
+		if ( Class == 4019 ) {
+			jobchange 4078;
+			goto Job3_Done;
+		}
+		if ( Class == 4020 ) {
+			jobchange 4075;
+			goto Job3_Done;
+		}
+		if ( Class == 4021 ) {
+			jobchange 4076;
+			goto Job3_Done;
+		}
+		
+	Job3_Done:
+		mes "[職業服務員]";
+		mes "轉職已經順利完成!";
+		close;	
+}
