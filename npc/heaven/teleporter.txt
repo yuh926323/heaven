@@ -1,6 +1,7 @@
-fayon,90,120,1	script	傳送人員	512,{
+fayon,101,117,4	script	傳送人員	10041,{
     mes .npcname$;
     mes "請問你想要去那裡呢？";
+	cutin "SHALOSHI04",2;
     next;
     switch(select("功能傳送","城市傳送","野外傳送")) {
         case 1:
@@ -24,6 +25,7 @@ function	script	warpFeatue	{
     next;
     switch( select("商店街") ) {
         case 1:
+			cutin "", 255;
             warp "que_temsky", 99, 52;
             break;
     }
@@ -314,6 +316,7 @@ function	script	warpDungeon	{
             setarray .@mapname$[0],"nyd_dun01","nyd_dun02";
             break; 
     }
+	cutin "", 255;
     warp .@mapname$[.@menu], 0, 0;
 }
 
