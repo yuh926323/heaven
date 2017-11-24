@@ -416,7 +416,7 @@ function	script	warpDungeon	{
             break;
     }
 	cutin "", 255;
-	set @lastmapname$,.@mapname$
+	set @lastmapname$,.@mapname$;
     warp .@mapname$[.@menu], 0, 0;
 }
 
