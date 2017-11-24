@@ -168,10 +168,12 @@ function	script	warpDungeon	{
 	"[夢魘]艾爾帕蘭鐘塔"
     ) ) {
         case 1:
-		next;
 		if (@lastmaptext$ == "" ) { 
-			close; 
-			}
+		cutin "", 255;
+		close; 
+		}
+		next;
+		mes"[傳送人員]";
 		mes"確定傳送^006030 " + @lastmaptext$ + "^000000嗎?";
 		next;
             if (select ("是", "不是") == 2) {
