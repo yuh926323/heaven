@@ -1,7 +1,7 @@
 fayon,101,117,4	script	傳送人員	10041,{
     mes .npcname$;
     mes "請問你想要去那裡呢？";
-	cutin "SHALOSHI04",2;
+	cutin "SHALOSHI02",2;
     next;
     switch(select("功能傳送","城市傳送","野外傳送")) {
         case 1:
@@ -23,6 +23,7 @@ OnInit:
 
 function	script	warpFeatue	{
     next;
+	cutin "SHALOSHI04",2;
     switch( select("商店街") ) {
         case 1:
 			cutin "", 255;
@@ -34,6 +35,7 @@ function	script	warpFeatue	{
 
 function	script	warpCity	{
     next;
+	cutin "SHALOSHI04",2;
     switch( select(
             "盧恩 米德加茲王國 首都 普隆德拉",
 			"衛星都市 依斯魯得島",
@@ -112,6 +114,7 @@ function	script	warpCity	{
 
 function	script	warpDungeon	{
     next;
+	cutin "SHALOSHI04",2;
     switch( select(
 	"迷藏森林",
 	"普隆德拉地下水道",
