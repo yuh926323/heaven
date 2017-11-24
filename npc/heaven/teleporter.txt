@@ -116,7 +116,7 @@ function	script	warpDungeon	{
     next;
 	cutin "SHALOSHI04",2;
     switch( select(
-	"^9933FF[上次傳送]^00BB00 + @lastmapname + ^000000",
+	"^9933FF[上次傳送]^00BB00 " + (@lastmapname$ != "" ? @lastmapname$ : "無") + "^000000",
 	"迷藏森林",
 	"普隆德拉地下水道",
 	"依斯魯得島 海盜地洞密穴",
@@ -416,7 +416,7 @@ function	script	warpDungeon	{
             break;
     }
 	cutin "", 255;
-	set @lastmapname$,.@mapname$;
+	set @lastmapname$,.@mapname$[.@menu];
     warp .@mapname$[.@menu], 0, 0;
 }
 
