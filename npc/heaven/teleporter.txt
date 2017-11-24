@@ -177,6 +177,7 @@ function	script	warpDungeon	{
 		mes"確定傳送^006030 " + @lastmaptext$ + "^000000嗎?";
 		next;
             if (select ("是", "不是") == 2) {
+				cutin "", 255;
                 close;
             }
 			
