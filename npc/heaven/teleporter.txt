@@ -172,7 +172,6 @@ function	script	warpDungeon	{
 		cutin "", 255;
 		close; 
 		}
-		next;
 		mes"[傳送人員]";
 		mes"確定傳送^006030 " + @lastmaptext$ + "^000000嗎?";
 		next;
