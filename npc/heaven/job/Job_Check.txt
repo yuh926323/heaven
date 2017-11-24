@@ -15,7 +15,7 @@
 //預設條件與官方設定相同
 
 function	script	Job_Check	{
-
+	cutin "BU_DU5",2;
 	//初心者
 	if ( Class == 0 || Class == 4001 ) {
 		if ( JobLevel < 10 ) {

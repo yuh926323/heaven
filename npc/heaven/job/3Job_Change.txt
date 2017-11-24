@@ -21,6 +21,7 @@ function	script	Job3_Change	{
 		mes "您是^FF0000非轉生^000000的角色，";
 		mes "確定要進行三轉轉職嗎?";
 		mes "提示:^FF0000轉職後將無法學習進階二轉職業技能^000000";
+		cutin "BU_DU2",2;
 		next;
 		switch(select("確定","取消")){
 			case 1:

@@ -13,7 +13,7 @@
 //學習職業專屬的任務技能，其餘職業亦會習得緊急治療技能
 
 function	script	Job_Skill	{
-
+	cutin "BU_DU2",2;
 	//初心者
 	if ( Class == 0 || Class == 4001 ) {
 		skill 143,1,0;

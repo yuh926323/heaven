@@ -16,7 +16,7 @@
 
 
 //NPC框架
-fayon,104,117,4	script	職業服務員::Job_Service	469,{	//如遇到彈窗問題請將外觀編號更改
+fayon,104,117,4	script	職業服務員::Job_Service	628,{	//如遇到彈窗問題請將外觀編號更改
 
 	callfunc "Job_Main";
 	
@@ -52,10 +52,10 @@ fayon,104,117,4	script	職業服務員::Job_Service	469,{	//如遇到彈窗問�
 
 //腳本主目錄
 function	script	Job_Main	{
-
 	mes "[職業服務員]";
 	mes "歡迎使用綜合職業服務，";
 	mes "請問有甚麼能為您效勞?";
+	cutin "BU_DU1",2;
 	next;
 	switch(select("轉職服務","轉生服務","重置服務","職業租借服務","職業技能學習","結束")){
 		case 1:

@@ -19,6 +19,7 @@ function	script	Job_Rent	{
 	
 	mes "[職業服務員]";
 	mes	"請選擇您想要租借的項目:";
+	cutin "BU_DU2",2;
 	next;
 	switch(select("坐騎、魔導機甲","獵鷹","手推車")){
 		case 1:

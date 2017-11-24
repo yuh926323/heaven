@@ -20,6 +20,7 @@ function	script	Job2_Change	{
 		mes "[職業服務員]";
 		mes "請選擇想要轉職的職業:";
 		mes "提示:^FF0000轉生後將不能轉職成其他職業^000000";
+		cutin "BU_DU2",2;
 		
 		if ( Job1_History == 1 ) {
 			switch(select("騎士","十字軍")) {

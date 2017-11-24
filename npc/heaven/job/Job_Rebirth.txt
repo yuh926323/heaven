@@ -13,7 +13,7 @@
 //轉生時無需清空身上物品與金幣，只需解除租借物即可
 
 function	script	Job_Rebirth	{
-	
+	cutin "BU_DU2",2;
 	if (( class >= 7 && class <= 12 ) || ( class >= 14 && class <= 20 )) {
 	
 		if ( BaseLevel < 99 ) {

@@ -18,6 +18,7 @@ function	script	BbJob_Change	{
 	if ( Class >= 4024 && Class <= 4029 ) {
 		mes "[職業服務員]";
 		mes "請選擇想要轉職的職業:";
+		cutin "BU_DU2",2;
 		
 		if ( Job1_History == 1 ) {
 			switch(select("寶寶騎士","寶寶十字軍")) {

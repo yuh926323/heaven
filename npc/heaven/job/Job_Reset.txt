@@ -19,6 +19,7 @@ function	script	Job_Reset	{
 	mes "1. 重置素質 - " + $@RStZeny + " Zeny";
 	mes "2. 重置技能 - " + $@RSkZeny + " Zeny";
 	mes "3. 重置全部 - " + $@RAllZeny + " Zeny";
+	cutin "BU_DU2",2;
 	next;
 	switch(select("重置素質","重置技能","重置全部")){
 		case 1:
