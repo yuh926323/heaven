@@ -76,6 +76,7 @@ function	script	Job_Main	{
 		case 6:
 			mes "[職業服務員]";
 			mes "有需要歡迎隨時來找我幫忙!";
+			cutin "", 255;
 			close;
 	}
 }

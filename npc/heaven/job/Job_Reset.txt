@@ -52,10 +52,12 @@ function	script	Job_Reset	{
 	Reset_Done:
 		mes "[職業服務員]";
 		mes "重置已經順利完成!";
+		cutin "", 255;
 		close;
 		
 	Reset_Fail:
 		mes "[職業服務員]";
 		mes "很抱歉，您身上並持未有足夠Zeny!";
+		cutin "", 255;
 		close;
 }

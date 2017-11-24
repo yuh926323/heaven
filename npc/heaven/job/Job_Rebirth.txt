@@ -19,16 +19,19 @@ function	script	Job_Rebirth	{
 		if ( BaseLevel < 99 ) {
 			mes "[職業服務員]";
 			mes "需要達到基本等級^FF000099級^000000才能進行轉生!";
+			cutin "", 255;
 			close;
 		}
 		if ( JobLevel < 50 ) {
 			mes "[職業服務員]";
 			mes "需要達到職業等級^FF000050級^000000才能進行轉生!";
+			cutin "", 255;
 			close;
 		}
 		if ( checkfalcon() || checkcart() || checkriding() ) {
 			mes "[職業服務員]";
 			mes "請先解除所有^FF0000租借物品^000000才能進行轉生!";
+			cutin "", 255;
 			close;
 		}
 		
@@ -45,20 +48,24 @@ function	script	Job_Rebirth	{
 					resetlvl(1);
 					mes "[職業服務員]";
 					mes "恭喜您，己順利進行轉生!";
+					cutin "", 255;
 					close;
 				} else {
 					mes "[職業服務員]";
 					mes "很抱歉，您身上並持未有足夠Zeny!";
+					cutin "", 255;
 					close;
 				}
 			case 2:
 				mes "[職業服務員]";
 				mes "有需要歡迎隨時來找我幫忙!";
+				cutin "", 255;
 				close;
 		}
 	}
 	
 	mes "[職業服務員]";
 	mes "您的職業無法進行轉生!";
+	cutin "", 255;
 	close;
 }

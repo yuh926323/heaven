@@ -169,6 +169,7 @@ function	script	Job_Skill	{
 		}
 		mes "[職業服務員]";
 		mes "已成功習得職業的專屬技能!";
+		cutin "", 255;
 		close;
 
 }

@@ -28,6 +28,7 @@ function	script	Job_Rent	{
 			} else if ( ismounting() ) {
 				mes "[職業服務員]";
 				mes "請先移除您的騎寵!";
+				cutin "", 255;
 				close;
 			} else {
 				if ( Class == 7 || Class == 4008 || Class == 4030 || Class == 14 || Class == 4015 || Class == 4066 ||
@@ -35,6 +36,7 @@ function	script	Job_Rent	{
 					if ( !getskilllv(63) ) {
 						mes "[職業服務員]";
 						mes "很抱歉，需要習得^FF0000騎乘術^000000才能租借坐騎!";
+						cutin "", 255;
 						close;
 					} else {
 						setriding;
@@ -45,6 +47,7 @@ function	script	Job_Rent	{
 					if ( !getskilllv(2007) ) {
 						mes "[職業服務員]";
 						mes "很抱歉，需要習得^FF0000龍駕馭^000000才能租借坐騎!";
+						cutin "", 255;
 						close;
 					} else {
 						setdragon;
@@ -55,6 +58,7 @@ function	script	Job_Rent	{
 					if ( !getskilllv(2255) ) {
 						mes "[職業服務員]";
 						mes "很抱歉，需要習得^FF0000魔導機甲執照^000000才能租借坐騎!";
+						cutin "", 255;
 						close;
 					} else {
 						setmadogear;
@@ -71,6 +75,7 @@ function	script	Job_Rent	{
 					if ( !getskilllv(127) ) {
 						mes "[職業服務員]";
 						mes "很抱歉，需要習得^FF0000馴鷹術^000000才能租借獵鷹!";
+						cutin "", 255;
 						close;
 					} else {
 						setfalcon;
@@ -89,6 +94,7 @@ function	script	Job_Rent	{
 					if ( !getskilllv(39) ) {
 						mes "[職業服務員]";
 						mes "很抱歉，需要習得^FF0000手推車使用^000000才能租借手推車!";
+						cutin "", 255;
 						close;
 					} else {
 						setcart;
@@ -102,15 +108,18 @@ function	script	Job_Rent	{
 	Rent_Fail:
 		mes "[職業服務員]";
 		mes "很抱歉，您已經租借過了!";
+		cutin "", 255;
 		close;
 
 	Rent_Fail2:
 		mes "[職業服務員]";
 		mes "很抱歉，您的職業無法租借此項目!";
+		cutin "", 255;
 		close;
 
 	Rent_Done:
 		mes "[職業服務員]";
 		mes "租借已經順利完成!";
+		cutin "", 255;
 		close;
 }

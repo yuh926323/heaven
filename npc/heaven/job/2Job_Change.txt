@@ -179,6 +179,7 @@ function	script	Job2_Change	{
 	}
 	
 	Job2_Done:
+		cutin "", 255;
 		mes "[職業服務員]";
 		mes "轉職已經順利完成!";
 		close;	

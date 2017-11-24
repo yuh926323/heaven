@@ -140,22 +140,29 @@ function	script	warpDungeon	{
 	"優配擂斯",
 	"機械娃娃工廠",
     "達納托斯塔台",
-	"礦山洞穴",
-	"奧丁神殿",
-	"生體試驗研究所",
-	"深淵湖水地下洞穴",
-	"冰洞穴",
-	"古代神殿迷宮",
-	"神殿聖域洞穴",
-    "圖爾火山洞窟",
-	"無名的海島",
-	"地下公會",
-	"克魔島密穴",
+	"艾音貝赫礦山",
+	"毀葛奧丁神殿",
+	"活體實驗研究所",
+	"毀葛深淵湖水地下洞穴",
+	"拉赫冰穴",
+	"阿瑜陀耶 古神殿",
+	"拉赫神殿聖域",
+    "菲音斯 托爾火山密穴",
+	"無名島",
+	"公會地下密穴",
+	"克魔島洞穴",
 	"深淵森林洞穴",
-	"次元空間",
-	"馬努克曠野",
-	"輝煌領域曠野",
-    "尼德霍格洞穴"
+	"蘇克拉特沙漠次元裂縫",
+	"魔怒克原野",
+	"史波浪壯麗原野",
+    "巴西瀑布內的洞窟",
+	"莫斯科森林",
+	"粗暴者的傷口",
+	"卡米達隧道",
+	"德瓦他火山島",
+	"噩夢醫院",
+	"彩虹橋高塔",
+	"[夢魘]夢羅克金字塔地下",
     ) ) {
         case 1:
             set .@menu,select("迷藏森林1層","迷藏森林2層","迷藏森林3層")-1;
@@ -253,49 +260,48 @@ function	script	warpDungeon	{
             set .@menu,select("達納托斯塔台下層部 博物館入口1層","達納托斯塔台下層部 博物館2層","達納托斯塔台下層部 廢棄空間3層","達納托斯塔台下層部 廢棄空間4層","達納托斯塔台上層部5層","達納托斯塔台上層部6層","達納托斯塔台上層部 天使之房7層","達納托斯塔台上層部 天使之房8層","達納托斯塔台上層部 煩惱之房9層","達納托斯塔台上層部 悲傷之房10層","達納托斯塔台上層部 絕望之房11層","達納托斯塔台上層部 憎恨之房12層","達納托斯塔台(不明區域)13層")-1;
             setarray .@mapname$[0],"tha_t01","tha_t02","tha_t03","tha_t04","tha_t05","tha_t06","tha_t07","tha_t08","tha_t09","tha_t10","tha_t11","tha_t12","thana_boss";
             break;
-			//-------------------進度線--------------------------
         case 25:
-            set .@menu,select("礦山洞穴1層","礦山洞穴2層")-1;
+            set .@menu,select("艾音貝赫礦山1層","艾音貝赫礦山2層")-1;
             setarray .@mapname$[0],"ein_dun01","ein_dun02";
             break;
         case 26:
-            set .@menu,select("奧丁神殿1層","奧丁神殿2層","奧丁神殿3層")-1;
+            set .@menu,select("毀葛奧丁神殿西區","毀葛奧丁神殿南區","毀葛奧丁神殿北區")-1;
             setarray .@mapname$[0],"odin_tem01","odin_tem02","odin_tem03";
             break;
         case 27:
-            set .@menu,select("生體試驗研究所1層","生體試驗研究所2層","生體試驗研究所3層")-1;
-            setarray .@mapname$[0],"lhz_dun01","lhz_dun02","lhz_dun03";
+            set .@menu,select("活體實驗研究所 地下1層","活體實驗研究所 地下2層","活體實驗研究所 地下3層","活體實驗研究所 地下4層")-1;
+            setarray .@mapname$[0],"lhz_dun01","lhz_dun02","lhz_dun03","lhz_dun04";
             break;
         case 28:
-            set .@menu,select("深淵湖水地下洞穴1層","深淵湖水地下洞穴2層","深淵湖水地下洞穴3層")-1;
+            set .@menu,select("毀葛深淵湖水地下洞穴1層","毀葛深淵湖水地下洞穴2層","毀葛深淵湖水地下洞穴3層")-1;
             setarray .@mapname$[0],"abyss_01","abyss_02","abyss_03";
             break;
         case 29:
-            set .@menu,select("冰洞穴1層","冰洞穴2層","冰洞穴3層")-1;
+            set .@menu,select("拉赫冰穴1層","拉赫冰穴2層","拉赫冰穴3層")-1;
             setarray .@mapname$[0],"ice_dun01","ice_dun02","ice_dun03";
             break;
         case 30:
-            set .@menu,select("古代神殿迷宮1層","古代神殿迷宮2層")-1;
+            set .@menu,select("阿瑜陀耶 古神殿迷宮","阿瑜陀耶 古神殿內部")-1;
             setarray .@mapname$[0],"ayo_dun01","ayo_dun02";
             break;
         case 31:
-            set .@menu,select("神殿聖域洞穴1層","神殿聖域洞穴2層","神殿聖域洞穴3層","神殿聖域洞穴4層","神殿聖域洞穴5層")-1;
+            set .@menu,select("拉赫神殿聖域1樓北區 1層","拉赫神殿聖域1樓西區 2層","拉赫神殿聖域1樓東區 3層","拉赫神殿聖域1樓南區 4層","拉赫神殿聖域2樓中區 5層")-1;
             setarray .@mapname$[0],"ra_san01","ra_san02","ra_san03","ra_san04","ra_san05";
             break;
         case 32:
-            set .@menu,select("圖爾火山洞窟1層","圖爾火山洞窟2層","圖爾火山洞窟3層")-1;
+            set .@menu,select("菲音斯 托爾火山密穴1層","菲音斯 托爾火山密穴2層","菲音斯 托爾火山密穴3層")-1;
             setarray .@mapname$[0],"thor_v01","thor_v02","thor_v03";
             break;
         case 33:
-            set .@menu,select("無名的海島(晝)","無名的海島(夜)","修道院1層","修道院2層","修道院3層")-1;
+            set .@menu,select("無名島(日)","無名島(夜)","無名島修道院 1樓","無名島修道院 地下1樓","無名島修道院 地下2樓")-1;
             setarray .@mapname$[0],"nameless_i","nameless_n","abbey01","abbey02","abbey03";
             break;
         case 34:
-            set .@menu,select("地下公會1層","地下公會2層","地下公會3層","地下公會4層")-1;
-            setarray .@mapname$[0],"gld_dun01","gld_dun02","gld_dun03","gld_dun04";
+            set .@menu,select("斐楊公會地下密穴1層","斐楊公會地下密穴2層","深淵迴廊 : 太古之風","艾爾帕蘭公會地下密穴1層","艾爾帕蘭公會地下密穴2層","深淵迴廊 : 英雄之淚","普隆德拉公會地下密穴1層","普隆德拉公會地下密穴2層","深淵迴廊 : 戰士之路","吉芬公會地下密穴1層","吉芬公會地下密穴2層","深淵迴廊 : 亡者之丘","SE朱諾公會地下密穴","SE拉赫公會地下密穴",)-1;
+            setarray .@mapname$[0],"gld_dun01","gld_dun01_2","gld2_pay","gld_dun02","gld_dun02_2","gld2_ald","gld_dun03","gld_dun03_2","gld2_prt","gld_dun04","gld_dun04_2","gld2_gef","schg_dun01","arug_dun01";
             break;  
         case 35:
-            set .@menu,select("克魔島密穴 西邊","克魔島密穴 北邊","克魔島密穴 東邊")-1;
+            set .@menu,select("克魔島西邊洞穴加露","克魔島北邊洞穴盧安達","克魔島東邊洞穴馬吾")-1;
             setarray .@mapname$[0],"beach_dun","beach_dun2","beach_dun3";
             break;
         case 36:
@@ -303,21 +309,48 @@ function	script	warpDungeon	{
             setarray .@mapname$[0],"mosk_dun01","mosk_dun02","mosk_dun03";
             break; 
         case 37:
-            set .@menu,select("次元空間1層","次元空間2層","次元空間3層")-1;
+            set .@menu,select("蘇克拉特沙漠次元裂縫1層","蘇克拉特沙漠次元裂縫2層","蘇克拉特沙漠次元裂縫3層")-1;
             setarray .@mapname$[0],"moc_fild20","moc_fild21","moc_fild22";
             break; 
         case 38:
-            set .@menu,select("馬努克曠野1層","馬努克曠野2層","馬努克曠野3層")-1;
+            set .@menu,select("魔怒克原野1層","魔怒克原野2層","魔怒克原野3層")-1;
             setarray .@mapname$[0],"man_fild01","man_fild02","man_fild03";
             break; 
         case 39:
-            set .@menu,select("輝煌領域曠野1層","輝煌領域曠野2層","輝煌領域曠野3層")-1;
+            set .@menu,select("史波浪壯麗原野1層","史波浪壯麗原野2層","史波浪壯麗原野3層")-1;
             setarray .@mapname$[0],"spl_fild01","spl_fild02","spl_fild03";
             break;
         case 40:
-            set .@menu,select("尼德霍格洞穴1層","尼德霍格洞穴2層")-1;
-            setarray .@mapname$[0],"nyd_dun01","nyd_dun02";
+            set .@menu,select("巴西瀑布內的洞穴入口","巴西瀑布內的洞穴內部")-1;
+            setarray .@mapname$[0],"bra_dun01","bra_dun02";
             break; 
+		case 41:
+            set .@menu,select("莫斯科森林","莫斯科森林深處","莫斯科森林最深處")-1;
+            setarray .@mapname$[0],"mosk_dun01","mosk_dun02","mosk_dun03";
+            break; 	
+		case 42:
+            set .@menu,select("粗暴者的傷口")-1;
+            setarray .@mapname$[0],"nyd_dun01";
+            break;
+		case 43:
+            set .@menu,select("卡米達隧道","斯卡勒伯熔岩")-1;
+            setarray .@mapname$[0],"dic_dun01","dic_dun02";
+            break;
+		case 44:
+            set .@menu,select("喀拉喀托火山島","伊斯坦納洞穴")-1;
+            setarray .@mapname$[0],"dew_dun01","dew_dun02";
+            break;
+		case 45:
+            set .@menu,select("噩夢醫院 1樓")-1;
+            setarray .@mapname$[0],"ma_dun01";
+            break;
+        case 46:
+            set .@menu,select("彩虹橋高塔 1樓","彩虹橋高塔2層","彩虹橋高塔3層","彩虹橋高塔4層")-1;
+            setarray .@mapname$[0],"ecl_tdun01","ecl_tdun02","ecl_tdun03","ecl_tdun04";
+		case 47:
+            set .@menu,select("夢羅克金字塔地下1樓 夢魘","夢羅克金字塔地下2樓")-1;
+            setarray .@mapname$[0],"moc_prydn1","moc_prydn2";
+            break;
     }
 	cutin "", 255;
     warp .@mapname$[.@menu], 0, 0;

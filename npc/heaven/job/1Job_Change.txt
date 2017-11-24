@@ -52,6 +52,7 @@ function	script	Job1_Change	{
 					mes "[職業服務員]";
 					mes "想要轉職成為超級初心者，";
 					mes "需要達到基本等級^FF000045級^000000才能進行轉職!";
+					cutin "", 255;
 					close;
 				} else {
 					jobchange 23;
@@ -104,5 +105,6 @@ function	script	Job1_Change	{
 	Job1_Done:
 		mes "[職業服務員]";
 		mes "轉職已經順利完成!";
+		cutin "", 255;
 		close;
 }

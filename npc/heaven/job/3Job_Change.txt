@@ -33,6 +33,7 @@ function	script	Job3_Change	{
 			case 2:
 				mes "[職業服務員]";
 				mes "有需要歡迎隨時來找我幫忙!";
+				cutin "", 255;
 				close;
 		}
 	}
@@ -52,12 +53,14 @@ function	script	Job3_Change	{
 					mes	"[職業服務員]";
 					mes	"很抱歉，您身上並持未有足夠金幣，";
 					mes	"無法進行轉職!";
+					cutin "", 255;
 					close;
 				} else if ( countitem($@J3Item) < 1 ) {
 					mes	"[職業服務員]";
 					mes	"很抱歉，您身上並未持有";
 					mes	"[^FF0000" + getitemname($@J3Item) + "^000000]，";
 					mes	"無法進行轉職!";
+					cutin "", 255;
 					close;
 				} else {
 					delitem $@J3Item,1;
@@ -179,6 +182,7 @@ function	script	Job3_Change	{
 		mes "[職業服務員]";
 		mes "轉職已經順利完成!";
 		getitem 2795,1; // 青蘋果戒指
+		cutin "", 255;
 		switch(BaseJob)
 		{
 		case Job_Knight:

@@ -36,5 +36,6 @@ function	script	ExJob_Change	{
 	ExJob_Done:
 		mes "[職業服務員]";
 		mes "轉職已經順利完成!";
+		cutin "", 255;
 		close;	
 }
