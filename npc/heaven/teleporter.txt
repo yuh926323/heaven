@@ -116,7 +116,7 @@ function	script	warpDungeon	{
     next;
 	cutin "SHALOSHI04",2;
     switch( select(
-	"^9933FF[上次傳送]^00BB00 " + (@lastmapname$ != "" ? @lastmapname$ : "無") + "^000000",
+	"^9933FF[上次傳送]^00BB00 " + (@lastmaptext$ != "" ? @lastmaptext$ : "無") + "^000000",
 	"迷藏森林",
 	"普隆德拉地下水道",
 	"依斯魯得島 海盜地洞密穴",
@@ -172,7 +172,8 @@ function	script	warpDungeon	{
             break;	
         case 2:
 			next;
-            set .@menu,select("迷藏森林1層","迷藏森林2層","迷藏森林3層")-1;
+            setarray .@maptext$[0], "迷藏森林1層","迷藏森林2層","迷藏森林3層"; // [0]"迷藏森林1層" [1]"迷藏森林2層" [2]"迷藏森林3層" ...
+            set .@menu,select(implode(.@maptext$, ":"))-1; // "迷藏森林1層:迷藏森林2層:迷藏森林3層:"
             setarray .@mapname$[0],"prt_maze01","prt_maze02","prt_maze03";
             break;
         case 3:
@@ -416,11 +417,10 @@ function	script	warpDungeon	{
             break;
     }
 	cutin "", 255;
+	set @lastmaptext$,.@maptext$[.@menu];
 	set @lastmapname$,.@mapname$[.@menu];
     warp .@mapname$[.@menu], 0, 0;
 }
-
-
 
 
 
