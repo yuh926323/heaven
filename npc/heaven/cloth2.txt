@@ -1,14 +1,21 @@
-fayon,88,127,4    script    JRO第二套外觀    629,{
-	mes "盧恩騎士套裝尚未開放";
-    .@choose = select( "JRO第二套外觀", "Exit" );
-    if ( .@choose == 1 && ( Class == 4061 || Class == 4062 || Class == 4063 || Class == 4064|| Class == 4065|| Class == 4073|| Class == 4074|| Class == 4075|| Class == 4076|| Class == 4077|| Class == 4078|| Class == 4079) ) 
-	{
-        setlook 13, 1;
-        close;
-        }    
-    else
-        mes "抱歉 你的職業不符";
+fayon,88,127,4	script	更換JRO服裝人員	629,{
+    if (! callfunc("in_array", Class, .JRO_BodyStyle_whitelist)) {
+        mes "[更換JRO服裝人員]";
+        mes "抱歉，只有非^FF0000盧恩騎士^000000的三轉職業或寶寶三轉職業才能換成 JRO 服裝喔！";
         emotion e_swt,1;
-        setlook 13, 0;
-        close;    
+        setlook LOOK_BODY2, 0;
+        close;
+    }
+    mes "[更換JRO服裝人員]";
+    mes "很高興為你服務，你想換成什麼服裝呢？";
+    next;
+    set .@bodystyle, select("幫我換回原本的服裝", "我要換成 JRO 服裝") - 1;
+    mes "[更換JRO服裝人員]";
+    mes "換好了！";
+    setlook LOOK_BODY2, .@bodystyle;
+    close;
+
+OnInit:
+    setarray .JRO_BodyStyle_whitelist, 4061, 4062, 4063, 4064, 4065, 4073, 4074, 4075, 4076, 4077, 4078, 4079;
+    end;
 }
