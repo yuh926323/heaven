@@ -48,3 +48,37 @@ function	script	IP	{
 	close;}
 	
 }
+
+/*
+ * in_array(integer needle, array haystack)
+ * 檢查傳入整數是否存在陣列內
+ * @params integer needle
+ * @params array haystack
+ * @return boolean
+ */
+function	script	in_array	{
+    copyarray .@haystack, getarg(1), getarraysize(getarg(1));
+    for (set .@i, 0; .@i < getarraysize(.@haystack) ; set .@i, .@i + 1) {
+        if (getarg(0) == .@haystack[.@i]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/*
+ * in_array(string needle, array haystack)
+ * 檢查傳入字串是否存在陣列內
+ * @params string needle
+ * @params array haystack
+ * @return boolean
+ */
+function	script	in_arrays	{
+    copyarray .@haystack$, getarg(1), getarraysize(getarg(1));
+    for (set .@i, 0; .@i < getarraysize(.@haystack$) ; set .@i, .@i + 1) {
+        if (getarg(0) == .@haystack$[.@i]) {
+            return true;
+        }
+    }
+    return false;
+}
