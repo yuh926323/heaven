@@ -139,7 +139,6 @@ fayon, 82, 129,5	script	懸賞看板	844,{
 
         set $@BASE_RATE, 5; // Base 經驗倍率
         set $@JOB_RATE, 5; // Job 經驗倍率
-        logmes $@MAX_LEVEL_RANGE + "1234";
         // 避免搜尋到的魔物 (例: 華麗金屬)
         setarray $@exception$, "真晶", "炸彈", "聖誕", "肉粽", "寶箱", "箱子", "寶物箱子", "旗幟", "守護石", "防禦線", "水晶", "華麗金屬", "開關";
         end;
