@@ -44,6 +44,6 @@ OnInit:
                                        4073, 4074, 4075, 4076, 4077, 4078, 4079,
                                        4097, 4098, 4099, 4100, 4101, 4102, 4103, 4104, 4105, 4106, 4107, 4108;
     setarray .JRO_BodyStyle_blacklist, 4054, 4060, 4096;
-    set .npcname$, "[" + . strnpcinfo(0) . + "]";
+    set .npcname$, "[" + strnpcinfo(0) + "]";
     end;
 }
