@@ -1,17 +1,34 @@
-fayon,88,127,4	script	更換JRO服裝人員	629,{
+fayon,88,127,4	script	服裝大使	629,{
+    mes .npcname$;
+    mes "哈囉！ ^FF0000" + strcharinfo(0) + "^000000";
+    mes "你已經看膩了平常的穿著嗎？";
+    mes "如果你剛好是三轉職業的話"
+    mes "現在免費提供舊衣換新衣的服務喔！";
+    next;
+
     if (! callfunc("in_array", Class, .JRO_BodyStyle_whitelist)) {
-        mes "[更換JRO服裝人員]";
-        mes "抱歉，只有非^FF0000盧恩騎士^000000的三轉職業或寶寶三轉職業才能換成 JRO 服裝喔！";
+        mes .npcname$;
+        mes "抱歉，看起來你並不是三轉職業呢！只有三轉職業才能換成新的服裝喔！";
         emotion e_swt,1;
         close;
     }
-    mes "[更換JRO服裝人員]";
-    mes "很高興為你服務，你想換成什麼服裝呢？";
+
+    if (callfunc("in_array", Class, .JRO_BodyStyle_blacklist)) {
+        mes .npcname$;
+        mes "啊！真的是非常抱歉，^FF0000盧恩騎士^000000的新服裝還在設計中呢";
+        mes "請等待開放後再來更換唷！";
+        emotion e_swt,1;
+        close;
+    }
+
+    mes .npcname$;
+    mes "那麼～你想換什麼服裝呢？";
     next;
-    set .@bodystyle, select("幫我換回原本的服裝", "我要換成 JRO 服裝") - 1;
-    mes "[更換JRO服裝人員]";
+    set .@bodystyle, select("幫我換回原本的服裝", "我想要換上新服裝") - 1;
+    mes .npcname$;
     mes "換好了！";
     setlook LOOK_BODY2, .@bodystyle;
+    setlook LOOK_CLOTHES_COLOR, 0;
     close;
 
 OnInit:
@@ -26,5 +43,7 @@ OnInit:
                                        4061, 4062, 4063, 4064, 4065,
                                        4073, 4074, 4075, 4076, 4077, 4078, 4079,
                                        4097, 4098, 4099, 4100, 4101, 4102, 4103, 4104, 4105, 4106, 4107, 4108;
+    setarray .JRO_BodyStyle_blacklist, 4054, 4060, 4096;
+    set .npcname$, "[" + . strnpcinfo(0) . + "]";
     end;
 }
