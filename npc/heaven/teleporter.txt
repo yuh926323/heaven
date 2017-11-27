@@ -495,7 +495,7 @@ que_temsky,99,50,5	script	傳送人員#1	10041,{
 }
 
 function	script	TP	{
-    mes [傳送人員];
+    mes "[傳送人員]";
     mes "請問你想要去那裡呢？";
 	cutin "SHALOSHI02",2;
 	callfunc("warpFeatue");
