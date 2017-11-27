@@ -24,7 +24,7 @@ OnInit:
 function	script	warpFeatue	{
     next;
 	cutin "SHALOSHI04",2;
-    switch( select("^FF0088主城-當年斐楊^000000","^00BBFF商店街^000000","^00BBFF精煉區^000000","^00BBFF副本/道館區^000000","^00BBFF娛樂區^000000") ) {
+    switch( select("^FF0088主城-當年斐楊^000000","^0066FF商店街^000000","^0066FF精煉區^000000","^0066FF副本/道館區^000000","^0066FF娛樂區^000000","^0066FF掛賣區^000000") ) {
         case 1:
 			cutin "", 255;
             warp "Save",0,0;
@@ -44,6 +44,10 @@ function	script	warpFeatue	{
 		case 5:
 			cutin "", 255;
             warp "fayon", 105, 155;
+            break;
+		case 5:
+			cutin "", 255;
+            warp "fayon", 90, 87;
             break;
     }
     end;
