@@ -45,7 +45,7 @@ function	script	warpFeatue	{
 			cutin "", 255;
             warp "fayon", 105, 155;
             break;
-		case 5:
+		case 6:
 			cutin "", 255;
             warp "fayon", 90, 87;
             break;
