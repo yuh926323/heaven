@@ -1,4 +1,4 @@
-fayon,83,123,0	script	buff	-1,4,4,{
+fayon,68,100,0	script	buff	-1,4,4,{
     end;
 OnTouch:
     percentheal 100, 100;
