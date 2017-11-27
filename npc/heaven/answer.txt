@@ -1,0 +1,158 @@
+/************************************************************\
+					EAthena Script
+**************************************************************
+【名    稱】搶答活動
+【類    型】趣味問答
+【版    本】1.0
+【版權所有】泠然
+【服 務 端】99MAXEA v8.10.0
+【製作人員】
+    策劃：泠然
+    編程：泠然
+    文飾：泠然
+    製作：泠然
+    測試：泠然
+【簡要說明】
+    本腳本為 EAthena 服務端用娛樂腳本。
+	題庫只放了部分火影忍者題目，可以自行添加。
+	添加方法：在$qd_question1$數組中添加問題，$qd_question1_answer$數組中對應添加答案
+	注意：問題和答案在數組中的位置要相同。
+【更新日誌】
+    2015-07-26    1.0.0    創建腳本
+【錯誤回報】
+\************************************************************/
+fayon.gat,108,165,4	script	搶答活動	10108,{
+	mes"[搶答活動]";
+	mes"每日晚7點半到8點開啟搶答活動";
+	switch(select("規則說明",getgmlevel()>90?"測試開始":"",getgmlevel()>90?"測試結束":"")) {
+		case 1:
+			mes "搶答活動開始後，玩家直接在聊天欄中回答";
+			mes "第一個回答正確的可獲得獎勵";
+			mes "獎勵內容10w Zeny 和 1 P點";
+			close;
+		break;
+		case 2:
+			if (.qdhd==1){
+				mes "活動正在進行中";
+				close;
+			}
+			set .quest_time,0;
+			set .qdhd,1;
+			donpcevent "搶答活動::Onstart";
+			close;
+		break;
+		case 3:
+			set .qdhd,0;
+			close;
+		break;
+	}
+	end;
+	
+	OnClock1929:
+	if (.qdhd==1){
+		mes "活動正在進行中";
+		close;
+	}
+	set .qdhd,1;
+	announce "搶答活動1分鐘後開始，請到搶答活動npc處參加",bc_blue|bc_all;
+	sleep2 60000;
+	donpcevent "搶答活動::Onstart";
+	end;
+	OnClock2000:
+	set .qdhd,0;
+	end;
+	Onstart:
+		set .is_answer,0;
+		set .quest_time,.quest_time+1;
+		set .question_id,rand(getarraysize($qd_question1$));
+		defpattern 1, "([^:]+):\\s"+$qd_question1_answer$[.question_id]+".*", "bingo";
+		activatepset 1;
+		npctalk "第"+.quest_time+"題："+$qd_question1$[.question_id];
+		sleep2 5000;
+		if (.is_answer==1){
+			if(.qdhd==0){
+				npctalk "活動結束";
+				end;
+			}
+			npctalk "10秒後開始下一題";
+			sleep2 10000;
+			goto Onstart;
+		}
+		npctalk "還剩10秒";
+		sleep2 10000;
+		if (.is_answer==1){
+			if(.qdhd==0){
+				npctalk "活動結束";
+				end;
+			}
+			npctalk "10秒後開始下一題";
+			sleep2 10000;
+			goto Onstart;
+		}
+		if(.qdhd==0){
+			npctalk "活動結束";
+			end;
+		}
+		npctalk "無人答對，5秒後開始下一題";
+		sleep2 5000;
+		goto Onstart;
+		end;
+	
+
+	bingo:
+		deletepset 1;
+		set .is_answer,1;
+		npctalk "恭喜["+strcharinfo(0)+"]回答正確!";
+		zeny=zeny+100000;
+		atcommand "@cash 1 "+strcharinfo(0);
+		announce "回答正確，獎勵10W zeny 和 1 P點",bc_blue|bc_self;
+		emotion 24;
+		end;
+		
+	OnInit:
+		//題庫1
+		setarray $qd_question1$[0],
+		"《火影忍者》中誰復活了大蛇丸",
+		"《火影忍者》中影子模仿術有時間限制，忍術最多維持多久",
+		"《火影忍者》曉裡面的面具男是誰","《火影忍者》中佐助的哥哥叫什麼",
+		"《火影忍者》中忍考試筆試中與鳴人同桌的是誰",
+		"《火影忍者》中兵糧丸的作用是什麼",
+		"《火影忍者》中忍考試第2場，進入死亡之森的大門一共有幾道",
+		"《火影忍者》中在火影護額一共有幾種戴法",
+		"《火影忍者》中三代火影和阿斯瑪是什麼關係",
+		"《火影忍者》中雛田的老師是誰","《火影忍者》佩恩用來偵探的忍術叫什麼",
+		"《火影忍者》鳴人最喜歡的食物是什麼","《火影忍者》中自來也的護額是什麼字"
+		"《火影忍者》中人體有多少個查克拉穴位",
+		"《火影忍者》中雛田在第幾集變成長頭髮了",
+		"《火影忍者》中鳴人的全名是什麼","《火影忍者》中旗木卡卡西總看的書是什麼",
+		"《火影忍者》中七尾在哪個村",
+		"《火影忍者》中達茲納所修的橋最後定名為什麼",
+		"《火影忍者》中卡卡西幾歲晉級到中忍",
+		"《火影忍者》中不知玄間嘴裡叼著的是什麼",
+		"《火影忍者》中丁次在 豬鹿蝶 中是哪個";
+		//答案1
+		setarray $qd_question1_answer$[0],
+		"佐助",
+		"5分鐘",
+		"宇智波帶土",
+		"宇智波鼬",
+		"日向雛田",
+		"補充查克拉",
+		"44",
+		"11",
+		"父子",
+		"夕陽紅",
+		"雨虎自來術",
+		"拉麵",
+		"油",
+		"461",
+		"253",
+		"漩渦鳴人",
+		"親熱天堂",
+		"瀧忍村",
+		"鳴人大橋",
+		"6",
+		"千本",
+		"蝶";
+}
+
