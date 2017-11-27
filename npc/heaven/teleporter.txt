@@ -24,7 +24,7 @@ OnInit:
 function	script	warpFeatue	{
     next;
 	cutin "SHALOSHI04",2;
-    switch( select("^FF0000主城-當年斐楊^000000","商店街") ) {
+    switch( select("^FF0088主城-當年斐楊^000000","^00BBFF商店街"^000000,"^00BBFF精煉區"^000000,"^00BBFF副本/道館區"^000000,"^00BBFF娛樂區"^000000) ) {
         case 1:
 			cutin "", 255;
             warp "Save",0,0;
@@ -32,6 +32,18 @@ function	script	warpFeatue	{
 		case 2:
 			cutin "", 255;
             warp "que_temsky", 99, 52;
+            break;
+		case 3:
+			cutin "", 255;
+            warp "que_temsky", 100, 87;
+            break;
+		case 4:
+			cutin "", 255;
+            warp "fayon", 75, 155;
+            break;
+		case 5:
+			cutin "", 255;
+            warp "fayon", 105, 155;
             break;
     }
     end;
@@ -490,7 +502,10 @@ function	script	warpDungeon	{
 
 
 //--------------------------------------------------------------------------------------------
-que_temsky,99,50,5	script	傳送人員#1	10041,{
+que_temsky,99,50,4	script	傳送人員#1	10041,{
+	callfunc "TP";
+}
+fayon,90,155,4	script	傳送人員#2	10041,{
 	callfunc "TP";
 }
 
