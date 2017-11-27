@@ -1,0 +1,48 @@
+fayon,107,117,4	script	卡普拉 職員	10116,{
+	cutin "EP16_SKIA_NERIUS01",2;
+	mes "[卡普拉 職員]";
+	mes "歡迎光臨, 熱情的冒險家~!";
+	mes "我們將永遠為您提供最優質的服務!";
+	mes "請問您需要什麼服務呢?";
+	next;
+	 switch(select("儲存服務","個人倉庫","公會倉庫")) {
+        case 1:
+			mes "[卡普拉 職員]";
+			mes "您的復活點已經儲存到了:";
+			mes  "^0000FF當年斐楊^000000";
+			mes "謝謝您使用我們卡普拉公司的服務!";
+			close2;
+			savepoint "fayon",68,100,1,1;
+			cutin "", 255;
+			end;
+        case 2:
+			mes "[卡普拉 職員]";
+			mes "現在為您打開倉庫!";
+			mes "感謝您使用卡普拉服務.";
+			close2;
+			openstorage;
+			cutin "", 255;
+			end;
+        case 3:
+			switch(guildopenstorage()){
+				case 0:
+					mes "[卡普拉 職員]";
+					mes "已經成功為您打開公會倉庫!";
+					break;
+				case 1:
+					mes "[卡普拉 職員]";
+					mes "真的十分抱歉,";
+					mes "目前有其他公會成員正在使用倉庫!";
+					mes "請過一段時間再嘗試打開!";
+					break;
+				case 2:
+					mes "[卡普拉 職員]";
+					mes "很抱歉, 您至少需要加入一個公會,";
+					mes "才可以使用公會倉庫.";
+					break;
+				}
+			cutin "", 255;
+			close2;
+			end;
+    }
+}
