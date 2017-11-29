@@ -210,8 +210,7 @@ e_tower,81,105,0	script	塔之守護石	406,{
 				close;
 			}
 		} else {
-			set .@dun_lim_time,etower_timer+604800; // 1 week
-			// set .@dun_lim_time2,etower_timer+14400; // 4 hours
+			set .@dun_lim_time, etower_timer + 1800; // 30 minutes
 			set .@dun_cur_time,gettimetick(2);
 			set .@dun_ent_t,(.@dun_lim_time - .@dun_cur_time);
 			set .@dun_h,(.@dun_ent_t / 3600);
