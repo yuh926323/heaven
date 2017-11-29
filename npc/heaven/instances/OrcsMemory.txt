@@ -109,7 +109,7 @@ L_Enter:
 		mes "您必須先加入隊伍才能進入副本.";
 		close;
 	case IE_OK:
-		mapannounce "gef_fild10", getpartyname( getcharid(1) ) +" 隊伍的 "+strcharinfo(0)+" 已經進入 獸人的記憶.",bc_map,"0x00ff99";
+		mapannounce "fayon", getpartyname( getcharid(1) ) +" 隊伍的 "+strcharinfo(0)+" 已經進入 獸人的記憶.",bc_map,"0x00ff99";
 		if (checkquest(12059) == -1) setquest 12059;
 		//warp "1@orcs",179,15;
 		if (getarg(0) == 0) close;
