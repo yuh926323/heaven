@@ -203,8 +203,8 @@ e_tower,81,105,0	script	塔之守護石	406,{
 				callsub L_Enter,0,0;
 			case 2:
 				mes "我將把你傳送回原本的地方.";
-			close2;
-			warp "fayon", 70, 156;
+				close2;
+				warp "fayon", 70, 156;
 				end;
 			case 3:
 				close;
@@ -218,8 +218,7 @@ e_tower,81,105,0	script	塔之守護石	406,{
 			set .@dun_s,.@dun_ent_t - ((.@dun_h * 3600) + (.@dun_m * 60));
 
 			mes "由於魔力波動的影響現在無法進入副本, 請等 " + .@dun_h + "時" + .@dun_m + "分" + .@dun_s + "秒 後才能重新進入.";
-			next;
-			close2;
+			close;
 		}
 	case 2:
 		set etower_timer,0;
