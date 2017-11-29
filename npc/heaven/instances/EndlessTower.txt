@@ -822,7 +822,7 @@ function	script	F_Tower_Monster	{
 	case 77:
 		areamonster .@map$,93,351,103,387,"惡耗女妖",1867,30,.@label$;
 		areamonster .@map$,93,351,103,387,"狂暴惡靈",1291,10,.@label$;
-		areamonster .@map$,93,351,103,387,"?神官",1117,10,.@label$;
+		areamonster .@map$,93,351,103,387,"暗神官",1117,10,.@label$;
 		areamonster .@map$,93,351,103,387,"惡靈",1192,10,.@label$;
 		areamonster .@map$,93,351,103,387,"風魔巫師",1263,10,.@label$;
 		break;
