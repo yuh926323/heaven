@@ -143,8 +143,8 @@ fayon,64,150,6	script	船長 楊森	709,{
 	}
 
 OnInit:
-    waitingroom "★魔物終結塔★", 0;
-    end;
+	waitingroom "★魔物終結塔★", 0;
+	end;
 }
 
 e_tower,81,105,0	script	塔之守護石	406,{
@@ -192,8 +192,8 @@ e_tower,81,105,0	script	塔之守護石	406,{
 			callsub L_Enter,1,1;
 		case 2:
 			mes "我將把你傳送回原本的地方.";
-            close2;
-            warp "fayon", 70, 156;
+			close2;
+			warp "fayon", 70, 156;
 			end;
 		case 3:
 			end;
@@ -203,13 +203,13 @@ e_tower,81,105,0	script	塔之守護石	406,{
 		if (.@etower_timer2 < 2 && getcharid(1) == etower_partyid) {
 			mes "若你的副本已經創建完畢且開放進場, 那麼你就可以進入無盡之塔.";
 			next;
-			switch(select("進入 "+.@md_name$+":返回艾爾貝塔:結束對話")) {
+			switch(select("進入 "+.@md_name$+":返回原來的地方:結束對話")) {
 			case 1:
 				callsub L_Enter,0,0;
 			case 2:
-				mes "我將傳送你回去艾爾貝塔.";
-				close2;
-				warp "alberta",223,36;
+				mes "我將把你傳送回原本的地方.";
+			close2;
+			warp "fayon", 70, 156;
 				end;
 			case 3:
 				close;

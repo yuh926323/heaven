@@ -117,8 +117,8 @@ L_Enter:
 	}
 
 OnInit:
-    waitingroom "★獸人的記憶★", 0;
-    end;
+	waitingroom "★獸人的記憶★", 0;
+	end;
 }
 
 gef_fild10,238,202,6	script	狂傲的科學家#orc	865,{
