@@ -5,7 +5,7 @@ $file = fopen($full_filename, 'r');
 $utf8 = fread($file, filesize($full_filename));
 fclose($file);
 
-echo 'Convert ' . $full_filename. ' ... ' . PHP_EOL;
+echo "Convert filename: \033[0;37m{$full_filename}\033[0m ... \033[1;92mSuccessfully!\e[0m\n";
 
 $big5 = mb_convert_encoding($utf8, 'utf8', 'big5');
 $file = fopen($full_filename, 'w');
