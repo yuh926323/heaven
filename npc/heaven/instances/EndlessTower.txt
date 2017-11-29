@@ -125,7 +125,7 @@ fayon,64,150,6	script	船長 楊森	709,{
 		case 1:
 			mes "[船長 楊森]";
 			mes "那麼我們起錨, 出發~!";
-			close;
+			close2;
 			set in_102tower,4;
 			warp "e_tower",70,114;
 			end;
@@ -137,7 +137,7 @@ fayon,64,150,6	script	船長 楊森	709,{
 	} else if (in_102tower > 3) {
 		mes "[船長 楊森]";
 		mes "想要再次起航的話，我們可以馬上就出發～";
-		close;
+		close2;
 		warp "e_tower",70,114;
 		end;
 	}
@@ -175,7 +175,7 @@ e_tower,81,105,0	script	塔之守護石	406,{
 				callsub L_Enter,0,1;
 			case 3:
 				mes "我將把你傳送回原本的地方.";
-				close;
+				close2;
 				warp "fayon", 70, 156;
 				end;
 			case 4:
@@ -187,7 +187,7 @@ e_tower,81,105,0	script	塔之守護石	406,{
 			callsub L_Enter,1,1;
 		case 2:
 			mes "我將把你傳送回原本的地方.";
-			close;
+			close2;
 			warp "fayon", 70, 156;
 			end;
 		case 3:
@@ -203,8 +203,8 @@ e_tower,81,105,0	script	塔之守護石	406,{
 				callsub L_Enter,0,0;
 			case 2:
 				mes "我將把你傳送回原本的地方.";
-				close;
-				warp "fayon", 70, 156;
+			close2;
+			warp "fayon", 70, 156;
 				end;
 			case 3:
 				close;
