@@ -212,6 +212,10 @@ fayon,70,164,6	script	船長 楊森	709,{
 			}
 		}
 	}
+
+OnInit:
+    waitingroom "★魔物終結塔★", 0;
+    end;
 }
 
 e_tower,81,105,0	script	塔之守護石	406,{
