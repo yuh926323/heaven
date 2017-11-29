@@ -1,9 +1,9 @@
-//===== rAthenaCN º~¤ÆÁn©ú ===================================
-//= ±z¥i¥HÀH·NÂà¸ü©M¨Ï¥Î¥»º~¤Æ¸}¥»¡C­Y±z¨Ï¥Î¡B­ÉÅ³©Î½Æ»s¤F
-//= ¦¹¸}¥»¤¤ªºº~¤Æ¦¨ªG¡A¨º»ò½Ğ¦b±zªº¸}¥»¤¤¥[¤W¨Ã«O¯d³o¤C¦æ
-//= º~¤ÆÁn©ú¡A¥Ñ°J·PÁÂ¡C
-//= ­Y±z¹ï³o­Ó¸}¥»¦³§ó¦nªºÂ½Ä¶«ØÄ³¡A©Îµo²{¦¹¸}¥»ªºº~¤Æ¿ù»~¡A
-//= ½Ğ«e©¹ http://rathena.cn ¤W³ø±zµo²{ªº°İÃD¡AÁÂÁÂ¡C
+//===== rAthenaCN æ¼¢åŒ–è²æ˜ ===================================
+//= æ‚¨å¯ä»¥éš¨æ„è½‰è¼‰å’Œä½¿ç”¨æœ¬æ¼¢åŒ–è…³æœ¬ã€‚è‹¥æ‚¨ä½¿ç”¨ã€å€Ÿé‘’æˆ–è¤‡è£½äº†
+//= æ­¤è…³æœ¬ä¸­çš„æ¼¢åŒ–æˆæœï¼Œé‚£éº¼è«‹åœ¨æ‚¨çš„è…³æœ¬ä¸­åŠ ä¸Šä¸¦ä¿ç•™é€™ä¸ƒè¡Œ
+//= æ¼¢åŒ–è²æ˜ï¼Œç”±è¡·æ„Ÿè¬ã€‚
+//= è‹¥æ‚¨å°é€™å€‹è…³æœ¬æœ‰æ›´å¥½çš„ç¿»è­¯å»ºè­°ï¼Œæˆ–ç™¼ç¾æ­¤è…³æœ¬çš„æ¼¢åŒ–éŒ¯èª¤ï¼Œ
+//= è«‹å‰å¾€ http://rathena.cn ä¸Šå ±æ‚¨ç™¼ç¾çš„å•é¡Œï¼Œè¬è¬ã€‚
 //============================================================
 
 //===== rAthena Script ======================================= 
@@ -43,33 +43,33 @@
 
 // Entrance
 //============================================================
-fayon,73,164,0	script	µõ²ªªº¸H¤ù	406,{
+fayon,73,164,0	script	è£‚ç—•çš„ç¢ç‰‡	406,{
 
 	set .@party_id,getcharid(1);
-	set .@md_name$,"Ã~¤Hªº°O¾Ğ";
+	set .@md_name$,"ç¸äººçš„è¨˜æ†¶";
 
 	if (!instance_check_party(.@party_id,2,30,80)) {
-		mes "§A¥²¶·¥[¤J¤@­Ó¦Ü¤Ö¦³¨â­Ó¤Hªº¶¤¥î.";
-		mes "¦Ó¥B¶¤­ûªº°òÂ¦µ¥¯Å¥²¶·³£¦b ^ff000030 ~ 80^000000 ¤§¶¡, ¤~¯à°÷¶i¤J.";
+		mes "ä½ å¿…é ˆåŠ å…¥ä¸€å€‹è‡³å°‘æœ‰å…©å€‹äººçš„éšŠä¼.";
+		mes "è€Œä¸”éšŠå“¡çš„åŸºç¤ç­‰ç´šå¿…é ˆéƒ½åœ¨ ^ff000030 ~ 80^000000 ä¹‹é–“, æ‰èƒ½å¤ é€²å…¥.";
 		close;
 	}
 
 	set .@orctime,checkquest(12059,PLAYTIME);
 	if (.@orctime == -1) {
 		if (getcharid(0) == getpartyleader(.@party_id,2)) {
-			mes "¤w¸g½T»{¶¤¥îª¬ºA.";
-			mes "§A­n¹w¬ù¨Ã¶i¤J "+.@md_name$+" ¶Ü?";
+			mes "å·²ç¶“ç¢ºèªéšŠä¼ç‹€æ…‹.";
+			mes "ä½ è¦é ç´„ä¸¦é€²å…¥ "+.@md_name$+" å—?";
 			next;
-			switch(select("¹w¬ù³Ğ«Ø "+.@md_name$+":¶i¤J°Æ¥»:¨ú®ø")) {
+			switch(select("é ç´„å‰µå»º "+.@md_name$+":é€²å…¥å‰¯æœ¬:å–æ¶ˆ")) {
 			case 1:
 				if (instance_create(.@md_name$) < 0) {
-					mes "¶¤¥î¦WºÙ: "+ getpartyname(.@party_id);
-					mes "¶¤ªø¦WºÙ: "+strcharinfo(0);
-					mes "^0000ff"+.@md_name$+" ^000000 - °Æ¥»¹w¬ù¥¢±Ñ.";
+					mes "éšŠä¼åç¨±: "+ getpartyname(.@party_id);
+					mes "éšŠé•·åç¨±: "+strcharinfo(0);
+					mes "^0000ff"+.@md_name$+" ^000000 - å‰¯æœ¬é ç´„å¤±æ•—.";
 					close;
 				}
-				mes "^0000ff"+.@md_name$+"^000000- ¶}©l¹w¬ù°Æ¥»";
-				mes "¹w¬ù½T»{«á, ½Ğ¿ï¾Ü '¶i¤J°Æ¥»' µæ³æ, ¨Ó¶i¤J "+.@md_name$+" °Æ¥».";
+				mes "^0000ff"+.@md_name$+"^000000- é–‹å§‹é ç´„å‰¯æœ¬";
+				mes "é ç´„ç¢ºèªå¾Œ, è«‹é¸æ“‡ 'é€²å…¥å‰¯æœ¬' èœå–®, ä¾†é€²å…¥ "+.@md_name$+" å‰¯æœ¬.";
 				close;
 			case 2:
 				callsub L_Enter,0;
@@ -77,39 +77,39 @@ fayon,73,164,0	script	µõ²ªªº¸H¤ù	406,{
 				close;
 			}
 		}
-		if(select("¶i¤J " + .@md_name$ + ":¨ú®ø") == 2)
+		if(select("é€²å…¥ " + .@md_name$ + ":å–æ¶ˆ") == 2)
 			end;
 		callsub L_Enter,1;
 	} else if (.@orctime == 0 || .@orctime == 1) {
-		mes "­Y°Æ¥»¤w¸g¶}©ñ, ¨º»ò½Ğ¶i¤J°Æ¥».";
+		mes "è‹¥å‰¯æœ¬å·²ç¶“é–‹æ”¾, é‚£éº¼è«‹é€²å…¥å‰¯æœ¬.";
 		next;
-		if(select("¶i¤J "+.@md_name$+":¨ú®ø") == 2)
+		if(select("é€²å…¥ "+.@md_name$+":å–æ¶ˆ") == 2)
 			close;
 		callsub L_Enter,0;
 	} else if (.@orctime == 2) {
-		mes "^0000ff¤W¦¸¶i¤J Ã~¤Hªº°O¾Ğ °Æ¥»ªº Å]¤O­t­±®ÄªG¤w¸g®ø´²¤F. ±z¥i¥H­«·s³Ğ«Ø°Æ¥»µM«á¦A¦¸¶i¤J.^000000";
+		mes "^0000ffä¸Šæ¬¡é€²å…¥ ç¸äººçš„è¨˜æ†¶ å‰¯æœ¬çš„ é­”åŠ›è² é¢æ•ˆæœå·²ç¶“æ¶ˆæ•£äº†. æ‚¨å¯ä»¥é‡æ–°å‰µå»ºå‰¯æœ¬ç„¶å¾Œå†æ¬¡é€²å…¥.^000000";
 		erasequest 12059;
-		// ¤U­±³o­ÓÅÜ¶q±o­«¸m¡A§_«h¨Ó¹L¤@¦¸¤§«á,
-		// ¨C¦¸©M ®w¾|®æ ¹ï¸Ü³£±NÅã¥Ü³Ì«á¤@¥y¸Ü. [Sola¡B¤p§J]
+		// ä¸‹é¢é€™å€‹è®Šé‡å¾—é‡ç½®ï¼Œå¦å‰‡ä¾†éä¸€æ¬¡ä¹‹å¾Œ,
+		// æ¯æ¬¡å’Œ åº«é­¯æ ¼ å°è©±éƒ½å°‡é¡¯ç¤ºæœ€å¾Œä¸€å¥è©±. [Solaã€å°å…‹]
 		set yong_odun,0;
 		close;
 	}
-	mes "­Y±z·Q¹w¬ù³Ğ«Ø°Æ¥»ªº¸Ü, ±z¥²¶·¥[¤J¤@­Ó¦Ü¤Ö¦³¨â­Ó¤Hªº¶¤¥î, ¨Ã¥B¦¨¬°¶¤ªø¤~¥i¥H.";
+	mes "è‹¥æ‚¨æƒ³é ç´„å‰µå»ºå‰¯æœ¬çš„è©±, æ‚¨å¿…é ˆåŠ å…¥ä¸€å€‹è‡³å°‘æœ‰å…©å€‹äººçš„éšŠä¼, ä¸¦ä¸”æˆç‚ºéšŠé•·æ‰å¯ä»¥.";
 	close;
 L_Enter:
-	switch(instance_enter("Ã~¤Hªº°O¾Ğ")) {
+	switch(instance_enter("ç¸äººçš„è¨˜æ†¶")) {
 	case IE_OTHER:
-		mes "«Ü©êºp, µo¥Í¤F¥¼ª¾¿ù»~";
+		mes "å¾ˆæŠ±æ­‰, ç™¼ç”Ÿäº†æœªçŸ¥éŒ¯èª¤";
 		close;
 	case IE_NOINSTANCE:
-		mes "Ã~¤Hªº°O¾Ğ °Æ¥»¤£¦s¦b.";
-		mes "¥i¯à¬O°Æ¥»¤w³Q¶W¹L¤F®É¶¡­­¨î, ©ÎªÌ³Q¶¤ªø¥D°Ê¾P·´. ±z¥i¥H½Ğ¶¤ªø­«·s¹w¬ù³Ğ«Ø°Æ¥», ¦pªG¶¤ªø¹w¬ù¥¢±Ñªº¸Ü, ½Ğ¦b¨â¤p®É¤§«á¦A¹Á¸Õ­«·s¶i¤J.";
+		mes "ç¸äººçš„è¨˜æ†¶ å‰¯æœ¬ä¸å­˜åœ¨.";
+		mes "å¯èƒ½æ˜¯å‰¯æœ¬å·²è¢«è¶…éäº†æ™‚é–“é™åˆ¶, æˆ–è€…è¢«éšŠé•·ä¸»å‹•éŠ·æ¯€. æ‚¨å¯ä»¥è«‹éšŠé•·é‡æ–°é ç´„å‰µå»ºå‰¯æœ¬, å¦‚æœéšŠé•·é ç´„å¤±æ•—çš„è©±, è«‹åœ¨å…©å°æ™‚ä¹‹å¾Œå†å˜—è©¦é‡æ–°é€²å…¥.";
 		close;
 	case IE_NOMEMBER:
-		mes "±z¥²¶·¥ı¥[¤J¶¤¥î¤~¯à¶i¤J°Æ¥».";
+		mes "æ‚¨å¿…é ˆå…ˆåŠ å…¥éšŠä¼æ‰èƒ½é€²å…¥å‰¯æœ¬.";
 		close;
 	case IE_OK:
-		mapannounce "gef_fild10", getpartyname( getcharid(1) ) +" ¶¤¥îªº "+strcharinfo(0)+" ¤w¸g¶i¤J Ã~¤Hªº°O¾Ğ.",bc_map,"0x00ff99";
+		mapannounce "gef_fild10", getpartyname( getcharid(1) ) +" éšŠä¼çš„ "+strcharinfo(0)+" å·²ç¶“é€²å…¥ ç¸äººçš„è¨˜æ†¶.",bc_map,"0x00ff99";
 		if (checkquest(12059) == -1) setquest 12059;
 		//warp "1@orcs",179,15;
 		if (getarg(0) == 0) close;
@@ -118,59 +118,59 @@ L_Enter:
 
 }
 
-gef_fild10,238,202,6	script	¨g¶Æªº¬ì¾Ç®a#orc	865,{
+gef_fild10,238,202,6	script	ç‹‚å‚²çš„ç§‘å­¸å®¶#orc	865,{
 	if (BaseLevel < 50) {
-		mes "¬ì¾Ç®a¦ü¥G¨Sª`·N¨ì§A, ¦Ó¥B¿W¦Û¤@­Ó¤H³ä³ä¦Û»y...";
+		mes "ç§‘å­¸å®¶ä¼¼ä¹æ²’æ³¨æ„åˆ°ä½ , è€Œä¸”ç¨è‡ªä¸€å€‹äººå–ƒå–ƒè‡ªèª...";
 		close;
 	}
 	if (mad == 0) {
-		mes "[¨g¶Æªº¬ì¾Ç®a]";
-		mes "«¢«¢, ¨S¦³Ã~¤H´±¾aªñ§Ú!";
-		mes "µõ²ªªº¤O¶qªGµM¬O¤£¥i¾Ô³Óªº°Ú!!";
+		mes "[ç‹‚å‚²çš„ç§‘å­¸å®¶]";
+		mes "å“ˆå“ˆ, æ²’æœ‰ç¸äººæ•¢é è¿‘æˆ‘!";
+		mes "è£‚ç—•çš„åŠ›é‡æœç„¶æ˜¯ä¸å¯æˆ°å‹çš„å•Š!!";
 		next;
-		switch(select("Ã~¤H¤£´±§ğÀ»§A?:¯u·|§j¤û!")) {
+		switch(select("ç¸äººä¸æ•¢æ”»æ“Šä½ ?:çœŸæœƒå¹ç‰›!")) {
 		case 1:
-			mes "[¨g¶Æªº¬ì¾Ç®a]";
-			mes "Ãø¥H¸m«H¬O§a! ¦ı¬O¤d¯u¸U½T.";
-			mes "§Ú¬O½Õ¬d¹ÚÃ¹§Jªşªñ®ÉªÅµõ²ªªº¾ÇªÌ.";
-			mes "®Ú¾Ú§Úªº¬ã¨s, ¦bµõ²ª¤¤©Òµo²{ªºÄq¥Û, ÁôÂÃµÛ±j¤j¤O¶q!";
+			mes "[ç‹‚å‚²çš„ç§‘å­¸å®¶]";
+			mes "é›£ä»¥ç½®ä¿¡æ˜¯å§! ä½†æ˜¯åƒçœŸè¬ç¢º.";
+			mes "æˆ‘æ˜¯èª¿æŸ¥å¤¢ç¾…å…‹é™„è¿‘æ™‚ç©ºè£‚ç—•çš„å­¸è€….";
+			mes "æ ¹æ“šæˆ‘çš„ç ”ç©¶, åœ¨è£‚ç—•ä¸­æ‰€ç™¼ç¾çš„ç¤¦çŸ³, éš±è—è‘—å¼·å¤§åŠ›é‡!";
 			next;
 			break;
 		case 2:
-			mes "[¨g¶Æªº¬ì¾Ç®a]";
-			mes "­ü§A³o¤p¤p¦~¬ö, ÁÙ¯u¦hºÃ...­ó?";
+			mes "[ç‹‚å‚²çš„ç§‘å­¸å®¶]";
+			mes "å”‰ä½ é€™å°å°å¹´ç´€, é‚„çœŸå¤šç–‘...å“¼?";
 			next;
 			break;
 		}
-		select("³á? Ãø¹D¬O®ÉªÅ®È¦æ¶Ü?");
-		mes "[¨g¶Æªº¬ì¾Ç®a]";
-		mes "³é¨ş, §A«ÜÁo©ú¹À!";
-		mes "´N¦b­è­è, §ÚÅéÅç¤F®ÉªÅ®È¦æ! ¬İ¨ì©ñ¦b§Ú¨­®Çªº¥Û¹³¶Ü? ³o¥i¤£¬O¤@¯ëªº¥Û¹³!";
+		select("å–”? é›£é“æ˜¯æ™‚ç©ºæ—…è¡Œå—?");
+		mes "[ç‹‚å‚²çš„ç§‘å­¸å®¶]";
+		mes "å–²å‘µ, ä½ å¾ˆè°æ˜å˜›!";
+		mes "å°±åœ¨å‰›å‰›, æˆ‘é«”é©—äº†æ™‚ç©ºæ—…è¡Œ! çœ‹åˆ°æ”¾åœ¨æˆ‘èº«æ—çš„çŸ³åƒå—? é€™å¯ä¸æ˜¯ä¸€èˆ¬çš„çŸ³åƒ!";
 		next;
-		mes "[¨g¶Æªº¬ì¾Ç®a]";
-		mes "¸Ì­±¿Ä¦X¤F²{¥N¬ì¾ÇªººëÀH, ¥H¤Î¦bµõ²ª©Òµo²{ªºÄq¥Û©ÒÁô§tªºµL­­Å]¤O©O! §A­n¤£­n¿Ë¦ÛÅéÅç¬İ¬İ?";
+		mes "[ç‹‚å‚²çš„ç§‘å­¸å®¶]";
+		mes "è£¡é¢èåˆäº†ç¾ä»£ç§‘å­¸çš„ç²¾éš¨, ä»¥åŠåœ¨è£‚ç—•æ‰€ç™¼ç¾çš„ç¤¦çŸ³æ‰€éš±å«çš„ç„¡é™é­”åŠ›å‘¢! ä½ è¦ä¸è¦è¦ªè‡ªé«”é©—çœ‹çœ‹?";
 		next;
-		select("...¶â, ³oÅ¥°_¨Ó¨Ã¤£¦Xªk?");
-		mes "[¨g¶Æªº¬ì¾Ç®a]";
-		mes "«¢«¢«¢, ·íµM¬O«Dªkªº, ¤£¹L¬°¤F¹F¦¨¥Øªº¦³®É­n¤£¾Ü¤â¬q! ¦p¦ó? ­n¸Õ¸Õ¬İ¶Ü? «Ü¦³½ì³é! ¥i¥HÅéÅç»PÃ~¤H²á¤Ñ, ¨ş¨ş!";
+		select("...å—¯, é€™è½èµ·ä¾†ä¸¦ä¸åˆæ³•?");
+		mes "[ç‹‚å‚²çš„ç§‘å­¸å®¶]";
+		mes "å“ˆå“ˆå“ˆ, ç•¶ç„¶æ˜¯éæ³•çš„, ä¸éç‚ºäº†é”æˆç›®çš„æœ‰æ™‚è¦ä¸æ“‡æ‰‹æ®µ! å¦‚ä½•? è¦è©¦è©¦çœ‹å—? å¾ˆæœ‰è¶£å–²! å¯ä»¥é«”é©—èˆ‡ç¸äººèŠå¤©, å‘µå‘µ!";
 		next;
-		mes "[¨g¶Æªº¬ì¾Ç®a]";
-		mes "©Î³\§A­Ì­è¤@¨£­±, Ã~¤H´N·|¤U¹F¤@°ï¦æ°Ê«ü¥Ü, §A´N°²¸Ë°t¦X§Y¥i. ¦Ó¥BÃ~¤H­Ì¨C¦¸³£»¡­«½Æªº¸Ü, §Ú³£§Ö­I°_¨Ó¤F, ¨ş¨ş!";
+		mes "[ç‹‚å‚²çš„ç§‘å­¸å®¶]";
+		mes "æˆ–è¨±ä½ å€‘å‰›ä¸€è¦‹é¢, ç¸äººå°±æœƒä¸‹é”ä¸€å †è¡Œå‹•æŒ‡ç¤º, ä½ å°±å‡è£é…åˆå³å¯. è€Œä¸”ç¸äººå€‘æ¯æ¬¡éƒ½èªªé‡è¤‡çš„è©±, æˆ‘éƒ½å¿«èƒŒèµ·ä¾†äº†, å‘µå‘µ!";
 		next;
-		switch(select("¦n°Ú...§Ú­n«ç»ò°µ©O?:§Ú­n¬O¦uªkªº¦n¤½¥Á.")) {
+		switch(select("å¥½å•Š...æˆ‘è¦æ€éº¼åšå‘¢?:æˆ‘è¦æ˜¯å®ˆæ³•çš„å¥½å…¬æ°‘.")) {
 		case 1:
-			mes "[¨g¶Æªº¬ì¾Ç®a]";
-			mes "«Ü¦n! ½Ğ§A§â¤â©ñ¦b®ÇÃäªº²ö¤º¥Û¹³¤W! ¶i¥h¤§«á¦n¦nªí²{§a! ¨ş¨ş!";
+			mes "[ç‹‚å‚²çš„ç§‘å­¸å®¶]";
+			mes "å¾ˆå¥½! è«‹ä½ æŠŠæ‰‹æ”¾åœ¨æ—é‚Šçš„è«å…§çŸ³åƒä¸Š! é€²å»ä¹‹å¾Œå¥½å¥½è¡¨ç¾å§! å‘µå‘µ!";
 			set mad,1;
 			close;
 		case 2:
-			mes "[¨g¶Æªº¬ì¾Ç®a]";
-			mes "¤£¥h©Ô­Ë! ­ó!";
+			mes "[ç‹‚å‚²çš„ç§‘å­¸å®¶]";
+			mes "ä¸å»æ‹‰å€’! å“¼!";
 			close;
 		}
 	} else if (mad == 1) {
-		mes "[¨g¶Æªº¬ì¾Ç®a]";
-		mes "¶â? ·Q­nÅéÅç®ÉªÅ®È¦æªº¸Ü, ´N§â¤â©ñ¦b²ö¤º¥Û¹³¤W!";
+		mes "[ç‹‚å‚²çš„ç§‘å­¸å®¶]";
+		mes "å—¯? æƒ³è¦é«”é©—æ™‚ç©ºæ—…è¡Œçš„è©±, å°±æŠŠæ‰‹æ”¾åœ¨è«å…§çŸ³åƒä¸Š!";
 		close;
 	} else {
 		set mad,1;
@@ -194,7 +194,7 @@ OnDisable:
 
 OnEnable:
 	enablenpc instance_npcname("#Resurrect Monsters1");
-	monster instance_mapname("1@orcs"),0,0,"Ã~¤H¾Ô¤h",1023,30,instance_npcname("#Resurrect Monsters1")+"::OnMyMobDead";
+	monster instance_mapname("1@orcs"),0,0,"ç¸äººæˆ°å£«",1023,30,instance_npcname("#Resurrect Monsters1")+"::OnMyMobDead";
 	end;
 
 OnMyMobDead:
@@ -203,24 +203,24 @@ OnMyMobDead:
 	if (.@mob_dead_num > 0) {
 		set .@mob_ran,rand(1,30);
 		if (.@mob_ran > 29) {
-			monster .@map$,0,0,"Ã~¤H¾Ô¤h",1023,.@mob_dead_num,instance_npcname("#Resurrect Monsters1")+"::OnMyMobDead";
+			monster .@map$,0,0,"ç¸äººæˆ°å£«",1023,.@mob_dead_num,instance_npcname("#Resurrect Monsters1")+"::OnMyMobDead";
 		}
 		else if ((.@mob_ran > 28) && (.@mob_ran < 30)) {
-			monster .@map$,0,0,"Ã~¤H¾Ô¤hªø",1213,.@mob_dead_num,instance_npcname("#Resurrect Monsters1")+"::OnMyMobDead";
+			monster .@map$,0,0,"ç¸äººæˆ°å£«é•·",1213,.@mob_dead_num,instance_npcname("#Resurrect Monsters1")+"::OnMyMobDead";
 			if (rand(1,10) == 9) {
-				mapannounce .@map$, "Ã~¤H¾Ô¤hªø: §Ú­Ì»İ­n§ó¦hªºªZ¸Ë©è§Ü¤O¶q! »°§Ö¦b³o¸Ì¦h¦h§ì§§¤B!",bc_map,"0xff4444";
+				mapannounce .@map$, "ç¸äººæˆ°å£«é•·: æˆ‘å€‘éœ€è¦æ›´å¤šçš„æ­¦è£æŠµæŠ—åŠ›é‡! è¶•å¿«åœ¨é€™è£¡å¤šå¤šæŠ“å£¯ä¸!",bc_map,"0xff4444";
 			}
 		}
 		else if ((.@mob_ran > 26) && (.@mob_ran < 29)) {
-			areamonster .@map$,41,91,51,81,"Ã~¤H¾Ô¤hªø",1213,.@mob_dead_num,instance_npcname("#Resurrect Monsters1")+"::OnMyMobDead";
+			areamonster .@map$,41,91,51,81,"ç¸äººæˆ°å£«é•·",1213,.@mob_dead_num,instance_npcname("#Resurrect Monsters1")+"::OnMyMobDead";
 			if (rand(1,10) == 9) {
-				mapannounce .@map$, "Ã~¤H¾Ô¤hªø¦b­ş!? Åı¥L­Ì¨Ó¶Ï·À³o¨Ç¼Ä¤H!",bc_map,"0xff4444";
+				mapannounce .@map$, "ç¸äººæˆ°å£«é•·åœ¨å“ª!? è®“ä»–å€‘ä¾†å‰¿æ»…é€™äº›æ•µäºº!",bc_map,"0xff4444";
 			}
 		}
 		else {
-			areamonster .@map$,17,187,27,177,"Ã~¤H¾Ô¤hªø",1213,.@mob_dead_num,instance_npcname("#Resurrect Monsters1")+"::OnMyMobDead";
+			areamonster .@map$,17,187,27,177,"ç¸äººæˆ°å£«é•·",1213,.@mob_dead_num,instance_npcname("#Resurrect Monsters1")+"::OnMyMobDead";
 			if (rand(1,5) == 3) {
-				mapannounce .@map$, "Äµ§i: Ã~¤H­x¶¤¤w¸g¦b²Ä¥|°Ï°ì¶°µ²",bc_map,"0x77ff77";
+				mapannounce .@map$, "è­¦å‘Š: ç¸äººè»éšŠå·²ç¶“åœ¨ç¬¬å››å€åŸŸé›†çµ",bc_map,"0x77ff77";
 			}
 			if (rand(1,100) == 50) {
 				initnpctimer;
@@ -230,13 +230,13 @@ OnMyMobDead:
 	end;
 
 OnTimer10:
-	mapannounce instance_mapname("1@orcs"), "Ã~¤H¦uÅ@¶¤ªøªº©IÆ~: ¬İ¨Ó³o³õ¾Ô§Ğ·|¤ñ§Ú·Q¹³¤¤ªº­nªø¹À. ¥l³êÄÁ¨Å¥¨¥Û©Ç!",bc_map,"0xff4444";
+	mapannounce instance_mapname("1@orcs"), "ç¸äººå®ˆè­·éšŠé•·çš„å‘¼ç±²: çœ‹ä¾†é€™å ´æˆ°å½¹æœƒæ¯”æˆ‘æƒ³åƒä¸­çš„è¦é•·å˜›. å¬å–šé˜ä¹³å·¨çŸ³æ€ª!",bc_map,"0xff4444";
 	end;
 
 OnTimer4010:
 	set .@map$, instance_mapname("1@orcs");
-	mapannounce .@map$, "ÄÁ¨Å¥Û³ÈÀw­Ì±q¦a©³²`³B·½·½¤£Â_¦a«_¥X¨Ó.",bc_map,"0x77ff77";
-	areamonster .@map$,17,187,27,177,"ÄÁ¨Å¥¨¥Û©Ç",1278,20,instance_npcname("#Resurrect Monsters1")+"::OnMyMobDead";
+	mapannounce .@map$, "é˜ä¹³çŸ³å‚€å„¡å€‘å¾åœ°åº•æ·±è™•æºæºä¸æ–·åœ°å†’å‡ºä¾†.",bc_map,"0x77ff77";
+	areamonster .@map$,17,187,27,177,"é˜ä¹³å·¨çŸ³æ€ª",1278,20,instance_npcname("#Resurrect Monsters1")+"::OnMyMobDead";
 	stopnpctimer;
 	end;
 }
@@ -254,7 +254,7 @@ OnDisable:
 
 OnEnable:
 	enablenpc instance_npcname("#Resurrect Monsters2");
-	monster instance_mapname("1@orcs"),0,0,"¹¥¤Æ¤§¯T",1106,15,instance_npcname("#Resurrect Monsters2")+"::OnMyMobDead";
+	monster instance_mapname("1@orcs"),0,0,"é¦´åŒ–ä¹‹ç‹¼",1106,15,instance_npcname("#Resurrect Monsters2")+"::OnMyMobDead";
 	end;
 
 OnMyMobDead:
@@ -262,12 +262,12 @@ OnMyMobDead:
 	set .@mob_dead_num, 15 - mobcount(.@map$,instance_npcname("#Resurrect Monsters2")+"::OnMyMobDead");
 	if (rand(1,30) > 15) {
 		if (.@mob_dead_num > 0) {
-			monster .@map$,0,0,"¹¥¤Æ¤§¯T",1106,.@mob_dead_num,instance_npcname("#Resurrect Monsters2")+"::OnMyMobDead";
+			monster .@map$,0,0,"é¦´åŒ–ä¹‹ç‹¼",1106,.@mob_dead_num,instance_npcname("#Resurrect Monsters2")+"::OnMyMobDead";
 		}
 	}
 	else {
 		if (.@mob_dead_num > 0) {
-			areamonster .@map$,17,187,27,177,"¹¥¤Æ¤§¯T",1106,.@mob_dead_num,instance_npcname("#Resurrect Monsters2")+"::OnMyMobDead";
+			areamonster .@map$,17,187,27,177,"é¦´åŒ–ä¹‹ç‹¼",1106,.@mob_dead_num,instance_npcname("#Resurrect Monsters2")+"::OnMyMobDead";
 		}
 	}
 	end;
@@ -286,7 +286,7 @@ OnDisable:
 
 OnEnable:
 	enablenpc instance_npcname("#Resurrect Monsters3");
-	monster instance_mapname("1@orcs"),0,0,"Ã~¤H¤}½b¤â",1189,15,instance_npcname("#Resurrect Monsters3")+"::OnMyMobDead";
+	monster instance_mapname("1@orcs"),0,0,"ç¸äººå¼“ç®­æ‰‹",1189,15,instance_npcname("#Resurrect Monsters3")+"::OnMyMobDead";
 	end;
 
 OnMyMobDead:
@@ -295,20 +295,20 @@ OnMyMobDead:
 	set .@mob_ran,rand(1,30);
 	if (.@mob_ran > 29) {
 		if (.@mob_dead_num > 0) {
-			monster .@map$,0,0,"Ã~¤H¤}½b¤â",1189,.@mob_dead_num,instance_npcname("#Resurrect Monsters3")+"::OnMyMobDead";
+			monster .@map$,0,0,"ç¸äººå¼“ç®­æ‰‹",1189,.@mob_dead_num,instance_npcname("#Resurrect Monsters3")+"::OnMyMobDead";
 		}
 	}
 	else if ((.@mob_ran > 26) && (.@mob_ran < 30)) {
 		if (.@mob_dead_num > 0) {
-			areamonster .@map$,43,155,47,159,"Ã~¤H¤}½b¤â",1189,.@mob_dead_num,instance_npcname("#Resurrect Monsters3")+"::OnMyMobDead";
+			areamonster .@map$,43,155,47,159,"ç¸äººå¼“ç®­æ‰‹",1189,.@mob_dead_num,instance_npcname("#Resurrect Monsters3")+"::OnMyMobDead";
 			if (rand(1,3) == 3) {
-				mapannounce .@map$, "Ã~¤H¾Ô¤hªø: ±q­I«á§ğÀ»¥L­Ì! ¤ÁÂ_¥L­Ìªº¨Ñµ¹!",bc_map,"0xff4444";
+				mapannounce .@map$, "ç¸äººæˆ°å£«é•·: å¾èƒŒå¾Œæ”»æ“Šä»–å€‘! åˆ‡æ–·ä»–å€‘çš„ä¾›çµ¦!",bc_map,"0xff4444";
 			}
 		}
 	}
 	else {
 		if (.@mob_dead_num > 0) {
-			areamonster .@map$,17,187,27,177,"Ã~¤H¤}½b¤â",1189,.@mob_dead_num,instance_npcname("#Resurrect Monsters3")+"::OnMyMobDead";
+			areamonster .@map$,17,187,27,177,"ç¸äººå¼“ç®­æ‰‹",1189,.@mob_dead_num,instance_npcname("#Resurrect Monsters3")+"::OnMyMobDead";
 		}
 	}
 	end;
@@ -319,14 +319,14 @@ OnMyMobDead:
 
 OnInstanceInit:
 	enablenpc instance_npcname("#Resurrect Monsters4");
-	areamonster instance_mapname("1@orcs"),98,35,178,115,"ºÄ°A",1627,10,instance_npcname("#Resurrect Monsters4")+"::OnMyMobDead";
+	areamonster instance_mapname("1@orcs"),98,35,178,115,"ç˜§èšŠ",1627,10,instance_npcname("#Resurrect Monsters4")+"::OnMyMobDead";
 	end;
 
 OnMyMobDead:
 	set .@map$, instance_mapname("1@orcs");
 	set .@mob_dead_num, 10 - mobcount(.@map$,instance_npcname("#Resurrect Monsters4")+"::OnMyMobDead");
 	if (.@mob_dead_num > 0) {
-		monster .@map$,0,0,"ºÄ°A",1627,.@mob_dead_num,instance_npcname("#Resurrect Monsters4")+"::OnMyMobDead";
+		monster .@map$,0,0,"ç˜§èšŠ",1627,.@mob_dead_num,instance_npcname("#Resurrect Monsters4")+"::OnMyMobDead";
 	}
 	end;
 
@@ -335,66 +335,66 @@ OnDisable:
 	end;
 }
 
-1@orcs,180,29,4	script	®w¾|®æ#1-1	433,{
-	donpcevent instance_npcname("®w¾|®æ#1-2")+"::OnEnable";
+1@orcs,180,29,4	script	åº«é­¯æ ¼#1-1	433,{
+	donpcevent instance_npcname("åº«é­¯æ ¼#1-2")+"::OnEnable";
 	end;
 }
 
-1@orcs,180,29,4	script	®w¾|®æ#1-2	433,{
+1@orcs,180,29,4	script	åº«é­¯æ ¼#1-2	433,{
 	end;
 
 OnInstanceInit:
-	disablenpc instance_npcname("®w¾|®æ#1-2");
+	disablenpc instance_npcname("åº«é­¯æ ¼#1-2");
 	end;
 
 OnEnable:
-	disablenpc instance_npcname("®w¾|®æ#1-1");
-	enablenpc instance_npcname("®w¾|®æ#1-2");
+	disablenpc instance_npcname("åº«é­¯æ ¼#1-1");
+	enablenpc instance_npcname("åº«é­¯æ ¼#1-2");
 	initnpctimer;
 	end;
 
 OnTimer10:
-	mapannounce instance_mapname("1@orcs"), "®w¾|®æ: ¸Ó¦º... §A«ç»ò¨º»ò¤[!! §Ú¨S¦³¨º»ò¦h®É¶¡!!",bc_map,"0xffff00";
+	mapannounce instance_mapname("1@orcs"), "åº«é­¯æ ¼: è©²æ­»... ä½ æ€éº¼é‚£éº¼ä¹…!! æˆ‘æ²’æœ‰é‚£éº¼å¤šæ™‚é–“!!",bc_map,"0xffff00";
 	end;
 
 OnTimer5710:
-	mapannounce instance_mapname("1@orcs"), "®w¾|®æ: ¨Ì·Ó­ì¥ı­p¹º­nÀ°§Ú­Ì¦P¦ñ­Ì¥´¶}¤jªù, ¦ı¦]§A­Ì¯Ô»~®É¶¡, ®`§Ú­Ì³QÃ~¤H¤k§Åµo²{! ²{¦b¨Æ±¡ÅÜ±o«Ü´Æ¤â.",bc_map,"0xffff00";
+	mapannounce instance_mapname("1@orcs"), "åº«é­¯æ ¼: ä¾ç…§åŸå…ˆè¨ˆåŠƒè¦å¹«æˆ‘å€‘åŒä¼´å€‘æ‰“é–‹å¤§é–€, ä½†å› ä½ å€‘è€½èª¤æ™‚é–“, å®³æˆ‘å€‘è¢«ç¸äººå¥³å·«ç™¼ç¾! ç¾åœ¨äº‹æƒ…è®Šå¾—å¾ˆæ£˜æ‰‹.",bc_map,"0xffff00";
 	end;
 
 OnTimer14610:
-	mapannounce instance_mapname("1@orcs"), "Ã~¤H¦uÅ@¶¤ªøªº©IÆ~: ·PÄ±¨ì¼Ä¤H¦bªşªñ, »°§Ö§â°»¬d§L¤O¬£¨ì¤J¤fªşªñ¥h!!",bc_map,"0xff4444";
+	mapannounce instance_mapname("1@orcs"), "ç¸äººå®ˆè­·éšŠé•·çš„å‘¼ç±²: æ„Ÿè¦ºåˆ°æ•µäººåœ¨é™„è¿‘, è¶•å¿«æŠŠåµæŸ¥å…µåŠ›æ´¾åˆ°å…¥å£é™„è¿‘å»!!",bc_map,"0xff4444";
 	end;
 
 OnTimer20210:
-	mapannounce instance_mapname("1@orcs"), "®w¾|®æ: ¤£§®¤F... ¼Ä¤H§Ö­n½Ä¹L¨Ó¤F, ­n¥J²ÓÅ¥§Úªº«ü´§.",bc_map,"0xffff00";
+	mapannounce instance_mapname("1@orcs"), "åº«é­¯æ ¼: ä¸å¦™äº†... æ•µäººå¿«è¦è¡éä¾†äº†, è¦ä»”ç´°è½æˆ‘çš„æŒ‡æ®.",bc_map,"0xffff00";
 	end;
 
 OnTimer24910:
-	mapannounce instance_mapname("1@orcs"), "®w¾|®æ: ¦û»â¦¹°Ïªº¤k§Å, §â1¼Ó¤À¦¨4­Ó°Ï°ì«á¥ÎÅ]ªkµ¹«Ê¦L¤F, ¥H¨C­Ó°Ï°ì¬£¾n¤@­Ó¥i¥H¸Ñ°£«Ê¦LªºÃ~¤H¦uÅ@§L.",bc_map,"0xffff00";
+	mapannounce instance_mapname("1@orcs"), "åº«é­¯æ ¼: ä½”é ˜æ­¤å€çš„å¥³å·«, æŠŠ1æ¨“åˆ†æˆ4å€‹å€åŸŸå¾Œç”¨é­”æ³•çµ¦å°å°äº†, ä»¥æ¯å€‹å€åŸŸæ´¾é§ä¸€å€‹å¯ä»¥è§£é™¤å°å°çš„ç¸äººå®ˆè­·å…µ.",bc_map,"0xffff00";
 	end;
 
 OnTimer34310:
-	mapannounce instance_mapname("1@orcs"), "®w¾|®æ: ¥h§â¥L­Ì§ä¥X¨Ó«á®ø·À±¼, ¨º»òÅ]ªk°}´N·|¸Ñ°£, µM«á¥i¥H¶i¤J¤U¤@­Ó°Ï°ì¤F.",bc_map,"0xffff00";
+	mapannounce instance_mapname("1@orcs"), "åº«é­¯æ ¼: å»æŠŠä»–å€‘æ‰¾å‡ºä¾†å¾Œæ¶ˆæ»…æ‰, é‚£éº¼é­”æ³•é™£å°±æœƒè§£é™¤, ç„¶å¾Œå¯ä»¥é€²å…¥ä¸‹ä¸€å€‹å€åŸŸäº†.",bc_map,"0xffff00";
 	end;
 
 OnTimer39710:
-	mapannounce instance_mapname("1@orcs"), "®w¾|®æ: ­nª`·Nªº¬O°£¤FÅ]¤O«Ê¦LªºÃ~¤H, ºÉ¶q§OÅå°Ê¨ä¥¦Ã~¤H, §_«h§ó¼F®`ªºÃ~¤H¬ğÀ»¶¤, ·|¦u¦í³q©¹¤G¼hªº³Ì«á°Ï°ì.",bc_map,"0xffff00";
+	mapannounce instance_mapname("1@orcs"), "åº«é­¯æ ¼: è¦æ³¨æ„çš„æ˜¯é™¤äº†é­”åŠ›å°å°çš„ç¸äºº, ç›¡é‡åˆ¥é©šå‹•å…¶å®ƒç¸äºº, å¦å‰‡æ›´å²å®³çš„ç¸äººçªæ“ŠéšŠ, æœƒå®ˆä½é€šå¾€äºŒå±¤çš„æœ€å¾Œå€åŸŸ.",bc_map,"0xffff00";
 	end;
 
 OnTimer49210:
-	mapannounce instance_mapname("1@orcs"), "®w¾|®æ: ³ÌÁVªº±¡§Î¬O©¹2¼Óªº¤J¤f¦³¥i¯à³Q«ÊÂê, «ØÄ³ºÉ¶q§Oµw¸Iµw, ³Ì¦n¨±°j«e¶i.",bc_map,"0xffff00";
+	mapannounce instance_mapname("1@orcs"), "åº«é­¯æ ¼: æœ€ç³Ÿçš„æƒ…å½¢æ˜¯å¾€2æ¨“çš„å…¥å£æœ‰å¯èƒ½è¢«å°é–, å»ºè­°ç›¡é‡åˆ¥ç¡¬ç¢°ç¡¬, æœ€å¥½è¿‚è¿´å‰é€².",bc_map,"0xffff00";
 	end;
 
 OnTimer56310:
-	mapannounce instance_mapname("1@orcs"), "¥ô°È: ½Ğ®¨®¨¦a¾aªñ«á, ±N'Å]¤O«Ê¦LªºÃ~¤H'®ø·À±¼§a! ºÉ¶qÁ×§K¤j³WºNªº½Ä¬ğ, ³o¼Ë¤~¯à¶¶§Q©è¹F2¼Ó.",bc_map,"0x44ffff";
+	mapannounce instance_mapname("1@orcs"), "ä»»å‹™: è«‹æ‚„æ‚„åœ°é è¿‘å¾Œ, å°‡'é­”åŠ›å°å°çš„ç¸äºº'æ¶ˆæ»…æ‰å§! ç›¡é‡é¿å…å¤§è¦æ‘¸çš„è¡çª, é€™æ¨£æ‰èƒ½é †åˆ©æŠµé”2æ¨“.",bc_map,"0x44ffff";
 	donpcevent instance_npcname("#Resurrect Monsters1")+"::OnEnable";
 	donpcevent instance_npcname("#Resurrect Monsters2")+"::OnEnable";
 	donpcevent instance_npcname("#Resurrect Monsters3")+"::OnEnable";
-	disablenpc instance_npcname("®w¾|®æ#1-2");
+	disablenpc instance_npcname("åº«é­¯æ ¼#1-2");
 	end;
 
 OnTimer60000:
-	areamonster instance_mapname("1@orcs"),137,83,143,89,"Å]¤O«Ê¦LªºÃ~¤H",1023,1,instance_npcname("B1 Area Mobs")+"::OnMyMobDead";
+	areamonster instance_mapname("1@orcs"),137,83,143,89,"é­”åŠ›å°å°çš„ç¸äºº",1023,1,instance_npcname("B1 Area Mobs")+"::OnMyMobDead";
 	stopnpctimer;
 	end;
 
@@ -407,7 +407,7 @@ OnInstanceInit:
 
 OnEnable:
 	enablenpc instance_npcname("B1 Area 1");
-	areamonster instance_mapname("1@orcs"),103,105,109,111,"Å]¤O«Ê¦LªºÃ~¤H",1023,1,instance_npcname("B1 Area Mobs")+"::OnMyMobDead1";
+	areamonster instance_mapname("1@orcs"),103,105,109,111,"é­”åŠ›å°å°çš„ç¸äºº",1023,1,instance_npcname("B1 Area Mobs")+"::OnMyMobDead1";
 	end;
 
 OnTouch_:
@@ -420,11 +420,11 @@ OnContinue:
 	end;
 
 OnTimer10300:
-	mapannounce instance_mapname("1@orcs"), "®w¾|®æªº¦Õ»y: ³o¸ÌªºÃ~¤H³£´¿¸g¬O§Úªº¦P¦ñ. ¥u¬O±q¨º®É¶}©l, ¥L­Ì¨ü¨ìÃ~¤H¤k§ÅªºÅ]ªk±±¨î, ¥¢«o¤F¦Û¤v¥»¨Óªº¤ß©Ê.",bc_map,"0xff4499";
+	mapannounce instance_mapname("1@orcs"), "åº«é­¯æ ¼çš„è€³èª: é€™è£¡çš„ç¸äººéƒ½æ›¾ç¶“æ˜¯æˆ‘çš„åŒä¼´. åªæ˜¯å¾é‚£æ™‚é–‹å§‹, ä»–å€‘å—åˆ°ç¸äººå¥³å·«çš„é­”æ³•æ§åˆ¶, å¤±å»äº†è‡ªå·±æœ¬ä¾†çš„å¿ƒæ€§.",bc_map,"0xff4499";
 	end;
 
 OnTimer18700:
-	mapannounce instance_mapname("1@orcs"), "®w¾|®æªº¦Õ»y: °ß¦³±ş¦º¤k§Å, §Ú­Ì¤~¯à¬@±Ï¾l¤Uªº³¡¸¨¦¨­û, ­««Ø¬ü¦n©M¿Óªº©¯ºÖ®a¶é.",bc_map,"0xff4499";
+	mapannounce instance_mapname("1@orcs"), "åº«é­¯æ ¼çš„è€³èª: å”¯æœ‰æ®ºæ­»å¥³å·«, æˆ‘å€‘æ‰èƒ½æ‹¯æ•‘é¤˜ä¸‹çš„éƒ¨è½æˆå“¡, é‡å»ºç¾å¥½å’Œè«§çš„å¹¸ç¦å®¶åœ’.",bc_map,"0xff4499";
 	stopnpctimer;
 	end;
 }
@@ -436,7 +436,7 @@ OnInstanceInit:
 
 OnEnable:
 	enablenpc instance_npcname("B1 Area 2");
-	areamonster instance_mapname("1@orcs"),32,40,38,46,"Å]¤O«Ê¦LªºÃ~¤H",1023,1,instance_npcname("B1 Area Mobs")+"::OnMyMobDead2";
+	areamonster instance_mapname("1@orcs"),32,40,38,46,"é­”åŠ›å°å°çš„ç¸äºº",1023,1,instance_npcname("B1 Area Mobs")+"::OnMyMobDead2";
 	end;
 
 OnTouch_:
@@ -449,11 +449,11 @@ OnContinue:
 	end;
 
 OnTimer30300:
-	mapannounce instance_mapname("1@orcs"), "®w¾|®æªº¦Õ»y: §Ú¬İ¨ì¤F§Ú±Ú¤H­Ìªº«ÍÅé. ¦n¹³Ã~¤H¤k§Å§Q¥Î¥L­Ì¨Ó¶i¦æ¦oªº¨¸´c»ö¦¡, ³o³õ´º¬O¦h»ò¦a¥O¤Hµh¹ı¤ß´v°Ú.",bc_map,"0xff4499";
+	mapannounce instance_mapname("1@orcs"), "åº«é­¯æ ¼çš„è€³èª: æˆ‘çœ‹åˆ°äº†æˆ‘æ—äººå€‘çš„å±é«”. å¥½åƒç¸äººå¥³å·«åˆ©ç”¨ä»–å€‘ä¾†é€²è¡Œå¥¹çš„é‚ªæƒ¡å„€å¼, é€™å ´æ™¯æ˜¯å¤šéº¼åœ°ä»¤äººç—›å¾¹å¿ƒæ‰‰å•Š.",bc_map,"0xff4499";
 	end;
 
 OnTimer37600:
-	mapannounce instance_mapname("1@orcs"), "®w¾|®æªº¦Õ»y: ... ³o³£¬O§Úªº¿ù. ¬O§Ú¶}±Ò¤F³o®°¸o´c¤§ªù.",bc_map,"0xff4499";
+	mapannounce instance_mapname("1@orcs"), "åº«é­¯æ ¼çš„è€³èª: ... é€™éƒ½æ˜¯æˆ‘çš„éŒ¯. æ˜¯æˆ‘é–‹å•Ÿäº†é€™æ‰‡ç½ªæƒ¡ä¹‹é–€.",bc_map,"0xff4499";
 	stopnpctimer;
 	end;
 }
@@ -465,7 +465,7 @@ OnInstanceInit:
 
 OnEnable:
 	enablenpc instance_npcname("B1 Area 3");
-	areamonster instance_mapname("1@orcs"),19,177,25,183,"Å]¤O«Ê¦LªºÃ~¤H",1023,1,instance_npcname("B1 Area Mobs")+"::OnMyMobDead3";
+	areamonster instance_mapname("1@orcs"),19,177,25,183,"é­”åŠ›å°å°çš„ç¸äºº",1023,1,instance_npcname("B1 Area Mobs")+"::OnMyMobDead3";
 	end;
 
 OnTouch_:
@@ -478,11 +478,11 @@ OnContinue:
 	end;
 
 OnTimer30300:
-	mapannounce instance_mapname("1@orcs"), "½Ğ¦b³o¸ÌÄ~Äò¥[ªo§a!",bc_map,"0xff4499";
+	mapannounce instance_mapname("1@orcs"), "è«‹åœ¨é€™è£¡ç¹¼çºŒåŠ æ²¹å§!",bc_map,"0xff4499";
 	end;
 
 OnTimer32700:
-	mapannounce instance_mapname("1@orcs"), "µ¥§Ú­Ì¥­¦w«×¹L³o¤@Ãö¤§«á, §Ú­Ì¥i¥H¦b¤G¼hªº¦a¤U«Çµy¬°¥ğ®§.",bc_map,"0xff4499";
+	mapannounce instance_mapname("1@orcs"), "ç­‰æˆ‘å€‘å¹³å®‰åº¦éé€™ä¸€é—œä¹‹å¾Œ, æˆ‘å€‘å¯ä»¥åœ¨äºŒå±¤çš„åœ°ä¸‹å®¤ç¨ç‚ºä¼‘æ¯.",bc_map,"0xff4499";
 	stopnpctimer;
 	end;
 }
@@ -536,7 +536,7 @@ OnInstanceInit:
 
 OnEnable:
 	enablenpc instance_npcname("#2Resurrect Monsters1");
-	monster instance_mapname("2@orcs"),0,0,"´_¤³Ã~¤H",1152,30,instance_npcname("#2Resurrect Monsters1")+"::OnMyMobDead";
+	monster instance_mapname("2@orcs"),0,0,"å¾©ä»‡ç¸äºº",1152,30,instance_npcname("#2Resurrect Monsters1")+"::OnMyMobDead";
 	end;
 
 OnDisable:
@@ -550,21 +550,21 @@ OnMyMobDead:
 	if (.@mob_dead_num > 0) {
 		set .@mob_ran,rand(1,30);
 		if (.@mob_ran > 29) {
-			monster .@map$,0,0,"´_¤³Ã~¤H",1152,.@mob_dead_num,instance_npcname("#2Resurrect Monsters1")+"::OnMyMobDead";
+			monster .@map$,0,0,"å¾©ä»‡ç¸äºº",1152,.@mob_dead_num,instance_npcname("#2Resurrect Monsters1")+"::OnMyMobDead";
 		}
 		else if ((.@mob_ran > 28) && (.@mob_ran < 30)) {
-			monster .@map$,0,0,"Ã~¤H¾Ô¤hªø",1213,.@mob_dead_num,instance_npcname("#2Resurrect Monsters1")+"::OnMyMobDead";
+			monster .@map$,0,0,"ç¸äººæˆ°å£«é•·",1213,.@mob_dead_num,instance_npcname("#2Resurrect Monsters1")+"::OnMyMobDead";
 		}
 		else if ((.@mob_ran > 26) && (.@mob_ran < 29)) {
-			areamonster .@map$,157,112,167,122,"Ã~¤H¾Ô¤hªø",1213,.@mob_dead_num,instance_npcname("#2Resurrect Monsters1")+"::OnMyMobDead";
+			areamonster .@map$,157,112,167,122,"ç¸äººæˆ°å£«é•·",1213,.@mob_dead_num,instance_npcname("#2Resurrect Monsters1")+"::OnMyMobDead";
 			if (rand(1,10) == 9) {
-				mapannounce .@map$, "Äµ§i: ³¡¤À§L¤O¶}©l©¹¤T¸¹°Ï°ì¶°µ²¤F.",bc_map,"0xff4444";
+				mapannounce .@map$, "è­¦å‘Š: éƒ¨åˆ†å…µåŠ›é–‹å§‹å¾€ä¸‰è™Ÿå€åŸŸé›†çµäº†.",bc_map,"0xff4444";
 			}
 		}
 		else {
-			areamonster .@map$,173,13,183,23,"Ã~¤H¾Ô¤hªø",1213,.@mob_dead_num,instance_npcname("#2Resurrect Monsters1")+"::OnMyMobDead";
+			areamonster .@map$,173,13,183,23,"ç¸äººæˆ°å£«é•·",1213,.@mob_dead_num,instance_npcname("#2Resurrect Monsters1")+"::OnMyMobDead";
 			if (rand(1,5) == 3) {
-				mapannounce .@map$, "Äµ§i: Ã~¤H§L¤O¶}©l¦b¤k§Åªº²½¾Â³B¶°µ².",bc_map,"0x77ff77";
+				mapannounce .@map$, "è­¦å‘Š: ç¸äººå…µåŠ›é–‹å§‹åœ¨å¥³å·«çš„ç¥­å£‡è™•é›†çµ.",bc_map,"0x77ff77";
 			}
 			if (rand(1,70) == 50) {
 				initnpctimer;
@@ -574,13 +574,13 @@ OnMyMobDead:
 	end;
 
 OnTimer10:
-	mapannounce instance_mapname("2@orcs"), "±q¬Y³B¨ÓªºÁn­µ: ¶Ì¹G­Ì... Ãø¹D§A­ÌÄ±±o²½¾Â·|±Y¶ò¦b§A­Ì³oºØ¤T¸}¿ßªº§ğÀ»¤§¤U¶Ü?",bc_map,"0xff4444";
+	mapannounce instance_mapname("2@orcs"), "å¾æŸè™•ä¾†çš„è²éŸ³: å‚»é€¼å€‘... é›£é“ä½ å€‘è¦ºå¾—ç¥­å£‡æœƒå´©å¡Œåœ¨ä½ å€‘é€™ç¨®ä¸‰è…³è²“çš„æ”»æ“Šä¹‹ä¸‹å—?",bc_map,"0xff4444";
 	end;
 
 OnTimer4010:
 	set .@map$, instance_mapname("2@orcs");
-	mapannounce .@map$, "[ ´cÆF­Ì³Q¤@ºØ¥¼ª¾ªº¤O¶q¥l³ê¥X¨Ó ]",bc_map,"0x77ff77";
-	areamonster .@map$,167,25,177,35,"´cÆF",1475,30,instance_npcname("#2Resurrect Monsters1")+"::OnMyMobDead";
+	mapannounce .@map$, "[ æƒ¡éˆå€‘è¢«ä¸€ç¨®æœªçŸ¥çš„åŠ›é‡å¬å–šå‡ºä¾† ]",bc_map,"0x77ff77";
+	areamonster .@map$,167,25,177,35,"æƒ¡éˆ",1475,30,instance_npcname("#2Resurrect Monsters1")+"::OnMyMobDead";
 	stopnpctimer;
 	end;
 }
@@ -594,7 +594,7 @@ OnInstanceInit:
 
 OnEnable:
 	enablenpc instance_npcname("#2Resurrect Monsters3");
-	monster instance_mapname("2@orcs"),0,0,"Ã~¤H»G«Í",1153,15,instance_npcname("#2Resurrect Monsters3")+"::OnMyMobDead";
+	monster instance_mapname("2@orcs"),0,0,"ç¸äººè…å±",1153,15,instance_npcname("#2Resurrect Monsters3")+"::OnMyMobDead";
 	end;
 
 OnMyMobDead:
@@ -603,20 +603,20 @@ OnMyMobDead:
 	set .@mob_ran,rand(1,30);
 	if (.@mob_ran > 29) {
 		if (.@mob_dead_num > 0) {
-			monster .@map$,0,0,"Ã~¤H¤}½b¤â",1189,.@mob_dead_num,instance_npcname("#2Resurrect Monsters3")+"::OnMyMobDead";
+			monster .@map$,0,0,"ç¸äººå¼“ç®­æ‰‹",1189,.@mob_dead_num,instance_npcname("#2Resurrect Monsters3")+"::OnMyMobDead";
 		}
 	}
 	else if ((.@mob_ran > 6) && (.@mob_ran < 30)) {
 		if (.@mob_dead_num > 0) {
-			areamonster .@map$,168,10,184,26,"Ã~¤H¤}½b¤â",1189,.@mob_dead_num,instance_npcname("#2Resurrect Monsters3")+"::OnMyMobDead";
+			areamonster .@map$,168,10,184,26,"ç¸äººå¼“ç®­æ‰‹",1189,.@mob_dead_num,instance_npcname("#2Resurrect Monsters3")+"::OnMyMobDead";
 			if (rand(1,15) == 3) {
-				mapannounce .@map$, "Äµ§i: Ã~¤H¤}½b¤â¾Ô¶¤¶}©l¦b²½¾Â³B¶°µ².",bc_map,"0xff4444";
+				mapannounce .@map$, "è­¦å‘Š: ç¸äººå¼“ç®­æ‰‹æˆ°éšŠé–‹å§‹åœ¨ç¥­å£‡è™•é›†çµ.",bc_map,"0xff4444";
 			}
 		}
 	}
 	else {
 		if (.@mob_dead_num > 0) {
-			areamonster .@map$,168,21,184,21,"Ã~¤H¤}½b¤â",1189,.@mob_dead_num,instance_npcname("#2Resurrect Monsters3")+"::OnMyMobDead";
+			areamonster .@map$,168,21,184,21,"ç¸äººå¼“ç®­æ‰‹",1189,.@mob_dead_num,instance_npcname("#2Resurrect Monsters3")+"::OnMyMobDead";
 		}
 	}
 	end;
@@ -631,79 +631,79 @@ OnDisable:
 
 OnInstanceInit:
 	enablenpc instance_npcname("#2Resurrect Monsters4");
-	monster instance_mapname("2@orcs"),0,0,"ºÄ°A",1627,10,instance_npcname("#2Resurrect Monsters4")+"::OnMyMobDead";
+	monster instance_mapname("2@orcs"),0,0,"ç˜§èšŠ",1627,10,instance_npcname("#2Resurrect Monsters4")+"::OnMyMobDead";
 	end;
 
 OnMyMobDead:
 	set .@map$, instance_mapname("2@orcs");
 	set .@mob_dead_num, 10 - mobcount(.@map$,instance_npcname("#2Resurrect Monsters4")+"::OnMyMobDead");
 	if (.@mob_dead_num > 0) {
-		monster .@map$,0,0,"ºÄ°A",1627,1,instance_npcname("#2Resurrect Monsters4")+"::OnMyMobDead";
+		monster .@map$,0,0,"ç˜§èšŠ",1627,1,instance_npcname("#2Resurrect Monsters4")+"::OnMyMobDead";
 	}
 	end;
 }
 
-2@orcs,35,169,4	script	®w¾|®æ#2-1	433,{
-	donpcevent instance_npcname("®w¾|®æ#2-2")+"::OnEnable";
+2@orcs,35,169,4	script	åº«é­¯æ ¼#2-1	433,{
+	donpcevent instance_npcname("åº«é­¯æ ¼#2-2")+"::OnEnable";
 	end;
 }
 
-2@orcs,35,169,4	script	®w¾|®æ#2-2	433,{
+2@orcs,35,169,4	script	åº«é­¯æ ¼#2-2	433,{
 	end;
 
 OnInstanceInit:
-	disablenpc instance_npcname("®w¾|®æ#2-2");
+	disablenpc instance_npcname("åº«é­¯æ ¼#2-2");
 	end;
 
 OnEnable:
-	disablenpc instance_npcname("®w¾|®æ#2-1");
-	enablenpc instance_npcname("®w¾|®æ#2-2");
+	disablenpc instance_npcname("åº«é­¯æ ¼#2-1");
+	enablenpc instance_npcname("åº«é­¯æ ¼#2-2");
 	initnpctimer;
 	end;
 
 OnTimer10:
-	mapannounce instance_mapname("2@orcs"), "®w¾|®æªº¦Õ»y: §Ú±N·|§i¶D§A¦p¦ó³q©¹¤k§Åªº²½¾Â.",bc_map,"0xffff00";
+	mapannounce instance_mapname("2@orcs"), "åº«é­¯æ ¼çš„è€³èª: æˆ‘å°‡æœƒå‘Šè¨´ä½ å¦‚ä½•é€šå¾€å¥³å·«çš„ç¥­å£‡.",bc_map,"0xffff00";
 	end;
 
 OnTimer3510:
-	mapannounce instance_mapname("2@orcs"), "®w¾|®æªº¦Õ»y: §A¬İ¨ì¨º¨Ç·Ó«G³q¹Dªº¤õ§â¤F¶Ü? ¼W±j¥¦­Ìªº¤õµK´N¥i¥H¶}±Ò¤U¤@¼h°Ï°ì.",bc_map,"0xffff00";
+	mapannounce instance_mapname("2@orcs"), "åº«é­¯æ ¼çš„è€³èª: ä½ çœ‹åˆ°é‚£äº›ç…§äº®é€šé“çš„ç«æŠŠäº†å—? å¢å¼·å®ƒå€‘çš„ç«ç„°å°±å¯ä»¥é–‹å•Ÿä¸‹ä¸€å±¤å€åŸŸ.",bc_map,"0xffff00";
 	end;
 
 OnTimer10710:
-	mapannounce instance_mapname("2@orcs"), "®w¾|®æªº¦Õ»y: ·íµMÅ]ª«­Ì¤£·|Åı§A¦p¦¹»´¦Ó©öÁ|¦a´NºN¨ì¤õ§âªº.",bc_map,"0xffff00";
+	mapannounce instance_mapname("2@orcs"), "åº«é­¯æ ¼çš„è€³èª: ç•¶ç„¶é­”ç‰©å€‘ä¸æœƒè®“ä½ å¦‚æ­¤è¼•è€Œæ˜“èˆ‰åœ°å°±æ‘¸åˆ°ç«æŠŠçš„.",bc_map,"0xffff00";
 	end;
 
 OnTimer16310:
-	mapannounce instance_mapname("2@orcs"), "®w¾|®æªº¦Õ»y: ¦ı§A¤´»İ­nºÉ¥i¯à¦a§â¾Ô°«±±¨î¦b³Ì¤p³W¼Ò, ³o¼Ë¤k§Å´N¤£·|µo²{§A­Ì, ±q¦Ó¤£·|°Ê¥Î¦oªº¿Ë½Ã¶¤¨Ó¬İ¦u²½¾Â.",bc_map,"0xffff00";
+	mapannounce instance_mapname("2@orcs"), "åº«é­¯æ ¼çš„è€³èª: ä½†ä½ ä»éœ€è¦ç›¡å¯èƒ½åœ°æŠŠæˆ°é¬¥æ§åˆ¶åœ¨æœ€å°è¦æ¨¡, é€™æ¨£å¥³å·«å°±ä¸æœƒç™¼ç¾ä½ å€‘, å¾è€Œä¸æœƒå‹•ç”¨å¥¹çš„è¦ªè¡›éšŠä¾†çœ‹å®ˆç¥­å£‡.",bc_map,"0xffff00";
 	end;
 
 OnTimer21910:
-	mapannounce instance_mapname("2@orcs"), "®w¾|®æªº¦Õ»y: ¤£¹L, ¥u¦³¶¤ªø¥i¥H¼W±j¤õ§âªº¤õµK, ©Ò¥H½Ğ«OÅ@¦n§A­Ìªº¶¤ªø§a.",bc_map,"0xffff00";
+	mapannounce instance_mapname("2@orcs"), "åº«é­¯æ ¼çš„è€³èª: ä¸é, åªæœ‰éšŠé•·å¯ä»¥å¢å¼·ç«æŠŠçš„ç«ç„°, æ‰€ä»¥è«‹ä¿è­·å¥½ä½ å€‘çš„éšŠé•·å§.",bc_map,"0xffff00";
 	end;
 
 OnTimer23910:
-	mapannounce instance_mapname("2@orcs"), "¥ô°È: ÂI«G¤õ§â¥H¶}±Ò¤U¤@¼h°Ï°ì. ¤õ§â¥u¯à«ö·Ó¤@©wªº¶¶§Ç¶i¦æÂI«G, ½Ğ¤p¤ß¦æ¨Æ.",bc_map,"0x4444ff";
+	mapannounce instance_mapname("2@orcs"), "ä»»å‹™: é»äº®ç«æŠŠä»¥é–‹å•Ÿä¸‹ä¸€å±¤å€åŸŸ. ç«æŠŠåªèƒ½æŒ‰ç…§ä¸€å®šçš„é †åºé€²è¡Œé»äº®, è«‹å°å¿ƒè¡Œäº‹.",bc_map,"0x4444ff";
 	donpcevent instance_npcname("#2Resurrect Monsters1")+"::OnEnable";
 	donpcevent instance_npcname("#2Resurrect Monsters3")+"::OnEnable";
-	donpcevent instance_npcname("¤õ§â#1-1")+"::OnEnable";
-	disablenpc instance_npcname("®w¾|®æ#2-2");
+	donpcevent instance_npcname("ç«æŠŠ#1-1")+"::OnEnable";
+	disablenpc instance_npcname("åº«é­¯æ ¼#2-2");
 	end;
 }
 
-2@orcs,26,164,0	script	¤õ§â#1-1	844,{
+2@orcs,26,164,0	script	ç«æŠŠ#1-1	844,{
 	if(getpartyleader(getcharid(1),2) != getcharid(0)) end;
 	progressbar "ffff00",5;
 	setarray .@id[0], atoi(charat(strnpcinfo(2),0)), atoi(charat(strnpcinfo(2),2));
 	if (.@id[1] == 4)
 		donpcevent instance_npcname("#Warp2-"+.@id[0])+"::OnEnable";
 	else
-		donpcevent instance_npcname("¤õ§â#"+.@id[0]+"-"+(.@id[1]+1))+"::OnEnable";
+		donpcevent instance_npcname("ç«æŠŠ#"+.@id[0]+"-"+(.@id[1]+1))+"::OnEnable";
 	initnpctimer;
 	disablenpc instance_npcname(strnpcinfo(0));
 	end;
 
 OnInstanceInit:
-	if (strnpcinfo(0) != "¤õ§â#2-1" && strnpcinfo(0) != "¤õ§â#3-1")
+	if (strnpcinfo(0) != "ç«æŠŠ#2-1" && strnpcinfo(0) != "ç«æŠŠ#3-1")
 		disablenpc instance_npcname(strnpcinfo(0));
 	end;
 
@@ -720,9 +720,9 @@ OnTimer2000:
 	stopnpctimer;
 	end;
 }
-2@orcs,55,155,0	duplicate(¤õ§â#1-1)	¤õ§â#1-2	844
-2@orcs,108,146,0	duplicate(¤õ§â#1-1)	¤õ§â#1-3	844
-2@orcs,98,171,0	duplicate(¤õ§â#1-1)	¤õ§â#1-4	844
+2@orcs,55,155,0	duplicate(ç«æŠŠ#1-1)	ç«æŠŠ#1-2	844
+2@orcs,108,146,0	duplicate(ç«æŠŠ#1-1)	ç«æŠŠ#1-3	844
+2@orcs,98,171,0	duplicate(ç«æŠŠ#1-1)	ç«æŠŠ#1-4	844
 
 2@orcs,48,100,0	script	#Warp2-1	45,3,3,{
 OnInstanceInit:
@@ -731,8 +731,8 @@ OnInstanceInit:
 
 OnEnable:
 	set .@map$, instance_mapname("2@orcs");
-	monster .@map$,109,156,"Ã~¤H¦uÅ@¶¤ªø",1981,1,instance_npcname("#Mobs Control")+"::OnMyMobDead1";
-	mapannounce .@map$, "Ã~¤H¦uÅ@¶¤ªø: «u§r!! ¦n¹³§Ú¤S±N¦³¤@­Ó·sª±¦ñ°Ú. ¦³¥»¨Æ´N¨Ó¬D¾Ô§Ú¸Õ¸Õ¬İ!!",bc_map,"0xff8888";
+	monster .@map$,109,156,"ç¸äººå®ˆè­·éšŠé•·",1981,1,instance_npcname("#Mobs Control")+"::OnMyMobDead1";
+	mapannounce .@map$, "ç¸äººå®ˆè­·éšŠé•·: å“å‘€!! å¥½åƒæˆ‘åˆå°‡æœ‰ä¸€å€‹æ–°ç©ä¼´å•Š. æœ‰æœ¬äº‹å°±ä¾†æŒ‘æˆ°æˆ‘è©¦è©¦çœ‹!!",bc_map,"0xff8888";
 	end;
 
 OnContinue:
@@ -741,7 +741,7 @@ OnContinue:
 	end;
 
 OnTimer10000:
-	areamonster instance_mapname("2@orcs"),28,158,40,170,"Ã~¤H¦uÅ@¶¤ªø",1981,1,instance_npcname("#Mobs Control")+"::OnMyMobDead1";
+	areamonster instance_mapname("2@orcs"),28,158,40,170,"ç¸äººå®ˆè­·éšŠé•·",1981,1,instance_npcname("#Mobs Control")+"::OnMyMobDead1";
 	stopnpctimer;
 	end;
 
@@ -750,10 +750,10 @@ OnTouch_:
 	end;
 }
 
-2@orcs,35,92,0	duplicate(¤õ§â#1-1)	¤õ§â#2-1	844
-2@orcs,32,70,0	duplicate(¤õ§â#1-1)	¤õ§â#2-2	844
-2@orcs,70,31,0	duplicate(¤õ§â#1-1)	¤õ§â#2-3	844
-2@orcs,84,51,0	duplicate(¤õ§â#1-1)	¤õ§â#2-4	844
+2@orcs,35,92,0	duplicate(ç«æŠŠ#1-1)	ç«æŠŠ#2-1	844
+2@orcs,32,70,0	duplicate(ç«æŠŠ#1-1)	ç«æŠŠ#2-2	844
+2@orcs,70,31,0	duplicate(ç«æŠŠ#1-1)	ç«æŠŠ#2-3	844
+2@orcs,84,51,0	duplicate(ç«æŠŠ#1-1)	ç«æŠŠ#2-4	844
 
 2@orcs,101,55,0	script	#Warp2-2	45,3,3,{
 OnInstanceInit:
@@ -762,8 +762,8 @@ OnInstanceInit:
 
 OnEnable:
 	set .@map$, instance_mapname("2@orcs");
-	monster .@map$,67,64,"Ã~¤H¯«®g¤â",1982,1,instance_npcname("#Mobs Control")+"::OnMyMobDead2";
-	mapannounce .@map$, "Ã~¤H¯«®g¤â: ¼K! §A³o¤@¸ô·F±o®¼º}«Gªº¹À, ¦ı¬O§A³oªá®±Â¸»Lªº³Ã¥ë²{¦b´N­n®â¦b§Ú¤â¤W¤F...",bc_map,"0xff8888";
+	monster .@map$,67,64,"ç¸äººç¥å°„æ‰‹",1982,1,instance_npcname("#Mobs Control")+"::OnMyMobDead2";
+	mapannounce .@map$, "ç¸äººç¥å°„æ‰‹: å˜¿! ä½ é€™ä¸€è·¯å¹¹å¾—æŒºæ¼‚äº®çš„å˜›, ä½†æ˜¯ä½ é€™èŠ±æ‹³ç¹¡è…¿çš„å‚¢ä¼™ç¾åœ¨å°±è¦æ ½åœ¨æˆ‘æ‰‹ä¸Šäº†...",bc_map,"0xff8888";
 	end;
 
 OnContinue:
@@ -772,7 +772,7 @@ OnContinue:
 	end;
 
 OnTimer10000:
-	areamonster instance_mapname("2@orcs"),40,91,52,103,"Ã~¤H¯«®g¤â",1982,1,instance_npcname("#Mobs Control")+"::OnMyMobDead2";
+	areamonster instance_mapname("2@orcs"),40,91,52,103,"ç¸äººç¥å°„æ‰‹",1982,1,instance_npcname("#Mobs Control")+"::OnMyMobDead2";
 	stopnpctimer;
 	end;
 
@@ -781,10 +781,10 @@ OnTouch_:
 	end;
 }
 
-2@orcs,142,145,0	duplicate(¤õ§â#1-1)	¤õ§â#3-1	844
-2@orcs,162,134,0	duplicate(¤õ§â#1-1)	¤õ§â#3-2	844
-2@orcs,144,117,0	duplicate(¤õ§â#1-1)	¤õ§â#3-3	844
-2@orcs,136,98,0	duplicate(¤õ§â#1-1)	¤õ§â#3-4	844
+2@orcs,142,145,0	duplicate(ç«æŠŠ#1-1)	ç«æŠŠ#3-1	844
+2@orcs,162,134,0	duplicate(ç«æŠŠ#1-1)	ç«æŠŠ#3-2	844
+2@orcs,144,117,0	duplicate(ç«æŠŠ#1-1)	ç«æŠŠ#3-3	844
+2@orcs,136,98,0	duplicate(ç«æŠŠ#1-1)	ç«æŠŠ#3-4	844
 
 2@orcs,167,104,0	script	#Warp2-3	45,3,3,{
 OnInstanceInit:
@@ -793,31 +793,31 @@ OnInstanceInit:
 
 OnEnable:
 	set .@map$, instance_mapname("2@orcs");
-	monster .@map$,152,147,"¼Z¸¨ªºÃ~¤H«è»î",1983,1,instance_npcname("#Mobs Control")+"::OnMyMobDead3";
-	mapannounce .@map$, "¼Z¸¨ªºÃ~¤H«è»î: ¦n¿@ªº¦×­»! Åı§Ú·PÄ±¨ì«e©Ò¥¼¦³ªº°§¾j! ¯u·Q¹Á¹Á·Æ·Æ³n³nªº¤H¦×°Ú!!",bc_map,"0xff8888";
+	monster .@map$,152,147,"å¢®è½çš„ç¸äººæ€¨é­‚",1983,1,instance_npcname("#Mobs Control")+"::OnMyMobDead3";
+	mapannounce .@map$, "å¢®è½çš„ç¸äººæ€¨é­‚: å¥½æ¿ƒçš„è‚‰é¦™! è®“æˆ‘æ„Ÿè¦ºåˆ°å‰æ‰€æœªæœ‰çš„é£¢é¤“! çœŸæƒ³å˜—å˜—æ»‘æ»‘è»Ÿè»Ÿçš„äººè‚‰å•Š!!",bc_map,"0xff8888";
 	end;
 
 OnContinue:
-	areamonster instance_mapname("2@orcs"),117,61,129,73,"¼Z¸¨ªºÃ~¤H«è»î",1983,1;
+	areamonster instance_mapname("2@orcs"),117,61,129,73,"å¢®è½çš„ç¸äººæ€¨é­‚",1983,1;
 	donpcevent instance_npcname("#Boss Control")+"::OnEnable";
 	enablenpc instance_npcname("#Warp2-3");
 	initnpctimer;
 	end;
 
 OnTimer10:
-	mapannounce instance_mapname("2@orcs"), "¤k§Å ¬_²ú¤à©ÔèØ: °Ú«¢«¢«¢«¢«¢«¢«¢«¢«¢«¢!! §A­Ì²×©ó¨Ó°Õ. §A­Ì°e¨Ó·t±ş§Úªº¨ë«ÈÂ²ª½´N¹³»«¶§¯È¿NÀn¤@¼Ë¤£³ô¤@À». ¨º¨Ç¥i¼¦ªºÃ~¤H¦­´N³Q§Ú°e¨ì³±±ä¦a©²¥h°Õ.",bc_map,"0xffff00";
+	mapannounce instance_mapname("2@orcs"), "å¥³å·« æŸ¯è‰æˆˆæ‹‰é­†: å•Šå“ˆå“ˆå“ˆå“ˆå“ˆå“ˆå“ˆå“ˆå“ˆå“ˆ!! ä½ å€‘çµ‚æ–¼ä¾†å•¦. ä½ å€‘é€ä¾†æš—æ®ºæˆ‘çš„åˆºå®¢ç°¡ç›´å°±åƒè³“é™½ç´™ç‡’é´¨ä¸€æ¨£ä¸å ªä¸€æ“Š. é‚£äº›å¯æ†çš„ç¸äººæ—©å°±è¢«æˆ‘é€åˆ°é™°æ›¹åœ°åºœå»å•¦.",bc_map,"0xffff00";
 	end;
 
 OnTimer6810:
-	mapannounce instance_mapname("2@orcs"), "¤k§Å ¬_²ú¤à©ÔèØ: §Ú©¾¸Ûªº¥£Áõ­Ì, »°§Öµ¹§Ú§â³o¨Ç¶Ì¹G¨ï¦¨¦×Âæ!",bc_map,"0xffff00";
+	mapannounce instance_mapname("2@orcs"), "å¥³å·« æŸ¯è‰æˆˆæ‹‰é­†: æˆ‘å¿ èª çš„å¥´éš¸å€‘, è¶•å¿«çµ¦æˆ‘æŠŠé€™äº›å‚»é€¼å‰æˆè‚‰é†¬!",bc_map,"0xffff00";
 	end;
 
 OnTimer10310:
-	mapannounce instance_mapname("2@orcs"), "¼Z¸¨ªºÃ~¤H­^¶¯: ¿í¦®, ¤k¤ı°¡¤U.",bc_map,"0xff7777";
+	mapannounce instance_mapname("2@orcs"), "å¢®è½çš„ç¸äººè‹±é›„: éµæ—¨, å¥³ç‹é™›ä¸‹.",bc_map,"0xff7777";
 	end;
 
 OnTimer13110:
-	mapannounce instance_mapname("2@orcs"), "Äµ§i: §A¤w¸g³Q ¤k§Å ¬_²ú¤à©ÔèØ µ¹µo²{¤F. ®w¾|®æªº·t±ş¤k§Å­p¹º¤w¸g¥¢±Ñ. §A¥²¶·¥ı¥´±Ñ¬_²ú¤à©ÔèØ, µM«á´M§ä®w¾|®æªºÂÜ¸ñ.",bc_map,"0x8888ff";
+	mapannounce instance_mapname("2@orcs"), "è­¦å‘Š: ä½ å·²ç¶“è¢« å¥³å·« æŸ¯è‰æˆˆæ‹‰é­† çµ¦ç™¼ç¾äº†. åº«é­¯æ ¼çš„æš—æ®ºå¥³å·«è¨ˆåŠƒå·²ç¶“å¤±æ•—. ä½ å¿…é ˆå…ˆæ‰“æ•—æŸ¯è‰æˆˆæ‹‰é­†, ç„¶å¾Œå°‹æ‰¾åº«é­¯æ ¼çš„è¹¤è·¡.",bc_map,"0x8888ff";
 	stopnpctimer;
 	end;
 
@@ -835,29 +835,29 @@ OnInstanceInit:
 
 OnEnable:
 	set .@map$, instance_mapname("2@orcs");
-	monster .@map$,185,8,"¤k§Å ¬_²ú¤à©ÔèØ",1984,1,instance_npcname("#Boss Control")+"::OnMyMobDead";
-	monster .@map$,179,15,"¼Z¸¨ªºÃ~¤H­^¶¯",1087,1;
+	monster .@map$,185,8,"å¥³å·« æŸ¯è‰æˆˆæ‹‰é­†",1984,1,instance_npcname("#Boss Control")+"::OnMyMobDead";
+	monster .@map$,179,15,"å¢®è½çš„ç¸äººè‹±é›„",1087,1;
 	enablenpc instance_npcname("#Boss Control");
 	end;
 
 OnMyMobDead:
-	donpcevent instance_npcname("®w¾|®æ#")+"::OnEnable";
+	donpcevent instance_npcname("åº«é­¯æ ¼#")+"::OnEnable";
 	set .@map$, instance_mapname("2@orcs");
 	set .@mob_ran,rand(1,5);
 	if (.@mob_ran == 1) {
-		mapannounce .@map$, "¤k§Å ¬_²ú¤à©ÔèØ: «ç... «ç»ò·|³o¼Ë... ´N¾Ì..§A...§A....§A³o­Ó²V³J...!!",bc_map,"0xffff00";
+		mapannounce .@map$, "å¥³å·« æŸ¯è‰æˆˆæ‹‰é­†: æ€... æ€éº¼æœƒé€™æ¨£... å°±æ†‘..ä½ ...ä½ ....ä½ é€™å€‹æ··è›‹...!!",bc_map,"0xffff00";
 	}
 	else if (.@mob_ran == 2) {
-		mapannounce .@map$, "¤k§Å ¬_²ú¤à©ÔèØ: ¹³§Ú³o¼Ë´L¶Qªº¼bÂß«ç»ò¯à³Q§A­Ì³o¨Ç»êÅ¼ªº¤HÃş©ºªA!",bc_map,"0xffff00";
+		mapannounce .@map$, "å¥³å·« æŸ¯è‰æˆˆæ‹‰é­†: åƒæˆ‘é€™æ¨£å°Šè²´çš„å¬Œè»€æ€éº¼èƒ½è¢«ä½ å€‘é€™äº›éª¯é«’çš„äººé¡å¾æœ!",bc_map,"0xffff00";
 	}
 	else if (.@mob_ran == 3) {
-		mapannounce .@map$, "¤k§Å ¬_²ú¤à©ÔèØ: §Ú... §Ú¸ò§A­Ì¨S§¹...",bc_map,"0xffff00";
+		mapannounce .@map$, "å¥³å·« æŸ¯è‰æˆˆæ‹‰é­†: æˆ‘... æˆ‘è·Ÿä½ å€‘æ²’å®Œ...",bc_map,"0xffff00";
 	}
 	else if (.@mob_ran == 4) {
-		mapannounce .@map$, "¤k§Å ¬_²ú¤à©ÔèØ: §Ú...§Ú¤£¯à¦º...¤£¯à¦º...!",bc_map,"0xffff00";
+		mapannounce .@map$, "å¥³å·« æŸ¯è‰æˆˆæ‹‰é­†: æˆ‘...æˆ‘ä¸èƒ½æ­»...ä¸èƒ½æ­»...!",bc_map,"0xffff00";
 	}
 	else {
-		mapannounce .@map$, "¤k§Å ¬_²ú¤à©ÔèØ: ©~µM´N³o¼Ë³Q§A­Ì³o¨Ç½â¤H±À­Ë¤F... ¤£­n°Ú...!",bc_map,"0xffff00";
+		mapannounce .@map$, "å¥³å·« æŸ¯è‰æˆˆæ‹‰é­†: å±…ç„¶å°±é€™æ¨£è¢«ä½ å€‘é€™äº›è³¤äººæ¨å€’äº†... ä¸è¦å•Š...!",bc_map,"0xffff00";
 	}
 	donpcevent instance_npcname("#2Resurrect Monsters1")+"::OnDisable";
 	donpcevent instance_npcname("#2Resurrect Monsters3")+"::OnDisable";
@@ -879,46 +879,46 @@ OnTouch_:
 	end;
 }
 
-2@orcs,172,13,0	script	®w¾|®æ#	434,{
+2@orcs,172,13,0	script	åº«é­¯æ ¼#	434,{
 	if (yong_odun < 2) {
-		mes "[®w¾|®æ]";
-		mes "*«y«y«y«y«y*";
-		mes strcharinfo(0)+", ¬O§A°Ú...";
+		mes "[åº«é­¯æ ¼]";
+		mes "*å’³å’³å’³å’³å’³*";
+		mes strcharinfo(0)+", æ˜¯ä½ å•Š...";
 		next;
 		mes "["+strcharinfo(0)+"] ";
-		mes "§O°Ê! §A¨ü¶Ë¤F!";
+		mes "åˆ¥å‹•! ä½ å—å‚·äº†!";
 		next;
-		mes "[®w¾|®æ]";
-		mes "¨SÃö«Y.. §Ú...§Ú´N­n...¨«¤F...";
+		mes "[åº«é­¯æ ¼]";
+		mes "æ²’é—œä¿‚.. æˆ‘...æˆ‘å°±è¦...èµ°äº†...";
 		mes "....";
-		mes "¤k§Å? ¨º¤k§Å«ç»ò¼Ë¤F?";
+		mes "å¥³å·«? é‚£å¥³å·«æ€éº¼æ¨£äº†?";
 		next;
 		mes "["+strcharinfo(0)+"] ";
-		mes "¨º­Ó¤k§Å¤w¸g³Q§Ú­Ì®ø·À¤F§r, ¨ì©³¨º­Ó¤k§Å¬O½Ö?";
+		mes "é‚£å€‹å¥³å·«å·²ç¶“è¢«æˆ‘å€‘æ¶ˆæ»…äº†å‘€, åˆ°åº•é‚£å€‹å¥³å·«æ˜¯èª°?";
 		next;
-		mes "®w¾|®æÅ¥¨ì¤k§Å³Q®ø·Àªº®ø®§, §Ï©»¤F«o¤F¤@¼Î¤ß¨Æ¤@¯ë»´ÃP¤F³\¦h, ¦ı¬O§Aª`·N¨ì¤F¥L­^«TªºÁy¤W, ¨º­WÀß¦ı¤´¥O¤HÃ¨°gªºªí±¡.";
+		mes "åº«é­¯æ ¼è½åˆ°å¥³å·«è¢«æ¶ˆæ»…çš„æ¶ˆæ¯, å½·å½¿äº†å»äº†ä¸€æ¨å¿ƒäº‹ä¸€èˆ¬è¼•é¬†äº†è¨±å¤š, ä½†æ˜¯ä½ æ³¨æ„åˆ°äº†ä»–è‹±ä¿Šçš„è‡‰ä¸Š, é‚£è‹¦æ¾€ä½†ä»ä»¤äººç™¡è¿·çš„è¡¨æƒ….";
 		next;
-		mes "[®w¾|®æ]";
-		mes "§Ú...§Ú¥u¬O...";
-		mes "µLªk¹ï§Ú¦Û¤vªº¤k¨à...¤U¤â...";
-		mes "ÁÂÁÂ§A, §Ú¬Û«H¦o²×©ó...";
-		mes "±qÆF»îªº¹ÚÆL¤¤¸Ñ²æ¤F¥X¨Ó.";
+		mes "[åº«é­¯æ ¼]";
+		mes "æˆ‘...æˆ‘åªæ˜¯...";
+		mes "ç„¡æ³•å°æˆ‘è‡ªå·±çš„å¥³å…’...ä¸‹æ‰‹...";
+		mes "è¬è¬ä½ , æˆ‘ç›¸ä¿¡å¥¹çµ‚æ–¼...";
+		mes "å¾éˆé­‚çš„å¤¢é­˜ä¸­è§£è„«äº†å‡ºä¾†.";
 		next;
-		mes "®w¾|®æ¦ü¥GÁÙ­n»¡¨Ç¤°»ò, ¦ı¬O²×¨s¨S¯à»¡¥X¤f, ´NÃ`®ğ¤F...";
+		mes "åº«é­¯æ ¼ä¼¼ä¹é‚„è¦èªªäº›ä»€éº¼, ä½†æ˜¯çµ‚ç©¶æ²’èƒ½èªªå‡ºå£, å°±åš¥æ°£äº†...";
 		set yong_odun,2;
 		close;
 	}
 	else {
-		mes "§Aª`µøµÛ®w¾|®æªº¨­Åé, ¥u¨£¥L¥­ÀR¦w¸Ôªº¦a½ö¦b¦a¤W.";
+		mes "ä½ æ³¨è¦–è‘—åº«é­¯æ ¼çš„èº«é«”, åªè¦‹ä»–å¹³éœå®‰è©³çš„åœ°èººåœ¨åœ°ä¸Š.";
 		close;
 	}
 
 OnInstanceInit:
-	disablenpc instance_npcname("®w¾|®æ#");
+	disablenpc instance_npcname("åº«é­¯æ ¼#");
 	end;
 
 OnEnable:
-	enablenpc instance_npcname("®w¾|®æ#");
+	enablenpc instance_npcname("åº«é­¯æ ¼#");
 	end;
 }
 
