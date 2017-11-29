@@ -267,7 +267,7 @@ e_tower,30,30,2	script	巨大的漩渦	844,2,2,{
 	end;
 OnTouch:
 	mapannounce "e_tower","[ " + strcharinfo(0) + " ], 好像已被巨大的漩渦吞噬.",bc_map,"0x00ff99",FW_NORMAL,12;
-	warp "alberta",223,36;
+	warp "fayon", 70, 156;
 	end;
 }
 
@@ -1707,7 +1707,7 @@ OnTouch_:
 		mes "^0000ff神秘的聲音消失之後, 突然有一股神秘力量把你托了起來, 把你移向了一個另一處地點.";
 		close2;
 		set in_102tower,10;
-		warp "alberta",223,36;
+		warp "fayon", 70, 156;
 	}
 	else {
 		mes "^0000ff散發出耀眼光華的透明水晶召喚著你, 如同上次一樣.^000000";
@@ -2116,7 +2116,7 @@ OnMyMobDead:
 	mes "[失落之魂]";
 	mes "再見, 年輕的冒險者. 願幸運女神時刻陪伴你左右.";
 	close2;
-	warp "alberta",223,36;
+	warp "fayon", 70, 156;
 	end;
 
 OnInstanceInit:
