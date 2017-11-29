@@ -115,11 +115,7 @@ OnInit:
 	end;
 }
 
-gef_fild10,238,202,6	script	狂傲的科學家#orc	865,{
-	if (BaseLevel < 50) {
-		mes "科學家似乎沒注意到你, 而且獨自一個人喃喃自語...";
-		close;
-	}
+fayon,62,153,6	script	狂傲的科學家#orc	865,{
 	if (mad == 0) {
 		mes "[狂傲的科學家]";
 		mes "哈哈, 沒有獸人敢靠近我!";
