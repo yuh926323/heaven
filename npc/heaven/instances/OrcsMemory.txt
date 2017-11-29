@@ -48,12 +48,6 @@ fayon,64,153,6	script	裂痕的碎片	406,{
 	set .@party_id,getcharid(1);
 	set .@md_name$,"獸人的記憶";
 
-	if (!instance_check_party(.@party_id,2,30,80)) {
-		mes "你必須加入一個至少有兩個人的隊伍.";
-		mes "而且隊員的基礎等級必須都在 ^ff000030 ~ 80^000000 之間, 才能夠進入.";
-		close;
-	}
-
 	set .@orctime,checkquest(12059,PLAYTIME);
 	if (.@orctime == -1) {
 		if (getcharid(0) == getpartyleader(.@party_id,2)) {
