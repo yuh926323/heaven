@@ -1,0 +1,334 @@
+fayon,78,160,4	script	進階道館傳送員::MVP2	498,{	
+callfunc "Mod_F10_Script";	
+end;	
+OnInit:
+	waitingroom "進階道館",0;
+	end;
+	}
+
+//====================================================//
+
+fayon.gat,0,0,0	script	ModF_OnInit	-1,{	OnInit:
+
+//--- Script 執行時的相關設定 , 請各伺服器依情況斟酌 ---
+
+//----- 道館開場費用 (預設 10000000 Zeny) -----
+	set $@ModFZeny,10000000;
+
+//----- 隊員進場費用 (預設 5000000 Zeny) -----
+	set $@ModFPZeny,5000000;
+
+//----- 道館的參加人數 (預設 10人) -----
+	set $@ModFPlayer,12;
+
+//----- 道館的怪物編號 -----
+	setarray $@ModFName[1],2087,1779,1832,1871,1502,1873,1917,2087,1956,2022,1646,1647,1648,1649,1650,1651,1990;
+//----- 道館的怪物總數量 (預設 38隻) -----
+//----- Ps:請對應 道館的怪物編號 的總數後 -1 -----
+	set $@ModFNumber,16;
+
+//----- 道館的總關數 (預設 10關) -----
+	set $@AllGuanShu,10;
+
+//----- 道館的休息關數 -----
+	setarray $@RestsGuanShu[1],5;
+
+//----- 道館的怪物數量 -----
+	setarray $@GuanShuMod[1],1,1,1,1,1,1,1,1,1,1;
+
+//====================================================//
+
+//--- 挑戰賽獎勵員的相關設定 , 請各伺服器依情況斟酌 ---
+
+//----- 挑戰賽獎勵的獎金設定 -----
+//----- 獎勵金額最少能夠取得多少 (預設 100萬 Zeny) 
+	set $@ModFReZeny,10000000;
+
+//----- 獎勵金額最多能夠取得多少 (預設 500萬 Zeny) 
+	set $@ModFReZenyMax,15000000;
+
+//----- 挑戰賽獎勵的商城點數設定 -----
+//----- 獎勵金額最少能夠取得多少 (預設 1 點) 
+	set $@ModFReCash,120;
+
+//----- 獎勵商城點數最多能夠取得多少 (預設 10 點) 
+	set $@ModFReCashMax,150;
+
+//----- 挑戰賽獎勵的獎品設定 -----
+//----- 獎勵獎品能夠取得的物品
+	setarray $@ModFReItem[0],5334,985,985,12210,12902,5378,5372;
+
+//----- 獎勵獎品能夠取得的數量
+	setarray $@ModFReItemMax[0],1,200,400,5,1,1,1;
+
+//----- 獎勵獎品的總數量 (預設 6個) -----
+//----- Ps:請對應 獎勵獎品能夠取得的物品 的總數 -1 -----
+	set $@ModFReItemNumber,6;	}	
+
+//====================================================//
+
+function	script	Mod_F10_Script	{
+
+	if ( $@ModF_PTimer == 1 ) {
+	announce "進階道館傳送員 : 有玩家正在報名中，請稍後或等待 30 秒鐘！",bc_self,0xFF0000;
+	close;	}
+	set $@ModF_PTimer,1;
+	initnpctimer "ModF_PTimer";
+	if ( getcharid(1) == 0 ) {
+	mes "[進階道館傳送員]";
+	mes "對不起，您沒有加入任何隊伍！";
+	mes "無法參加挑戰賽。";
+	set $@ModF_PTimer,0;
+	close;	}
+	for ( set @MnF,1; @MnF <= 4; set @MnF,@MnF+1 ) {
+	if ( getmapusers("guild_vs1-"+@MnF+".gat") == 0 ) set $ModFPID[@MnF],0;	}
+	for ( set @MnF,1; @MnF <= 4; set @MnF,@MnF+1 ) {
+	if ( getcharid(1) == $ModFPID[@MnF] ){
+	mes "[進階道館傳送員]";
+	mes "您好，我是進階道館傳送員。";
+	mes "您是 [^FF0000"+getpartyname(getcharid(1))+"^000000] 的隊員吧！";
+	mes "參加前須付^FF0000"+$@ModFPZeny+"^000000z的參加費唷！";
+	mes "請問有需要為您服務嗎？";
+	mes "^0000FF嚴格禁止雙開打館，GM不定時上線抓人，抓到必凍帳號!!!^000000";
+	next;
+	if (select("我要參加挑戰！","不小心點到！")==1) {
+	if ( $@ModF_PTimer == 1 ) {
+	announce "進階道館傳送員 : 已超過報名時間！請您在重新報名一次。",bc_self,0xFF0000;
+	close;	}
+	set $@ModF_PTimer,0;
+	if ( $@ModFStart[@MnF] == 1 ) {
+	mes "[進階道館傳送員]";
+	mes "您的隊友已經開始挑戰了，";
+	mes "請稍後或加入其他隊伍另外報名參加！";
+	close;	}
+	if ( zeny < $@ModFPZeny ) {
+	mes "[進階道館傳送員]";
+	mes "對不起，您沒有足夠的金錢！";
+	close;	}
+	if ( getmapusers("guild_vs1-"+@MnF+".gat") >= $@ModFPlayer ) {
+	mes "[進階道館傳送員]";
+	mes "隊伍 [^FF0000"+getpartyname(getcharid(1))+"^000000] 參加的人數已滿，";
+	mes "請稍後或加入其他隊伍另外報名參加！";
+	close;	}
+	set zeny,zeny - $@ModFPZeny;
+	warp "guild_vs1-"+@MnF+".gat",49,47;
+	end;	}	
+	mes "[進階道館傳送員]";
+	mes "那您以後別在那麼不小心哩！";
+	set $@ModF_PTimer,0;
+	close;	}	}
+
+//====================================================//
+
+	mes "[進階道館傳送員]";
+	mes "您好，我是進階道館傳送員。";
+	mes "參加前須付^FF0000"+$@ModFZeny+"^000000z的參加費唷！";
+	mes "^0000FF嚴格禁止雙開打館，GM不定時上線抓人，抓到必凍帳號!!!^000000";
+	next;
+	if (select("我要參加進階道場！","不小心點到！")==1) {
+	if ( $@ModF_PTimer == 1 ) {
+	announce "進階道館傳送員 : 已超過報名時間！請您在重新報名一次。",bc_self,0xFF0000;
+	close;	}
+	set $@ModF_PTimer,0;
+	if ( Zeny < $@ModFZeny ) {
+	mes "[進階道館傳送員]";
+	mes "對不起，您沒有足夠的金錢！";
+	close;	}
+	for ( set @MnF,1; @MnF <= 4; set @MnF,@MnF+1 ) {
+	if ( getmapusers("guild_vs1-"+@MnF+".gat") == 0 ) {
+	enablenpc "道館裁判#"+@MnF+"";
+	killmonsterall "guild_vs1-"+@MnF+".gat";
+	set Zeny,Zeny - $@ModFZeny;
+	set $@ModFStart[@MnF],0;
+	set $ModFPID[@MnF],getcharid(1);
+	set $@ModFCID[@MnF],getcharid(0);
+	set $@GuanShu[@MnF],1;
+	announce "隊伍["+getpartyname($ModFPID[@MnF])+"]的隊員請到[ 主城-道管區 ]集合！！",15,0x63f263;
+
+	warp "guild_vs1-"+@MnF+".gat",49,47;
+	end;	}	}
+	mes "[進階道館傳送員]";
+	mes "所有場地都有隊伍在挑戰中，";
+	mes "請您稍後再試，謝謝!!";
+	mes "地圖一: 【"+getpartyname($ModFPID[1])+"】";
+	mes "地圖二: 【"+getpartyname($ModFPID[2])+"】";
+	mes "地圖三: 【"+getpartyname($ModFPID[3])+"】";
+	mes "地圖四: 【"+getpartyname($ModFPID[4])+"】";
+	close;	}
+	mes "[進階道館傳送員]";
+	mes "好的";
+	set $@ModF_PTimer,0;
+	close;	}
+
+//====================================================//
+
+-	script	ModF_PTimer	-1,{
+
+OnTimer100:
+	set $@ModF_PTimer,0;
+	setnpctimer 0;
+	end;	}
+
+//====================================================//
+
+guild_vs1-1.gat,50,49,4	script	道館裁判#1	459,{ callfunc "ModF_Referee",1; }
+guild_vs1-2.gat,50,49,4	script	道館裁判#2	459,{ callfunc "ModF_Referee",2; }
+guild_vs1-3.gat,50,49,4	script	道館裁判#3	459,{ callfunc "ModF_Referee",3; }
+guild_vs1-4.gat,50,49,4	script	道館裁判#4	459,{ callfunc "ModF_Referee",4; }
+
+//====================================================//
+
+function	script	ModF_Referee	{
+
+	if ( getcharid(0) != $@ModFCID[@MnF] ) {
+	mes "[道館裁判]";
+	mes "您不是報名參加挑戰賽的人";
+	mes "請叫"+ $@ModFCID[@MnF]+"來找我。";
+	close;	}
+
+	mes "[道館裁判]";
+	mes "您好，我是道館裁判。";
+	mes "請問有需要為您服務嗎？";
+	next;
+	switch(select("開始挑戰！","不小心點到！")) {
+case 1:
+	set $@ModFStart[@MnF],1;
+	disablenpc "道館裁判#"+@MnF+"";
+	set $@ModFQuantity[@MnF],$@GuanShuMod[$@GuanShu[@MnF]];
+	doevent "ModF_Mod::OnSummon_ModF";
+	close;
+	end;
+case 2:
+	mes "[道館裁判]";
+	mes "那您以後別在那麼不小心哩！";
+	close;	}	}
+//====================================================//
+
+-	script	ModF_Mod	-1,{
+
+OnSummon_ModF:
+	set $@ModF,rand(1,$@ModFNumber);
+	set $@ModFQuantity[@MnF],$@ModFQuantity[@MnF]-1;
+	monster "guild_vs1-"+@MnF+".gat",50,50,"--ja--",$@ModFName[$@ModF],1,"ModF_Mod::OnKill_ModF";
+	if ( $@GuanShu[@MnF] == getarraysize($@GuanShuMod) - 1 ) {
+ 	announce "最後一關挑戰開始,加油！",17,0xff40ff;
+	end;	}
+	announce "第"+$stage[getarg(0)]+"關魔物放出！挑戰開始！",1,0xff40ff;
+	end;
+OnKill_ModF:
+	if ( $@ModFQuantity[@MnF] != 0 ) {
+	addtimer 2500,"ModF_Mod::OnSummon_ModF";
+	end;	}
+	if ( $@GuanShu[@MnF] == $@AllGuanShu ) {
+	announce "恭喜隊伍【"+getpartyname($ModFPID[@MnF])+"】挑戰進階道館成功！",15,0x7f7fff;
+	areawarp "guild_vs1-"+@MnF+".gat",0,0,300,300,"job3_arch01.gat",29,26;
+	end;	}
+	announce  "道館裁判 : 恭喜第 ["+$@GuanShu[@MnF]+"] 關挑戰成功！",17,0x7f7fff;
+	set @CheckRests,0;
+CheckRests:
+	if ( getarraysize($@RestsGuanShu) > @CheckRests ){
+	if ( $@GuanShu[@MnF] == $@RestsGuanShu[@CheckRests] ) {
+	set $@GuanShu[@MnF],$@GuanShu[@MnF] +1;
+ 	announce "道館裁判 : 休息時間，請準備好在開始挑戰！",17;
+	enablenpc "道館裁判#"+@MnF+"";
+	end;	}
+	set @CheckRests,@CheckRests+1;
+	goto CheckRests;	}
+	set $@GuanShu[@MnF],$@GuanShu[@MnF] +1;
+	set $@ModFQuantity[@MnF],$@GuanShuMod[$@GuanShu[@MnF]];
+	addtimer 5000,"ModF_Mod::OnSummon_ModF";
+	end;	}
+
+//====================================================//
+
+//====================================================//
+guild_vs1-1.gat	mapflag	nobranch	dummy
+guild_vs1-1.gat	mapflag	nomemo	dummy
+guild_vs1-1.gat	mapflag	nopenalty	dummy
+guild_vs1-1.gat	mapflag	noteleport	dummy
+guild_vs1-1.gat	mapflag	nosave	SavePoint
+guild_vs1-1.gat	mapflag	noloot	dummy
+
+guild_vs1-2.gat	mapflag	nobranch	dummy
+guild_vs1-2.gat	mapflag	nomemo	dummy
+guild_vs1-2.gat	mapflag	nopenalty	dummy
+guild_vs1-2.gat	mapflag	noteleport	dummy
+guild_vs1-2.gat	mapflag	nosave	SavePoint
+guild_vs1-2.gat	mapflag	noloot	dummy
+
+guild_vs1-3.gat	mapflag	nobranch	dummy
+guild_vs1-3.gat	mapflag	nomemo	dummy
+guild_vs1-3.gat	mapflag	nopenalty	dummy
+guild_vs1-3.gat	mapflag	noteleport	dummy
+guild_vs1-3.gat	mapflag	nosave	SavePoint
+guild_vs1-3.gat	mapflag	noloot	dummy
+
+guild_vs1-4.gat	mapflag	nobranch	dummy
+guild_vs1-4.gat	mapflag	nomemo	dummy
+guild_vs1-4.gat	mapflag	nopenalty	dummy
+guild_vs1-4.gat	mapflag	noteleport	dummy
+guild_vs1-4.gat	mapflag	nosave	SavePoint
+guild_vs1-4.gat	mapflag	noloot	dummy
+
+
+job3_arch01.gat	mapflag	nobranch	dummy
+job3_arch01.gat	mapflag	nomemo	dummy
+job3_arch01.gat	mapflag	nopenalty	dummy
+job3_arch01.gat	mapflag	noteleport	dummy
+job3_arch01.gat	mapflag	nosave	SavePoint
+job3_arch01.gat	mapflag	noloot	dummy
+job3_arch01	mapflag	nomemo
+//====================================================//
+
+
+//============================發放獎品NPC======================= 
+
+job3_arch01.gat,29,31,4	script	進階道管獎品	403,{
+	query_sql("SELECT last_ip FROM `login` WHERE account_id = "+getcharid(3)+"", .@LastIp$);
+
+	query_sql("SELECT account_id FROM `login` WHERE last_ip = '"+.@LastIp$+"'", .@AccountId);
+
+	set .@MaxWimdows,1;
+
+		for(set .@i ,0;.@i<getarraysize(.@AccountId);set .@i,.@i+1){
+		if(isloggedin(.@AccountId[.@i]))set .@j,.@j+1;
+		   if(.@j>.@MaxWimdows){	
+			mes "很抱歉....";
+			mes "玩家名稱: "+strcharinfo(0)+" 來自[^FF6600" + .@LastIp$ + "^000000]";
+			mes "同樣 IP，不可以超過 ^FF0000"+.@MaxWimdows+"^000000 開.";
+			mes "離線掛店的也算一開";
+			mes "請確認你的視窗數，謝謝!!!";
+			sleep2(1000);
+			atcommand "@kick "+strcharinfo(0);
+			end;
+		}
+	}
+	mes "**獎品領取**";
+	mes "[^996699 隨機取得獎品 ^000000]";
+	mes "[^ff0000 祝您中大獎 ^000000]";
+        percentheal 100,100;
+	setarray .@i,20014,20001,20004,20007,12240,7058
+		,608,607,20011,20012,20001,20007,20003,20004,12920,12921,12922,20006,7444,984,985,20016
+		,608,607,20011,20012,20001,20007,20003,20004,12920,12921,12922,20006,7444,984,985,20016,12240,7058
+		,608,607,20011,20012,20001,20007,20003,20004,12920,12921,12922,20006,7444,984,985,20016,12240,7058;
+	setarray .@q,1,10,5,5,6,3
+		,150,75,1,1,5,3,3,1,15,15,15,10,15,200,200,10
+		,150,75,1,1,5,3,3,1,15,15,15,10,15,200,200,10,3,1
+		,150,75,1,1,5,3,3,1,15,15,15,10,15,200,200,10,3,1;
+	if(getgmlevel() >= 98){
+	next;
+	mes "[^ff0000 GM模式 ^000000]";
+	mes ".@i元素個數 ="+getarraysize(.@i)+"";
+	mes ".@q元素個數 ="+getarraysize(.@q)+"";
+	for (set .@a,0;.@a<getarraysize(.@i);set .@a,.@a+1)
+	mes "^880000"+(.@a+1) +"^000000. [^006600"+ getitemname(.@i[.@a]) +"^000000] ^880000"+.@q[.@a]+"個^000000";
+	set .@a,0;
+			}
+	next;
+	set .@n,rand(0,(getarraysize(.@i)-1));
+	getitem .@i[.@n],.@q[.@n];
+
+	warp "SavePoint",0,0;
+		close;
+}
+
