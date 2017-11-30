@@ -3,7 +3,7 @@
 //==製作人 : 破滅　　　　　　　　　　　　Eathena　　==//
 //==更新日期 : 西元 2008/07/01　　　　　　　Script　==//
 //==腳本版號 : 繁體中文 v2.3 正式版　　　　　　　　 ==//
-//==腳本名稱 : 行政管理員　　　　　　　　　　　　　 ==//
+//==腳本名稱 : 銀行管理員　　　　　　　　　　　　　 ==//
 //==　　　　　　　　　　　　　　　　　　　　　　　　==//
 //==腳本出處 : http://srogm.no-ip.info/forum　　　　==//
 //==　　　　　　　　　　　　　　　　　　　　　　　　==//
@@ -13,233 +13,124 @@
 //====================================================//
 //====================================================//
 
-prontera,146,83,6	script	行政管理員::bank	874,{
+fayon,110,117,4	script	銀行管理員	860,{
 
-	mes "[行政管理員]";
+	mes "[銀行管理員]";
+	cutin "kafra_08",2;
 	mes "親愛的 "+strcharinfo(0)+" 玩家您好，";
-	mes "我是此伺服器的行政管理員。";
-	mes "請問您需要什麼服務呢？";
+	mes "我是此伺服器的銀行管理員。";
 	mes "=====[伺服器目前的時間]=====";
 	mes "【"+gettime(7)+"年"+gettime(6)+"月"+gettime(5)+"日　"+gettime(3)+ "點" +gettime(2)+ "分】";
 	mes "============================";
 	next;
-	switch(select("郵遞筒:拍賣場:銀行服務")){
+	mes "[銀行管理員]";
+	mes "歡迎使用銀行服務，";
+	mes "銀行內的存款是^ff0000帳號共通^000000的，";
+	mes "請選擇您要的銀行服務。";
+	next;
+	switch(select("存款服務:提領服務"))			
+	{
 	case 1: 
-		mes "[行政管理員]";
-		mes "非常感謝您的使用，";
-		mes "馬上為您開啟郵遞筒";
+		mes "[銀行管理員][^0000ff單位^000000][^ff0000萬元^000000]";
+		mes "您的銀行總存款為";
+		mes "『^ff0000"+#Deposit_W+"0000^000000』Zeny";
+		mes "單次最少只能存入  ^0000ff1萬 Zeny^000000，";
+		mes "　　最多只能存入 ^0000ff10億 Zeny^000000，";
+		mes "您要存入多少金額呢?";
+		mes "(取消存款請輸入 0 )";
+		next;
+		input @Deposit;
+		if ( @Deposit <= 0 ){
+			mes "[銀行管理員]";
+			mes "已經取消存款動作了!";
+			close2;
+			cutin "", 255;
+			end;
+			}
+		if ( @Deposit < 1 || @Deposit > 100000 ){
+			mes "[銀行管理員]";
+			mes "存款金額不符合規定!";
+			mes "已經取消存款動作了!";
+			close2;
+			cutin "", 255;
+			end;
+			}
+		if ( Zeny < (@Deposit*10000) ){
+			mes "[銀行管理員]";
+			mes "您身上沒有這麼多錢喔!";
+			close2;
+			cutin "", 255;
+			end;
+			}
+		if ( #Deposit_W > 100000000 ){
+			mes "[銀行管理員]";
+			mes "您的銀行總存款已達上限!";
+			mes "無法再進行存款動作!";
+			close2;
+			cutin "", 255;
+			end;
+			}
+		set Zeny,Zeny-(@Deposit*10000);
+		set #Deposit_W,#Deposit_W + @Deposit;
+		if ( #Deposit_W > 100000000 ){
+			set @withdraw,(#Deposit_W-100000000);
+			set #Deposit_W,#Deposit_W-@withdraw;
+			set Zeny,Zeny+(@withdraw*10000);
+			}
+		mes "[銀行管理員]";
+		mes "存款完畢!您的銀行總存款為";
+		mes "『^ff0000"+#Deposit_W+"0000^000000』Zeny";
 		close2;
-		openmail;
+		cutin "", 255;
 		end;
-	case 2: 
-		mes "[行政管理員]";
-		mes "非常感謝您的使用，";
-		mes "馬上為您開啟拍賣場";
-		mes "請記住如果物品放置超過兩頁";
-		mes "將會導致伺服器當機";
-		mes "請勿因為個人利益而不顧他人";
-		mes "(查到IP直接封鎖帳號)";
+		
+		case 2: 
+		mes "[銀行管理員][^0000ff單位^000000][^ff0000萬元^000000]";
+		mes "您的銀行總存款為";
+		mes "『^ff0000"+#Deposit_W+"0000^000000』Zeny";
+		mes "單次最少只能提領  ^0000ff1萬 Zeny^000000，";
+		mes "　　最多只能提領 ^0000ff10億 Zeny^000000，";
+		mes "您要提領多少金額呢?";
+		mes "(取消提款請輸入 0 )";
+		next;
+		input @withdraw;
+		if ( @withdraw <= 0 ){
+			mes "[銀行管理員]";
+			mes "已經取消提款動作了!";
+			close2;
+			cutin "", 255;
+			end;
+			}
+		if ( @withdraw > 100000 ){
+			mes "[銀行管理員]";
+			mes "提款金額不符合規定!";
+			mes "已經取消提款動作了!";
+			close2;
+			cutin "", 255;
+			end;
+			}
+		if ( (Zeny+(@withdraw*10000)) > 1000000000 ){
+			mes "[銀行管理員]";
+			mes "您無法攜帶這麼多錢喔!";
+			close2;
+			cutin "", 255;
+			end;
+				}
+		if ( #Deposit_W < @withdraw ){
+			mes "[銀行管理員]";
+			mes "您沒有這麼多存款喔!";
+			close2;
+			cutin "", 255;
+			end;
+			}
+		set Zeny,Zeny+(@withdraw*10000);
+		set #Deposit_W,#Deposit_W - @withdraw;
+		mes "[銀行管理員]";
+		mes "提款完畢!您的銀行總存款剩餘";
+		mes "『^ff0000"+#Deposit_W+"0000^000000』Zeny";
 		close2;
-		OpenAuction;
+		cutin "", 255;
 		end;
-	case 3: 
-		if ( #BankPass == 0 ){
-			mes "[行政管理員]";
-			mes "您是^ff0000第一次使用^000000本服務，";
-			mes "需要設置銀行密碼才可使用，";
-			mes "請依照說明進行申請動作。";
-			next;
-			if (select("進行申請:不要申請")==2){
-				mes "[行政管理員]";
-				mes "不進行申請沒辦法使用銀行喔!";
-				close;
-			}
-			mes "[行政管理員]";
-			mes "請輸入您想設定的銀行密碼，";
-			mes "請輸入 ^ff00001000 ~ 99999999^000000 的數字！";
-			mes "(輸入 0 為取消)(四位數至八位數)";
-			next;
-			input @BankPass;
-			if ( @BankPass <= 0 ){
-				mes "[行政管理員]";
-				mes "已經取消申請動作了!";
-				close;
-			}
-			if ( @BankPass < 1000 || @BankPass > 99999999 ) {
-				mes "[行政管理員]";
-				mes "您設定的密碼不符合規定!";
-				mes "需輸入 ^ff00001000 ~ 99999999^000000 的數字!";
-				close;
-			}
-			mes "[行政管理員]";
-			mes "您輸入的密碼為";
-			mes "『^0000ff"+@BankPass+"^000000』";
-			mes "您確定要使用該組密碼嗎?";
-			next;
-			if (select("確定使用:不要使用")==2){
-				mes "[行政管理員]";
-				mes "已經取消申請動作了!";
-				close;
-			}
-			set #BankPass,@BankPass;
-			mes "[行政管理員]";
-			mes "恭喜您申請完成!";
-			mes "您申請的銀行密碼是";
-			mes "『^0000ff"+#BankPass+"^000000』";
-			mes "請牢記您的銀行密碼，";
-			mes "^ff0000忘記密碼將無法取回!";
-			close;
-			} else {
-			mes "[行政管理員]";
-			mes "請輸入您的銀行密碼";
-			next;
-			input @CheckPass;
-			if ( @CheckPass != #BankPass ){
-				mes "[行政管理員]";
-				mes "您的銀行密碼錯誤!";
-				mes "無法使用銀行服務!";
-				close;
-			}
-			mes "[行政管理員]";
-			mes "銀行密碼確認完畢，";
-			mes "馬上為您開啟銀行服務!";
-			next;
-			mes "[行政管理員]";
-			mes "歡迎使用銀行服務，";
-			mes "銀行內的存款是^ff0000帳號共通^000000的，";
-			mes "請選擇您要的銀行服務。";
-			next;
-			switch(select("存款服務:提領服務:修改銀行密碼")){
-			case 1: 
-				mes "[行政管理員][^0000ff單位^000000][^ff0000萬元^000000]";
-				mes "您的銀行總存款為";
-				mes "『^ff0000"+#Deposit_W+"0000^000000』Zeny";
-				mes "單次最少只能存入  ^0000ff1萬 Zeny^000000，";
-				mes "　　最多只能存入 ^0000ff10億 Zeny^000000，";
-				mes "您要存入多少金額呢?";
-				mes "(取消存款請輸入 0 )";
-				next;
-				input @Deposit;
-				if ( @Deposit <= 0 ){
-					mes "[行政管理員]";
-					mes "已經取消存款動作了!";
-					close;
-				}
-				if ( @Deposit < 1 || @Deposit > 100000 ){
-					mes "[行政管理員]";
-					mes "存款金額不符合規定!";
-					mes "已經取消存款動作了!";
-					close;
-				}
-				if ( Zeny < (@Deposit*10000) ){
-					mes "[行政管理員]";
-					mes "您身上沒有這麼多錢喔!";
-					close;
-				}
-				if ( #Deposit_W > 100000000 ){
-					mes "[行政管理員]";
-					mes "您的銀行總存款已達上限!";
-					mes "無法再進行存款動作!";
-					close;
-				}
-				set Zeny,Zeny-(@Deposit*10000);
-				set #Deposit_W,#Deposit_W + @Deposit;
-				if ( #Deposit_W > 100000000 ){
-					set @withdraw,(#Deposit_W-100000000);
-					set #Deposit_W,#Deposit_W-@withdraw;
-					set Zeny,Zeny+(@withdraw*10000);
-				}
-				mes "[行政管理員]";
-				mes "存款完畢!您的銀行總存款為";
-				mes "『^ff0000"+#Deposit_W+"0000^000000』Zeny";
-				close;
-			case 2: 
-				mes "[行政管理員][^0000ff單位^000000][^ff0000萬元^000000]";
-				mes "您的銀行總存款為";
-				mes "『^ff0000"+#Deposit_W+"0000^000000』Zeny";
-				mes "單次最少只能提領  ^0000ff1萬 Zeny^000000，";
-				mes "　　最多只能提領 ^0000ff10億 Zeny^000000，";
-				mes "您要提領多少金額呢?";
-				mes "(取消提款請輸入 0 )";
-				next;
-				input @withdraw;
-				if ( @withdraw <= 0 ){
-					mes "[行政管理員]";
-					mes "已經取消提款動作了!";
-					close;
-				}
-				if ( @withdraw > 100000 ){
-					mes "[行政管理員]";
-					mes "提款金額不符合規定!";
-					mes "已經取消提款動作了!";
-					close;
-				}
-				if ( (Zeny+(@withdraw*10000)) > 1000000000 ){
-					mes "[行政管理員]";
-					mes "您無法攜帶這麼多錢喔!";
-					close;
-				}
-				if ( #Deposit_W < @withdraw ){
-					mes "[行政管理員]";
-					mes "您沒有這麼多存款喔!";
-					close;
-				}
-				set Zeny,Zeny+(@withdraw*10000);
-				set #Deposit_W,#Deposit_W - @withdraw;
-				mes "[行政管理員]";
-				mes "提款完畢!您的銀行總存款剩餘";
-				mes "『^ff0000"+#Deposit_W+"0000^000000』Zeny";
-				close;
-			case 3: 
-				mes "[行政管理員]";
-				mes "請輸入您的^ff0000銀行舊密碼";
-				next;
-				input @NewPass;
-				if ( @NewPass != #BankPass ){
-					mes "[行政管理員]";
-					mes "您輸入的舊密碼錯誤!";
-					mes "無法進行修改動作";
-					close;
-				}
-				mes "[行政管理員]";
-				mes "舊密碼驗證成功!";
-				mes "開始設定新銀行密碼，";
-				mes "請輸入 ^ff00001000 ~ 99999999^000000 的數字，";
-				mes "(輸入 0 為取消設置新密碼)";
-				next;
-				input @NewBankPass;
-				if ( @NewBankPass <= 0 ){
-					mes "[行政管理員]";
-					mes "已經取消新密碼設置動作";
-					close;
-				}
-				if ( @NewBankPass < 1000 || @NewBankPass > 99999999 ){
-					mes "[行政管理員]";
-					mes "您設定的密碼不符合規定!";
-					mes "需輸入 ^ff00001000 ~ 99999999^000000 的數字!";
-					close;
-				}
-				mes "[行政管理員]";
-				mes "您輸入的新密碼為";
-				mes "『^0000ff"+@NewBankPass+"^000000』";
-				mes "您確定要使用該組密碼嗎?";
-				next;
-				if (select("確定使用:不要使用")==2){
-					mes "[行政管理員]";
-					mes "已經取消更改密碼動作了!";
-					close;
-				}
-				set #BankPass,@NewBankPass;
-				mes "[行政管理員]";
-				mes "恭喜您更改完成!";
-				mes "您的銀行新密碼是";
-				mes "『^0000ff"+#BankPass+"^000000』";
-				mes "^ff0000請牢記您的銀行密碼，";
-				mes "忘記密碼將無法取回!";
-				close;
-			}
+		
 		}
-	}
 }
-
-fayon,105,117,4	duplicate(bank)	行政管理員	874
