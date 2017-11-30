@@ -104,7 +104,7 @@ fayon.gat,108,165,4	script	搶答活動	497,{
 		set .is_answer,1;
 		npctalk "恭喜["+strcharinfo(0)+"]回答正確!";
 		zeny=zeny+100000;
-		atcommand "@cash 1 "+strcharinfo(0);
+		set #CASHPOINTS, #CASHPOINTS + 1;
 		announce "回答正確，獎勵10W zeny 和 1 P點",bc_blue|bc_self;
 		emotion 24;
 		end;
