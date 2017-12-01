@@ -1,7 +1,9 @@
 fayon,101,117,4	script	傳送人員	10041,{
     mes .npcname$;
-	mes "^0088FF"+strcharinfo(0)+"^000000您好，很高興為您服務。";
+	mes "【"+gettime(7)+"年"+gettime(6)+"月"+gettime(5)+"日　"+gettime(3)+ "點" +gettime(2)+ "分】";
 	mes "目前線上人數^0088FF["+getusers(1)+"]^000000人";
+	mes "============================";
+	mes "^0088FF"+strcharinfo(0)+"^000000您好，很高興為您服務。";
     mes "請問你想要去那裡呢？";
 	cutin "SHALOSHI02",2;
     next;
@@ -139,7 +141,7 @@ function	script	warpDungeon	{
 	cutin "SHALOSHI04",2;
     switch( select(
 	"^9933FF[上次傳送]^006030 " + (@lastmaptext$ != "" ? @lastmaptext$ : "無") + "^000000",
-	"^CC00FF波利練功系列^000000",
+	"FF44AA波利練功系列^000000",
 	"迷藏森林",
 	"普隆德拉地下水道",
 	"依斯魯得島 海盜地洞密穴",
@@ -524,8 +526,10 @@ fayon,90,155,4	script	傳送人員#2	10041,{
 
 function	script	TP	{
     mes "[傳送人員]";
-	mes "^0088FF"+strcharinfo(0)+"^000000您好，很高興為您服務。";
+	mes "【"+gettime(7)+"年"+gettime(6)+"月"+gettime(5)+"日　"+gettime(3)+ "點" +gettime(2)+ "分】";
 	mes "目前線上人數^0088FF["+getusers(1)+"]^000000人";
+	mes "============================";
+	mes "^0088FF"+strcharinfo(0)+"^000000您好，很高興為您服務。";
     mes "請問你想要去那裡呢？";
 	cutin "SHALOSHI02",2;
 	callfunc("warpFeatue");
@@ -534,7 +538,7 @@ function	script	TP	{
 
 //-----------------------增加新手區-------------------------------------
 
-new_3-3,96,176,0	warp	new	1,1,save,0,0
+new_3-3,96,176,0	warp	new	1,1,savepoint,0,0
 
 new_3-3,0,0,0,0	monster	波利	1002,20,0,0,0
 new_3-3,0,0,0,0	monster	土波利	1113,20,0,0,0
