@@ -535,7 +535,7 @@ function	script	TP	{
 }
 //----------------------主城地圖屬性-----------------------------
 fayon.gat	mapflag	nobranch	dummy
-
+que_temsky.gat	mapflag	nobranch	dummy
 //-----------------------增加新手區-------------------------------------
 new_3-3.gat	mapflag	nobranch	dummy
 

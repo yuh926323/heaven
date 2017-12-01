@@ -1,4 +1,5 @@
 fayon,88,127,4	script	服裝大使	629,{
+	cutin "GELCA01",2;
     mes .npcname$;
     mes "哈囉！ ^FF0000" + strcharinfo(0) + "^000000";
     mes "你已經看膩了平常的穿著嗎？";
@@ -8,20 +9,27 @@ fayon,88,127,4	script	服裝大使	629,{
 
     if (! callfunc("in_array", Class, .JRO_BodyStyle_whitelist)) {
         mes .npcname$;
+		cutin "GELCA04",2;
         mes "抱歉，看起來你並不是三轉職業呢！只有三轉職業才能換成新的服裝喔！";
         emotion e_swt,1;
-        close;
+		close2;
+		cutin "", 255;
+		end;
     }
 
     if (callfunc("in_array", Class, .JRO_BodyStyle_blacklist)) {
         mes .npcname$;
+		cutin "GELCA02",2;
         mes "啊！真的是非常抱歉，^FF0000盧恩騎士^000000的新服裝還在設計中呢";
         mes "請等待開放後再來更換唷！";
         emotion e_swt,1;
-        close;
+		close2;
+		cutin "", 255;
+		end;
     }
 
     mes .npcname$;
+	cutin "GELCA03",2;
     mes "那麼～你想換什麼服裝呢？";
     next;
     set .@bodystyle, select("幫我換回原本的服裝", "我想要換上新服裝") - 1;
@@ -29,7 +37,9 @@ fayon,88,127,4	script	服裝大使	629,{
     mes "換好了！";
     setlook LOOK_BODY2, .@bodystyle;
     setlook LOOK_CLOTHES_COLOR, 0;
-    close;
+	close2;
+	cutin "", 255;
+	end;
 
 OnInit:
     /*
