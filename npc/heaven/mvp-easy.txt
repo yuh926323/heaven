@@ -270,7 +270,7 @@ guild_room.gat,30,285,6	script	道場獎品	757,{
 	set .@n,rand(0,(getarraysize(.@i)-1));
 	getitem .@i[.@n],.@q[.@n];
 
-	warp "SavePoint",0,0;
+	warp "Save",0,0;
 		close;
 OnInit:
 //------開道費用----
@@ -319,6 +319,6 @@ guild_room.gat,52,284,4	script	道場獎金	757,{
 	set #CASHPOINTS,#CASHPOINTS+(.@cash+5);
 	dispbottom "Zeny增加 " +.@zeny+ " 。";
 	dispbottom "您的 CASH 點數增加 " +.@cash+ " 點，共 " + #CASHPOINTS + " 點。";
-	warp "SavePoint",0,0;
+	warp "Save",0,0;
 		close;
 }

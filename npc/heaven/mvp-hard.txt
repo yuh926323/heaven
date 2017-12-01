@@ -328,7 +328,7 @@ job3_arch01.gat,29,31,4	script	進階道管獎品	403,{
 	set .@n,rand(0,(getarraysize(.@i)-1));
 	getitem .@i[.@n],.@q[.@n];
 
-	warp "SavePoint",0,0;
+	warp "Save",0,0;
 		close;
 }
 
