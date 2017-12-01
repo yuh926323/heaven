@@ -204,9 +204,9 @@ function	script	warpDungeon	{
 			cutin "", 255;
 			end;
             }
-			
+	
 		warp @lastmapname$, 0, 0;
-            break;	
+            end;	
 		case 2:
 			next;
             setarray .@maptext$[0], "^FF44AA新手練功區^000000","波利島","[石頭波利]菲音斯 原野","[岩漿波利]菲音斯 原野"; 
@@ -512,6 +512,7 @@ function	script	warpDungeon	{
 	set @lastmaptext$,.@maptext$[.@menu];
 	set @lastmapname$,.@mapname$[.@menu];
     warp .@mapname$[.@menu], 0, 0;
+	end;
 }
 
 
